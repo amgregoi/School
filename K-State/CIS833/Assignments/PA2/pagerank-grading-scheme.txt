@@ -1,0 +1,34 @@
+PageRank
+
+Code 20 points
+
+step1 5 points
+
+have they correctly extracted the links - considered all possibilities?
+have they used mapreduce correctly?
+
+step2 8 points
+
+map stage 2 points
+reduce stage 2 points
+
+make sure they do the initialization 1
+make sure they use the pagerank formula correctly 1
+make sure they have a for loop after the number of iterations 1
+if they check the convergence condition, give them 2 extra credit points
+make sure they have normalized 1
+
+step3 5 points
+
+make sure they do the cleaning and sorting using mapreduce
+
+Code well documented 2
+
+Report 10 points
+
+functionality of the program (main classes, data structures) 2
+List the map/reduce jobs in your code. For each map/reduce job, describe the inputs and the outputs (to map and reduce methods, respectively). 2
+Describe the data types you used for keys and values in the various MapReduce stages. How did you serialize and de-serialize the data stream? 2
+What are the 10 pages with the highest PageRank? Does that surprise you? Why/why not? 1
+complete instructions on how to run the code 2
+discussion of your experience with this assignment 1
