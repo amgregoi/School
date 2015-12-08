@@ -1,0 +1,39 @@
+Take Home Mid-Term Exam
+
+Due: 5:00PM on 10/30/2014 (Thursday)
+
+Analyze the behavior of IDLE.
+Trace the code from line number 9318 and explain, by SHOWING STACK CONTENTS,
+1. what will happen when IDLE is scheduled for the first time.
+2. what will happen when IDLE is scheduled for the 2nd time (the behavior is the same for the 3rd, 4th, ..., Xth time)
+
+In your discussion,  include explanation of what will happen when an interrupt arrives (the kernel will "notify" the device driver process of the interrupt) and how the driver process that has received the interrupt is dispatched by SHOWING the k_stack contents.
+An example of such a situation is found at line 10612; clock_handler() (10556) is the interrupt handler for an clock interrupt and by notifying the CLOCK task, it makes the CLOCK task ready.  Thus, after this execution of the clock_handler() by the kernel, the CLOCK task is scheduled.
+
+Explanations on some assembly operations
+1. hlt
+  Stops instruction execution and places the processor in a HALT state. An enabled interrupt, NMI, or a reset will resume execution. If an interrupt (including NMI) is used to resume execution after a HLT instruction, the saved instruction pointer (CS:EIP) points to the instruction following the HLT instruction.
+  
+  The HLT instruction is a privileged instruction. When the processor is running in protected or virtual-8086 mode, the privilege level of a program or procedure must be 0 to execute the HLT instruction.
+  
+2. int LEVEL0_VECTOR
+  LEVEL0_VECTOR is set at 8466 based on the value in line 8417.
+  That is, when the above instruction is executed, the control goes to 6814
+
+3. mov (_level0_func), eax  
+  move the value in eax to variable level0_func
+  
+4. jmp (_level0_func)
+  jump to the address stored in variable level0_func
+
+
+NOTES:  
+1. This is a perfect question to test how much you understand the behavior of the Minix Kernel.
+    Read the kernel code several times if you cannot figure out how IDLE behaves
+
+2. THIS IS AN EXAM AND YOU MUST DO IT WITHOUT DISCUSSING WITH ANYBODY ELSE (OR EVEN ME OR THE WEB).
+     YOU CANNOT SEARCH THE WEB TO SEEK A SOLUTION 
+     I do not know if there is any explanation for the IDLE process in the web.
+    (Even though you are not supposed to search for an answer in the web), somehow if you find any explanation of the behavior of IDLE, inform me immediately.
+
+3. It is ok if you cannot give a correct answer.  Try as much as you can.

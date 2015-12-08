@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title>djb research: Automatic Exploit Generation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="nav">
+        <a href="../index.html">Home</a>
+        <a href="../people.html">People</a>
+        <a href="../pubs.html">Publications</a>
+      </div>
+
+      <h1>Automatic Exploit Generation</h1>
+    </div>
+    <div id="sidebar">
+      <ol>
+<!--        <li><a href="#mayhem">Mayhem</a></li>-->
+        <li><a href="#aeg">AEG</a></li>
+      </ol>
+    </div>
+
+    <div id="main">
+ <!--     <div class="topic">
+	<strong><a name="mayhem">Mayhem: Automatic Exploit Generation on Binaries</a></strong>
+	<p>Mayhem is a new system for automatically
+	  finding exploitable bugs in binary (i.e., executable) programs. Every
+	  bug reported by Mayhem is accompanied by a working shell-spawning
+	  exploit. The working exploits ensure soundness and that each bug
+	  report is security-critical and actionable. Mayhem works on raw
+	  binary code without debugging information. To make exploit generation
+	  possible at the binary-level, Mayhem addresses two major technical
+	  challenges: actively managing execution paths without exhausting
+	  memory, and reasoning about symbolic memory indices where
+	  a load or a store address depends on user input. To this end, Mayhem introduces
+	  two novel techniques: 1) <strong>hybrid symbolic execution</strong> for combining
+	  online and offline (concolic) execution to maximize the benefits of
+	  both techniques, and 2) <strong>index-based memory modeling</strong>, a technique that allows
+	  Mayhem to efficiently reason about symbolic memory at the binary
+	  level. We used Mayhem to find and demonstrate 29
+	  exploitable vulnerabilities in both Linux and Windows programs,
+	  2 of which were previously undocumented.
+	</p>
+
+	<p>We will be presenting our paper
+	  at <a href="http://www.ieee-security.org/TC/SP2012/">Oakland 2012</a>.
+	  Stay tuned for our camera-ready version and our demo videos.
+	</p>
+
+      </div>
+-->
+      <div class="topic">
+        <strong><a name="aeg">AEG: Automatic Exploit Generation on Source Code</a></strong>
+	<p>
+	  The automatic exploit generation challenge we address is
+	  given a program, automatically find security-critical bugs
+	  and generate exploits. Our approach uses a novel formal
+	  verification technique called preconditioned symbolic
+	  execution to make automatic exploit generation  more
+	  scalable to real-world programs than without it. We implemented
+	  our techniques in a system called AEG, which we use to
+	  automatically generate 16 exploits for 14 open-source
+	  projects. Two of the generated exploits are against
+	  previously unknown vulnerabilities.  
+	</p>
+
+	<p>The hard part, in our experience, was exploring the state space
+	  efficiently to find bugs, determine the problem, and generate an 
+	  initial input that triggers the bug.  
+	  The core of our paper is
+	  a technique called preconditioned symbolic execution, which provides better
+	  scalability for finding exploitable bugs than when using previous
+	  symbolic execution techniques.  The main idea is to guide symbolic
+	  execution to program paths that are more likely to be exploitable. Basic
+	  symbolic execution tends to try and explore all paths, which is more
+	  expensive.   
+	  Our implementation is built on top of <a href="http://klee.llvm.org">KLEE</a>,
+	  a great symbolic execution engine from researchers at Stanford.</p>
+	
+	<p>We are very excited about these results, and think they
+	  show a real step forward in state of the art. 
+	  Don't take this to mean
+          we believe it's a solved problem.
+          Our future work focuses on
+	  scaling to larger and more programs, to more types of
+	  exploits, and to other relevant problem settings. There is
+          plenty still to do.
+	</p>
+	
+	<p>We presented our paper
+	  at <a href="http://www.isoc.org/isoc/conferences/ndss/11/">NDSS
+	    2011</a>.
+	  <ul>
+	    <li>The most current copy of our
+	      paper. <a href="aeg-current.pdf">PDF</a> <a href="aeg.bib">BiBTeX</a></li>
+	    <li>Help us find typos in our paper and join our <a href="thanks.html">thank you</a> list.</li>
+	    <li>The camera-ready version for NDSS. The above is the
+	      update; this is here mostly for historical
+	      reasons. <a href="aeg-ndss-2011.pdf">PDF</a></li>
+	  </ul>
+	</p>
+	
+	<p>For those of you interested in watching, we've prepared a
+	  youtube video of our experiments.</p>
+
+	<object style="height: 390px; width: 640px"><param name="movie" value="http://www.youtube.com/v/VPe1W7SIdBE?version=3" /><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><embed src="http://www.youtube.com/v/VPe1W7SIdBE?version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="390" /></object>
+
+	<p>We have a short talk that gives a  high-level
+	  overview of our take on the problem, the direction, and our project.
+	  Also note that due to
+	  youtube time lengths, we left out several important things such as
+	  the related work. That stuff is important, but we just couldn't fit
+	  everything in. Please see the paper for more information.</p>
+		
+	<object style="height: 390px; width: 640px"><param name="movie"
+	value="http://www.youtube.com/v/qbfujXuJrbs?version=3" />
+	  <param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" />
+	  <embed src="http://www.youtube.com/v/qbfujXuJrbs?version=3" type="application/x-shockwave-flash" allowfullscreen="true"
+		 allowScriptAccess="always" width="640" height="390" /></object>
+
+
+
+	<p> As a random link related to exploits, CMU runs a Capture the Flag team. See their website <a href="http://ppp.cylab.cmu.edu">http://ppp.cylab.cmu.edu</a>.</p>
+
+
+      </div>
+    </div>
+    <p id="footer">Copyright 2009, 2010 David Brumley</p>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20185243-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+	Project 3  Phase 2 (Implementation) 
+  Due: 8:00am on 11/29 (Thursday)
+  Complete a program for Project 3
+  	- You are not allowed to use database or hash (database) in your program
+  	- You must use lambda expressions to search and delete an object in a collection
+  	- Instantiation of dialog boxes must be done in the boundary class (VehicleRegistrationSystem.cs)
+        - You may access files (read operation files and serialization) in classes other than 
+           VehicleRegistrationSystem.cs
+        - Do not forget to put attribute [Serializable{}] right before each class that need to be serialized.
+  	- Update your object/class diagrams to match the final version of your program
+  		You may add a few fields, associations, and classes.  However, your final design cannot
+  		  be very different from the one I have approved at the design meeting
+  		I will carefully check whether your program matches the design at the meeting
+  	- Apply the Refactoring Rules (Chapter 4) to clean up your code
+  	- Make sure to place logic in appropriate classes
+  	
+  To submit your work, follow the steps below:
+  	1. make a directory after your LastName_FirstName (e.g., Mizuno_Masaaki in my case)
+  	2. put your final class diagram (.uml), object diagram (ppt(x), pdf, or jpg), and the program 
+  	   solution directory (remove the bin and obj directories) in your directory
+  	3. make a zip file of the directory
+	4. submit the zip file in the file dropbox named "Project 3 Phase 2"
+	Note: If you do not follow the above steps and I need extra steps to open your files, you will lose at least 10 % 
+	
+

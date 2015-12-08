@@ -1,0 +1,373 @@
+
+<html>
+<body>
+<h2>CIS301 Exercise 4</h2>
+
+<em><font color="#8B0000">10 points; due Monday, February 27</font></em>
+<hr>
+
+<p>
+We will extend a Python-coded interpreter for
+propositional-logic formulas so that it can execute a single test case, generate all possible test
+cases (build a "truth table"), and tell us whether or not a proposition is a tautology or is
+satisfiable.
+
+<p>
+<em><font color="#8B0000">First, before you starting working on anything, read this entire
+assignment page.  There are lots of hints, but you have to read
+to the very end to collect them together and use them as needed.</font></em>
+
+<p>
+I have written an interpreter for this syntax of propositional
+formulas, <tt><font color="#00008B"><strong>PROP</strong></font></tt>:
+<font color="#00008B"><strong><pre>
+PROP ::= PRIM  |  ~ PROP  |  ( PROP OP PROP )
+OP ::=  ^  |  v
+PRIM ::=  T  |  F  |  VAR
+VAR is a single lower-case letter (but not 'v' !)
+</pre></strong></font>
+That is, a proposition is written with <tt><font color="#00008B"><strong>T</strong></font></tt> (True), <tt><font color="#00008B"><strong>F</strong></font></tt> (False),
+<tt><font color="#00008B"><strong>~</strong></font></tt> (not), <tt><font color="#00008B"><strong>^</strong></font></tt> (and), and <tt><font color="#00008B"><strong>v</strong></font></tt> (or).  There are also variable
+names, like <tt><font color="#00008B"><strong>p</strong></font></tt> and <tt><font color="#00008B"><strong>q</strong></font></tt>.  (Variables are working correctly in the starting version.
+We'll fix this in a bit.)
+
+<p>What
+I've written for you so far reads a formula, parses it, and computes its meaning.
+Here are samples:
+<font color="#00008B"><strong><pre>
+Type a parenthesized proposition: ~T
+Parse tree is:
+['~', 'T']
+The proposition's meaning with no values for its vars is: False
+
+Type a parenthesized proposition: (T ^ ~F)
+Parse tree is:
+['^', 'T', ['~', 'F']]
+The proposition's meaning with no values for its vars is: True
+
+Type a parenthesized proposition: ~(F ^ (~F ^ T) )
+Parse tree is:
+['~', ['^', 'F', ['^', ['~', 'F'], 'T']]]
+The proposition's meaning with no values for its vars is: True
+</pre></strong></font>
+That is, the user starts the interpreter (types <tt><font color="#00008B"><strong>python Run.py</strong></font></tt> in a
+command window, or double-clicks
+on the driver icon, <tt><font color="#00008B"><strong>Run</strong></font></tt>) and then types a formula
+(e.g., <tt><font color="#00008B"><strong>~T</strong></font></tt>) which is then parsed into an operator tree
+(e.g., <tt><font color="#00008B"><strong>['~', 'T']</strong></font></tt>) from which the meaning is computed (<tt><font color="#00008B"><strong>False</strong></font></tt>).
+<em><font color="#8B0000">Notice that and-or-formulas require matching parens.</font></em>
+(I wrote the parser this way to keep it small and simple.
+You are welcome to read its code.)
+
+<p>
+Here are the forms of operator tree constructed by the parser:
+<font color="#00008B"><strong><pre>
+PTREE ::=  PRIM  |  ["~", PTREE}  |  [OP, PTREE1, PTREE2]
+PRIM is "T" or "F" or a one-letter string     
+OP is "^" or "v"
+</pre></strong></font>
+The program traverses an operator tree and computes its
+meaning, like we saw
+in Chapter 8 of the Lecture Notes.
+
+<p>
+The interpreter can be downloaded from
+<a href="Taut.zip"><tt><font color="#00008B">http://www.cis.ksu.edu/~schmidt/301s12/Exercises/Taut.zip</font></tt></a>.   If you have trouble downloaded and unzipping the folder,
+you can view the folder and its individual files at
+<a href="Prop"><tt><font color="#00008B">http://www.cis.ksu.edu/~schmidt/301s12/Exercises/Taut</font></tt></a>.
+
+<p>
+Download the <tt><font color="#00008B"><strong>Taut</strong></font></tt> folder and test <tt><font color="#00008B"><strong>Run.py</strong></font></tt>
+on the three examples shown above.  Verify that you
+obtain the same output as above.
+Then, read the code for <tt><font color="#00008B"><strong>Run.py</strong></font></tt> and <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt> to see how the output was produced.
+
+<p>
+<h4>Question 1. (1 point)</h4>
+Modify the <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt> so that it computes the meaning of formulas written with <tt><font color="#00008B"><strong>v</strong></font></tt> (or).
+(Important: <tt><font color="#00008B"><strong>v</strong></font></tt> is the lower-case letter ``vee''.)
+Test your revised interpreter on at least these required test cases:
+<font color="#00008B"><strong><pre>
+Type a parenthesized proposition: (T v ~T)
+Parse tree is:
+['v', 'T', ['~', 'T']]
+The proposition's meaning with no values for its vars is: True
+
+Type a parenthesized proposition: (T v (F ^ T))
+Parse tree is:
+['v', 'T', ['^', 'F', 'T']]
+The proposition's meaning with no values for its vars is: True
+
+Type a parenthesized proposition: ((F v F) ^ T)
+Parse tree is:
+['^', ['v', 'F', 'F'], 'T']
+The proposition's meaning with no values for its vars is: False
+</pre></strong></font>
+
+<p>
+<h4>Question 2. (4 points)</h4>
+First off, try these tests on your interpreter:
+<font color="#00008B"><strong><pre>
+python Run.py
+Type a parenthesized proposition: (p ^ T)
+Parse tree is:
+['^', 'p', 'T']
+Output is: None
+
+python Run.py
+Type a parenthesized proposition: (p ^ q)
+Parse tree is:
+['v', 'F', 'q']
+Output is: None
+</pre></strong></font>
+The problem is that variables <tt><font color="#00008B"><strong>p</strong></font></tt> and <tt><font color="#00008B"><strong>q</strong></font></tt> have no values.
+Find the place in <tt><font color="#00008B"><strong>eval</strong></font></tt> where variables are evaluated --- you will
+see they receive the meaning, <tt><font color="#00008B"><strong>None</strong></font></tt>.   
+
+<p>
+We fix this by traversing the
+operator tree and extracting all the variables inside the tree.
+(For example, for the tree, <tt><font color="#00008B"><strong>['^', 'p', ['~', 'q']]</strong></font></tt>, the list,
+<tt><font color="#00008B"><strong>['p', 'q']</strong></font></tt> is a list of the variables inside the tree.
+Similarly,
+<tt><font color="#00008B"><strong>['r', 'q']</strong></font></tt> is a list of the variables inside
+<tt><font color="#00008B"><strong>['v', 'r', ['^', 'T', 'q']]</strong></font></tt>.
+And <tt><font color="#00008B"><strong>['p']</strong></font></tt> is a list of the variables inside <tt><font color="#00008B"><strong>'p'</strong></font></tt>.)
+
+<p>
+You must implement this function in <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt>:
+<font color="#00008B"><strong><pre>
+def evalVarList(t) : 
+    """traverses  t  and builds a list of all the VARs embedded in  t
+       pre: t  is a PTREE
+       post: computes the "meaning" of  t  as  ans,  a list that holds all the VARs in  t.  
+          The order of the vars does not matter, but no varname is repeated --- no duplicates!
+       returns: ans
+           Examples:  
+           evalVarList(["v", "T", "p"])  returns  ["p"]
+           evalVarList("T")  returns  []
+           evalVarList(["^", ["~", "p"], ["v", "q", "p"]])  returns  ["p", "q"]
+    """
+</pre></strong></font>
+Replace the "code stub" I have left for you with a working implementation.
+(Big hint: the code you write will have the same structure as the <tt><font color="#00008B"><strong>eval</strong></font></tt> function.)
+Revise <tt><font color="#00008B"><strong>Run.py</strong></font></tt> as I have indicated in the comments in that module, and test
+your coding of <tt><font color="#00008B"><strong>evalVarList</strong></font></tt>.
+Now, the program reads a proposition, parse it, extracts its variables, asks the user for
+values for each variable, and prints the meaning.
+Test your coding on at least these required test cases:
+<font color="#00008B"><strong><pre>
+Type a parenthesized proposition: (p ^ ~q)
+Parse tree is:
+['^', 'p', ['~', 'q']]
+Variables in proposition are ['p', 'q']
+Type  True  or  False  for variable p: True
+Type  True  or  False  for variable q: True
+For bindings: {'q': True, 'p': True}  The answer is: False
+
+Type a parenthesized proposition: (q v (r ^ p))
+Parse tree is:
+['v', 'q', ['^', 'r', 'p']]
+Variables in proposition are ['q', 'r', 'p']
+Type  True  or  False  for variable q: False
+Type  True  or  False  for variable r: True
+Type  True  or  False  for variable p: True
+For bindings: {'q': False, 'p': True, 'r': True}  The answer is: True
+
+Type a parenthesized proposition: ~~F
+Parse tree is:
+['~', ['~', 'F']]
+Variables in proposition are []
+For bindings: {}  The answer is: False
+
+Type a parenthesized proposition: (p ^ (q ^ ~p))
+Parse tree is:
+['^', 'p', ['^', 'q', ['~', 'p']]]
+Variables in proposition are ['p', 'q']
+Type  True  or  False  for variable p: True
+Type  True  or  False  for variable q: False
+For bindings: {'q': False, 'p': True}  The answer is: False
+</pre></strong></font>
+The last example shows that the variable list never has duplicate variables.
+
+<p>
+<h4>Question 3. (3 points)</h4>
+Next, finish this function in <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt>, which generates the ``truth table'' for a proposition:
+<font color="#00008B"><strong><pre>
+def evalAllTests(tree):
+    """This function is called to supply the output for Questions 3 and 4.
+        It computes all possible combinations of True-False values for the variables in  tree  
+        and evaluates  tree  with each combination, printing the results. 
+        For Question 4: In addition, the function states whether or not  tree  is 
+        a tautology (true for all True-False combinations) and whether or not  tree  is 
+        satisfiable (true for at least one combination)
+       pre:  tree  is an operator tree in the format given above
+       post: (see the actions stated above)
+    """
+    varlist = evalVarList(tree)
+    allcombinations = generateBoolPermutations(len(varlist))  # 'len' means 'length of'
+    # INSERT CODE HERE TO ANSWER QUESTIONS 3 AND 4
+</pre></strong></font>
+The function uses the list, <tt><font color="#00008B"><strong>allcombinations</strong></font></tt>, of all possible True-False combinations
+for the number of variables in the <tt><font color="#00008B"><strong>tree</strong></font></tt> to generate the truth table.
+Modify
+<tt><font color="#00008B"><strong>Run.py</strong></font></tt> as indicated to call <tt><font color="#00008B"><strong>evalAllTests</strong></font></tt> and test it on at least these
+required test cases:
+<font color="#00008B"><strong><pre>
+Type a parenthesized proposition: ((r ^ q) ^ q)
+Parse tree is:
+['^', ['^', 'r', 'q'], 'q']
+For bindings: {'q': True, 'r': True}   The answer is: True
+For bindings: {'q': False, 'r': True}   The answer is: False
+For bindings: {'q': True, 'r': False}   The answer is: False
+For bindings: {'q': False, 'r': False}   The answer is: False
+
+Type a parenthesized proposition: (T v ~p)
+Parse tree is:
+['v', 'T', ['~', 'p']]
+For bindings: {'p': True}   The answer is: True
+For bindings: {'p': False}   The answer is: True
+
+Type a parenthesized proposition: ~~T
+Parse tree is:
+['~', ['~', 'T']]
+For bindings: {}   The answer is: True
+</pre></strong></font>
+
+
+<p>
+<h4>Question 4. (2 points)</h4>
+Modify function <tt><font color="#00008B"><strong>evalAllTests</strong></font></tt> to print whether or not the input proposition is a <em><font color="#8B0000">tautology</font></em>
+or is <em><font color="#8B0000">satisfiable</font></em>.
+
+<p>
+A proposition is a tautology if its meaning is True for all possible True-False combinations.
+For example, <tt><font color="#00008B"><strong>(p v ~p)</strong></font></tt> is a tautology; so is <tt><font color="#00008B"><strong>q v (p v ~q)</strong></font></tt>; so is <tt><font color="#00008B"><strong>~F</strong></font></tt>; so is <tt><font color="#00008B"><strong>~(p ^ ~p)</strong></font></tt>.
+But <tt><font color="#00008B"><strong>(p v q)</strong></font></tt> is not a tautology; nor is <tt><font color="#00008B"><strong>F</strong></font></tt>.
+
+<p>
+A proposition is satisfiable if its meaning is True for at least one True-False combination.
+For example, <tt><font color="#00008B"><strong>(p ^ q)</strong></font></tt> is satisfiable; so is <tt><font color="#00008B"><strong>(p v ~q)</strong></font></tt>; so is <tt><font color="#00008B"><strong>~p</strong></font></tt>; so is <tt><font color="#00008B"><strong>~F</strong></font></tt>.
+Also, any proposition that is a tautology is satisfiable, too.
+These propositions are not satisfiable: <tt><font color="#00008B"><strong>(p ^ ~p)</strong></font></tt>; <tt><font color="#00008B"><strong>~T</strong></font></tt>; <tt><font color="#00008B"><strong>p ^ (q ^ ~p)</strong></font></tt>.
+
+<p>
+Add extra instructions to <tt><font color="#00008B"><strong>evalAllTests</strong></font></tt> to print tautology/satisfiable information
+so that these
+required test cases execute as shown below:
+<font color="#00008B"><strong><pre>
+Type a parenthesized proposition: (p v ~p)
+Parse tree is:
+['v', 'p', ['~', 'p']]
+For bindings: {'p': True}   The answer is: True
+For bindings: {'p': False}   The answer is: True
+is a tautology
+is satisfiable
+
+Type a parenthesized proposition: (p ^ (q v ~r))
+Parse tree is:
+['^', 'p', ['v', 'q', ['~', 'r']]]
+For bindings: {'q': True, 'p': True, 'r': True}   The answer is: True
+For bindings: {'q': True, 'p': True, 'r': False}   The answer is: True
+For bindings: {'q': False, 'p': True, 'r': True}   The answer is: False
+For bindings: {'q': False, 'p': True, 'r': False}   The answer is: True
+For bindings: {'q': True, 'p': False, 'r': True}   The answer is: False
+For bindings: {'q': True, 'p': False, 'r': False}   The answer is: False
+For bindings: {'q': False, 'p': False, 'r': True}   The answer is: False
+For bindings: {'q': False, 'p': False, 'r': False}   The answer is: False
+is not a tautology
+is satisfiable
+
+Type a parenthesized proposition: (p ^ ~p)
+Parse tree is:
+['^', 'p', ['~', 'p']]
+For bindings: {'p': True}   The answer is: False
+For bindings: {'p': False}   The answer is: False
+is not a tautology
+is not satisfiable
+</pre></strong></font>
+
+
+<h3>About Python</h3>
+Since Python looks and acts somewhat like C or Basic, it is straightforward
+to use. 
+There is a set of lecture notes at
+<a href="http://people.cis.ksu.edu/~schmidt/200s08/Lectures/">
+<tt><font color="#00008B">http://people.cis.ksu.edu/~schmidt/200s08/Lectures/</font></tt></a>
+and there is a terse language summary at
+<a href="http://people.cis.ksu.edu/~schmidt/200s08/Lectures/999.summary.html">
+<tt><font color="#00008B">http://people.cis.ksu.edu/~schmidt/200s08/Lectures/999.summary.html</font></tt></a>.
+
+<p>
+You can do all the questions using only a notepad-like text editor.
+Of course, you must learn  some basic operations
+for Python lists and dictionaries (hash tables).
+These structures are central to dynamic languages and they are
+not primitive to compiler-based languages like C or C#.  They are well worth
+learning!
+Please see the
+<a href="http://people.cis.ksu.edu/~schmidt/301s12/pythonstrucs.html">
+notes on lists and dictionaries</a>
+that I posted on the CIS301 home page.
+Also, look at the code I have written in the <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt> file; I wrote it in a style
+that shows some standard ways of working with lists and dictionaries.
+
+
+<h4>Solo or Pair-work OK</h4>
+You may do this exercise solo or with a partner.
+If you choose the latter, you must tell the instructor (Schmidt)
+by classtime <em><font color="#8B0000">Wednesday, February 22</font></em>, who you and your partner are.
+Once the instructor OKs your request, you and your partner can work together on the assignment.
+(When you submit, both you and your partner will <em><font color="#8B0000">each submit the same zipped folder</font></em> on K-State Online.) 
+
+
+<h4>Submission</h4>
+
+Do the Questions in the order stated.  To obtain credit for answering
+a Question, your modified <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt> file must work correctly on all the required
+test cases stated above for each Question.  The amount of coding you
+must do is very little (about 50-60 lines to answer all four
+Questions!), but it requires that you understand grammars, operator trees,
+recursive function calls, lists, and dictionaries.
+
+<p>
+You <em><font color="#8B0000">must</font></em> follow these instructions to obtain credit for your
+work:
+
+<p>
+Make a folder to hold your work.  Your folder must contain
+the following:
+<ol>
+<li>
+The final version of your <tt><font color="#00008B"><strong>EvalProp.py</strong></font></tt> file, which must work correctly with the
+<tt><font color="#00008B"><strong>Run.py</strong></font></tt> and <tt><font color="#00008B"><strong>ParseProp.py</strong></font></tt> files I am giving you for free.
+<li>
+For each Question that you answer correctly, you must include
+a <tt><font color="#00008B"><strong>txt</strong></font></tt> file that contains <em><font color="#8B0000">cut-and-paste printout</font></em> that shows how
+each test case executed in the command window when you tested it.
+(If you do not know how to cut-and-paste from a window into
+an edit window, please ask the instructor!  It is easy to learn.)
+<p>
+The files that hold the successful test-cases-with-outputs for each question
+will be named <tt><font color="#00008B"><strong>Q1.txt</strong></font></tt>, <tt><font color="#00008B"><strong>Q2.txt</strong></font></tt>, <tt><font color="#00008B"><strong>Q3.txt</strong></font></tt>, <tt><font color="#00008B"><strong>Q4.txt</strong></font></tt>.
+
+<p>
+To get credit for answering a question,
+you must include all of the test cases
+listed above for the question.
+
+</ol>
+Zip the folder and upload it at K-State online.
+
+<p>
+The Teaching Assistant will read your source code (please add comments as needed
+to help him!), study your tests, and retry the tests for himself.  Perhaps the TA
+will do extra tests if he is unsure about your coding.
+
+<p>
+Please do not hesitate to ask questions if you are uncertain about any
+stage of the work.
+</body>
+</html>
+
+

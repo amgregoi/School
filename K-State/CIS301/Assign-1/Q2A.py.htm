@@ -1,0 +1,28 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q2.py</font>
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+y = x + 1
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (y == (x + 1))</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> y ==(x+1)	premise }"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (y == (x + 1))</font>
+x = x - 2
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (x == (x_old - 2))</font>
+<font color="#1E90FF"># (y == (x_old + 1))</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x == x_old - 2	premise
+	 2.<font color="#00FF00">OK</font> y == x_old + 1 	premise
+	 3.<font color="#00FF00">OK</font> x_old == y - 1	algebra 2
+	 4.<font color="#00FF00">OK</font> x == (y-1)-2	subst 3 1
+	 5.<font color="#00FF00">OK</font> x + 3 == y		algebra 4
+	}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># ((x + 3) == y)</font>
+	 
+<font color="#1E90FF"># prove:  y == 3 + x</font>
+
+</strong></pre></body></html>

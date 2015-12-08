@@ -1,0 +1,101 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q4.py</font>
+bal = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#CD6600">assert</font> bal >= 0   <font color="#1E90FF"># bal  is a global variable that holds an account's balance</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> bal >= 0	premise }"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+<font color="#1E90FF"># function  withdraw  extracts  amt  from the balance and returns  cash</font>
+def withdraw(amt) :
+    <font color="#008B00">"""{ pre  bal >= 0 and amt >= 0
+         post bal >= 0 and bal + cash == bal_in
+         return cash
+    }"""</font>
+    global bal  <font color="#1E90FF"># Python requires this line when a function changes a global var</font>
+    bal_in = bal
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((bal >= 0) and (amt >= 0))</font>
+	<font color="#1E90FF"># (bal == bal_in)</font>
+    <font color="#1E90FF"># bal_in = bal  (The checker adds this "ghost assignment")</font>
+    <font color="#1E90FF"># This generates a new premise you can use:  bal == bal_in</font>
+	if amt <= bal:
+		<font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+		<font color="#1E90FF"># (amt <= bal)</font>
+		<font color="#1E90FF"># ((bal >= 0) and (amt >= 0))</font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> amt <= bal	premise
+			2.<font color="#00FF00">OK</font> bal == bal_in	premise
+			3.<font color="#00FF00">OK</font> bal>= 0 and amt >= 0	premise
+			4.<font color="#00FF00">OK</font> bal >= 0	ande 3
+			5.<font color="#00FF00">OK</font> amt >= 0	ande 3
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (amt >= 0)</font>
+		bal = bal - amt
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (bal == (bal_old - amt))</font>
+		<font color="#1E90FF"># (amt >= 0)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> bal == bal_old - amt		premise
+			2.<font color="#00FF00">OK</font> amt >= 0	premise
+			3.<font color="#00FF00">OK</font> amt == bal_in - bal	algebra 1
+			4.<font color="#00FF00">OK</font> bal_in - bal >= 0	algebra 2 3
+			5.<font color="#00FF00">OK</font> bal >= 0	algebra 4
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (bal >= 0)</font>
+		cash = amt
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (cash == amt)</font>
+		<font color="#1E90FF"># (bal >= 0)</font>
+		<font color="#CD6600">assert</font> (amt == (bal_in - bal))  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+		<font color="#008B00">"""{1.<font color="#EE2C2C">??</font> amt == bal_in - bal	premise
+			2.<font color="#00FF00">OK</font> cash == amt	premise
+			3.<font color="#00FF00">OK</font> bal >= 0	premise
+			4.<font color="#00FF00">OK</font> cash == bal_in - bal	algebra 2 1
+			5.<font color="#00FF00">OK</font> bal+cash == bal_in	algebra 4
+			6.<font color="#00FF00">OK</font> bal >= 0	algebra 2 3
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (bal >= 0)</font>
+	else :
+		<font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+		<font color="#1E90FF"># not (amt <= bal)</font>
+		<font color="#1E90FF"># ((bal >= 0) and (amt >= 0))</font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(amt <= bal)	premise
+			2.<font color="#00FF00">OK</font> bal == bal_in	premise
+			3.<font color="#00FF00">OK</font> bal>= 0 and amt >= 0	premise
+			4.<font color="#00FF00">OK</font> bal >= 0	ande 3
+			5.<font color="#00FF00">OK</font> amt >= 0	ande 3
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (amt >= 0)</font>
+		cash = 0
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (cash == 0)</font>
+		<font color="#1E90FF"># (amt >= 0)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> cash == 0	premise
+			2.<font color="#00FF00">OK</font> amt >= 0 	premise
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (amt >= 0)</font>
+<font color="#1E90FF"># <font color="#EE2C2C">ERROR</font>: uneven indentation of commands</font>
+    <font color="#1E90FF"># Prove the postcondition here; the checker can't do this one alone.</font>
+    return cash
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (amt >= 0)</font>
+    <font color="#1E90FF"># ((bal >= 0) and ((bal + cash) == bal_in))</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((bal >= 0) or ((amt >= 0) and ((bal >= 0) and ((bal + cash) == bal_in))))</font>
+	<font color="#CD6600">assert</font> ((bal >= 0) and ((bal + cash) == bal_in))  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+	<font color="#008B00">"""{1.<font color="#EE2C2C">??</font> bal >= 0 and bal + cash == bal_in	premise
+	}"""</font>	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((bal >= 0) and ((bal + cash) == bal_in))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+</strong></pre></body></html>

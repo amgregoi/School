@@ -1,0 +1,52 @@
+<html><body><pre><strong>
+
+pi = 3  <font color="#1E90FF"># sorry --- the checker handles  ints  only  )-:</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (pi == 3)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (pi == 3)</font>
+c = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (c == 0)</font>
+<font color="#1E90FF"># (pi == 3)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (c == 0)</font>
+<font color="#1E90FF"># (pi == 3)</font>
+
+def circ(diameter) :
+    <font color="#008B00">"""{ pre  diameter >= 0  and  pi >= 3
+         post  c == pi * diameter  
+    }"""</font>
+    global c   <font color="#1E90FF"># this designates that global c will be updated</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># ((diameter >= 0) and (pi >= 3))</font>
+    c = pi * diameter
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (c == (pi * diameter))</font>
+    <font color="#1E90FF"># ((diameter >= 0) and (pi >= 3))</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (c == (pi * diameter))</font>
+    <font color="#1E90FF"># ((diameter >= 0) and (pi >= 3))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (c == 0)</font>
+<font color="#1E90FF"># (pi == 3)</font>
+
+
+
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> pi == 3   premise 
+     2.<font color="#00FF00">OK</font> c ==  0   premise
+     3.<font color="#00FF00">OK</font> pi > c    algebra 1 2
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (pi > c)</font>
+novar = circ(2)   <font color="#1E90FF"># this is a function call that returns no answer</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (c == (pi * 2))</font>
+<font color="#1E90FF"># (pi > c_old)</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  c == pi * 2   premise
+     2.<font color="#00FF00">OK</font>  pi > c_old    premise   <font color="#1E90FF"># c's value was changed by  circ;</font>
+                                 <font color="#1E90FF"># this is called a _side effect_</font>
+     <font color="#1E90FF"># ... we can do more deductions here ...</font>
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+</strong></pre></body></html>

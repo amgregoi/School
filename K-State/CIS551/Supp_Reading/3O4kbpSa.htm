@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+  <title>Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure | Deploy360 Programme</title>
+
+    <!-- HTML5 form of the declaration of the character set encoding -->
+    <meta charset="UTF-8">
+    
+	<link rel="stylesheet" type="text/css" media="all" href="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/css/html-reset.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/style.css" />
+    <link rel="stylesheet" href="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/css/handheld.css" media="handheld"/>
+
+	<!--[if IE]>
+    <link rel="stylesheet" href="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/css/ie.css" media="screen"/>
+    <![endif]-->
+    
+    
+	<link rel="alternate" type="application/rss+xml" title="Deploy360 Programme &raquo; Feed" href="http://www.internetsociety.org/deploy360/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Deploy360 Programme &raquo; Comments Feed" href="http://www.internetsociety.org/deploy360/comments/feed/" />
+
+            <script type="text/javascript">//<![CDATA[
+            // Google Analytics for WordPress by Yoast v4.3.3 | http://yoast.com/wordpress/google-analytics/
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-1978561-7']);
+				            _gaq.push(['_setCustomVar',1,'post_type','post',3],['_setCustomVar',2,'author','dan-york',3],['_setCustomVar',3,'tags','comcast dnssec',3],['_setCustomVar',4,'categories','dnssec',3],['_trackPageview']);
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+            //]]></script>
+			<link rel="alternate" type="application/rss+xml" title="Deploy360 Programme &raquo; Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure Comments Feed" href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/feed/" />
+<link rel='stylesheet' id='nextgen_gallery_related_images-css'  href='http://www.internetsociety.org/deploy360/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/nextgen_gallery_display/static/nextgen_gallery_related_images.css?ver=3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='tfg_style-css'  href='http://www.internetsociety.org/deploy360/wp-content/plugins/twitter-facebook-google-plusone-share/tfg_style.css?ver=3.6.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.internetsociety.org/deploy360/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+<script type='text/javascript' src='http://www.internetsociety.org/deploy360/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var photocrati_ajax = {"url":"http:\/\/www.internetsociety.org\/deploy360\/photocrati_ajax","wp_site_url":"http:\/\/www.internetsociety.org\/deploy360","wp_site_static_url":"http:\/\/www.internetsociety.org\/deploy360"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.internetsociety.org/deploy360/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ajax/static/ajax.js?ver=3.6.1'></script>
+<script type='text/javascript' src='http://www.internetsociety.org/deploy360/wp-includes/js/comment-reply.min.js?ver=3.6.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.internetsociety.org/deploy360/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.internetsociety.org/deploy360/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='It&#8217;s Friday &#8211; Why Not Make It &#8220;IPv6 Friday&#8221;?' href='http://www.internetsociety.org/deploy360/blog/2012/01/its-friday-why-not-make-it-ipv6-friday/' />
+<link rel='next' title='Video/Slides &#8211; Dead Men Walking: IPv6 and DNSSEC' href='http://www.internetsociety.org/deploy360/blog/2012/01/videoslides-dead-men-walking-ipv6-and-dnssec/' />
+<meta name="generator" content="WordPress 3.6.1" />
+<link rel='canonical' href='http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/' />
+<link rel='shortlink' href='http://www.internetsociety.org/deploy360/?p=5703' />
+<!-- <meta name="NextGEN" version="2.0.33" /> -->
+
+
+<!-- Facebook Like Thumbnail -->
+<link rel="image_src" href="http://www.internetsociety.org/deploy360/wp-content/uploads/2012/01/comcast-dnssec.jpg" />
+<!-- End Facebook Like Thumbnail -->
+
+
+</head> 
+
+<body class="single single-post postid-5703 single-format-standard">
+
+<div id="headerutility"><div class="utility"><ul id="menu-utility-menu" class="menu"><li id="menu-item-180" class="first-menu-item menu-item menu-item-type-post_type menu-item-object-page current_page_parent last-menu-item menu-item-180"><a href="http://www.internetsociety.org/deploy360/blog/" >Blog</a></li>
+</ul></div><div class="clear"></div></div> <!-- header utility -->
+
+<header id="header">
+
+  
+<form method="get" id="searchform" action="http://www.internetsociety.org/deploy360/">
+	<label for="s">Search</label>
+	<input type="text" value="" name="s" id="s" />
+
+	<input type="submit" id="searchsubmit" value="GO" />
+
+</form>
+  <h1><a href="/deploy360/" title=""><img src="http://www.internetsociety.org/deploy360/wp-content/uploads/2013/10/deploy360-logo.jpg" alt="Deploy360 Programme" /></a></h1>
+
+  <div class="clear"></div>
+
+</header> <!-- #header -->
+
+<nav id="nav">
+
+	<div class="menu-header"><ul id="menu-navigation" class="menu"><li id="menu-item-186" class="first-menu-item menu-item menu-item-type-post_type menu-item-object-page menu-item-186"><a href="http://www.internetsociety.org/deploy360/" >Home</a>
+<ul class="sub-menu">
+	<li id="menu-item-499" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-499"><a href="http://www.internetsociety.org/deploy360/home/operators/" >Network Operators</a></li>
+	<li id="menu-item-500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-500"><a href="http://www.internetsociety.org/deploy360/home/developers/" >Developers</a></li>
+	<li id="menu-item-501" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-501"><a href="http://www.internetsociety.org/deploy360/home/content-providers/" >Content Providers</a></li>
+	<li id="menu-item-502" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-502"><a href="http://www.internetsociety.org/deploy360/home/consumer-electronics/" >Consumer Electronics</a></li>
+	<li id="menu-item-503" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-503"><a href="http://www.internetsociety.org/deploy360/home/enterprise-customers/" >Enterprise Customers</a></li>
+</ul>
+</li>
+<li id="menu-item-185" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-185"><a href="http://www.internetsociety.org/deploy360/ipv6/" >IPv6</a>
+<ul class="sub-menu">
+	<li id="menu-item-1034" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1034"><a href="http://www.internetsociety.org/deploy360/ipv6/basics/" >Basics</a></li>
+	<li id="menu-item-5447" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5447"><a href="http://www.internetsociety.org/deploy360/ipv6/case-studies/" >Case Studies</a></li>
+	<li id="menu-item-14737" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14737"><a href="http://www.internetsociety.org/deploy360/ipv6/community/" >Community</a></li>
+	<li id="menu-item-1035" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1035"><a href="http://www.internetsociety.org/deploy360/ipv6/sites/" >Sites</a></li>
+	<li id="menu-item-13876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13876"><a href="http://www.internetsociety.org/deploy360/ipv6/statistics/" >Statistics</a></li>
+	<li id="menu-item-1038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1038"><a href="http://www.internetsociety.org/deploy360/ipv6/training/" >Training</a></li>
+	<li id="menu-item-13878" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-13878"><a href="http://www.internetsociety.org/deploy360/blog/category/ipv6/videos/" >Videos</a></li>
+	<li id="menu-item-13875" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13875"><a href="http://www.internetsociety.org/deploy360/roadmap/ipv6/" >Roadmap for IPv6 Content</a></li>
+</ul>
+</li>
+<li id="menu-item-184" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-184"><a href="http://www.internetsociety.org/deploy360/dnssec/" >DNSSEC</a>
+<ul class="sub-menu">
+	<li id="menu-item-1036" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1036"><a href="http://www.internetsociety.org/deploy360/dnssec/basics/" >Basics</a></li>
+	<li id="menu-item-5439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5439"><a href="http://www.internetsociety.org/deploy360/dnssec/case-studies/" >Case Studies</a></li>
+	<li id="menu-item-17186" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17186"><a href="http://www.internetsociety.org/deploy360/dnssec/maps/" >Deployment Maps</a></li>
+	<li id="menu-item-14724" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14724"><a href="http://www.internetsociety.org/deploy360/dnssec/community/" >Community</a></li>
+	<li id="menu-item-1037" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1037"><a href="http://www.internetsociety.org/deploy360/dnssec/sites/" >Sites</a></li>
+	<li id="menu-item-13877" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13877"><a href="http://www.internetsociety.org/deploy360/dnssec/statistics/" >Statistics</a></li>
+	<li id="menu-item-5438" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5438"><a href="http://www.internetsociety.org/deploy360/dnssec/tools/" >Tools</a></li>
+	<li id="menu-item-5440" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5440"><a href="http://www.internetsociety.org/deploy360/dnssec/training/" >Training</a></li>
+	<li id="menu-item-5662" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5662"><a href="http://www.internetsociety.org/deploy360/blog/category/dnssec/tutorials-dnssec/" >Tutorials</a></li>
+	<li id="menu-item-13879" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-13879"><a href="http://www.internetsociety.org/deploy360/blog/category/dnssec/videos-dnssec/" >Videos</a></li>
+	<li id="menu-item-904" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-904"><a href="http://www.internetsociety.org/deploy360/blog/category/dnssec/whitepapers/" >Whitepapers</a></li>
+	<li id="menu-item-13874" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13874"><a href="http://www.internetsociety.org/deploy360/roadmap/dnssec/" >Roadmap for DNSSEC Content</a></li>
+</ul>
+</li>
+<li id="menu-item-14822" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14822"><a href="http://www.internetsociety.org/deploy360/routing/" >Routing</a>
+<ul class="sub-menu">
+	<li id="menu-item-14823" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14823"><a href="http://www.internetsociety.org/deploy360/routing/basics/" >Basics</a></li>
+	<li id="menu-item-14825" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14825"><a href="http://www.internetsociety.org/deploy360/routing/case-studies/" >Case Studies</a></li>
+	<li id="menu-item-14824" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14824"><a href="http://www.internetsociety.org/deploy360/routing/reports/" >Reports</a></li>
+	<li id="menu-item-14827" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14827"><a href="http://www.internetsociety.org/deploy360/routing/sites/" >Sites</a></li>
+	<li id="menu-item-14828" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14828"><a href="http://www.internetsociety.org/deploy360/routing/statistics/" >Statistics</a></li>
+	<li id="menu-item-14826" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14826"><a href="http://www.internetsociety.org/deploy360/routing/tools/" >Tools</a></li>
+	<li id="menu-item-15830" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15830"><a href="http://www.internetsociety.org/deploy360/roadmap/routing/" >Roadmap for Routing Content</a></li>
+</ul>
+</li>
+<li id="menu-item-183" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-183"><a href="http://www.internetsociety.org/deploy360/ion/" >ION Conferences</a>
+<ul class="sub-menu">
+	<li id="menu-item-16230" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16230"><a href="http://www.internetsociety.org/deploy360/ion/krakow2013/" >ION Krakow</a></li>
+	<li id="menu-item-15678" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15678"><a href="http://www.internetsociety.org/deploy360/ion/toronto2013/" >ION Toronto</a></li>
+	<li id="menu-item-15425" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15425"><a href="http://www.internetsociety.org/deploy360/ion/past-ion-conferences/" >Past ION Conferences</a></li>
+</ul>
+</li>
+<li id="menu-item-438" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-438"><a href="http://www.internetsociety.org/deploy360/blog/" >Blog</a></li>
+<li id="menu-item-193" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-193"><a href="http://www.internetsociety.org/deploy360/about/" >About</a>
+<ul class="sub-menu">
+	<li id="menu-item-191" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-191"><a href="http://www.internetsociety.org/deploy360/about/contact/" >Contact Us</a></li>
+	<li id="menu-item-268" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-268"><a href="http://www.internetsociety.org/deploy360/about/volunteer/" >Volunteer</a></li>
+	<li id="menu-item-192" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-192"><a href="http://www.internetsociety.org/deploy360/about/media/" >Media</a></li>
+	<li id="menu-item-12977" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12977"><a href="http://www.internetsociety.org/deploy360/roadmap/" >Roadmap</a>
+	<ul class="sub-menu">
+		<li id="menu-item-12978" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12978"><a href="http://www.internetsociety.org/deploy360/roadmap/dnssec/" >DNSSEC Roadmap</a></li>
+		<li id="menu-item-12979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12979"><a href="http://www.internetsociety.org/deploy360/roadmap/ipv6/" >IPv6 Roadmap</a></li>
+		<li id="menu-item-15829" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15829"><a href="http://www.internetsociety.org/deploy360/roadmap/routing/" >Routing Roadmap</a></li>
+	</ul>
+</li>
+	<li id="menu-item-265" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-265"><a href="http://www.internetsociety.org/deploy360/about/speakers/" >Speakers</a></li>
+	<li id="menu-item-274" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-274"><a href="http://www.internetsociety.org/deploy360/about/sponsors/" >Sponsors</a></li>
+	<li id="menu-item-11229" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11229"><a href="http://www.internetsociety.org/deploy360/about/team/" >Our Team</a></li>
+</ul>
+</li>
+<li id="menu-item-290" class="menu-item menu-item-type-post_type menu-item-object-page last-menu-item menu-item-290"><a href="http://www.internetsociety.org/deploy360/feedback/" >Feedback?</a></li>
+</ul></div>
+    <div class="clear"></div>
+
+</nav><!-- #nav -->
+
+<div id="columns">
+
+ 	<aside id="aside-left">
+
+<div class="menu-sidebar"><h2><a href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/">Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure</a></h2><ul class="menu"></ul></div>
+		<div id="text-11" class="widget-container widget_text"><h2 class="widget-title">IPv6</h2>			<div class="textwidget"><ul>
+<li><a href="/deploy360/ipv6/basics/">Basics</a>
+<li><a href="/deploy360/ipv6/case-studies">Case Studies</a>
+<li><a href="/deploy360/ipv6/sites">Other Sites</a>
+<li><a href="/deploy360/ipv6/statistics">Statistics</a>
+<li><a href="/deploy360/ipv6/training">Training Resources</a>
+<li><a href="/deploy360/ipv6/twitter-feeds/">Twitter Feeds</a>
+</ul></div>
+		</div><div id="text-12" class="widget-container widget_text"><h2 class="widget-title">DNSSEC</h2>			<div class="textwidget"><ul>
+<li><a href="/deploy360/dnssec/basics">Basics</a>
+<li><a href="/deploy360/dnssec/case-studies/">Case Studies</a>
+<li><a href="/deploy360/dnssec/sites">Other Sites</a>
+<li><a href="/deploy360/dnssec/statistics">Statistics</a>
+<li><a href="/deploy360/dnssec/tools">Tools</a>
+<li><a href="/deploy360/dnssec/training">Training Resources</a>
+<li><a href="/deploy360/dnssec/twitter-feeds/">Twitter Feeds</a>
+</ul></div>
+		</div><div id="text-20" class="widget-container widget_text"><h2 class="widget-title">Routing</h2>			<div class="textwidget"><ul>
+<li><a href="/deploy360/routing/basics">Basics</a>
+<li><a href="/deploy360/routing/case-studies/">Case Studies</a>
+<li><a href="/deploy360/dnssec/reports">Reports</a>
+<li><a href="/deploy360/routing/sites">Other Sites</a>
+<li><a href="/deploy360/routing/statistics">Statistics</a>
+<li><a href="/deploy360/routing/tools">Tools</a>
+</ul></div>
+		</div>
+
+</aside><!-- end aside-left --><section id="copy">
+	    
+ 
+				
+		<div class="navigation">
+		  <table width="100%">
+		    <tr>
+             <td width="50%"><div class="navleft">&laquo; <a href="http://www.internetsociety.org/deploy360/blog/2012/01/its-friday-why-not-make-it-ipv6-friday/" rel="prev">It&#8217;s Friday &#8211; Why Not Make It &#8220;IPv6 Friday&#8221;?</a></div></td>
+		     <td width="50%"><div class="navright"><a href="http://www.internetsociety.org/deploy360/blog/2012/01/videoslides-dead-men-walking-ipv6-and-dnssec/" rel="next">Video/Slides &#8211; Dead Men Walking: IPv6 and DNSSEC</a> &raquo;</div></td>
+            </tr>
+          </table>
+		  <hr/>
+	   </div>
+			
+		<div class="post" id="post-5703" class="post-5703 post type-post status-publish format-standard hentry category-dnssec tag-comcast tag-dnssec">
+
+			<h1>Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure</h1>
+
+			<div class="entry">
+
+				<p><a href="http://www.dnssec.comcast.net/DNSSEC_Validation_Failure_NASAGOV_20120118_FINAL.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://www.dnssec.comcast.net/DNSSEC_Validation_Failure_NASAGOV_20120118_FINAL.pdf']);"><img style="float: right;" title="comcast-dnssec.jpg" src="http://www.internetsociety.org/deploy360/wp-content/uploads/2012/01/comcast-dnssec.jpg" alt="Comcast dnssec" width="250" height="230" border="0" /></a>Did you see all the tweets and mentions on the web last week about Comcast apparently blocking NASA&#8217;s website on their network? While it made for great headlines, the truth was that there was an error with the DNSSEC signing of the NASA.gov domain and now that <a href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-gives-17-8m-customers-access-to-dnssec-validating-dns-servers/" >Comcast has deployed DNSSEC-validating DNS servers</a> those DNS servers were correctly responding with a failure and blocking access to the site.</p>
+<p>Comcast alerted the administrators of the NASA.gov site and worked with them to resolve the issue. <a href="http://www.dnssec.comcast.net/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.dnssec.comcast.net/']);">Comcast&#8217;s DNS Engineering team</a> has now issued <a href="http://www.dnssec.comcast.net/DNSSEC_Validation_Failure_NASAGOV_20120118_FINAL.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://www.dnssec.comcast.net/DNSSEC_Validation_Failure_NASAGOV_20120118_FINAL.pdf']);">a very helpful analysis of the NASA.gov DNSSEC validation failure</a>. As they outline in part of the executive summary:</p>
+<blockquote><p>On January 18, 2012, the NASA.GOV domain had a DNS Security Extensions (DNSSEC) signing error that blocked access to all NASA.GOV sites when using DNS recursive resolvers performing DNSSEC validation. As one of the largest ISPs in the world utilizing DNSSEC validation, users of Comcast noticed a problem when attempting to connect to the website. This caused some people to incorrectly interpret this as Comcast purposely blocking access to NASA.GOV and recommending users switch from Comcast security-aware DNS resolvers to resolvers not performing DNSSEC validation &#8230; Instead, the administrators of the NASA.GOV domain had enabled DNSSEC signing for their domain, and the security signatures in their domain were no longer valid. The Comcast DNS resolvers correctly identified the DNSSEC signature errors and responded with a failure to Comcast customers. This is the expected result when a domain can no longer be validated, and this protects users from a potential security threat.</p></blockquote>
+<p>The document then goes on at some length to explain how Comcast monitors for DNSSEC validation failures, how the NASA.gov domain failed, how the issue was resolved and how users responded to the issue. The document includes a number of charts from <a href="http://www.internetsociety.org/deploy360/resources/testing-dnsviz-a-dns-visualization-tool/" >DNSViz</a> showing the precise error in the DNSSEC chain-of-trust and then interestingly includes examples of the web and Twitter reaction to the problem.</p>
+<p>In a message to the dnssec-deployment mailing list announcing the release of this document, Comcast&#8217;s Jason Livingood stated:</p>
+<blockquote><p>Since we feel that the entire Internet community has room for improvement on signing processes (not to single out NASA), we decided to start doing failure analyses here and there – and share them with the community in the hope that it will help bring greater operational scrutiny and maturity to DNSSEC signing processes.</p></blockquote>
+<p>Kudos to the Comcast DNS Engineering team for <a href="http://www.dnssec.comcast.net/DNSSEC_Validation_Failure_NASAGOV_20120118_FINAL.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://www.dnssec.comcast.net/DNSSEC_Validation_Failure_NASAGOV_20120118_FINAL.pdf']);">releasing this analysis</a> as it is indeed quite helpful to understand how DNSSEC validation failed, what the user experience was and how the issue was resolved. We look forward to seeing more of these types of analysis documents as the global DNSSEC rollout continues. Sharing this level of detail will definitely help others who encounter similar situations and will only make the DNSSEC system that much stronger.</p>
+<div style="background: #eee; padding: 5px 5px 5px 15px; border: 1px solid #ddd; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -moz-box-shadow: 5px 5px 4px #000; -webkit-box-shadow: 5px 5px 4px #000; box-shadow: 5px 5px 4px #000;">Want to learn more about DNSSEC? View <a href="http://www.internetsociety.org/deploy360/dnssec/" >our DNSSEC-related resources</a>, including tutorials, videos and more&#8230;</div>
+<hr />
+<p><strong>UPDATE:</strong> Dark Reading also put up a good post today on this topic: <em><a href="http://www.darkreading.com/authentication/167901072/security/application-security/232500483/dnssec-error-caused-nasa-website-to-be-blocked.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.darkreading.com/authentication/167901072/security/application-security/232500483/dnssec-error-caused-nasa-website-to-be-blocked.html']);" target="_blank">DNSSEC Error Caused NASA Website To Be Blocked</a></em></p>
+<div class="bottomcontainerBox" style="background-color:#F0F4F9;">
+			<div style="float:left; width:60px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.internetsociety.org%2Fdeploy360%2Fblog%2F2012%2F01%2Fcomcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure%2F&amp;layout=button_count&amp;show_faces=false&amp;width=60&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:60px; height:21px;"></iframe></div>
+			<div style="float:left; width:45px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<g:plusone size="medium" href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/"count="false"></g:plusone>
+			</div>
+			<div style="float:left; width:55px;padding-right:10px; margin:4px 4px 4px 4px;height:30px;">
+			<a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com/share']);" class="twitter-share-button" data-url="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/"  data-text="Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure" data-count="none" data-via="deploy360"></a>
+			</div>			
+			</div><div style="clear:both"></div><div style="padding-bottom:4px;"></div>
+			</div>
+
+						
+			
+<div class="meta">
+
+	January 25th, 2012 by <a href="http://www.internetsociety.org/deploy360/blog/author/danyork/" title="Posts by Dan York" rel="author">Dan York</a> |
+	Posted in <a href="http://www.internetsociety.org/deploy360/blog/category/dnssec/" title="View all posts in DNSSEC" rel="category tag">DNSSEC</a> | 
+    Tags: <a href="http://www.internetsociety.org/deploy360/blog/tag/comcast/" rel="tag">comcast</a>, <a href="http://www.internetsociety.org/deploy360/blog/tag/dnssec/" rel="tag">DNSSEC</a> | 	<a href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/#comments" class="comments-link"  title="Comment on Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure">2 Comments</a>
+</div>			<hr>
+
+		</div>
+
+		
+<div id="comments">
+
+
+			<h3 id="comments-title">2 Responses to <em>Comcast Releases Detailed Analysis of NASA.gov DNSSEC Validation Failure</em></h3>
+
+
+			<ol class="commentlist">
+						<li class="comment even thread-even depth-1 parent" id="comment-509">
+				<div id="div-comment-509" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt="" src="http://graph.facebook.com/100000567875198/picture" class="avatar avatar-32 photo " height="32" width="32" />			<cite class="fn">Mark Fritz</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/#comment-509">
+			April 20, 2012 at 8:31 pm</a>		</div>
+
+		<p>So this is now April 20, 2012 and Comcast is still blocking NASA.<br />
+<a href="http://wwt.nasa.gov/wwt/p/mars_base_map/2/0/0.png" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://wwt.nasa.gov/wwt/p/mars_base_map/2/0/0.png']);" rel="nofollow">http://wwt.nasa.gov/wwt/p/mars_base_map/2/0/0.png</a></p>
+<p>Should show a nice png of Mars, but It&#8217;s not to be found if you&#8217;re a Comcast customer.  When are they going to get around to fixing the mistake?</p>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/?replytocom=509#respond' onclick='return addComment.moveForm("div-comment-509", "509", "respond", "5703")'>Reply</a>		</div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-danyork bypostauthor odd alt depth-2" id="comment-510">
+				<div id="div-comment-510" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/6b416510c1351722237f3fbe14cf4eea?s=32&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<cite class="fn">Dan York</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.internetsociety.org/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/#comment-510">
+			April 20, 2012 at 9:48 pm</a>		</div>
+
+		<p>Mark,</p>
+<p>The issue with NASA.gov having incorrect DNSSEC keys was fixed way back in January.  The report from Comcast mentioned in this blog post was the report from <em>after</em> the incident relaying what happened and how it was fixed.  There have been no reports of issues since that time that I&#8217;ve seen.</p>
+<p>If you are unable to get to an image on NASA&#8217;s site, I would contact Comcast technical support or send them a Twitter message to @ComcastCares.  I don&#8217;t see any messages on their DNSSEC info center indicating there are any new problems: <a href="http://www.dnssec.comcast.net/" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://www.dnssec.comcast.net/']);" rel="nofollow">http://www.dnssec.comcast.net/</a></p>
+<p>Hopefully if there is an issue it will be quickly corrected.</p>
+<p>Dan</p>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/?replytocom=510#respond' onclick='return addComment.moveForm("div-comment-510", "510", "respond", "5703")'>Reply</a>		</div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+			</ol>
+
+
+
+								<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/deploy360/blog/2012/01/comcast-releases-detailed-analysis-of-nasa-gov-dnssec-validation-failure/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://www.internetsociety.org/deploy360/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='5703' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="246f260e36" /></p>					</form>
+							</div><!-- #respond -->
+			        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                jQuery('#commentform').submit(function () {
+                    _gaq.push(
+                            ['_setAccount', 'UA-1978561-7'],
+                            ['_trackEvent', 'comment', 'submit']
+                    );
+                });
+            });
+        </script>
+					
+</div><!-- #comments -->
+
+		    
+
+    	
+	</section><!-- /end section -->			<aside id="aside-right">
+				<div id="text-13" class="socialmedias"><div class="content widget_text"><h2 class="widget-title">Follow Us</h2>			<div class="textwidget"><a href="http://www.facebook.com/Deploy360" target="_blank">
+<img src="/deploy360/wp-content/themes/isoc-wp/images/icon_facebook_blue.png" width="28" height="29" alt="facebook"></a> 
+<a href="http://twitter.com/deploy360"  target="_blank">
+<img src="/deploy360/wp-content/themes/isoc-wp/images/icon_twitter_blue.png" width="30" height="29" alt="twitter"></a> 
+<a href="http://www.youtube.com/user/Deploy360"  target="_blank">
+<img src="/deploy360/wp-content/themes/isoc-wp/images/icon_youtube_blue.png" width="29" height="29" alt="youtube"></a>
+<a href="https://plus.google.com/b/100600212961472655878/"  target="_blank">
+<img src="/deploy360/wp-content/themes/isoc-wp/images/icon_googleplus_blue.png" width="29" height="29" alt="Google+"></a>
+<a href="http://www.internetsociety.org/deploy360/feed/">
+<img src="/deploy360/wp-content/themes/isoc-wp/images/icon_rss_blue.png" width="28" height="28" alt="RSS icon"></a></div>
+		</div></div>		<div id="recent-posts-3" class="socialmedias"><div class="content widget_recent_entries">		<h2 class="widget-title">Recent Posts</h2>		<ul>
+					<li>
+				<a href="http://www.internetsociety.org/deploy360/blog/2013/12/a-2013-recap-of-our-bcop-efforts/" title="A 2013 Recap of our BCOP Efforts">A 2013 Recap of our BCOP Efforts</a>
+						</li>
+					<li>
+				<a href="http://www.internetsociety.org/deploy360/blog/2013/12/follow-deploy360-on-soundcloud-to-hear-our-audio-updates-and-event-recordings/" title="Follow Deploy360 On SoundCloud To Hear Our Audio Updates And Event Recordings">Follow Deploy360 On SoundCloud To Hear Our Audio Updates And Event Recordings</a>
+						</li>
+					<li>
+				<a href="http://www.internetsociety.org/deploy360/blog/2013/12/dell-how-i-learned-to-stop-worrying-and-love-ipv6/" title="Dell: How I Learned To Stop Worrying And Love IPv6">Dell: How I Learned To Stop Worrying And Love IPv6</a>
+						</li>
+					<li>
+				<a href="http://www.internetsociety.org/deploy360/blog/2013/12/call-for-participation-submit-your-idea-for-the-icann-49-dnssec-workshop-in-singapore/" title="Call For Participation &#8211; Submit Your Idea For The ICANN 49 DNSSEC Workshop In Singapore">Call For Participation &#8211; Submit Your Idea For The ICANN 49 DNSSEC Workshop In Singapore</a>
+						</li>
+					<li>
+				<a href="http://www.internetsociety.org/deploy360/blog/2013/12/campaign-turn-off-ipv4-on-6-june-2014-for-one-day/" title="Campaign: Turn Off IPv4 on 6 June 2014 for One Day">Campaign: Turn Off IPv4 on 6 June 2014 for One Day</a>
+						</li>
+				</ul>
+		</div></div>		<div id="recent-custom-posts-2" class="socialmedias"><div class="content widget_recent_entries_custom">		<h2 class="widget-title">Recent Resources</h2>		<ul>
+				<li><a href="http://www.internetsociety.org/deploy360/resources/ebook-ipv6-for-ipv4-experts-available-in-english-and-russian/" title="Ebook: IPv6 for IPv4 Experts (Available In English And Russian)">Ebook: IPv6 for IPv4 Experts (Available In English And Russian)</a></li>
+				<li><a href="http://www.internetsociety.org/deploy360/resources/deployment-guide-dnssec-for-isps/" title="Deployment Guide: DNSSEC for Internet Service Providers (ISPs)">Deployment Guide: DNSSEC for Internet Service Providers (ISPs)</a></li>
+				<li><a href="http://www.internetsociety.org/deploy360/resources/knot-dns/" title="Knot DNS">Knot DNS</a></li>
+				<li><a href="http://www.internetsociety.org/deploy360/resources/dns-servers-supporting-dnssec/" title="DNS Servers Supporting DNSSEC">DNS Servers Supporting DNSSEC</a></li>
+				<li><a href="http://www.internetsociety.org/deploy360/resources/surfnet-preparing-an-ipv6-address-plan/" title="SURFnet: Preparing An IPv6 Address Plan">SURFnet: Preparing An IPv6 Address Plan</a></li>
+				</ul>
+		</div></div><div id="tag_cloud-3" class="socialmedias"><div class="content widget_tag_cloud"><h2 class="widget-title">Tags</h2><div class="tagcloud"><a href='http://www.internetsociety.org/deploy360/blog/tag/afrinic/' class='tag-link-166' title='3 topics' style='font-size: 9.05pt;'>AfriNIC</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/arin/' class='tag-link-13' title='2 topics' style='font-size: 8pt;'>ARIN</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/bcop/' class='tag-link-145' title='3 topics' style='font-size: 9.05pt;'>BCOP</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ces/' class='tag-link-29' title='3 topics' style='font-size: 9.05pt;'>CES</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/comcast/' class='tag-link-76' title='7 topics' style='font-size: 11.675pt;'>comcast</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/content-providers/' class='tag-link-80' title='3 topics' style='font-size: 9.05pt;'>Content Providers</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/dane/' class='tag-link-110' title='16 topics' style='font-size: 14.5625pt;'>DANE</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/developers/' class='tag-link-34' title='8 topics' style='font-size: 12.1125pt;'>Developers</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/dns/' class='tag-link-72' title='14 topics' style='font-size: 14.125pt;'>DNS</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/dnssec/' class='tag-link-4' title='115 topics' style='font-size: 21.825pt;'>DNSSEC</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/events/' class='tag-link-22' title='7 topics' style='font-size: 11.675pt;'>Events</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/freebsd/' class='tag-link-84' title='2 topics' style='font-size: 8pt;'>FreeBSD</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/google/' class='tag-link-107' title='7 topics' style='font-size: 11.675pt;'>Google</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/humor/' class='tag-link-57' title='4 topics' style='font-size: 9.925pt;'>Humor</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/icann/' class='tag-link-123' title='16 topics' style='font-size: 14.5625pt;'>ICANN</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/icann48/' class='tag-link-158' title='5 topics' style='font-size: 10.625pt;'>ICANN48</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ietf/' class='tag-link-62' title='19 topics' style='font-size: 15.175pt;'>IETF</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ietf86/' class='tag-link-126' title='5 topics' style='font-size: 10.625pt;'>IETF86</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ietf88/' class='tag-link-182' title='7 topics' style='font-size: 11.675pt;'>IETF88</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/inet-denver/' class='tag-link-138' title='4 topics' style='font-size: 9.925pt;'>INET Denver</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ion/' class='tag-link-21' title='12 topics' style='font-size: 13.5125pt;'>ION</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ionkrakow/' class='tag-link-195' title='5 topics' style='font-size: 10.625pt;'>IONKrakow</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ipv6/' class='tag-link-6' title='120 topics' style='font-size: 22pt;'>IPv6</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ipv6-security/' class='tag-link-65' title='7 topics' style='font-size: 11.675pt;'>IPv6 security</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/linux/' class='tag-link-59' title='3 topics' style='font-size: 9.05pt;'>Linux</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/programming/' class='tag-link-33' title='5 topics' style='font-size: 10.625pt;'>Programming</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/rfcs/' class='tag-link-82' title='2 topics' style='font-size: 8pt;'>RFCs</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ripe/' class='tag-link-64' title='8 topics' style='font-size: 12.1125pt;'>RIPE</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ripe66/' class='tag-link-147' title='3 topics' style='font-size: 9.05pt;'>RIPE66</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/ripe67/' class='tag-link-184' title='5 topics' style='font-size: 10.625pt;'>RIPE67</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/roadmaps-2/' class='tag-link-89' title='2 topics' style='font-size: 8pt;'>roadmaps</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/routing/' class='tag-link-115' title='9 topics' style='font-size: 12.55pt;'>Routing</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/security/' class='tag-link-35' title='13 topics' style='font-size: 13.8625pt;'>Security</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/sip/' class='tag-link-78' title='10 topics' style='font-size: 12.9pt;'>SIP</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/slides/' class='tag-link-63' title='4 topics' style='font-size: 9.925pt;'>Slides</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/statistics/' class='tag-link-30' title='15 topics' style='font-size: 14.3pt;'>Statistics</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/surveys/' class='tag-link-98' title='4 topics' style='font-size: 9.925pt;'>Surveys</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/telecom/' class='tag-link-141' title='3 topics' style='font-size: 9.05pt;'>telecom</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/tools/' class='tag-link-26' title='7 topics' style='font-size: 11.675pt;'>Tools</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/training/' class='tag-link-18' title='4 topics' style='font-size: 9.925pt;'>Training</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/tutorials/' class='tag-link-10' title='6 topics' style='font-size: 11.2375pt;'>Tutorials</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/videos/' class='tag-link-12' title='5 topics' style='font-size: 10.625pt;'>Videos</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/voip/' class='tag-link-77' title='15 topics' style='font-size: 14.3pt;'>VoIP</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/webinars/' class='tag-link-31' title='4 topics' style='font-size: 9.925pt;'>Webinars</a>
+<a href='http://www.internetsociety.org/deploy360/blog/tag/world-ipv6-launch/' class='tag-link-52' title='9 topics' style='font-size: 12.55pt;'>World IPv6 Launch</a></div>
+</div></div>							</aside><!-- end aside-right -->
+		
+<div class="clear"></div></div><!-- end container -->
+
+
+<footer id="footer">
+
+	<div class="menu-footer"><ul id="menu-footer-menu" class="menu"><li id="menu-item-181" class="first-menu-item menu-item menu-item-type-post_type menu-item-object-page menu-item-181"><a href="http://www.internetsociety.org/deploy360/about/contact/" >Contact Us</a></li>
+<li id="menu-item-5480" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5480"><a href="http://www.internetsociety.org/deploy360/about/privacy-policy/" >Privacy Policy</a></li>
+<li id="menu-item-5492" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5492"><a href="http://www.internetsociety.org/deploy360/about/comment-policy/" >Comment Policy</a></li>
+<li id="menu-item-11297" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11297"><a href="http://www.internetsociety.org/deploy360/sitemap/" >Sitemap</a></li>
+<li id="menu-item-5540" class="menu-item menu-item-type-custom menu-item-object-custom last-menu-item menu-item-5540"><a href="http://www.internetsociety.org/deploy360/feed/" >RSS Feed</a></li>
+</ul></div>
+    
+		<div id="block-block-1" class="block block-block ">
+
+			<ul><li id="text-10" class="widget-container widget_text">			<div class="textwidget"><p>Copyright © 2011-2013 <a href="http://www.internetsociety.org/" >Internet Society</a>  |  <a href="mailto:deploy360@isoc.org">deploy360@isoc.org</a><br>
+1775 Wiehle Avenue, Suite 201, Reston, VA 20190-5108 U.S.A. +1-703-439-2120<br>
+Galerie Jean-Malbuisson 15, CH-1204 Geneva, Switzerland +41 22 807 1444</p></div>
+		</li></ul>
+
+		</div><!-- #footer-widget .widget-area -->
+
+	
+</footer>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/js/cycle.js"></script>
+<script type="text/javascript" src="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/js/util.js"></script>
+<script type="text/javascript" src="http://www.internetsociety.org/deploy360/wp-content/themes/isoc-wp/js/dropdown.js"></script>	
+<!--[if IE]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=3.6.1'></script>
+<script type='text/javascript' src='http://apis.google.com/js/plusone.js?ver=3.6.1'></script>
+</body>
+</html>

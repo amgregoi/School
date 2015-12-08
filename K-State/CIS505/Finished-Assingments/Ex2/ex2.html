@@ -1,0 +1,462 @@
+
+<html>
+<body>
+<h2>CIS505 Assignment 2</h2>
+
+<em>10 points; due Tuesday, September 18</em>
+
+<p>
+We will develop an object-oriented language in stages.
+This, the first stage, begins with the assignment language from Exercise 1,
+<spre>
+P  ::=  CL
+CL ::=  C;*   (zero or more  C  separated by ; )
+C  ::=  L = E  |  if E : CL else CL end  |  print E
+E  ::=  N  |  E1 OP E2  | L
+OP ::=  +  |  -
+L  ::=  I
+N  ::=  a nonempty string of digits
+I  ::=  a nonempty string of letters, not a keyword
+</spre>
+but this time implemented by a heap-storage interpreter, like that in Chapter 2, Section 2.2.
+
+<p>
+You will extend this language with
+declared variables and
+parameterized procedures.  (Objects and classes are added in Assignment 3.)
+You must complete Part A of this exercise.  Once you do so, work
+Part B.  (If you don't finish Part B, it is not a disaster, but be
+certain to do Part A!)
+
+<h3>Part A: declarations and proc calls</h3>
+
+Part A asks us to rework Exercise 1 by adding integer declarations and
+procedures with parameters.
+A sample program in the extended language looks like this:
+<pre>
+int x = 2;
+proc p(y, z):
+   print y;  x = (y - z);  q(z);  z = 0
+end;
+proc q(y): x = (x + (y - 1)); print y;  end;
+print x;
+p(9, (x+1));
+</pre>
+Here is the execution of the above program.
+(Note: I rigged the semantics of $print E$ so that it prints the value of
+$E$ and then prints the current stack/heap.)
+<pre>
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', ['y', 'z'], [['print', ['deref', 'y']], ['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], ['=', 'z', '0']], []], ['proc', 'q', ['y'], [['=', 'x', ['+', ['deref', 'x'], ['-', ['deref', 'y'], '1']]], ['print', ['deref', 'y']]], []]], [['print', ['deref', 'x']], ['call', 'p', ['9', ['+', ['deref', 'x'], '1']]]]]
+
+Execution:
+2
+activation stack = ['h0']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 2}
+  h1 : ['proc', ['y', 'z'], [['print', ['deref', 'y']], ['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], ['=', 'z', '0']], [], 'h0']
+  h2 : ['proc', ['y'], [['=', 'x', ['+', ['deref', 'x'], ['-', ['deref', 'y'], '1']]], ['print', ['deref', 'y']]], [], 'h0']
+}
+
+9
+activation stack = ['h0', 'h3']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 2}
+  h1 : ['proc', ['y', 'z'], [['print', ['deref', 'y']], ['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], ['=', 'z', '0']], [], 'h0']
+  h2 : ['proc', ['y'], [['=', 'x', ['+', ['deref', 'x'], ['-', ['deref', 'y'], '1']]], ['print', ['deref', 'y']]], [], 'h0']
+  h3 : {'y': 9, 'parentns': 'h0', 'z': 3}
+}
+
+3
+activation stack = ['h0', 'h3', 'h4']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 8}
+  h1 : ['proc', ['y', 'z'], [['print', ['deref', 'y']], ['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], ['=', 'z', '0']], [], 'h0']
+  h2 : ['proc', ['y'], [['=', 'x', ['+', ['deref', 'x'], ['-', ['deref', 'y'], '1']]], ['print', ['deref', 'y']]], [], 'h0']
+  h3 : {'y': 9, 'parentns': 'h0', 'z': 3}
+  h4 : {'y': 3, 'parentns': 'h0'}
+}
+
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 8}
+  h1 : ['proc', ['y', 'z'], [['print', ['deref', 'y']], ['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], ['=', 'z', '0']], [], 'h0']
+  h2 : ['proc', ['y'], [['=', 'x', ['+', ['deref', 'x'], ['-', ['deref', 'y'], '1']]], ['print', ['deref', 'y']]], [], 'h0']
+  h3 : {'y': 9, 'parentns': 'h0', 'z': 0}
+  h4 : {'y': 3, 'parentns': 'h0'}
+}
+</pre>
+The implementation uses an activation stack
+(implemented as a Python list) of handles to namespaces (dictionaries).  A namespace
+holds declared variables and procedures.   Procedures are saved in the
+heap as closures (lists).  When a procedure is called,
+a namespace is allocated, the parameter-argument bindings are stored
+in the new namespace, and the namespace's handle is pushed onto the activation stack.
+When a procedure completes, its handle is popped from the activation stack.
+<em>See Section 5.2.1 of the lecture notes for
+how this works.</em>
+
+<p>
+IMPORTANT: the execution did no garbage collection of unneeded namespaces.
+I won't stop you if you want to erase unneeded namespaces, but it isn't
+required.
+
+
+<p>
+Here's the extended language's grammar:
+<pre>
+P : Program                      E : Expression
+CL : CommandList                 L : LefthandSide
+C : Command                      I : Variable
+DL : DeclarationList             N : Numeral
+D : Declaration
+
+P  ::=  DL  CL
+
+DL ::=  D;*
+   that is, a sequence of zero or more Ds, separated by  ;
+   ( DL ::=  D  |  D ; DL  |  empty  )
+
+D  ::=  int I = E  |  proc I ( IL ) : CL end 
+
+CL ::=  C;*
+C  ::=  L = E  |  if E : CL1 else CL2 end  |  print E  |  L ( EL )
+
+EL ::=  E,*
+E  ::=  N  |  ( E1 OP E2 )  |  L
+OP ::=  +  |  -
+
+L ::= I
+IL ::=  I,*
+I ::=  strings of letters, not including keywords
+
+N ::=  string of digits
+</pre>
+
+<h4>Interpreter input format</h4>
+
+<p>
+The input to the interpreter is the list-based parse tree constructed by the parser.
+The syntax of parse trees goes like this:
+<pre>
+PTREE ::=  [DLIST, CLIST]
+
+DLIST ::=  [ DTREE* ]
+           where  DTREE*  means zero or more DTREEs
+DTREE ::=  ["int", ID, ETREE]  |  ["proc", ID, ILIST, CLIST, []]
+
+CLIST ::=  [ CTREE* ]
+CTREE ::=  ["=", LTREE, ETREE]  |  ["if", ETREE, CLIST, CLIST]
+        |  ["print", ETREE]  |  ["call", LTREE, ELIST]
+
+ELIST ::=   [ ETREE* ]
+ETREE ::=  NUM  |  [OP, ETREE, ETREE] |  ["deref", LTREE]  
+      where  OP ::=  "+"  | "-"
+
+LTREE ::=  ID
+
+ILIST ::= [ ID* ]
+ID    ::=  a nonempty string of letters
+
+NUM   ::=  a nonempty string of digits
+</pre>
+
+
+<h4>Interpreter operation</h4>
+
+I constructed for you the driver and parser for the
+complete language.  (By the way, the parser is generated from a tool,
+PLY, which built the parser from the grammar rules. You can look inside
+$a234pars.py$ to see what I mean.  There is documentation at
+$http://www.dabeaz.com/ply/$.)
+
+<p>
+I also wrote
+an interpreter, $interpret.py$, that implements the
+core language from Chapter 1 but for the object-virtual-machine.
+When you download
+and run the interpreter on a core program, you will see it behaves like this:
+<pre>
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+x = 2;
+print x;
+y = (x + 1);
+x = (y + y)
+!
+Parse tree:
+[[], [['=', 'x', '2'], ['print', ['deref', 'x']], ['=', 'y', ['+', ['deref', 'x'], '1']], ['=', 'x', ['+', ['deref', 'y'], ['deref', 'y']]]]]
+Execution:
+2
+namespace = h0
+heap = {
+  h0 : {'x': 2}
+}
+Successful termination.
+namespace = h0
+heap = {
+  h0 : {'y': 3, 'x': 6}
+}
+Press Enter key to terminate
+</pre>
+The parse tree has an empty list of declarations (since the
+core language doesn't have declarations) and there is no activation
+stack but only a handle to the active namespace that holds the program's variables.
+
+<p>
+Here are the steps you take to do this assignment:  
+<ol>
+<li>
+Go to the CIS505 assignment page and download the folder, $Ex2$.
+It contains the scanner ($a234lex$), parser ($a234parse$), parser-generator library ($ply$), heap ($heapmodule$),
+starting
+interpreter ($interpret$), and driver ($run$).  Double-click the $run$ icon or type $python run.py$
+to run the prototype system and test the above example.
+<p>
+<li>
+Within $heapmodule.py$,
+replace the active-namespace variable, $ns$, by an activation stack, and add functions that push a handle onto the
+activation stack, pop the stack, check if the stack is empty, and return the top handle.
+Modify the $allocateNS$ function so that it places a $'parentns':'nil'$ binding in
+every newly allocated namespace.
+Modify $activeNS$, $initializeHeap$, and $printHeap$ so that they use the stack
+(and not $ns$).
+Test that the system still executes the starter test cases ok.
+(Hint: read the notes at
+<a href="http://people.cis.ksu.edu/~schmidt/505f12/pythonstrucs.html">
+<tt>http://people.cis.ksu.edu/~schmidt/505f12/pythonstrucs.html</tt></a>
+to see how to use a list like a stack.)
+<p>
+Now, in $interpret.py$, add
+integer declarations to $interpretDTREE$: For $int I = E$,  do this: bind $I$ 
+to the value of $E$ in the <em>active namespace</em>
+(the namespace whose handle
+lies at the top of the activation stack).
+Make certain that variable $I$ is not already declared in the active namespace.
+(If it is already declared, then it's an error that prints a
+message and stops execution.)
+<em>
+It will be simplest if you write a new function, $declare$, add
+it to $heapmodule.py$, and call it to declare a new variable.
+</em>
+
+<p>
+Also, modify the interpreter to enforce that the variable that appears in position $L$
+of $L = E$
+is already declared.
+(Otherwise, it's an error that prints a
+message and stops execution.)
+<em>
+It will be simplest if you modify the $store$ function in $heapmodule.py$
+to do the check.
+</em>
+
+
+<p>
+<li>
+Next, implement procedure declarations in $interpretDTREE$:
+For $proc I(IL): CL end$, do this: bind $I$ to the handle of a newly allocated closure (the closure can be implemented as a list, like above, or as a dictionary) that holds
+$IL$, $CL$, and the handle to the active namespace. (See the CIS505
+notes, Section 5.2.1, for details.)
+Make certain that variable $I$ is not already declared in the active namespace
+(Otherwise, it's an error that prints a
+message and stops execution).
+<em>It will be simplest if you write a new function, $allocateClosure$, add it
+to $heapmodule.py$, and call it to allocate the closure.</em>
+
+<p>
+<li>
+Now, implement procedure call in $interpretCTREE$:
+For $L(EL)$, do these steps, as described in the CIS505 notes:
+<em>(i)</em> Compute the meaning of $L$, verify that the meaning is the handle to a closure,
+and extract from the closure the $IL$, $CL$, and global handle.
+(If $L$ is not bound to a handle of a closure, it's an error that stops execution.)
+<em>(ii)</em>
+evaluate $EL$ to a list of values
+<em>(iii)</em> Allocate a new namespace and push the new namespace's handle onto the
+activation stack.
+<em>(iv)</em>
+Within the new namespace,
+bind $parentns$ to the handle extracted from the closure;
+bind the values from $EL$ to the corresponding
+names in $IL$.
+(Make certain that the number of arguments in $EL$ equals the number of parameters in
+$IL$.  Otherwise, it's an error that prints a
+message and stops execution).
+<em>(v)</em> Execute $CL$, and upon completion pop the activation stack.
+
+<p>
+Since the intepreter now uses local namespaces for parameters
+and global namespaces for global variables, you must implement
+a smarter lookup algorithm: within $interpretLTREE$,
+when searching for a variable, $V$,
+look in the active namespace first; if $V$ is not there, look for $V$ in the $parentns$
+namespace.  (See the CIS505 lecture notes, Section 5.2.1.)
+</ol>
+
+<p>
+<em>Remember to document appropriately your modified interpreter.
+</em>
+
+<h3>Part B: multiple levels of declarations</h3>
+
+C, Java, and C# artificially restrict programs to have just two levels
+of declaration nesting: local and global.  This is done so the compiler
+can work with
+a simple storage layout.    Most other languages have no such restriction.
+In Part B, you will extend the language so there are multiple levels
+of declarations.
+
+<p>
+Here is an example: procedure $p$ owns two local declarations, $z$ and $q$.
+Within $q$, there are three levels
+of declarations, which you see when $q$ is called:
+<spre>
+int x = 2;
+proc p(y):
+   int z = 3;
+   proc q(m) : print m;  x = ((m + y) + z) end;
+   q((x + z));
+end;
+p(9);
+</spre>
+Here is the execution:
+<spre>
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', ['y'], [['call', 'q', [['+', ['deref', 'x'], ['deref', 'z']]]]], [['int', 'z', '3'], ['proc', 'q', ['m'], [['print', ['deref', 'm']], ['=', 'x', ['+', ['+', ['deref', 'm'], ['deref', 'y']], ['deref', 'z']]]], []]]]], [['call', 'p', ['9']]]]
+
+Execution:
+5
+activation stack = ['h0', 'h2', 'h4']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 2}
+  h1 : ['proc', ['y'], [['call', 'q', [['+', ['deref', 'x'], ['deref', 'z']]]]], [['int', 'z', '3'], ['proc', 'q', ['m'], [['print', ['deref', 'm']], ['=', 'x', ['+', ['+', ['deref', 'm'], ['deref', 'y']], ['deref', 'z']]]], []]], 'h0']
+  h2 : {'y': 9, 'parentns': 'h0', 'z': 3, 'q': 'h3'}
+  h3 : ['proc', ['m'], [['print', ['deref', 'm']], ['=', 'x', ['+', ['+', ['deref', 'm'], ['deref', 'y']], ['deref', 'z']]]], [], 'h2']
+  h4 : {'parentns': 'h2', 'm': 5}
+}
+
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 17}
+  h1 : ['proc', ['y'], [['call', 'q', [['+', ['deref', 'x'], ['deref', 'z']]]]], [['int', 'z', '3'], ['proc', 'q', ['m'], [['print', ['deref', 'm']], ['=', 'x', ['+', ['+', ['deref', 'm'], ['deref', 'y']], ['deref', 'z']]]], []]], 'h0']
+  h2 : {'y': 9, 'parentns': 'h0', 'z': 3, 'q': 'h3'}
+  h3 : ['proc', ['m'], [['print', ['deref', 'm']], ['=', 'x', ['+', ['+', ['deref', 'm'], ['deref', 'y']], ['deref', 'z']]]], [], 'h2']
+  h4 : {'parentns': 'h2', 'm': 5}
+}
+</spre>
+When $q$ is called, its namespace, $h4$, holds its parameter, $m$,
+and a link to $h2$, which holds $y$, $z$, and $q$, and a
+link to $h0$, which holds $x$.  All these variables are visible to $q$'s
+code.
+
+<p>
+The language's syntax for declarations now looks like this:
+<pre>
+D ::=  int I = E  |  proc I ( IL ) : DL CL end
+</pre>
+The local declarations $DL$ are evaluated when the procedure is called,
+just before the procedure's $CL$ is computed.
+The operator trees for declarations look like this:
+<pre>
+DTREE ::=  ["int", ID, ETREE]  
+        |  ["proc", ID, ILIST, CLIST, DLIST]  
+                    # NOTE that the local decls come last and might be []
+</pre>
+I placed the local-declaration part last in the operator tree so that
+you could work Part A and not be bothered yet about Part B.
+
+<p>
+To do Part B, you must revise the code in $interpretDTREE$
+so that it builds a closure 
+that saves the local declarations.  And when the
+procedure is called in $interpretCTREE$,
+you must evaluate the local declarations just before
+you execute the procedure's commands.  These steps are easy.
+
+<p>
+The interesting part is improving variable lookup in $interpretLTREE$
+so that it uses a loop to follow the $parentns$ links to locate 
+nonlocal variables.  Be careful.
+
+
+<h3>Testing</h3>
+
+The $Ex2$ folder contains a file of test cases that you must use.
+Use at least these tests to check your implementation.
+You might devise additional tests to see if the interpreter detects program
+errors and prints appropriate messages.
+
+<p>
+Place all the test cases and their output in a file named $tests.txt$
+
+<h4>Either a one- or two-person project...</h4>
+You may do this exercise solo or with a partner. If you choose the latter, you must tell the instructor (Schmidt) by email by Thursday evening, September 6, who you and your partner are.
+(After the 6th, I won't allow new teams to form.)
+Once the instructor OKs your request, you and your partner can work together on the assignment. (When you submit, both you and your partner will each upload thesame program on K-State online.) 
+
+<h4>Submission and grading</h4>
+
+Make a folder, $Ex2$, and place in it your modified versions of
+$heapmodule.py$ and $interpret.py$ and also $tests.txt$.
+Zip the folder into a $.zip$ file and submit the $.zip$ file to the CIS505 site on K-State Online.
+
+The teaching assistant will study your work and your tests and apply some
+additional tests before scoring the submission.
+
+<!--
+< h4>Extra credit< /h4>
+Real languages let you make local declarations within procedure bodies,
+like this:
+<spre>
+int v = 99;
+proc p(x, y) :
+    int z = 0;
+    proc q(a) : v = ((a + y) + z) end;
+    z = (x + y);
+    q(z)
+end;
+p(3, v)
+</spre>
+The syntax for procedures with local variables looks like this:
+<pre>
+D ::= ...  |  proc I ( IL ) : DL CL end
+</pre>
+and the parse tree has this form:
+<spre>
+["proc", ID, ILIST, DLIST, CLIST]
+</spre>
+For extra credit, modify the parser and interpreter to handle procedures
+of this form.  Almost all your work is easy; the interesting part is
+handling variable lookups in $interpretLTREE$, which requires a loop that searches the
+<em>static chain</em> of $parentns$ links. 
+(In the above example, consider how the variables $v$, $a$, $y$,
+and $z$ are found when the body of $q$ executes - see the CIS505 lecture
+notes, Section 5.3.1.)
+
+<p>
+If you do this extra work, then place into your $Ex2$ folder the following
+files:
+<dl>
+<dd>
+the modified file, $a234parse.py$
+<dd>
+the modified file, $heapmodule.py$
+<dd>
+the modified file, $interpret.py$
+<dd>
+$tests.txt$ (the required tests)
+<dd>
+$extratests.txt$  (extra tests you devised that show how your implementation
+handles local declarations within procedure bodies, like the one example
+above)
+</dl>
+-->
+
+</body>
+</html>
+
+
+

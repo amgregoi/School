@@ -1,0 +1,73 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q2.py</font>
+n = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#CD6600">assert</font> n >= 0
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (n >= 0)</font>
+x = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (x == 0)</font>
+<font color="#1E90FF"># (n >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (x == 0)</font>
+<font color="#1E90FF"># (n >= 0)</font>
+y = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (y == 0)</font>
+<font color="#1E90FF"># (x == 0)</font>
+<font color="#1E90FF"># (n >= 0)</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> x == 0	premise
+	2.<font color="#00FF00">OK</font> y == x * n	algebra 1
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (y == (x * n))</font>
+
+
+while x != n :
+	<font color="#008B00">"""{ invariant  y == x * n
+		modifies  y, x  }"""</font>	
+	<font color="#1E90FF">#PREMISES FOR LOOP BODY: </font>
+	<font color="#1E90FF"># (x != n)</font>
+	<font color="#1E90FF"># (y == (x * n))</font>
+	y = y + n
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (y == (y_old + n))</font>
+	<font color="#1E90FF"># (x != n)</font>
+	<font color="#1E90FF"># (y_old == (x * n))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> y == y_old + n	premise
+		2.<font color="#00FF00">OK</font> y_old == (x*n)	premise
+		3.<font color="#00FF00">OK</font> y-n == x*n	algebra 1 2
+		4.<font color="#00FF00">OK</font> y == (x+1) * n	algebra 3
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (y == ((x + 1) * n))</font>
+	x = x + 1
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (x == (x_old + 1))</font>
+	<font color="#1E90FF"># (y == ((x_old + 1) * n))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> x == x_old + 1	premise
+		2.<font color="#00FF00">OK</font> y == (x_old + 1) * n	premise
+		3.<font color="#00FF00">OK</font> y == x * n	algebra 1 2
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (y == (x * n))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (y == (x * n))</font>
+<font color="#1E90FF"># not (x != n)</font>
+
+
+<font color="#1E90FF"># PROVE HERE THAT: y == n * n</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(x != n)	premise
+	2.<font color="#00FF00">OK</font> x == n	algebra 1
+	3.<font color="#00FF00">OK</font> y == x * n	premise
+	4.<font color="#00FF00">OK</font> y == n * n	subst 2 3
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (y == (n * n))</font>
+print y
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (y == (n * n))</font>
+</strong></pre></body></html>

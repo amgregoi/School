@@ -1,0 +1,9 @@
+C:\Users\Jailhouse\Desktop\Project\Project\VehicleRegistration\VehicleRegistrationCore\bin\Debug\VehicleRegistrationCore.dll
+C:\Users\Jailhouse\Desktop\Project\Project\VehicleRegistration\VehicleRegistrationCore\bin\Debug\VehicleRegistrationCore.pdb
+C:\Users\Jailhouse\Desktop\Project\Project\VehicleRegistration\VehicleRegistrationCore\obj\Debug\VehicleRegistrationCore.dll
+C:\Users\Jailhouse\Desktop\Project\Project\VehicleRegistration\VehicleRegistrationCore\obj\Debug\VehicleRegistrationCore.pdb
+C:\Users\Jailhouse\Desktop\Project3\Gregoire_Andre\VehicleRegistration\VehicleRegistrationCore\bin\Debug\VehicleRegistrationCore.dll
+C:\Users\Jailhouse\Desktop\Project3\Gregoire_Andre\VehicleRegistration\VehicleRegistrationCore\bin\Debug\VehicleRegistrationCore.pdb
+C:\Users\Jailhouse\Desktop\Project3\Gregoire_Andre\VehicleRegistration\VehicleRegistrationCore\obj\Debug\VehicleRegistrationCore.csprojResolveAssemblyReference.cache
+C:\Users\Jailhouse\Desktop\Project3\Gregoire_Andre\VehicleRegistration\VehicleRegistrationCore\obj\Debug\VehicleRegistrationCore.dll
+C:\Users\Jailhouse\Desktop\Project3\Gregoire_Andre\VehicleRegistration\VehicleRegistrationCore\obj\Debug\VehicleRegistrationCore.pdb

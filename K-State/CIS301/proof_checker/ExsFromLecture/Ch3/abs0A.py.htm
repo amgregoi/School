@@ -1,0 +1,46 @@
+<html><body><pre><strong>
+
+def absValue(x) :
+    <font color="#008B00">"""{ pre  x != 0
+         post ans > 0
+         return ans
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x != 0)</font>
+    if x < 0 :
+        <font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+        <font color="#1E90FF"># (x < 0)</font>
+        <font color="#1E90FF"># (x != 0)</font>
+        ans = 0 - x
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (ans == (0 - x))</font>
+        <font color="#1E90FF"># (x < 0)</font>
+        <font color="#1E90FF"># (x != 0)</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (ans == (0 - x))</font>
+        <font color="#1E90FF"># (x < 0)</font>
+        <font color="#1E90FF"># (x != 0)</font>
+    else :
+        <font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+        <font color="#1E90FF"># not (x < 0)</font>
+        <font color="#1E90FF"># (x != 0)</font>
+        ans = x
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (ans == x)</font>
+        <font color="#1E90FF"># not (x < 0)</font>
+        <font color="#1E90FF"># (x != 0)</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (ans == x)</font>
+        <font color="#1E90FF"># not (x < 0)</font>
+        <font color="#1E90FF"># (x != 0)</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (((ans == (0 - x)) and (x < 0)) or ((ans == x) and not (x < 0)))</font>
+    <font color="#1E90FF"># (x != 0)</font>
+    return ans
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (((ans == (0 - x)) and (x < 0)) or ((ans == x) and not (x < 0)))</font>
+    <font color="#1E90FF"># (x != 0)</font>
+    <font color="#1E90FF"># (ans > 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+</strong></pre></body></html>

@@ -1,0 +1,21 @@
+		Project 3   Phase 1 (Design)
+  Due: 8:00am on 11/6 (Tuesday)
+  
+  Develop an object diagram, a class diagram, and use-case realizations in English
+  	- I will accept a ppt (pptx), pdf, or jpg format
+  	- If you hand-draw a diagram, you must scan it
+  	- You do not need to write use-case realizations. However, I will ask you to describe use-case realizations
+  	   when we meet.  If you cannot describe your use-case realizations, you will lose points
+  	- You do not need to draw sequence diagrams
+  	
+  To submit your work, follow the steps described below:
+  	1. Create a top-level directory after your LastName_FirstName
+  		Example: Mizuno_Masaaki in my case
+  	2. Copy your object diagram (.pptx, .pdf, or .jpg) and class diagram (.uml format) in the directory
+  	3. Make a Zip file of your directory and submit it in the file dropbox named ÅgProject 3 Phase 1Åh
+  	
+  	Note: If you do not follow the above steps and I need extra steps to open your files, you will lose 
+  	at least 5 % 
+  
+  This is strictly an individual project.  You are not allowed to discuss the project with other people.
+  You can discuss with me or Ana.

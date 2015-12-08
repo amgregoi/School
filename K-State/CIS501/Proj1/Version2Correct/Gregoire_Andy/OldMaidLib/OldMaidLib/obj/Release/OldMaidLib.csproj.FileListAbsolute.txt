@@ -1,0 +1,5 @@
+C:\Users\Jailhouse\Desktop\OldMaid\OldMaidLib\OldMaidLib\bin\Release\OldMaidLib.dll
+C:\Users\Jailhouse\Desktop\OldMaid\OldMaidLib\OldMaidLib\bin\Release\OldMaidLib.pdb
+C:\Users\Jailhouse\Desktop\OldMaid\OldMaidLib\OldMaidLib\obj\Release\OldMaidLib.csprojResolveAssemblyReference.cache
+C:\Users\Jailhouse\Desktop\OldMaid\OldMaidLib\OldMaidLib\obj\Release\OldMaidLib.dll
+C:\Users\Jailhouse\Desktop\OldMaid\OldMaidLib\OldMaidLib\obj\Release\OldMaidLib.pdb

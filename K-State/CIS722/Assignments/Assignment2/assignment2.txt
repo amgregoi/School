@@ -1,0 +1,78 @@
+		CIS722  Assignment 2			Fall, 2014
+
+Due: 5:00pm on 9/16 (Tuesday)
+
+1. Reverse compile the assembly program in pent_asm.pdf.
+Note that there does not exist a unique solution (there may be several
+variations).
+
+The original program has the following program structure:
+#include <stdio.h>
+
+typedef struct {
+  char c1;
+  int i1;
+  char c2;
+  short s1;
+  char c3;
+}  A;
+
+A a1;
+
+int x;
+
+void func1(A *ap, int i) {
+  int m, n;
+
+  // the body has been deleted
+}
+
+void main(int argc, char **argv, char **envp) {
+  A *ap = &a1;
+
+  // the first several lines of the body have been deleted
+
+  printf("a1 = %d,\t%d,\t%d,\t%d,\t%d\n", a1.c1, a1.i1, a1.c2, a1.s1, a1.c3);
+  printf("x = %d\n", x);
+}
+
+
+The output of the original program is:
+a1 = 0,	3,	6,	10,	15
+x = 50
+
+Compile and run your solution program to see if it prints the above output.
+
+Hints:
+ 1. No variable (local or parameter) is mapped to a register
+    as a register variable (just like variable x in fact(i) in fact.pdf).
+    But recall that esi is a non-destructive register
+
+ 2. A post increment operator (e.g., x++) is used in the original program
+
+ 3. There is a sequence of assembly operations as follows:
+    - A value of a variable (say x) is computed in a sequence of operations 
+      in a register, say R0
+    - The value in R0 is stored in x
+    - In the next sequence of operations, the value in R0 is
+      used as the value of x 
+  
+
+2. Draw a memory image of the execution of your solution program 
+(just like the ones on 1-41 and 1-43).
+You must use a drawing tool (hand-drawing will not be accepted).
+Write variable names and values. If a variable is a parameter or 
+a local variable, write its offset as well.
+When you update a value of a variable, cross off the old value and write 
+the new value next to the old value.
+Do not erase the old value.  We want a history of the values in each variable.
+When an invocation terminates, do not delete or cross off the corresponding
+frame (It would make your figure difficult to read).
+
+
+How to submit your work:
+  1. Create a directory after your "LastName_FirstName" 
+     ("Mizuno_Masaaki" in my case)
+  2. put your program (.c file) and memory image file (only .pdf is accepted) 
+     in the directory.
+  3. zip the directory and submit it in the file dropbox named "Assignment 2"

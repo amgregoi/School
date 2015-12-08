@@ -1,0 +1,40 @@
+1 ?- run([("b",2), ("a",1), ("c",4)]).
+node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf)
+Command? l.
+Key (double quoted)? "a".
+
+1_L310
+Command? u.
+Key (double quoted)? "a".
+Value? 99
+|: .
+
+upd([97],99,node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf))
+Command? l.
+Key (double quoted)? "a".
+
+99_L395
+Command? u.
+Key (double quoted)? "b".
+Value? 1000.
+
+upd([98],1000,upd([97],99,node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf)))
+Command? r.
+
+upd([97],99,node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf))
+Command? c.			
+
+(a, 99), 
+node([97],99,leaf,leaf)
+Command? q.
+
+
+ERROR: Out of global stack
+   Exception: (16) execute(revert, upd([98], 1000, upd([97], 99, node([99], 4, node([97], 1, leaf, node([98], 2, leaf, leaf)), leaf)))) ? creep
+   Exception: (12) execute((lookup, [97]), upd([97], 99, node([99], 4, node([97], 1, leaf, node([98], 2, leaf, leaf)), leaf))) ? creep
+   Exception: (8) execute((lookup, [97]), node([99], 4, node([97], 1, leaf, node([98], 2, leaf, leaf)), leaf)) ? creep
+2 ?- |
+
+
+// Commit is unfinished, I believe my remove is not correct ( I dont believe its returning the list of nodes that were not removed )
+// I believe q. error'd because of problems with commit?

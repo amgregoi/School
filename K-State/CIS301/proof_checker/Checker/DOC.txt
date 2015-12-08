@@ -1,0 +1,605 @@
+
+This is a semi-formal description of the input language
+to the proof checker.
+
+
+###################################################################
+Programming constructions supported by proof checker:
+
+CMD ::= LHS = EXPR |  if BEXPR :  |  else : |  while BEXPR :
+        |  assert BEXPR  |  pass  |  def VAR ( VARLIST ) : 
+        |  return [VAR]
+        |  global VARLIST  |  print TRASH
+        |  LHS . append ( EXPR )
+
+LHS ::= VAR |  VAR [ EXPR ]
+
+BEXPR ::=  forall EXPR < VAR <= EXPR , BBEXPR  |  BBEXPR
+
+BEBXPR ::=  NEXPR LBINOP NEXPR |  NEXPR
+LBINOP ::=  and | or    (no implies for now)
+
+NEXPR ::= LUNOP REXPR | REXPR
+LUNOP ::= not
+
+REXPR ::= EXPR RELOP EXPR | EXPR | True | False
+RELOP ::=  == | != | < | <= | > | >= 
+
+EXPR ::= TERM AOP TERM | TERM
+AOP  ::= + | - | *
+
+TERM ::=  VAR |  VAR ( EXPRLIST ) | NUM | ( BEXPR )
+       |  VAR [ EXPR ]  |  len( VAR )  |  [ EXPRLIST ]  
+
+EXPRLIST ::= \epsilon | EXPR , EXPRLIST
+
+
+
+################################################################
+Proof constructions supported by proof checker:
+
+PF ::=  NUM .  BEXPR  JUST  |  NUM .  return  NUMLIST
+     |  invariant BEXPR  |  modifies VARLIST 
+     |  pre BEXPR  |  post BEXPR  |  return VAR 
+     |  globalinv BEXPR  |  def BEXPR
+
+VARLIST ::= \epsilon | VAR , VARLIST   (the commas are optional)
+
+NUMLIST ::= \epsilon | NUM , NUMLIST   (the commas are optional)
+
+JUST ::=  premise  | algebra NUMLIST 
+       |  andi NUM NUM  |  ande NUM  |  ori NUM  |  ore NUM
+       |  subst NUM NUM
+       |  copy NUM   |  globalinv
+       |  foralli NUMLIST  | foralle EXPR NUMLIST
+       |  def
+
+
+#########################################################################
+Logic rules enforced by checker:
+
+ASSERT:
+
+{ P }
+assert B
+{ P
+  B
+}
+
+
+ASSIGN scalar:
+
+{ P }
+x = E
+{ x == [x_old/x]E
+  [x_old/x]P
+}
+
+
+ASSIGN array element:
+
+{ P }
+x[E1] = E2   (x does not appear in E1)
+{ [x_old/x]P
+  len(x) == len(x_old)
+  forall 0 <= _i < len(x), (E1 == _i)  or  (x_old[_i] == x[_i])
+}
+
+
+FUNCTION CALL no global variables:
+
+{ P }    (must imply  pre_f)
+x = f(E1, ..., En)
+{ [x/ans][E1,...En/p1,...pn]post_f
+  [x_old]P
+}
+    where  f  is specified as  def f(p1,...,pn):
+                               { pre_f
+                                 post_f
+                                 return ans }
+
+FUNCTION CALL with global variable,  g:
+
+{ P }    (must imply  pre_f)
+x = f(E1, ..., En)
+{ [x/ans][E1,...En/p1,...pn][g_old/g_in]post_f
+  [x_old][g_old/g]P
+}
+
+
+PASS:
+
+{ P }
+pass
+{ P }
+
+
+IF:
+
+{ P }
+if B :
+    { P
+      B }
+    C1
+    { Q1 }
+else :
+    { P
+      not B }
+    C2
+    { Q2 }
+{ Q1 or Q2 }
+
+
+WHILE:
+
+{ I }
+while B :
+    { invariant I
+      modifies x1,...,xn }
+    { I
+      B }
+    C
+    { I }
+{ not B
+  I
+}
+
+
+DEF: simple form:
+
+def f(p1,...,pn) :
+    { pre P      (can mention p1...pn)
+      post Q     (can mention p1...pn,ans)
+      return ans }
+    { P }
+    C            (no assignments to p1...pn)
+    { Q' }       (must imply Q)
+
+
+DEF with global-variable invariants:
+
+g = ...
+{ invariant I_g }
+
+def f(p1,...,pn) :
+    { pre P        (can mention p1...pn,g)
+      post Q       (can mention p1...pn,ans,g_in,g)
+      return ans }
+    global g
+    { P 
+      I_g }
+    C              (no assignments to p1...pn; can assign to g)
+    { Q' }    (must imply Q and I_g)
+
+
+RETURN:
+
+{ P }   (must imply  post_f)
+return
+{ post_f }
+
+
+APPEND:
+
+{ P }
+x.append(E)
+{ [x_old/x]P 
+  x[len(x)-1] == [x_old/x]E
+  len(x) == len(x_old) + 1
+  forall 0 <= _i < len(x_old), x_old[_i] == x[_i]
+}
+
+
+EMBEDDED PROOF:
+
+{ P }
+"""{ 1. P   premise
+     2. asserts justified by rules defined above
+      ...
+     n. Q
+}"""
+{ Q }
+
+
+##########################################################################
+How to run the checker from the command line:
+
+python Checker/Check.py  FileName.py
+
+  output is deposited in FilenameA.py
+  html-formatted output for viewing is placed in  FilenameA.py.htm
+
+Other execution options:
+
+python Checker/Check.py [-args] Filename.py
+where  args  can be any or all of
+       v : verbose mode: insert deduced asserts as comments in output
+       a : include all possible asserts in proof output as premises
+       x : insert header and assert code in output file for execution
+       n : do not generate html file for viewing
+       d : display internal data structures for debugging
+
+
+   e.g.,  python Analyze.py -va Filename.py
+   e.g.,  python Analyze.py -v Filename.py
+   e.g.,  python Analyze.py -xn Filename.py
+
+
+You can also start the Checker interactively by double-clicking on its icon.
+
+##########################################################################
+Checked Examples:
+
+
+#1  ASSIGNMENT, ALGEBRA, SUBSTITUTION:
+x = readInt()
+assert x > 0
+x = x + 1
+"""{ 1. x == x_old + 1    premise
+     2. x_old > 0         premise
+     3. x_old + 1 > 1     algebra 2
+     4. x > 1             subst 1 3
+}"""
+# NOTE: for Line 4, subst 1 3 means substitute equality in 1 into 3
+#  ( subst 3 1  will fail)
+
+
+#2  TERSER VERSION OF PREVIOUS EXAMPLE:
+x = readInt()
+assert x > 0
+x = x + 1
+"""{ 1. x > 1   algebra }"""
+# The checker stores assignments and relational asserts and
+#  applies them when forced.
+
+
+#3  SYMMETRY, TRANSITIVITY:
+x = readInt()
+y = readInt()
+z = readInt()
+
+assert x == y
+assert y == z
+"""{ 1. x == y   premise
+     2.  y == z  premise
+     3.  z == y  algebra 2
+     4.  x == z  algebra
+}"""
+
+
+#4  NONLINEAR ARITHETIC (AS FOUND IN BODY OF A LOOP):
+
+x = readInt()
+sum = 0
+i = 0
+"""{ 1. sum == x * i   algebra  }"""
+sum = sum + x
+"""{ 1.  sum == sum_old  + x   premise
+     2.  sum_old  == x * i     premise
+     3.  sum == (x*i) + x      algebra 2 1
+}"""
+i = i + 1
+"""{ 1. i == i_old + 1      premise
+     2. sum == (x * i_old) + x   premise
+     3. sum == x * i             algebra 2 1
+}"""
+
+
+#5  CONDITIONAL COMMAND:
+
+x = readInt()
+y = readInt()
+if x > y :
+    """{ 1.  x > y   premise }"""
+    max = x
+    """{ 1. max == x    premise
+         2. x > y       premise
+         3. max >= x    algebra
+         4. max >= y    algebra 3 2
+         5. max >= x  and  max >= y   andi 3 4
+         6. return 2 1 5
+    }"""
+    # andi  means ``and introduction''
+    # return 2 1 5  recopies the asserts on Lines 1 and 5, as the checker 
+    # uses the assert on the last line of the proof as the conclusion.
+    # In this way a proof can return more than one fact.
+else :
+    max = y
+    """{ 1.  not x > y    premise
+         2.  y >= x       algebra 1
+         4.  max == y     premise
+         5.  max >= x     algebra 2 4
+         3.  max >= x or (0 == 1)   ori 5
+         6.  max >= y      algebra 4
+         7.  max >= x  and  max >= y   andi 5 6
+         8.  return 2 4 7
+    }"""
+    # The checker does not enforce strict order of line numbers
+    # ori  means  ''or introduction''
+
+"""{
+     1. (((x > y) and (max == x)) or ((y >= x) and (max == y))) premise
+     2. max >= x  and  max >= y     premise
+     3. max == x  or  max == y      ore 1
+}"""
+# The law for conditionals builds the disjunction of the conclusions
+# of the proofs for the then- and else-arms. (Line 1)
+# If possible, it extracts common facts (Line 2).
+# On Line 3,  ore  means ``or elimination'' and forces the checker
+# to do a case analysis to prove the assert.
+
+
+
+#6  COMPOUND TEST EXPRESSION:
+
+x = readInt()
+y = 1  
+if (y == 0) and (x == 1) :
+    """{ 1. (y == 0) and (x == 1)    premise }"""
+    # The premise on Line 1 must be exactly as stated on the  if's test.
+    p = 1
+    """{ 1. p == 1      premise
+         2. p == x * y  algebra 1
+         3. y == 1      algebra
+         4. p == x      algebra 2 3
+    }"""
+    # Line 2 forces the checker to consult its internal premises list.
+else :
+    p = x * y
+    """{ 1.  not((y == 0) and (x == 1) )   premise 
+         2.  (y != 0) or (x != 1)          algebra 1
+         3.  p == x * y                    premise
+         4.  p == x                        ore 2 3
+    }"""
+    # Line 2 shows that the checker understands boolean operators
+    # Line 4 shows that additional asserts can aid the cases-analysis proof
+"""{ 1.  p == x        premise  }"""
+# Goal: p == x
+
+
+
+#7  WHILE LOOP:
+
+x = readInt()
+n = readInt()
+i = 0
+sum = 0
+"""{ 1. sum == x * i   algebra }"""
+while i != n :
+    """{ invariant sum == x* i 
+         modifies i, sum         }"""
+    # every loop must have an  invariant  clause  and a clause
+    # that lists the vars that are modified in the loop
+    # The checker validates that the invariant holds on initial loop entry
+    sum = sum + x
+    """{ 1.  sum == sum_old + x     premise
+         2.  sum_old  == x * i     premise
+         3.  sum == (x*i) + x      algebra 2 1
+    }"""
+    i = i + 1
+    """{ 1. i == i_old + 1  premise
+         2. sum == (x * i_old) + x   premise
+         4. sum == x * i            algebra  2
+    }"""
+    # The checker checks that the invariant holds at the end of the loop body
+
+"""{ 1. sum == x * i   premise
+     2.  not(i != n)   premise
+     3.  i == n        algebra 2
+     4.  sum == x * n  subst 3 1
+}"""
+# Unfortunately, the checker does not always solve equations with
+# quadratics, and for this reason, Line 4 cannot be validated by ``algebra''
+
+
+
+#8  FUNCTION AND GLOBAL VARIABLE:
+
+a = 0
+"""{ globalinv  a >= 0 }"""
+# A global variable's property can be fixed as invariant.
+# At this point, the global var can be altered _only_ from within
+# a function that uses the variable as  global.
+# For this reason, the globalinv property is _always_ true
+# (outside the functions that alter the var).
+
+def f(x) :
+    """{ pre x > 0
+         post ans > x  and  ans > a
+         return ans  }"""
+    # The header comment must list pre, post, and the return var.
+    global a
+    ans = (a + x) + 1
+    return ans
+    # Here, the checker validates that the post condition holds
+    # and that the invariant for  g  holds.
+b = 1
+# The checker validates here that the pre-condition for  f  holds.
+c = f(b)
+"""{ 1.  c > b and c > a   premise 
+     3.  a >= 0            globalinv
+     4.  c > 0             algebra 1 3
+}"""
+# Line 1 is the post-condition.  The  global invariant is used in Line 3.
+
+
+#9. ARRAYS:
+
+a = [4,6,8]
+"""{ 1.  a == [4,6,8]   premise
+     2.  a[0] == 4      algebra 1
+     3.  len(a) == 3    algebra 1
+}"""
+
+i = readInt()
+assert i >= 0  and i < len(a)
+a[i] =  a[0]
+"""{ 1. a[i] == a_old[0]   premise
+     2. a[i] == 4          algebra 1
+}"""
+# The checker verifies that  i  is an acceptable index for  a.
+# Here, the index  i-1  would not be allowed, because there is not
+#   enough assertions to prove  0 <= i-1 < len(a).
+
+# Because the value of  i  is unknown, one can no longer prove
+#  anything about the values of  a[0]..a[3].  (Try to prove that  a[0] == 4.)
+a.append(10)
+"""{ 1. a[len(a)-1] == 10         premise
+     4. len(a) == len(a_old) + 1  premise
+     2. len(a) == 4               algebra
+     3. a[3] == 10                algebra 1 2
+}"""
+
+
+#10.  ARRAYS AND FUNCTIONS:
+
+g = [2,4]
+"""{ globalinv  g[0] > 0 and len(g) >= 1 }"""
+
+def f(x,y):
+   """{ pre    x == 0  and y > x
+        post   g[0] > x  
+        return  x    
+   }"""
+   global g
+   g[x] = y
+   return  x
+   # The checker validated the post-condition and global invariant
+
+# The checker validated the pre-condition:
+m = f(0,2)
+"""{ 1. (g[0] > 0) and (len(g) >= 1)   globalinv
+     2. g[0] > 0                       premise
+}"""
+
+
+
+
+#11.  DEFS  AND (RECURSIVE) FUNCTIONS:
+
+"""{ def mult(0) == 1
+     def mult(n) == mult(n-1) * n  }"""
+#Use a set of def equations to define a logical concept.
+# Here, mult(n) defines  1 * 2 * ... * n, for n > 0
+# (The tradition is that  mult(0) defines 1.)
+
+def fac(n) :
+    """computes factorial"""
+    """{ pre  n >= 0
+         post  ans == mult(n)
+         return ans  }"""
+    if n == 0 :
+        ans = 1
+        """{ 1. mult(0) == 1    def
+             2. ans == mult(0)  algebra 1
+             3. n == 0          premise
+             4. ans == mult(n)  subst 3 2}"""
+        # The  def  justification introduces a definition, where
+        # we can substitute for the argument names in the equation.
+    else :
+        """{ 1. not(n == 0)   premise
+             2. n - 1 >= 0    algebra 1
+        }"""
+        sub = fac(n-1)
+        """{ 1.  sub == mult(n-1)    premise }"""
+        ans = n * sub
+        """{ 1.  ans == n * sub             premise
+             2.  sub == mult(n-1)           premise
+             3.  ans == n * mult(n-1)       subst 2 1
+             6.  ans == mult(n-1) * n       algebra 3
+             4.  mult(n) == mult(n-1) * n   def
+             5.  ans == mult(n)             subst 4 6
+        }"""
+    """{ 1.  ans == mult(n)     premise }"""
+    return ans
+
+
+#12. DEFS AND ARRAYS:
+
+"""{ def  sum(0) == 0
+     def  sum(n+1) == sum(n) + a[n]
+}"""
+
+def summation(a) :
+    """{ pre  len(a) >= 0
+         post answer == sum(len(a))
+         return answer
+    }"""
+    answer = 0
+    """{ 1. answer == 0     premise
+         2. sum(0) == 0     def
+         3. answer == sum(0)  algebra 1 2
+    }"""
+    i = 0
+    while i != len(a) :
+        """{ invariant  answer == sum(i)
+             modifies answer i           }"""
+        """{ 1. answer == sum(i)    premise }"""
+        answer = answer + a[i]
+        """{ 1. answer == answer_old + a[i]   premise
+             2. answer_old == sum(i)          premise
+             3. answer == sum(i) + a[i]       subst 2 1
+             4. sum(i+1) == sum(i) + a[i]     def
+             5. answer == sum(i+1)            subst 4 3
+        }"""
+        i = i + 1
+        """{ 1. answer == sum(i_old +1)     premise
+             2. i == i_old + 1              premise
+             3. answer == sum(i)            subst 2 1
+        }"""
+
+    """{ 1. answer == sum(i)        premise
+         2. not(i != len(a))        premise
+         3. i == len(a)             algebra 2
+         4. answer == sum(len(a))   subst 3 1
+    }"""
+    return answer
+    
+
+#13. UNIVERSAL ASSERTS:
+
+def double(a):
+    """returns a list  b  that holds all of  a's  values * 2 (see post)"""
+    """{ pre  True
+         post forall 0 <= i < len(a), b[i] == a[i] * 2
+         return b
+    }"""
+    b = []
+    x = 0
+    """{ 1. forall 0 <= i < x, b[i] == a[i] * 2    foralli
+         2. x == len(b)                 algebra
+    }"""
+    while x != len(a) :
+        """{ invariant  (forall 0 <= i < x, b[i] == a[i] * 2) and (x == len(b))
+             modifies x, b
+        }"""
+        b.append(a[x]*2)
+        """{ 1. (forall 0 <= i < x, b[i] == a[i] * 2) and (x == len(b_old))  premise
+             2. x == len(b_old)                         ande 1
+             10. forall 0 <= i < x, b[i] == a[i] * 2    ande 1
+             3. len(b) == len(b_old) + 1                 premise
+             4. x == len(b)-1                                 algebra 2 3
+             5. b[len(b)-1] == a[x]*2                    premise
+             6. b[x] == a[x]*2                          subst 4 5
+             7. forall 0 <= i < x+1, b[i] == a[i] * 2  foralli 10 6
+             8. len(b) == x + 1                         algebra 4
+             9. return 7 8
+        }"""
+        x = x + 1
+        """{ 1.  forall 0 <= i < x_old +1, b[i] == a[i] * 2  premise
+             2.  x == x_old +1                              premise
+             3. forall 0 <= i < x, b[i] == a[i] * 2    subst 2 1
+             4. len(b) == x_old + 1                       premise
+             5. len(b) == x                             subst 2 4
+             6. x == len(b)                             algebra 5
+             7. (forall 0 <= i < x, b[i] == a[i] * 2) and (x == len(b)) andi 3 6
+        }"""
+
+    """{ 1. (forall 0 <= i < x, b[i] == a[i] * 2) and (x == len(b))  premise
+         3. not(x != len(a))                        premise
+         4. x == len(a)                            algebra
+         6. forall 0 <= i < x, b[i] == a[i] * 2    ande 1
+         5. forall 0 <= i < len(a), b[i] == a[i] * 2   subst 4 6
+    }"""
+    return b
+

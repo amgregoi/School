@@ -1,0 +1,1282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=latin-1" http-equiv="Content-Type"/><script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
+<title>USENIX Security '08 Technical Sessions</title><!--<link href="sec08.css" rel="stylesheet" type="text/css">--><style type="text/css">
+<!--
+@import url(/legacy/style.css);
+@import url(/legacy/events/conf.css);
+@import url(../sec08.css);
+-->
+</style></head><body bgcolor="#ffffff" id="tech">
+<center>
+<!--START TABLE 1-->
+<table border="0" cellpadding="0" cellspacing="0" style="background:url(../art/back_border.gif);" width="750">
+<tr>
+<!--banner-->
+<td colspan="2">
+<img alt="Security '08 Banner" height="120" src="../art/sec08_banner_750.jpg" width="750"/></td>
+<!--end banner-->
+</tr>
+<tr>
+<td bgcolor="#ffffff" colspan="2" valign="bottom">
+<!-- insert topmenu -->
+<ul id="topbar" class="nav">
+<!--<li id="topbar-01"><a href="/legacy/events/sec08/">Security '08 Home</a></li> -->
+
+<li id="topbar-02"><a href="/legacy/">USENIX Home</a></li>
+
+<li id="topbar-03"><a href="/legacy/events/">Conferences</a></li>
+
+<li id="topbar-04"><a href="/legacy/publications/library/proceedings/">Publications</a></li>
+
+<li id="topbar-05"><a href="/legacy/membership/">Membership</a></li>
+
+  </ul>
+</td>
+</tr>
+<!--begin spacer-->
+<tr>
+<td colspan="2" height="6">
+<img alt="" height="6" src="../art/longbar.gif" width="750"/>
+</td>
+</tr>
+<!--end spacer-->
+<tr>
+<td valign="top" width="150">
+<!--begin left menu-->
+<ul class="nav" id="left-navlist">
+<!-- insert menu -->
+<li><a href="/legacy/events/sec08/sec08.html" ID="nav-home"><b>Security '08 Home</b></a></li>
+
+<li><a href="/legacy/events/sec08/registration/"  ID="nav-reg"><b>Registration</b></a></li>
+
+<li><a href="/legacy/events/sec08/organizers.html" ID="nav-organizers"><b>Organizers</b></a></li>
+
+<li><a href="/legacy/events/sec08/invitation.html" ID="nav-invitation"><b>Invitation</b></a></li>
+
+<li><span id="bar"><img src="/legacy/events/sec08/art/left_bar.gif" width="150" height="2" border="0" alt=""></span></li>
+
+<li><a href="/legacy/events/sec08/ataglance.html" ID="nav-glance"><b>At a Glance</b></a></li>
+
+<li><a href="/legacy/events/sec08/training/" ID="nav-training"><b>Training</b></a></li>
+
+<li><a href="/legacy/events/sec08/tech/" ID="nav-tech"><b>Tech Sessions</b></a></li>
+
+<li><a href="/legacy/events/sec08/workshops.html" ID="nav-workshops"><b>Workshops</b></a></li>
+
+<li><a href="/legacy/events/sec08/poster.html" ID="nav-poster"><b>Poster Session</b></a></li>
+
+<li><a href="/legacy/events/sec08/wips.html" ID="nav-wips"><b>WiPs</b></a></li>
+
+<li><a href="/legacy/events/sec08/bofs.html" ID="nav-bofs"><b>BoFs</b></a></li>
+
+<li><span id="bar"><img src="/legacy/events/sec08/art/left_bar.gif" width="150" height="2" border="0" alt=""></span></li>
+
+<li><a href="/legacy/events/sec08/sponsors.html" ID="nav-sponsors"><b>Sponsors</b></a></li>
+
+<li><a href="/legacy/events/sec08/activities.html" ID="nav-activities"><b>Activities</b></a></li>
+
+<li><a href="http://www.linuxpromagazine.com/usenix_sec08" target="other" ID="nav-streaming"><b>Live Streaming</b></a></li>
+
+<!--<li><a href="/legacy/events/sec08/ctf.html" ID="nav-ctf"><b>Capture the Flag</b></a></li>-->
+
+<li><span id="bar"><img src="/legacy/events/sec08/art/left_bar.gif" width="150" height="2" border="0" alt=""></span></li>
+
+<li><a href="/legacy/events/sec08/hotel.html" ID="nav-hotel"><b>Hotel/Travel</b></a></li>
+
+<li><a href="/legacy/events/sec08/services.html" ID="nav-services"><b>Services</b></a></li>
+
+<li><span id="bar"><img src="/legacy/events/sec08/art/left_bar.gif" width="150" height="2" border="0" alt=""></span></li>
+
+<li><a href="/legacy/events/sec08/students.html" ID="nav-students"><b>Students</b></a></li>
+
+<li><a href="/legacy/events/sec08/questions.html" ID="nav-questions"><b>Questions?</b></a></li>
+
+<li><a href="/legacy/events/sec08/promote.html" ID="nav-promote"><b>Help Promote!</b></a></li>
+
+<li><a href="/legacy/events/sec08/sec08_flyer.pdf" ID="nav-brochure"><b>Flyer PDF</b></a></li>
+
+<li><span id="bar"><img src="/legacy/events/sec08/art/left_bar.gif" width="150" height="2" border="0" alt=""></span></li>
+
+<li><a href="/legacy/events/sec08/cfp/" ID="nav-cfp"><b>Call for Papers</b></a></li>
+
+<li><a href="/legacy/events/bytopic/security.html" ID="nav-past"><b>Past Proceedings</b></a></li>
+
+<li><span id="bar"><img src="/legacy/events/sec08/art/left_bar.gif" width="150" height="2" border="0" alt=""></span></li>
+
+<li><a href="/legacy/events/sec08/instrux" ID="nav-authors"><b>Authors</b></a></li>
+
+<li><a href="/legacy/events/sec08/instrux/ITs" ID="nav-speakers"><b>Speakers</b></a></li>
+
+<li><SPAN id="bar"><IMG src="/legacy/events/sec08/art/left_bottom.gif" ALT="" width="150" height="20"></SPAN></li>
+
+</ul>
+
+
+<!--end left menu-->
+</ul></td>
+<td align="left" valign="top" width="590">
+<!--START TABLE 2: BEGIN MAIN TABLE-->
+<table align="center" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tr>
+<td valign="top">
+<!--REGISTER NOW BUTTON-->
+<p class="subhead1">
+<!--<a href="https://db.usenix.org/cgi-bin/Conference/sec08/reg.cgi">
+<img src="../art/register_now.gif" border="0" width="95" height="16" alt="Register Now!" align="LEFT"></a>&nbsp;&nbsp;-->TECHNICAL SESSIONS
+</p>
+<p>Conference papers are available to conference registrants immediately and to everyone beginning July 30, 2008. Everyone can view the proceedings front matter immediately.
+</p>
+<table border="0" cellpadding="4" cellspacing="0" width="100%">
+<!--Times-->
+<tr>
+<td colspan="3">
+<p><b>Proceedings Front Matter:</b> <a href="title.pdf">Title Page</a> | <a href="organizers.pdf">Conference Organizers and External Reviewers</a> | <a href="contents.pdf">Table of Contents</a> | <a href="index.pdf">Index of Authors</a> | <a href="message.pdf">Message from the Program Chair</a>
+</p>
+</td></tr><tr>
+<td colspan="2"><b>Tech Sessions</b>: 
+		<a href="#wed">Wednesday, July 30</a> | 
+		<a href="#thurs">Thursday, July 31</a> | 
+		<a href="#fri">Friday, August 1</a> | <a href="techspeakers.html">Invited Talk Speakers</a>
+</td>
+</tr>
+<!--Spacer-->
+<tr>
+<td colspan="2" height="20" width="100%">
+<img alt="" height="10" src="../art/dot_clear.gif" width="100"/></td>
+</tr>
+<!--Begin Wednesday-->
+<tr>
+<td class="techday" colspan="2"><a name="wed">Wednesday, July 30</a></td>
+</tr>
+<!-- Begin Times -->
+<tr>
+<td class="techtime">9:00 a.m.&#8211;10:30 a.m.</td>
+<td class="techtime2">Wednesday</td>
+</tr>
+<!-- End Times -->
+<tr>
+<td colspan="2">
+<p class="techroomleft">Regency Ballroom</p>
+<p class="techtitle">Opening Remarks, Awards, and Keynote Address</p>
+<p class="techchairs">Program Chair: Paul Van Oorschot, <i>Carleton University</i></p>
+<p class="subhead2"><img align="left" alt="Bowen" height="101" hspace="5" src="../art/bowen_debra.jpg" vspace="5" width="85"/>
+<i>Keynote Address</i><br/>
+Dr. Strangevote or:  How I Learned to Stop Worrying and Love the Paper Ballot</p>
+<p class="desc"><a name="bowen">
+</a><a href="techspeakers.html#bowen">Debra Bowen</a>, <i>California Secretary of State</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dbowen/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dbowen/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/keynote-address-dr-strangevote-or-how-i-learned-stop">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<br clear="left"/>
+</td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">10:30 a.m.&#8211;11:00 a.m.   Break</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">11:00 a.m.&#8211;12:30 p.m.</td>
+<td class="techtime2">Wednesday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="web"><p class="techtitle">Web Security</p></a>
+<p class="techchairs">Session Chair: Catherine Zhang, <i>IBM Research</i></p>
+<p class="techdesc">
+<b>All Your iFRAMEs Point to Us</b><br/>
+Niels Provos and Panayiotis Mavrommatis, <i>Google Inc.;</i> 
+Moheeb Abu Rajab and Fabian Monrose, <i>Johns Hopkins University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/provos/provos_html/index.html">HTML</a> |
+	<a href="full_papers/provos/provos.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/all-your-iframes-point-us" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Securing Frame Communication in Browsers</b><br/>
+Adam Barth, Collin Jackson, and John C. Mitchell, <i>Stanford University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/barth/barth_html/index.html">HTML</a> |
+	<a href="full_papers/barth/barth.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/securing-frame-communication-browsers" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Automatic Generation of XSS and SQL Injection Attacks with 
+Goal-Directed Model Checking</b><br/>
+Michael Martin and Monica S. Lam, <i>Stanford University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/martin/martin_html/index.html">HTML</a> |
+	<a href="full_papers/martin/martin.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/automatic-generation-xss-and-sql-injection-attacks-goal" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="nazario"></a>
+<b>Political DDoS: Estonia and Beyond</b><br/>
+<a href="techspeakers.html#nazario">Jose Nazario</a>, <i>Senior Security Engineer, Arbor Networks</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	jnazario/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	jnazario/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/political-ddos-estonia-and-beyond">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<p><a href="slides/nazario-slides.pdf" target="_self">View the presentation slides</a></p>
+<p class="techdesc">
+In the spring of 2007, the country of Estonia suffered a deluge of distributed denial of service (DDoS) attacks, coordinated to coincide with street-level protests. These attacks caused nationwide problems for the heavily wired country of Estonia and did so again when they recurred in early 2008. These attacks were not the first such politically motivated attacks and they will certainly not be the last. This talk explores the world of DDoS attacks and their growing role as an online political weapon. It also covers how Arbor Networks measured the Estonia attacks, how other attacks are measured, and what these attacks mean for the Internet at large.<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/>
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">12:30 p.m.&#8211;2:00 p.m.   Lunch, on your own</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">2:00 p.m.&#8211;3:30 p.m.</td>
+<td class="techtime2">Wednesday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="keys"><p class="techtitle">Cryptographic Keys</p></a>
+<p class="techchairs">Session Chair: Dan Boneh, <i>Stanford University</i></p>
+<p class="techdesc"><b><i>Awarded Best Student Paper!</i></b><br/>
+<b>Lest We Remember: Cold Boot Attacks on Encryption Keys</b><br/>
+     J. Alex Halderman, <i>Princeton University;</i> Seth D. Schoen, 
+	<i>Electronic Frontier Foundation;</i> 
+     Nadia Heninger and William Clarkson, <i>Princeton University;</i> 
+     William Paul, <i>Wind River Systems;</i>  
+     Joseph A. Calandrino and Ariel J. Feldman, <i>Princeton University;</i>   
+     Jacob Appelbaum; Edward W. Felten, <i>Princeton University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/halderman/halderman_html/index.html">HTML</a> |
+	<a href="full_papers/halderman/halderman.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/lest-we-remember-cold-boot-attacks-encryption-keys" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>The Practical Subtleties of Biometric Key Generation</b><br/>
+    Lucas Ballard and  Seny Kamara, <i>The Johns Hopkins University;</i>  
+    Michael K. Reiter, <i>University of North Carolina at Chapel Hill</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/ballard/ballard_html/index.html">HTML</a> |
+	<a href="full_papers/ballard/ballard.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/practical-subtleties-biometric-key-generation" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Unidirectional Key Distribution Across Time and Space with Applications to RFID Security</b><br/>
+    Ari Juels, <i>RSA Laboratories;</i> Ravikanth Pappu, <i>ThingMagic Inc;</i> 
+	Bryan Parno, <i>Carnegie Mellon University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/juels/juels_html/index.html">HTML</a> |
+	<a href="full_papers/juels/juels.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/unidirectional-key-distribution-across-time-and-space" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="schlein"></a>
+<b>Building the Successful Security Software Company</b><br/>
+<a href="techspeakers.html#schlein">Ted Schlein</a>, <i>Kleiner Perkins Caufield & Byers</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	tschlein/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	tschlein/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/building-successful-security-software-company">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/></p>
+<p class="techdesc">
+		Ted will discuss the security market, past and present. He will review what it takes to succeed in building a company and will look at current opportunities.  Ted will also share with the audience a few of his successes.
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">3:30 p.m.&#8211;4:00 p.m.   Break</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">4:00 p.m.&#8211;5:30 p.m.</td>
+<td class="techtime2">Wednesday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="network"><p class="techtitle">Network Defenses</p></a>
+<p class="techchairs">Session Chair: Angelos Stavrou, <i>George Mason University</i></p>
+<p class="techdesc">
+<b>CloudAV: N-Version Antivirus in the Network Cloud</b><br/>
+    Jon Oberheide, Evan Cooke, and Farnam Jahanian, <i>University of 
+	Michigan</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/oberheide/oberheide_html/index.html">HTML</a> |
+	<a href="full_papers/oberheide/oberheide.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/cloudav-n-version-antivirus-network-cloud" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc"><b><i>Awarded Best Paper!</i></b><br/>
+<b>Highly Predictive Blacklisting</b><br/>
+    Jian Zhang and Phillip Porras, <i>SRI International;</i> Johannes  Ullrich, 
+	<i>SANS Institute</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/zhang/zhang_html/index.html">HTML</a> |
+	<a href="full_papers/zhang/zhang.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/highly-predictive-blacklisting" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Proactive Surge Protection: A Defense Mechanism for Bandwidth-Based Attacks</b><br/>
+    Jerry Chou and Bill Lin, <i>University of California, San Diego;</i> 
+	Subhabrata Sen and Oliver Spatscheck, <i>AT&T Labs—Research</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/chou/chou_html/index.html">HTML</a> |
+	<a href="full_papers/chou/chou.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/proactive-surge-protection-defense-mechanism-bandwidth" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="seiden"></a>
+<b>From the Casebooks of . . .</b><br/>
+<a href="techspeakers.html#seiden">Mark Seiden</a>, <i>Senior Consultant</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	mseiden/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	mseiden/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/casebooks">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/></p>
+<p class="techdesc">
+In a field with few design principles ("defense in depth"? separate
+duties?), few rules of thumb, no laws named after people more
+influential than Murphy, no Plancks or Avogadros to hold Constant, and
+little quantification of any sort (we count only bad things), it appears
+the best we can do right now is to tell stories.
+</p>
+<p class="techdesc2">
+Over (enough) beer we conjure up lightly anonymized war stories about late-night phone calls, scary devices, hard-to-find bugs that exploiters
+somehow found, the backups that didn't, stupid criminals, craven prosecutors,
+cute hacks ("but don't try this at home"), and pointy-haired bosses. . . .
+There will be a few of these in this talk, but also some cautionary
+tales and parables&#8212;isomorphs of the Old Stories demonstrating human
+frailty and that the Law of Unexpected Consequences operates most
+strongly near the intersection of Bleeding Edge and Slippery Slope.
+Also, just a bit about the future.<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/></p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Times -->
+<tr>
+<td class="techtime">6:00 p.m.&#8211;7:30 p.m.</td>
+<td class="techtime2">Wednesday</td>
+</tr>
+<!-- End Times -->
+<tr>
+<td colspan="2">
+<p class="techtitle">Poster Session & Happy Hour</p>
+<p class="techroomleft">Imperial Ballroom</p>
+<p class="techchairs">Poster Session Chair: Carrie Gates, <i>CA Labs</i></p>
+<p>
+Don't miss the cool new ideas and the latest preliminary research on display at the Poster Session & Happy Hour. Take part in discussions with your colleagues over complimentary drinks and snacks. Check out the list of <a href="../poster.html">accepted posters</a>.</p>
+<!--Would you like to share a provocative opinion, interesting
+preliminary work, or a cool idea that will spark discussion at this
+year's USENIX Security Symposium? The poster session  is the perfect
+venue to introduce such new or ongoing work. Poster presenters will
+have the entirety of the evening happy hour to discuss their work, get
+exposure, and receive feedback from attendees.
+</p>
+
+<P>
+To submit a poster, please send a 1&#150;5 page proposal, in PDF or
+PostScript, to <a href="mailto:sec08posters@usenix.org">sec08posters@usenix.org</a> by Monday, July 7, 2008.
+Decisions will be made by Monday, July 14, 2008.
+</p>-->
+</td>
+</tr>
+<!--End Wednesday-->
+<tr>
+<td colspan="3" height="5" width="100%">
+<img alt="" height="1" src="../art/dot_clear.gif" width="100"/></td>
+</tr>
+<!--Times-->
+<tr>
+<td colspan="2"><b>Tech Sessions</b>: 
+		<a href="#wed">Wednesday, July 30</a> | 
+		<a href="#thurs">Thursday, July 31</a> | 
+		<a href="#fri">Friday, August 1</a> | <a href="techspeakers.html">Invited Talk Speakers</a>
+</td>
+</tr>
+<!--Spacer-->
+<tr>
+<td colspan="3" height="20" width="100%">
+<img alt="" height="10" src="../art/dot_clear.gif" width="100"/></td>
+</tr>
+<!--Begin Thursday-->
+<tr>
+<td class="techday" colspan="2"><a name="thurs">Thursday, July 31</a></td>
+</tr>
+<!-- Begin Times -->
+<tr>
+<td class="techtime">9:00 a.m.&#8211;10:30 a.m.</td>
+<td class="techtime2">Thursday</td>
+</tr>
+<!-- End Times -->
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="botnet"><p class="techtitle">Botnet Detection</p></a>
+<p class="techchairs">Session Chair: Wietse Venema, <i>IBM Research</i></p>
+<p class="techdesc">
+<b>BotMiner: Clustering Analysis of Network Traffic for 
+Protocol- and Structure-Independent Botnet Detection</b><br/>
+Guofei Gu, <i>Georgia Institute of Technology;</i> Roberto Perdisci, 
+<i>Damballa, Inc.;</i>  
+Junjie Zhang and Wenke Lee, <i>Georgia Institute of Technology</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/gu/gu_html/index.html">HTML</a> |
+	<a href="full_papers/gu/gu.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/botminer-clustering-analysis-network-traffic-protocol-and" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Measurement and Classification of Humans and Bots in Internet Chat</b><br/>
+Steven Gianvecchio, Mengjun Xie, Zhengyu Wu, and Haining  Wang, <i>The 
+College of William and Mary</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/gianvecchio/gianvecchio_html/index.html">HTML</a> |
+	<a href="full_papers/gianvecchio/gianvecchio.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/measurement-and-classification-humans-and-bots-internet" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>To Catch a Predator: A Natural Language Approach 
+     for Eliciting Malicious Payloads</b><br/>
+     Sam Small, Joshua Mason, and Fabian Monrose, <i>Johns Hopkins 
+	University;</i> Niels Provos, <i>Google Inc.;</i> 
+     Adam Stubblefield, <i>Johns Hopkins University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/small/small_html/index.html">HTML</a> |
+	<a href="full_papers/small/small.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/catch-predator-natural-language-approach-eliciting" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="mitchell"></a>
+<b>Security Analysis of Network Protocols</b><br/>
+<a href="techspeakers.html#mitchell">John Mitchell</a>, <i>Stanford University</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	jmitchell/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	jmitchell/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/security-analysis-network-protocols">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<p><a href="slides/mitchell_slides.pdf" target="_self">View the presentation slides</a></p>
+<p class="techdesc">Network security protocols, such as key-exchange and key-management protocols, are notoriously difficult to design and debug.  Anomalies and shortcomings have been discovered in standards and proposed standards for a wide range of protocols, including public-key and Diffie-Hellman&#8211;based variants of Kerberos,  SSL/TLS, and the 802.11i (Wi-Fi2) wireless authentication protocols. Although many of these protocols may seem relatively simple, security protocols must achieve their goals when an arbitrary number of sessions are executed concurrently, and an attacker may use information provided by one session to compromise the security of another.
+</p>
+<p class="techdesc2">
+Since security protocols form the cornerstone of modern secure networked systems, it is important to develop informative, accurate, and deployable methods for finding errors and proving that protocols meet their security requirements.  This talk will summarize two methods and discuss some of the case studies carried out over the past several years. One method is a relatively simple automated finite-state approach that has been used by our research group, others, and several years of students in a project course at Stanford to find flaws and develop improvements in a wide range of protocols and security mechanisms. The second method, Protocol Composition Logic (PCL), is a way of thinking about protocols that is designed to make it possible to prove security properties of large practical protocols. The two methods are complemen-
+tary, since the first method can find errors, but only the second is suitable for proving their absence.  The talk will focus on basic principles and examples from the IEEE and IETF standardization process.<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/>
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">10:30 a.m.&#8211;11:00 a.m.   Break</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">11:00 a.m.&#8211;12:30 p.m.</td>
+<td class="techtime2">Thursday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="hardware"><p class="techtitle">Hardware and Security</p></a>
+<p class="techchairs">Session Chair: Yoshi Kohno, <i>University of Washington</i></p>
+<p class="techdesc">
+<b>Reverse-Engineering a Cryptographic RFID Tag</b><br/>
+Karsten Nohl and David Evans, <i>University of Virginia;</i> 
+Starbug and Henryk Plötz, <i>Chaos Computer Club, Berlin</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/nohl/nohl_html/index.html">HTML</a> |
+	<a href="full_papers/nohl/nohl.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/reverse-engineering-cryptographic-rfid-tag" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Practical Symmetric Key Cryptography on Modern Graphics Hardware</b><br/>
+Owen Harrison and John Waldron, <i>Trinity College Dublin</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/harrison/harrison_html/index.html">HTML</a> |
+	<a href="full_papers/harrison/harrison.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/practical-symmetric-key-cryptography-modern-graphics" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>An Improved Clock-skew Measurement Technique for Revealing Hidden Services</b><br/> 
+Sebastian Zander, <i>Swinburne University of Technology, Australia;</i> Steven J. Murdoch, <i>Computer Laboratory, University of Cambridge</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/zander/zander_html/index.html">HTML</a> |
+	<a href="full_papers/zander/zander.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/improved-clock-skew-measurement-technique-revealing-hidden" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="garfinkel"></a>
+<b>Enterprise Security in the Brave New (Virtual) World</b><br/>
+<a href="techspeakers.html#garfinkel">Tal Garfinkel</a>, <i>VMware</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	tgarfinkel/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	tgarfinkel/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/enterprise-security-brave-new-virtual-world">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<p><a href="slides/garfinkel_slides.pdf" target="_self">View the presentation slides</a></p>
+<p class="techdesc">
+The move to virtual machine&#8211;based computing platforms is perhaps the most
+significant change in how enterprise computing systems have been built in the past
+decade.  The benefits of moving to virtual infrastructure are substantial,
+from ease of management and better server utilization to transparently
+providing a wide range of services from high availability to backup.  Despite
+this sweeping change, the way that we secure these systems is still largely
+unchanged from how we secure today's physical systems. We must rethink
+the way we design security in virtual infrastructure, both to cope with the new
+challenges it introduces and to take advantage of the opportunities it offers.
+</p>
+<p class="techdesc2">
+I will discuss the growing pains of moving from physical to virtual
+infrastructure in the network and the dissonance this can cause in operational
+settings: why simply dropping existing firewalls and NIDS into virtual infrastructure
+can limit flexibility, how new mechanisms can help overcome these limitations, and
+why these elements are better off being virtual instead of physical. Next, I will look
+at how virtual machines can affect host security as techniques such as virtual machine
+introspection become mainstream and the line between host and network security
+gets increasingly blurred.  Finally, I will look at some of the odder and more interesting
+capabilities virtual platforms will be offering in the next few years which will offer fertile ground for new research.<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/>
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">12:30 p.m.&#8211;2:00 p.m.   Lunch, on your own</td>
+</tr>
+<!-- End Times -->
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">2:00 p.m.&#8211;3:30 p.m.</td>
+<td class="techtime2">Thursday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="systems"><p class="techtitle">Systems Security</p></a>
+<p class="techchairs">Session Chair: Wenke Lee, <i>Georgia Institute of Technology</i></p>
+<p class="techdesc">
+<b>NetAuth: Supporting User-Based Network Services</b><br/> 
+     Manigandan Radhakrishnan and Jon A. Solworth, <i>University of Illinois at 
+	Chicago</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/radhakrishnan/radhakrishnan_html/index.html">HTML</a> |
+	<a href="full_papers/radhakrishnan/radhakrishnan.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/netauth-supporting-user-based-network-services" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Hypervisor Support for Identifying Covertly Executing Binaries</b><br/> 
+Lionel Litty, H. Andrés Lagar-Cavilla, and David Lie, <i>University of 
+Toronto</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/litty/litty_html/index.html">HTML</a> |
+	<a href="full_papers/litty/litty.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/hypervisor-support-identifying-covertly-executing-binaries" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Selective Versioning in a Secure Disk System</b><br/> 
+     Swaminathan Sundararaman, Gopalan Sivathanu, and Erez Zadok, <i>Stony Brook 
+	University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/sundararaman/sundararaman_html/index.html">HTML</a> |
+	<a href="full_papers/sundararaman/sundararaman.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/selective-versioning-secure-disk-system" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="thompson"></a>
+<b>Hackernomics</b><br/>
+<a href="techspeakers.html#thompson">Hugh Thompson</a>, <i>Chief Security Strategist, People Security</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	hthompson/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	hthompson/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/hackernomics">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<p><a href="slides/thompson_slides.pdf" target="_self">View the presentation slides</a></p>
+<p class="techdesc">
+Security processes inside most commercial development teams haven't caught up with the growing threat from organized crime groups that are becoming better financed, are relying more on automation to find vulnerabilities, and have figured out how to drive down the cost of launching a significant attack. This talk looks at why the incentive to attack and the ability to find flaws are outpacing practiced application security techniques. It examines how the economics of software attack and defense ("hackernomics") is changing and looks at some interesting outcomes, such as making vulnerability discovery a viable business. The talk will include several  live vulnerability demonstrations to illustrate the exploitation vs. prevention dynamics.<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/>
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">3:30 p.m.&#8211;4:00 p.m.   Break</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">4:00 p.m.&#8211;5:30 p.m.</td>
+<td class="techtime2">Thursday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="LEFT" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="sessionanchor"><p class="techtitle">Privacy</p></a>
+<p class="techchairs">Session Chair: Patrick Traynor, <i>Pennsylvania State University</i></p>
+<p class="techdesc">
+<b> Privacy-Preserving Location Tracking of Lost or Stolen Devices: Cryptographic Techniques and Replacing Trusted Third Parties with DHTs</b><br/> 
+    Thomas Ristenpart, <i>University of California, San Diego;</i>  Gabriel 
+	Maganis, Arvind Krishnamurthy, and Tadayoshi Kohno, <i>University of 
+	Washington</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/ristenpart/ristenpart_html/index.html">HTML</a> |
+	<a href="full_papers/ristenpart/ristenpart.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/privacy-preserving-location-tracking-lost-or-stolen" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Panalyst: Privacy-Aware Remote Error Analysis on Commodity Software</b><br/> 
+Rui Wang and XiaoFeng Wang, <i>Indiana University at Bloomington</i>; Zhuowei Li, <i>Center for Software Excellence, Microsoft</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/wang/wang_html/index.html">HTML</a> |
+	<a href="full_papers/wang/wang.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/panalyst-privacy-aware-remote-error-analysis-commodity" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Multi-flow Attacks Against Network Flow Watermarking Schemes</b><br/> 
+Negar Kiyavash, Amir Houmansadr, and Nikita Borisov, <i>University of Illinois at Urbana-Champaign</i>
+</p>
+<p class="paperfiles">
+	Paper in <!--<a href="full_papers/kiyavash/kiyavash_html/index.html">HTML</a> |-->
+<a href="full_papers/kiyavash/kiyavash.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/multi-flow-attacks-against-network-flow-watermarking" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="engler"></a>
+<b>A Couple Billion Lines of Code Later: Static Checking in the Real World</b><br/>
+<a href="techspeakers.html#engler">Dawson Engler</a>, <i>Stanford University;</i> Ben Chelf, Andy Chou, and Seth Hallem, <i>Coverity</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dengler/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dengler/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/couple-billion-lines-code-later-static-checking-real-world">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<p><a href="slides/engler_slides.pdf" target="_self">View the presentation slides</a></p>
+<p class="techdesc">This talk describes lessons learned taking an academic tool that "worked
+fine" in the lab and using it to check billions of lines of code across
+several hundred companies.  Some ubiquitous themes: reality is weird;
+what one thinks will matter often doesn't; what one doesn't even
+think to reject as a possibility is often a first-order effect.</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Times -->
+<tr>
+<td class="techtime"><a name="panel"></a>5:30 p.m.&#8211;6:30 p.m.</td>
+<td class="techtime2">Thursday</td>
+</tr>
+<!-- End Times -->
+<tr>
+<td colspan="2">
+<p class="techtitle">Panel</p>
+<p class="techroomleft">Regency 2</p>
+<p class="techdesc"><b>Setting DNS's Hair on Fire</b></p>
+<p class="techchairs">Moderator: Niels Provos, <i>Google, Inc.</i></p>
+<p class="techdesc">Panelists: David Dagon, <i>Georgia Institute of Technology;</i> Paul Vixie, <i>Internet Systems Consortium, Inc.</i></p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dns/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dns/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/setting-dnss-hair-fire">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a></p>
+<p><a href="slides/dagon_slides.pdf" target="_self">View David Dagon's presentation slides</a></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Times -->
+<tr>
+<td class="techtime">6:30 p.m.&#8211;8:30 p.m.</td>
+<td class="techtime2">Thursday</td>
+</tr>
+<!-- End Times -->
+<tr>
+<td colspan="2"><p class="techtitle">Symposium Reception</p>
+<p class="techroomleft">Fourth Street Summit Center</p>
+</td>
+</tr>
+<!--End Thursday-->
+<tr>
+<td colspan="3" height="5" width="100%">
+<img alt="" height="1" src="../art/dot_clear.gif" width="100"/></td>
+</tr>
+<!--Times-->
+<tr>
+<td colspan="2"><b>Tech Sessions</b>: 
+		<a href="#wed">Wednesday, July 30</a> | 
+		<a href="#thurs">Thursday, July 31</a> | 
+		<a href="#fri">Friday, August 1</a> | <a href="techspeakers.html">Invited Talk Speakers</a>
+</td>
+</tr>
+<!--Spacer-->
+<tr>
+<td colspan="3" height="20" width="100%">
+<img alt="" height="10" src="../art/dot_clear.gif" width="100"/></td>
+</tr>
+<!--Begin Friday-->
+<tr>
+<td class="techday" colspan="2"><a name="fri">Friday, August 1</a></td>
+</tr>
+<!-- Begin Times -->
+<tr>
+<td class="techtime">9:00 a.m.&#8211;10:30 a.m.</td>
+<td class="techtime2">Friday</td>
+</tr>
+<!-- End Times -->
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="left" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="voting"><p class="techtitle">Voting and Trusted Systems</p></a>
+<p class="techchairs">Session Chair: Rachna Dhamija, <i>Harvard University</i></p>
+<p class="techdesc">
+<b>Verifying Compliance of Trusted Programs</b><br/> 
+ Sandra Rueda, Dave King, and Trent Jaeger, <i>The Pennsylvania State 
+University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/rueda/rueda_html/index.html">HTML</a> |
+	<a href="full_papers/rueda/rueda.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/verifying-compliance-trusted-programs" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Helios: Web-based Open-Audit Voting</b><br/> 
+Ben Adida, <i>Harvard University</i>
+</p>
+<p class="paperfiles">
+	Paper in <!--<a href="full_papers/adida/adida_html/index.html">HTML</a> |-->
+<a href="full_papers/adida/adida.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/helios-web-based-open-audit-voting" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>VoteBox: A Tamper-evident, Verifiable Electronic Voting System</b><br/> 
+ Daniel Sandler, Kyle Derr, and Dan S. Wallach, <i>Rice University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/sandler/sandler_html/index.html">HTML</a> |
+	<a href="full_papers/sandler/sandler.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/votebox-tamper-evident-verifiable-electronic-voting-system" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="provos"></a>
+<b>The Ghost in the Browser and Other Frightening Stories About Web Malware</b><br/>
+<a href="techspeakers.html#provos">Niels Provos</a>, <i>Google, Inc.</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	nprovos/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	nprovos/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/ghost-browser-and-other-frightening-stories-about-web">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/></p>
+<p class="techdesc">
+While the Web provides information and services that enrich our lives
+in many ways, it has also become the primary vehicle for delivering
+malware.  Once infected with Web-based malware, an unsuspecting user's
+machine is converted into a productive member of the Internet
+underground. This talk explores Web-based malware and the
+infrastructure supporting it, covering an analysis period of almost two
+years.   It describes trends observed in Web server compromises, as
+well as giving an overview of the life cycle of Web-based malware.
+The talk shows that Web malware enables a large number of
+questionable activities, ranging from the exfiltration of sensitive
+information such as email addresses and credit card information to forming
+spamming botnets, which are responsible for a significant fraction of the spam
+currently seen on the Internet.<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/>
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">10:30 a.m.&#8211;11:00 a.m.   Break</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">11:00 a.m.&#8211;12:30 p.m.</td>
+<td class="techtime2">Friday</td>
+</tr>
+<!-- Column beginning -->
+<tr>
+<!-- column 1 -->
+<td align="left" bgcolor="#ffffff" valign="top" width="50%">
+<p class="techhead2">REFEREED PAPERS</p>
+<p class="techroom">Regency 2</p>
+<a name="software"><p class="techtitle">Software Security</p></a>
+<p class="techchairs">Session Chair: David Lie, <i>University of Toronto</i></p>
+<p class="techdesc">
+<b>An Empirical Security Study of the Native Code in the JDK</b><br/> 
+Gang Tan and Jason Croft, <i>Boston College</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/tan_g/tan_g_html/index.html">HTML</a> |
+	<a href="full_papers/tan_g/tan_g.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/empirical-security-study-native-code-jdk" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>AutoISES: <i>Auto</i>matically <i>I</i>nferring <i>Se</i>curity <i>S</i>pecification and Detecting Violations</b><br/> 
+Lin Tan, <i>University of Illinois, Urbana-Champaign;</i> Xiaolan Zhang, 
+<i>IBM T.J. Watson Research Center;</i> Xiao Ma, <i>University of Illinois, Urbana-Champaign, and Pattern Insight Inc.;</i> Weiwei Xiong,  <i>University of Illinois, Urbana-Champaign;</i> Yuanyuan 
+Zhou, <i>University of Illinois, Urbana-Champaign, and Pattern Insight Inc.</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/tan_l/tan_l_html/index.html">HTML</a> |
+	<a href="full_papers/tan_l/tan_l.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/autoises-automatically-inferring-security-specification" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+<p class="techdesc">
+<b>Real-World Buffer Overflow Protection for Userspace & Kernelspace</b><br/> 
+Michael Dalton, Hari Kannan, and Christos Kozyrakis, <i>Stanford 
+University</i>
+</p>
+<p class="paperfiles">
+	Paper in <a href="full_papers/dalton/dalton_html/index.html">HTML</a> |
+	<a href="full_papers/dalton/dalton.pdf">PDF</a>
+</p>
+<p class="mp3">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/real-world-buffer-overflow-protection-userspace" target="blank">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="10" src="../art/dot_clear.gif"/>
+</p>
+</td>
+<!-- Column 2 -->
+<td align="LEFT" bgcolor="#e0e0e0" valign="top" width="50%">
+<p class="techhead2">INVITED TALKS</p>
+<p class="techroom">Regency 1</p>
+<p class="techdesc"><a name="lacey"></a>
+<b>Managing Insecurity: Practitioner Reflections on Social Costs of Security</b><br/>
+<a href="techspeakers.html#lacey">Darren Lacey</a>, <i>Chief Information Security Officer, Johns Hopkins University/Johns Hopkins Medicine</i>
+</p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dlacey/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	dlacey/" target="blank">View the video</a>
+</p>
+<p class="techdesc">
+<a href="http://www.usenix.org/conference/17th-usenix-security-symposium/managing-insecurity-practitioner-reflections-social-costs">
+<img alt="MP3 Icon" height="25" src="/legacy/graphics/mp3_icon.gif" style="margin-right:5px; margin-bottom:-13px" title="Download the MP3" width="25"/>Listen in MP3 format</a><br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/></p>
+<p class="techdesc">		
+Nonprofits and local government have experienced more than their share of breaches and notifications over the past several years. The reasons for this are evident: lots of sensitive information, insufficient IT resources, lack of institutional discipline, etc. Clearly more time and resources at these organizations should be dedicated to security.
+</p>
+<p class="techdesc2">		
+I discuss whether even identifying the proper balance is a good deal more difficult for public service organizations than has been widely discussed. Will security concerns affect the adoption of electronic medical records, regional health organizations, and nonprofit work? At what point do needed changes in organizational cultures undermine the public mission? What types of security controls and practices are best suited for service agencies? What kinds of research would most help public services?<br/>
+<img alt="" height="5" src="../art/dot_clear.gif"/>
+</p>
+<!--<p>
+Also available in a live video stream. Find out more 
+<a href="http://streaming.linux-magazin.de/en/program_usec08tech.htm">here</a>.
+</p>-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- Begin Break -->
+<tr>
+<td class="techtime" colspan="2">12:30 p.m.&#8211;2:00 p.m.   Lunch, on your own</td>
+</tr>
+<tr>
+<td colspan="2">
+<img alt="" height="1" src="../art/dot_clear.gif"/></td>
+</tr>
+<!-- End Break -->
+<tr>
+<td class="techtime">2:00 p.m.&#8211;3:30 p.m.</td>
+<td class="techtime2">Friday</td>
+</tr>
+<tr>
+<td colspan="2"><a name="wips"></a>
+<p class="techtitle">Work-in-Progress Reports (WiPs) and Closing Remarks</p>
+<p class="techroomleft">Regency Ballroom</p>
+<p class="techchairs">WiPs Session Chair: Hao Chen, <i>University of California, Davis</i></p>
+<p>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	wip/" target="blank">
+<img alt="Video" height="25" src="/legacy/graphics/video_icon.gif" style="margin-bottom:-13px" title="View the video" width="25"/></a>
+<a href="http://streaming.linux-magazin.de/events/usec08/tech/archive/
+	wip/" target="blank">View the video</a>
+</p>
+<p>
+The Work-in-Progress reports
+(WiPs) session offers short presentations about research in
+progress, new results, or timely topics.  The schedule of WiPs and their abstracts is available <a href="../wips.html">here</a>.<!--This is not the place to
+re-announce work already published or to re-advertise work already
+accepted at another venue.  Speakers should submit a
+one- or two-paragraph abstract to <a href="mailto:sec08wips@usenix.org">sec08wips@usenix.org</a> by 6:00 p.m.
+PDT on Wednesday, July 30, 2008. Make sure to include your name, 
+your affiliation, and the title of your talk. The schedule of
+presentations and accepted abstracts will be posted on the Symposium
+Web site. The time available will be distributed among the
+presenters, with each speaker allocated between 5 and 10 minutes. The
+time limit will be strictly enforced.-->
+</p>
+</td>
+</tr>
+<!--End Friday-->
+</table>
+<!-- END OF PAGE CONTENTS -->
+<!--end main table-->
+</td>
+</tr>
+</table>
+<!--End Table #2-->
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<!--begin footer-->
+<img alt="" src="../art/footer.gif"/>
+<!--end footer-->
+</td>
+</tr>
+</table>
+<!--End Table #1-->
+<!--end main table-->
+<table width="750">
+<tr>
+<td align="left" valign="top">
+<img align="left" alt="?" height="16" hspace="2" src="../art/questmark.gif" width="12"/>Need help? 
+		<a href="/legacy/about/contacts.html">
+		Use our Contacts page.</a>
+<br clear="left"/>
+<img alt="" height="5" src="../art/dot_clear.gif" width="1"/><br/>
+<!-- EDIT THE DATE AND YOUR LOGIN NAME BELOW -->
+<i>Last changed: 9 Dec. 2008 mn</i><br/>
+</td>
+</tr>
+</table>
+</center>
+<script type="text/javascript">if(!NREUMQ.f){NREUMQ.f=function(){NREUMQ.push(["load",new Date().getTime()]);var e=document.createElement("script");e.type="text/javascript";e.src=(("http:"===document.location.protocol)?"http:":"https:")+"//"+"js-agent.newrelic.com/nr-100.js";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push(["nrfj","beacon-1.newrelic.com","d823139095","509444","YVJVZksCXkEEVhIMWFgYdlFNCl9cSkAVAFlfT2hAXAdZQABWEhZoWFhDbV8MRVwB",0,96,new Date().getTime(),"","","","",""]);</script>
+</body></html>

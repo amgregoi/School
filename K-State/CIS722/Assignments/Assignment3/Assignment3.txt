@@ -1,0 +1,11 @@
+				CIS 722   			Fall, 2014
+		       Assignment 3 
+Due: 5:00pm on 10/2 (Thursday)
+
+Describe what values does "boothead" assign to each field of each descriptor in the monitor GDT.
+READ related pages in "Pentium Processor Family Developer's Manual" in Resources in KSOL and explain them in your own words.
+If the same field appears more than once, you do not have to copy sentences.  Just give a reference
+(e.g., "see the explanation for the AVL filed in the monitor CS segment (MCS) descriptor")
+
+I will accept only .doc and .pdf files.
+Name the name of your file "yourLastName_youFirstName.doc (or pdf)" and submit it in the file dropbox for Assignment 3.

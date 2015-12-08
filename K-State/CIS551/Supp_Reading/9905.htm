@@ -1,0 +1,1279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
+<title>Digging Up Dirt in the DNS Hierarchy, Part I | Linux Journal</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="canonical" href="http://www.linuxjournal.com/article/9905" />
+<meta name="keywords" content="Security" />
+<meta name="description" content="Our DNS is working. Our clients can access our Web site, our secure e-commerce service, our FTP servers and our LDAP services. Our people can e-mail and browse the Web, and our VoIP system is fully functional. In short, all the services that, without a functional DNS, would not be working, appear to be fully operational." />
+<link rel="shortcut icon" href="/files/linuxjournal.com/ufiles/linuxjournal_favicon.png" type="image/x-icon" />
+  <link type="text/css" rel="stylesheet" media="all" href="/files/linuxjournal.com/ufiles/css/css_512ff41a17ca5ff3d544284d5b394b49.css" />
+<link type="text/css" rel="stylesheet" media="print" href="/files/linuxjournal.com/ufiles/css/css_5d4076ca6387a7e4ffcf41a09929c09b.css" />
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" media="all" href="/sites/linuxjournal.com/themes/zen/zen/ie.css?T" />
+<![endif]-->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+  <script type="text/javascript" src="/files/linuxjournal.com/ufiles/js/js_6a463abba860706840e2ae8c9a4c5659.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/", "thickbox": { "close": "Close", "next": "Next \x3e", "prev": "\x3c Prev", "esc_key": "", "next_close": "Next / Close on last", "image_count": "Image !current of !total" }, "user_relationships_ui": { "loadingimage": "/sites/linuxjournal.com/modules/user_relationships/user_relationships_ui/images/loadingAnimation.gif", "savingimage": "/sites/linuxjournal.com/modules/user_relationships/user_relationships_ui/images/savingimage.gif", "position": { "position": "absolute", "left": "0", "top": "0" } }, "quicktabs": { "qt_1": { "tabs": [ 0, 0, 0 ] } } });
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+$(document).ready(function(){ tb_show("", "/splash?width=600&height=405") });
+//--><!]]>
+</script>
+
+  <script type="text/javascript">
+jQuery.noConflict();
+
+</script>
+
+
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+googletag.defineSlot('/1013989/Interstitial', [600, 400], 'div-gpt-ad-1385082703935-0').addService(googletag.pubads());
+googletag.defineOutOfPageSlot('/1013989/Interstitial', 'div-gpt-ad-1385082703935-0-oop').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+<!-- PUT THIS TAG IN THE head SECTION -->
+
+<script type="text/javascript" src="http://partner.googleadservices.com/gampad/google_service.js">
+</script>
+<script type="text/javascript">
+  GS_googleAddAdSenseService("ca-pub-3600556074671070");
+  GS_googleEnableAllServices();
+</script>
+<script type="text/javascript">
+  GA_googleAddSlot("ca-pub-3600556074671070", "Half_Banner336x90");
+  GA_googleAddSlot("ca-pub-3600556074671070", "Large_Rectangle336x280");
+  GA_googleAddSlot("ca-pub-3600556074671070", "Leaderboard728x90");
+GA_googleAddSlot("ca-pub-3600556074671070", "Desktop_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "Desktop_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "Embedded_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "Embedded_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "Mobile_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "Mobile_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "Security_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "Security_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "SysAdmin_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "SysAdmin_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "Virtualization_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "Virtualization_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "HPC_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "HPC_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "WebDevelopment_LargeRectangle");
+GA_googleAddSlot("ca-pub-3600556074671070", "WebDevelopment_Leaderboard");
+GA_googleAddSlot("ca-pub-3600556074671070", "large_rectangle_test");
+GA_googleAddSlot("ca-pub-3600556074671070", "article_footer");
+GA_googleAddSlot("ca-pub-3600556074671070", "sidebar_bottom_lr");
+GA_googleAddSlot("ca-pub-3600556074671070", "small_footer_square");
+GA_googleAddSlot("ca-pub-3600556074671070", "small_footer_square_middle");
+GA_googleAddSlot("ca-pub-3600556074671070", "small_footer_square_right");
+GA_googleAddSlot("ca-pub-3600556074671070", "subscriptions");
+GA_googleAddSlot("ca-pub-3600556074671070", "MediumRectangle300x250");
+
+</script>
+<script type="text/javascript">
+  GA_googleFetchAds();
+</script>
+<!-- END OF TAG FOR head SECTION -->
+
+
+
+ <!-- <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script> -->
+ <!--<script type="text/javascript">_uacct = "UA-1117794-1"; urchinTracker();</script> -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1117794-1");
+pageTracker._setDomainName(".linuxjournal.com");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Start Quantcast tag -->
+<script type="text/javascript"
+src="http://edge.quantserve.com/quant.js"></script>
+<script
+type="text/javascript">_qacct="p-a3K3N6enFe9wA";quantserve();</script>
+<object>
+<noscript>
+<a href="http://www.quantcast.com/p-a3K3N6enFe9wA"
+target="_blank"><img
+src="http://pixel.quantserve.com/pixel/p-a3K3N6enFe9wA.gif"
+style="display: none;" border="0" height="1" width="1"
+alt="Quantcast"/></a>
+</noscript>
+</object>
+<!-- End Quantcast tag -->
+
+</head>
+<body class="not-front not-logged-in node-type-xmlnode one-sidebar sidebar-right page-node-9905 section-node">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=406458029406839";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+  <div id="page"><div id="page-inner">
+<div id="header-top">
+<!--<div id="login">
+<form action="/?q=user&amp;destination=node%2F9905"  method="post" id="user-login">
+Username/Email:&nbsp;<input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" class="form-text required" />
+Password:&nbsp;<input type="password" maxlength="" name="pass" id="edit-pass" size="15" class="form-text required" />
+<input type="submit" name="op" value="Login" class="form-submit" />
+
+
+<input type="hidden" name="form_id" id="edit-user-login" value="user_login" />
+
+</form>
+</div>
+<div id="login-links">
+<a href="/user/register">Register</a> | <a href="/user/password">Forgot your password?</a>
+
+
+
+</div>
+<div id="connect">
+<a href="http://www.twitter.com/linuxjournal" title="Follow us on Twitter"><img alt="Twitter" src="/files/linuxjournal.com/images/twittericon.jpg" /></a><a href="http://www.facebook.com/linuxjournal" title="Become a Fan on Facebook"><img alt="Facebook" src="/files/linuxjournal.com/images/fbicon.jpg" /></a><a href="http://www.flickr.com/groups/linuxjournal/pool/" title="Contribute to Our Flickr Pool"><img alt="Flickr" src="/files/linuxjournal.com/images/flickricon.jpg" /></a><a href="/rss_feeds" title="Subscribe to Our Feeds"><img alt="RSS" src="/files/linuxjournal.com/images/rssicon.jpg" /></a>
+</div>-->
+       <div id="skip-to-nav"><a href="#navigation">Skip to Navigation</a></div>
+    <div id="subscribe-button"><a href="http://www.linuxjournal.com/subscribe">Click to subscribe</a></div>
+<div id="login-button"><a href="/user">Login</a></div>
+
+</div> <!-- /#header-top -->
+
+
+
+
+
+
+    <a name="top" id="navigation-top"></a>
+
+
+    <div id="header"><div id="header-inner" class="clear-block">
+
+              <div id="logo-title">
+
+                      <div id="logo"><a href="/" title="Home" rel="home"><img src="/files/linuxjournal.com/ufiles/logo-lj.jpg" alt="Linux Journal" id="logo-image" /></a></div>
+          
+          
+          
+	<div id="leaderboard-adblock" class="adblock leaderboard-adblock">
+       <div id="block-block-82" class="block block-block region-odd even region-count-1 count-10"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><!-- ca-pub-3600556074671070/Security_Leaderboard -->
+<script type='text/javascript'>
+GA_googleFillSlot("Security_Leaderboard");
+</script>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+	</div>
+
+        </div> <!-- /#logo-title -->
+      
+
+
+      
+    </div></div> <!-- /#header-inner, /#header -->
+
+    <div id="main"><div id="main-inner" class="clear-block with-navbar">
+
+      <div id="content"><div id="content-inner">
+
+        
+        
+                  <div id="content-header">
+                                      <h1 class="title">Digging Up Dirt in the DNS Hierarchy, Part I</h1>
+                                                          </div> <!-- /#content-header -->
+        
+        <div id="content-area">
+          <div id="node-9905" class="node node-type-xmlnode"><div class="node-inner">
+
+
+
+  
+
+  
+  
+  
+
+
+  
+
+<div id="facebook-like">
+<!--<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.linuxjournal.com/article/9905&amp;layout=standard&amp;show_faces=false&amp;width=250&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=55" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:55px;" allowTransparency="true"></iframe>-->
+<div class="fb-like" data-href="http://www.linuxjournal.com//article/9905" data-send="false" data-width="250" data-show-faces="false"></div>
+
+</div>
+
+<div class="issue"> 
+	<div class="issue-cover">
+	<a href="/issue/165"><img title="Issue 165" alt="Issue 165" src="/files/linuxjournal.com/linuxjournal/issues/165/cover165.small.jpg" /></a>
+	</div>
+	<p><a href="/issue/165">From Issue #165<br />January 2008</a></p>
+</div>
+
+  
+
+  
+
+  
+      <div class="meta">
+              <div class="submitted">
+		Jan 01, 2008		&nbsp;By&nbsp;<a href="/user/1002214" title="View user profile.">Ron Aitchison</a>	</div>
+      
+              <div class="terms terms-inline">&nbsp;in<ul class="links inline"><li class="taxonomy_term_31 first last"><a href="/tag/security" rel="tag" title="">Security</a></li>
+</ul></div>
+      
+  	 </div>
+    <!-- how'd this get in here?</div> -->
+  
+  
+    	<div class="abstract">
+	Explore hidden secrets of the DNS hierarchy with a benign and systematic diagnostic and audit methodology using readily available tools.	</div>
+    
+
+
+  <div class="content">
+
+    <div class="article" lang="en"><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb44b18"></a></div>
+
+<p>
+Our DNS is working. Our clients can access our Web site, our secure
+e-commerce service, our FTP servers and our LDAP services. Our people can
+e-mail and browse the Web, and our VoIP system is fully functional. In
+short,
+all the services that, without a functional DNS, would not be working,
+appear to be fully operational. All is well with our DNS&mdash;perhaps.
+</p><p>
+When researching for my first book, I was constantly surprised, and on
+more than one occasion stunned, at how often even large, technically
+proficient organizations had potentially dangerous flaws in their DNS
+infrastructure. This article describes a simple set of techniques using
+two readily available tools, dig and fpdns (see Obtaining
+Tools sidebar), to explore the DNS hierarchy methodically. The techniques used
+are benign; they essentially emulate the functions of a caching
+resolver and can be used both for diagnostic and auditing purposes.
+There are tools available that cover some of the techniques shown here,
+but it is vital that administrators understand the entire process to
+avoid any shortcomings in the tools. 
+</p>
+
+<p>
+Although this article uses the
+inevitable example.com and private IP addresses in the interest of being
+a good Netizen, I encourage you to pull up a shell and substitute your
+domain, one that interests you, is important to you or about which you
+are just plain curious. The diagnostic examples show BIND because it
+represents approximately 80% of the estimated nine million name servers.
+</p></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb44d80"></a>
+Scope the Target</div><p>
+To animate the techniques, let's simply look up the IP
+address(es) of the Web site or sites of our target domain example.com.
+First, using a browser, go to the site and navigate
+around, taking interesting links, especially the secure ones. Our
+objective is to build a list of all the host and domain names being
+used by our target. In our illustrative case, say we discover that our target
+uses www.example.com as its public portal and a second host,
+online.example.com, for secure (HTTPS) transactions. From here on, we
+simply emulate the behavior a caching DNS would use to find its way to
+the target Web sites with a few deviations thrown in to spice up the
+action.
+</p></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb44e88"></a>
+The Root of All</div><p>
+The principal job of a caching name server is to resolve a domain name,
+such as www.example.com, into an IP address. If it has no information
+about the domain name in its cache, it must track the delegation route
+starting from the root servers through the DNS name hierarchy to the
+authoritative name server for the target domain. A delegation is defined
+by two or more Name Server (NS) Resource Records (RRs) in a parent
+zone. The NS RRs at the parent zone point to the authoritative name server of
+the child zone. This parent-child process is repeated for each level in
+the name hierarchy until we reach our target. Thus, for www.example.com,
+we will obtain a delegation from the root to .com's authoritative name
+servers, and then a delegation from .com to example.com's authoritative name
+servers.
+</p><p>
+A caching server gets its initial list of root servers from the root or
+hints zone, which uses a zone file typically called named.ca or
+named.root. To get the names of the root servers being used by your
+local DNS (defined in /etc/resolv.conf), simply enter:
+<tt>dig</tt>.
+</p><p>
+You should get a response that looks something like this:
+
+
+<pre class="programlisting">
+
+; &lt;&lt;&gt;&gt; DiG 9.4.1-P1 &lt;&lt;&gt;&gt;
+
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 16298
+
+;; flags: qr rd ra; QUERY: 1, ANSWER: 13, AUTHORITY: 0, ADDITIONAL: 7
+
+
+;; QUESTION SECTION:
+
+;. IN NS
+
+;; ANSWER SECTION:
+
+. 5058 IN NS A.ROOT-SERVERS.NET.
+
+...
+
+. 5058 IN NS M.ROOT-SERVERS.NET.
+
+
+;; ADDITIONAL SECTION:
+
+A.ROOT-SERVERS.NET. 798 IN A 198.41.0.4
+
+...
+
+M.ROOT-SERVERS.NET. 6957 IN A 202.12.27.33
+
+
+;; Query time: 36 msec
+
+;; SERVER: 192.168.2.1#53(192.168.2.1)
+
+...
+
+</pre>
+</p></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb45148"></a></div><p>
+I've removed a lot of material above, indicated by the ... sequence in the
+interests of brevity.
+</p><p>
+The format of a dig response has five
+sections. The HEADER contains summary and status information, which we
+look at in more detail later. The next four sections contain information in
+standard Resource Record (RR) format as they may appear in a zone file.
+The QUESTION SECTION reflects the question or query received by the
+responding server. In the above case, the dig command was interpreted to
+be “get me the NS RRs for the root”. The ANSWER SECTION may be empty if
+our question was not answered or may contain one or more RRs, which are
+the answer to our query. In the example above, it contains the NS RRs for
+the root servers (a.root-servers.net to m.root-servers.net). Note
+especially the infamous dot on the left hand side of each result line in
+this section, which is the short form for the root. The AUTHORITY
+SECTION normally contains one or more NS RRs for servers that are
+authoritative for the domain in question. In the above case, it is not
+present simply because the ANSWER SECTION already contains this
+information. The ADDITIONAL SECTION contains any information the
+responding server thinks may be useful and has available. In this example,
+and in most cases, it contains the A (Address) RRs of the
+authoritative name servers that our local name server has used.
+</p><p>
+The really interesting stuff is in the
+HEADER. The first thing to check
+is the status. In this case, NOERR means the command was successful (see
+the Dig Header Values sidebar for a complete list). The flags in
+this case are qr, indicating we received a query response that seems
+pretty reasonable; rd, indicating our dig message requested
+recursive services; and ra, signifying that this server
+supports recursive service (again, see the Dig Header Values sidebar for a complete
+list of possible flags). The HEADER also contains the id,
+which uniquely identifies this request/response pair and finally
+summarizes how many RRs we have in each section.
+</p><p>
+The last few lines of the dig response yield useful performance
+information. The SERVER line particularly confirms the address and name
+of the server from which the results were obtained.
+</p><p>
+Now, our toolkit is in place, and we have some idea about what it is
+telling us.
+So, next, let's follow the DNS hierarchy from the root to our
+targets www.example.com and online.example.com.
+</p><p>
+The first command on our journey is:
+
+
+<pre class="programlisting">
+dig @a.root-servers.net www,example.com
+</pre>
+</p><p>
+This command uses one of the root servers (a.root-servers.net) to get
+the A RR of www.example.com. A purist would say that to avoid possible
+sources of corruption, we always should use @x.x.x.x (an IP address)
+rather than a name, especially in a diagnostic mode, and in general, this
+method is safer. However, names are more understandable (the reason for
+the DNS), and we always can check that the IP address on the SERVER line
+of the response is in the expected set. The dig response will look like
+this:
+
+
+<pre class="programlisting">
+
+; &lt;&lt;&gt;&gt; DiG 9.4.1-P1 &lt;&lt;&gt;&gt; dig @a.root-servers.net www,example.com
+
+...
+
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 15570
+
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 13, ADDITIONAL: 14
+
+;; WARNING: recursion requested but not available
+
+
+;; QUESTION SECTION:
+
+;www.example.com. IN A
+
+
+;; AUTHORITY SECTION:
+
+com. 172800 IN NS A.GTLD-SERVERS.NET.
+
+....
+
+com 172800 IN NS M.GTLD-SERVERS.NET.
+
+;; ADDITIONAL SECTION:
+
+A.GTLD-SERVERS.NET 172800 IN A 192.5.6.30
+
+A.GTLD-SERVERS.NET. 172800 IN AAAA 2001:503:a83e::2:30
+
+....
+
+
+;; Query time: 38 msec
+
+;; SERVER: 198.41.0.4#53(198.41.0.4)
+
+...
+
+</pre>
+</p><p>
+Again, I've removed a lot of material indicated by the ... sequence in
+the interest of brevity. The first thing to note in the header is that
+the ra flag is not set, meaning recursion is not available&mdash;normal in
+the root and TLD servers. Second, the aa flag is not
+set, which means this is not an authoritative response. At first, this
+may seem strange; this is, after all, a root server. The root is the
+parent of .com (the next name in the hierarchy), but a parent's NS RRs
+(the point of delegation) are never authoritative; only the child can
+give an authoritative response for its NS RRs. This has important
+implications as we will see later. In summary, we have no answer
+(ANSWER 0) and no error (status NOERR), but there are AUTHORITY (13)
+entries. This identifies the response as a referral. The root cannot
+supply the answer but has helpfully referred us to the next level in the
+hierarchy&mdash;in this case, the .com gTLD servers, whose names are given in
+the AUTHORITY SECTION and some IP addresses in the ADDITIONAL SECTION,
+including an IPv6 address, which is becoming increasingly common.
+</p><p>
+Continuing our journey, we issue:
+
+
+<pre class="programlisting">
+dig @a.gtld-servers.net www.example.com
+</pre>
+</p><p>
+This command says, using one of the .com gTLD servers
+(a.gtld-servers.net), get me the IP address of www.example.com. This may
+begin to look a little tedious. After all, the root and gTLD servers are
+operated by professional organizations, so why bother checking them?
+Consider, however, that we may not be using the real root and gTLD
+servers. We obtained our list from our local caching server. If its
+hints zone is poisoned, this process will help us identify deviations
+from normality, and besides, some of the ccTLD zones have
+really interesting structures. The golden rule is make no assumptions.
+The dig response will look something like this:
+
+
+<pre class="programlisting">
+
+; &lt;&lt;&gt;&gt; DiG 9.4.1-P1 &lt;&lt;&gt;&gt; @a.gtld-servers.net www.example.com
+
+...
+
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20018
+
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 2, ADDITIONAL: 1
+
+;; WARNING: recursion requested but not available
+
+
+;; QUESTION SECTION:
+
+;www.example.com. IN A
+
+
+;; AUTHORITY SECTION:
+
+example.com. 86400 IN NS ns2.example.com.
+
+example.com. 86400 IN NS ns1.example.net.
+
+
+;; ADDITIONAL SECTION:
+
+ns2.example.com 172800 IN A 10.10.0.2
+
+
+;; Query time: 80 msec
+
+;; SERVER: 192.228.28.9#53(192.228.28.9)
+
+</pre>
+</p><p>
+This response is almost identical to the previous one. It's a
+referral to the authoritative name servers for the domain example.com,
+which are ns2.example.com (in the same domain or zone) and
+ns1.example.net (not in the same domain)&mdash;termed an out-of-zone
+or an out-of-bailiwick name server. If we choose to use
+ns2.example.com, we can use the supplied IP address; this is a normal
+“glue” A record and is required to make delegation work. However, if we
+want to use ns1.example.net, we must obtain its IP address by restarting
+the process from the root servers through to the .net gTLD servers. We
+must do this even if the IP address had been supplied, as it frequently
+is, in the ADDITIONAL SECTION of the response.
+</p><p>
+What's the reason for not trusting an out-of-zone
+IP address? We
+could pollute our authoritative name server space and allow a domain
+hijack. Let's illustrate the dangers. Suppose your local friendly
+caching name server comes to my unrelated domain, say www.example.org,
+and in this domain's zone file, I have the following zone records:
+
+<pre class="programlisting">
+$ORIGIN example.org.
+
+...
+
+; NS RR for the domain -- perfectly correct
+
+IN NS ns3.example.org.
+
+IN NS ns1.example.net.
+
+...
+
+; normal name server A RR
+
+ns3 IN A 192.168.2.4
+
+...
+
+; out-of-zone A RR . potentially naughty
+
+ns1.example.net. IN A 192.168.2.4 ;a malicious server
+</pre>
+</p><p>
+If the caching server trusts the A record for ns1.example.net&mdash;the
+out-of-zone server&mdash;and caches it without reading from its
+authoritative source, any subsequent resolution of example.com names
+using ns1.example.net would use a name server at 192.168.2.4, where a
+bogus zone file would likely redirect all example.com traffic to a
+malicious site. So, if we have an out-of-zone (or out-of-bailiwick) name
+server, any server that is not in the same domain name space as the
+target domain, its IP address must not be trusted until obtained
+from an authoritative source. This means tracking from the root. Modern
+versions of BIND discard all out-of-zone A RRs with an appropriate
+log message when the zone is loaded.
+</p><p>
+In our manual audit process, we could ignore ns1.example.net, but a real
+caching DNS will not. It will use it for approximately 50% of queries.
+In order to audit the route to our Web addresses thoroughly, we must
+check all the DNS servers that appear in the AUTHORITY SECTION. Any
+weak DNS may allow a compromise of some proportion of user traffic. The
+percentage of queries received by a name server should not be confused
+with the number of users. A single query from a large ISP may affect a
+disproportionate number of users, especially in regionally focused sites.
+</p><p>
+It can get a lot worse than this. Let's assume we have tracked
+ns1.example.net through the root servers and the gTLD servers for .net,
+and we get this response to our last dig:
+
+
+<pre class="programlisting">
+
+; &lt;&lt;&gt;&gt; DiG 9.4.1-P1 &lt;&lt;&gt;&gt; @a.gtld-servers.net ns1.example.net
+
+...
+
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 49319
+
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 2, ADDITIONAL: 2
+
+;; WARNING: recursion requested but not available
+
+
+;; QUESTION SECTION:
+
+;ns1.example.net. IN A
+
+
+;; AUTHORITY SECTION:
+
+example.net. 172800 IN NS ns1.example.net.
+
+example.net. 172800 IN NS ns4.example.org.
+
+
+;; ADDITIONAL SECTION:
+
+ns1.example.net. 172800 IN A 192.168.2.2
+
+;; Query time: 61 msec
+
+;; SERVER: 192.5.6.30#53(192.5.6.30)
+
+...
+
+</pre>
+</p><p>
+We have another out-of-bailiwick name server (ns4.example.org), which we
+have to track down using exactly the same principles as before, through
+the root to the .org TLD servers, which in turn also could respond with
+another out-of-bailiwick server and so on. Every one of these name
+servers plays a role in name resolution, and any one of them could be a weak
+link. Research into what is sometimes called “transitive
+trust” has
+shown that in extreme cases, more than 400 name servers can be involved in
+resolving a name. If you give other people even a small proportion of
+your DNS traffic, make sure that they, and all their DNS servers, are in
+good shape.
+</p><p>
+We even can create DNS loops by erroneous delegation. Here's a trivial
+zone file delegation loop:
+
+<pre class="programlisting">
+$ORIGIN example.org.
+
+...
+
+NS ns1.example.net.
+
+NS ns2.example.net.
+
+...
+
+$ORIGIN example.net.
+
+...
+
+NS ns1.example.org.
+
+NS ns2.example.org.
+
+...
+</pre>
+</p><p>
+Although even a superficial glance will show that these two domains names
+are unresolvable, now assume that they are buried in multiple layers of
+indirection and transitive trust to perhaps two, three, five or more
+levels. Debugging can become extremely complex. Further, assume that we
+add one in-zone name server to example.net's zone file. Our problem now
+is intermittent errors and timeouts (or slow access) rather than simple
+non-availability&mdash;always a much tougher problem to diagnose.
+</p><p>
+So far, we have navigated the perils of the DNS hierarchy, but we have not
+even touched our domain's authoritative name servers. In part two of this
+article, we will look at what can happen when we move into
+the user's territory. Now, that can get really scary.
+</p></div></div><div class="links"><div class="item-list"><ul class="pager"><li class="pager-current first">1</li>
+<li class="pager-item"><a href="/article/9905?page=0,1" title="Go to page 2" class="active">2</a></li>
+<li class="pager-next"><a href="/article/9905?page=0,1" title="Go to next page" class="active">next ›</a></li>
+<li class="pager-last last"><a href="/article/9905?page=0,1" title="Go to last page" class="active">last »</a></li>
+</ul></div></div>
+  </div>
+      <div class="user-signature clear-block">
+______________________
+	<p>
+        <!--paging_filter-->	</p>
+      </div>
+   
+
+
+  <ul class="links inline"><li class="flag-anon first"><a href="/u?destination=node%2F9905">Login to save this as favorite</a></li>
+<li class="service-links-delicious"><a href="http://del.icio.us/post?url=http%3A%2F%2Fwww.linuxjournal.com%2Farticle%2F9905&amp;title=Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I" title="Bookmark this post on del.icio.us." id="service-links-delicious-1" class="service-links-delicious" rel="nofollow"><img src="/sites/linuxjournal.com/modules/service_links/images/delicious.png" alt="del.icio.us" title="" width="16" height="16" /></a></li>
+<li class="service-links-digg"><a href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fwww.linuxjournal.com%2Farticle%2F9905&amp;title=Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I" title="Digg this post on digg.com" id="service-links-digg-1" class="service-links-digg" rel="nofollow"><img src="/sites/linuxjournal.com/modules/service_links/images/digg.png" alt="Digg" title="" width="16" height="16" /></a></li>
+<li class="service-links-facebook"><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.linuxjournal.com%2Farticle%2F9905&amp;t=Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I" title="Share on Facebook." id="service-links-facebook-1" class="service-links-facebook" rel="nofollow"><img src="/sites/linuxjournal.com/modules/service_links/images/facebook.png" alt="Facebook" title="" width="16" height="16" /></a></li>
+<li class="service-links-reddit"><a href="http://reddit.com/submit?url=http%3A%2F%2Fwww.linuxjournal.com%2Farticle%2F9905&amp;title=Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I" title="Submit this post on reddit.com." id="service-links-reddit-1" class="service-links-reddit" rel="nofollow"><img src="/sites/linuxjournal.com/modules/service_links/images/reddit.png" alt="Reddit" title="" width="16" height="16" /></a></li>
+<li class="service-links-slashdot"><a href="http://slashdot.org/bookmark.pl?url=http%3A%2F%2Fwww.linuxjournal.com%2Farticle%2F9905&amp;title=Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I" title="Bookmark this post on SlashDot" id="service-links-slashdot-1" class="service-links-slashdot" rel="nofollow"><img src="/sites/linuxjournal.com/modules/service_links/images/slashdot.png" alt="SlashDot" title="" width="16" height="16" /></a></li>
+<li class="service-links-stumbleupon"><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.linuxjournal.com%2Farticle%2F9905&amp;title=Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I" title="Thumb this up at StumbleUpon" id="service-links-stumbleupon-1" class="service-links-stumbleupon" rel="nofollow"><img src="/sites/linuxjournal.com/modules/service_links/images/stumbleit.png" alt="StumbleUpon" title="" width="16" height="16" /></a></li>
+<li class="tweet_Twitter last"><a href="http://twitter.com/home?status=+Digging+Up+Dirt+in+the+DNS+Hierarchy%2C+Part+I%3A+http%3A/%2Fwww.linuxjournal.com/article/9905" class="tweet" rel="nofollow" target="_blank"><img src="/sites/linuxjournal.com/modules/tweet/twitter.png" alt="Post to Twitter" title="Post to Twitter" width="16" height="16" /></a></li>
+</ul>
+ <!-- <div class="contentad">
+
+  </div>
+  -->
+
+<div id="article_footer"><!-- article_footer -->
+<!--<script type='text/javascript'>
+GA_googleFillSlot("article_footer");
+</script> -->
+<!-- MediumRectangle300x250 -->
+<center><script type='text/javascript'>
+GA_googleFillSlot("MediumRectangle300x250");
+</script></center>
+</div> <!-- /#article_footer -->
+
+
+
+
+</div></div> <!-- /node-inner, /node -->
+
+
+        </div> <!-- /#content-area -->
+
+        
+                  <div id="content-bottom" class="region region-content_bottom">
+            <div id="block-block-106" class="block block-block region-odd odd region-count-1 count-9"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><div id="lead-gen-wrapper"> 
+<div id="lead-gen"> 
+<div class="lead-gen-vert-rule"> 
+<div class="lead-gen-left"> 
+<div class="webcast heading"> 
+<div style="float:left;">White Paper
+</div> 
+<div class="lead-gen-read-more"><a href="/whitepapers">More Resources</a>
+</div> 
+</div> 
+<div class="lead-gen-content"> 
+
+<div class="webcast"> <a class="lead-gen-head" href="http://www.linuxjournal.com/content/download-linux-management-red-hat-satellite-measuring-business-impact-and-roi">Linux Management with Red Hat Satellite: Measuring Business Impact and ROI</a> 
+<p class="lead-gen-description">Linux has become a key foundation for supporting today's rapidly growing IT environments. Linux is being used to deploy business applications and databases, trading on its reputation as a low-cost operating environment. For many IT organizations, Linux is a mainstay for deploying Web servers and has evolved from handling basic file, print, and utility workloads to running mission-critical applications and databases, physically, virtually, and in the cloud. As Linux grows in importance in terms of value to the business, managing Linux environments to high standards of service quality — availability, security, and performance — becomes an essential requirement for business success.
+</p>
+<p class="lead-gen-learn_more"><a href="http://www.linuxjournal.com/content/download-linux-management-red-hat-satellite-measuring-business-impact-and-roi">Learn More</a></p> 
+<p class="lead-gen_sponsor">Sponsored by Red Hat</p> 
+</div> 
+
+</div> 
+</div> 
+<div class="lead-gen-right"> 
+<div class="download heading"> 
+<div style="float:left;">White Paper</div> 
+<div class="lead-gen-read-more">
+<a href="/whitepapers">More Resources</a>
+</div> 
+</div> 
+<div class="lead-gen-content"> 
+<div class="download"> 
+<a class="lead-gen-head" href="http://www.linuxjournal.com/content/download-private-paas-agile-enterprise">
+Private PaaS for the Agile Enterprise</a> 
+<p class="lead-gen-description">
+If you already use virtualized infrastructure, you are well on your way to leveraging the power of the cloud. Virtualization offers the promise of limitless resources, but how do you manage that scalability when your DevOps team doesn’t scale? In today’s hypercompetitive markets, fast results can make a difference between leading the pack vs. obsolescence. Organizations need more benefits from cloud computing than just raw resources. They need agility, flexibility, convenience, ROI, and control.
+</p><p class="lead-gen-description">
+Stackato private Platform-as-a-Service technology from ActiveState extends your private cloud infrastructure by creating a private PaaS to provide on-demand availability, flexibility, control, and ultimately, faster time-to-market for your enterprise.
+</p>
+<p class="lead-gen-learn_more">
+<a href="http://www.linuxjournal.com/content/download-private-paas-agile-enterprise">Learn More</a></p> 
+<p class="lead-gen_sponsor">Sponsored by ActiveState</p> 
+</div> 
+
+</div> 
+</div> 
+</div> 
+</div> 
+<div class="clear">
+</div>
+</div>
+  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+          </div> <!-- /#content-bottom -->
+        
+      </div></div> <!-- /#content-inner, /#content -->
+
+              <div id="navbar"><div id="navbar-inner" class="clear-block region region-navbar">
+
+          <a name="navigation" id="navigation"></a>
+
+          
+                      <div id="primary">
+              <ul class="links"><li class="menu-158 first"><a href="/subscriptions">Subscribe</a></li>
+<li class="menu-150"><a href="/blog">Blogs</a></li>
+<li class="menu-1802"><a href="/tag/reviews" title="">Reviews</a></li>
+<li class="menu-187"><a href="/tag/how-tos">HOWTOs</a></li>
+<li class="menu-1803"><a href="/whitepapers" title="">Knowledge Hub</a></li>
+<li class="menu-71"><a href="/tag/tech-tips" title="">Hep &amp; Tips</a></li>
+<li class="menu-181"><a href="/getlinux">How to Get Linux</a></li>
+<li class="menu-184 last"><a href="/gettinghelp">Getting Help</a></li>
+</ul> <div id="searchbox">
+ 
+<div id="cse-search-form" style="width: 100%;">Loading</div>
+<script src="//www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl(
+      '000332554451520836487:ikifqzncxvw');
+
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.enableSearchboxOnly("http://linuxjournal.com/googlesearch","s");
+    customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script>
+<link rel="stylesheet" href="//www.google.com/cse/style/look/default.css" type="text/css" />
+<style type="text/css">
+  input.gsc-input {
+    border-color: #EEEEEE;
+  }
+  input.gsc-search-button {
+    border-color: #666666;
+    background-color: #CECECE;
+  }
+</style>
+</div><!-- /#searchbox -->
+            </div> <!-- /#primary -->
+          
+          
+          
+        </div></div> <!-- /#navbar-inner, /#navbar -->
+      
+      
+              <div id="sidebar-right"><div id="sidebar-right-inner" class="region region-right">
+          <div id="block-block-83" class="block block-block region-odd even region-count-1 count-4"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><!-- ca-pub-3600556074671070/Security_LargeRectangle -->
+<script type='text/javascript'>
+GA_googleFillSlot("Security_LargeRectangle");
+</script>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-channels" class="block block-menu region-even odd region-count-2 count-5"><div class="block-inner">
+
+      <h2 class="title">Trending Topics</h2>
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="/tag/cloud" title="">Cloud</a></li>
+<li class="leaf"><a href="/tag/hpc" title="">HPC</a></li>
+<li class="leaf"><a href="/tag/mobile" title="">Mobile</a></li>
+<li class="leaf"><a href="/tag/security" title="">Security</a></li>
+<li class="leaf"><a href="/tag/sysadmin" title="">SysAdmin</a></li>
+<li class="leaf last"><a href="/tag/web-development" title="">Web Development</a></li>
+</ul>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-quicktabs-1" class="block block-quicktabs region-odd even region-count-3 count-6"><div class="block-inner">
+
+  
+  <div class="content">
+    <div id="quicktabs-1" class="quicktabs_wrapper quicktabs-style-zen"><ul class="quicktabs_tabs quicktabs-style-zen"><li class="qtab-0 active first"><a href="/article/9905?quicktabs_1=0#quicktabs-1" id="quicktabs-tab-1-0" class="qt_tab active">The Latest</a></li><li class="qtab-1"><a href="/article/9905?quicktabs_1=1#quicktabs-1" id="quicktabs-tab-1-1" class="qt_tab active">Popular</a></li><li class="qtab-2 last"><a href="/article/9905?quicktabs_1=2#quicktabs-1" id="quicktabs-tab-1-2" class="qt_tab active">Recent Comments</a></li></ul><div id="quicktabs_container_1" class="quicktabs_main quicktabs-style-zen"><div id="quicktabs_tabpage_1_0" class="quicktabs_tabpage"><div id="block-views-latest_stories-block_1" class="block block-views region-odd odd region-count-1 count-1"><div class="block-inner">
+
+  
+  <div class="content">
+    <div class="view view-latest-stories view-id-latest_stories view-display-id-block_1 view-dom-id-1">
+    
+  
+  
+      <div class="view-content">
+      <table class="views-table cols-6">
+    <thead>
+    <tr>
+              <th class="views-field views-field-title">
+                  </th>
+              <th class="views-field views-field-created">
+                  </th>
+          </tr>
+  </thead>
+  <tbody>
+          <tr class="odd views-row-first">
+                  <td class="views-field views-field-title">
+            <a href="/content/compojure">Compojure</a>          </td>
+                  <td class="views-field views-field-created">
+            Dec 26, 2013          </td>
+              </tr>
+          <tr class="even">
+                  <td class="views-field views-field-title">
+            <a href="/content/protect-your-ports-reverse-proxy">Protect Your Ports with a Reverse Proxy</a>          </td>
+                  <td class="views-field views-field-created">
+            Dec 23, 2013          </td>
+              </tr>
+          <tr class="odd">
+                  <td class="views-field views-field-title">
+            <a href="/slideshow/new-products">New Products</a>          </td>
+                  <td class="views-field views-field-created">
+            Dec 20, 2013          </td>
+              </tr>
+          <tr class="even">
+                  <td class="views-field views-field-title">
+            <a href="/content/non-linux-foss-lets-make-music-together">Non-Linux FOSS: Let&#039;s Make Music Together</a>          </td>
+                  <td class="views-field views-field-created">
+            Dec 19, 2013          </td>
+              </tr>
+          <tr class="odd">
+                  <td class="views-field views-field-title">
+            <a href="/content/best-cake-ever">Best. Cake. Ever.</a>          </td>
+                  <td class="views-field views-field-created">
+            Dec 18, 2013          </td>
+              </tr>
+          <tr class="even views-row-last">
+                  <td class="views-field views-field-title">
+            <a href="/content/aide%E2%80%94developing-android-android">AIDE—Developing for Android on Android</a>          </td>
+                  <td class="views-field views-field-created">
+            Dec 18, 2013          </td>
+              </tr>
+      </tbody>
+</table>
+    </div>
+  
+  
+  
+      
+<div class="more-link">
+  <a href="/latest">
+    more  </a>
+</div>
+  
+  
+  
+</div>   </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+</div><div id="quicktabs_tabpage_1_1" class="quicktabs_tabpage quicktabs-hide"><div id="block-views-popular-block_1" class="block block-views region-even even region-count-2 count-2"><div class="block-inner">
+
+  
+  <div class="content">
+    <div class="view view-popular view-id-popular view-display-id-block_1 view-dom-id-2">
+    
+  
+  
+      <div class="view-content">
+      <div class="item-list">
+    <ul>
+          <li class="views-row views-row-1 views-row-odd views-row-first">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/rc2013">Readers&#039; Choice Awards 2013</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-2 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/content/raspberry-pi-perfect-home-server">Raspberry Pi: the Perfect Home Server</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-3 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/article/7564">2004 Editors&#039; Choice Awards</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-4 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/content/protect-your-ports-reverse-proxy">Protect Your Ports with a Reverse Proxy</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-5 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/slideshow/geeks-guide-coolest-2013-holiday-gifts">The Geek&#039;s Guide to the Coolest 2013 Holiday Gifts</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-6 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/node/1084549">Linux Systems Administrator</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-7 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/node/1084558">Senior Perl Developer</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-8 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/node/1084550">Technical Support Rep</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-9 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/node/1084560">UX Designer</a></span>
+  </span>
+</li>
+          <li class="views-row views-row-10 views-row-even views-row-last">  
+  <span class="views-field-title">
+                <span class="field-content"><a href="/article/3882">Why Python?</a></span>
+  </span>
+</li>
+      </ul>
+</div>    </div>
+  
+  
+  
+      
+<div class="more-link">
+  <a href="/popular/today">
+    more  </a>
+</div>
+  
+  
+  
+</div>   </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+</div><div id="quicktabs_tabpage_1_2" class="quicktabs_tabpage quicktabs-hide"><div id="block-comment-0" class="block block-comment region-odd odd region-count-3 count-3"><div class="block-inner">
+
+  
+  <div class="content">
+    <div class="item-list"><ul><li class="first"><a href="/content/protect-your-ports-reverse-proxy#comment-377908">Reply to comment | Linux Journal</a><br />1 hour 8 min ago</li>
+<li><a href="/content/android-candy-free-family-fun%E2%80%94fantastic#comment-377907">Reply to comment | Linux Journal</a><br />3 hours 46 min ago</li>
+<li><a href="/slideshow/geeks-guide-coolest-2013-holiday-gifts#comment-377906">Reply to comment | Linux Journal</a><br />4 hours 1 min ago</li>
+<li><a href="/content/gimp-shmimp-give-me-browser#comment-377905">firefox best browser</a><br />7 hours 1 min ago</li>
+<li><a href="/content/handy-u-boot-trick#comment-377904">that&#039;s fine book trick</a><br />7 hours 7 min ago</li>
+<li><a href="/content/two-pi-r#comment-377903">semuanya selamat malam</a><br />7 hours 15 min ago</li>
+<li><a href="/content/best-cake-ever#comment-377902">it&#039;s pororo</a><br />7 hours 21 min ago</li>
+<li><a href="/content/best-cake-ever#comment-377901">is it pororo?</a><br />7 hours 28 min ago</li>
+<li><a href="/content/non-linux-foss-lets-make-music-together#comment-377900">window is better than linux brow</a><br />7 hours 35 min ago</li>
+<li class="last"><a href="/content/aide%E2%80%94developing-android-android#comment-377899">android replacing bbm</a><br />7 hours 39 min ago</li>
+</ul></div>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+</div></div></div>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-block-67" class="block block-block region-even odd region-count-4 count-7"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><p><a href="/enewsletters"><img alt=" Linux Newsletter" src="/files/linuxjournal.com/images/NewsletterBanner_T3b.jpg" /></a></p>
+<p><a href="/new-issue"><img alt="New Issue" src="/files/linuxjournal.com/images/SubscriberButton-Dec2013.png" /></a></p>
+  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-block-98" class="block block-block region-odd even region-count-5 count-8"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><!-- sidebar_bottom_lr -->
+<script type='text/javascript'>
+GA_googleFillSlot("sidebar_bottom_lr");
+</script>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+        </div></div> <!-- /#sidebar-right-inner, /#sidebar-right -->
+      
+    </div></div> <!-- /#main-inner, /#main -->
+
+          <div id="footer"><div id="footer-inner" class="region region-footer">
+
+        
+        <div id="block-block-62" class="block block-block region-odd odd region-count-1 count-11"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><div id="subsform">  
+     
+        
+	<form  method="post" name="form" action= "https://www.pubservice.com/subnew2page.aspx?PC=LJ&amp;PK&amp;FC=" class="subform">
+        
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td valign="top">First Name</td>
+
+            <td valign="top" colspan="2">Last Name</td>
+          </tr>
+
+    
+          <tr>
+            <td valign="top"><input type="text" value="" name="FN" size= "18" maxlength="" class="form1" /></td>
+
+            <td valign="top" colspan="2"><input type="text" name="LN" value="" size= "18" class="form1" /></td>
+          </tr>
+          <tr>
+            <td valign="top" >Address 1</td>
+
+            <td valign="top" colspan="2">Address 2</td>
+
+
+          </tr>
+          <tr>
+            <td valign="top"><input type="text" value="" name="A1" size= "18" maxlength="" class="form1" /></td>
+
+            <td valign="top" colspan="2"><input type="text" value="" name="A2" size= "18" class="form1" /></td>
+
+  
+          </tr>
+          <tr>
+            <td valign="top">City</td>
+
+            <td valign="top">State</td>
+
+            <td valign="top">Zip</td>
+          </tr>
+
+    
+          <tr>
+            <td valign="top"><input type="text" value="" name="CT" size= "18" maxlength="" class="form1" /></td>
+
+            <td valign="top"><input type="text" value="" name="ST" size="2" class="form2" /></td>
+
+            <td valign="top"><input type="text" value="" name="ZP" size="5" maxlength="5" class="form3" /></td>
+          </tr>
+       <tr>
+            <td valign="top" colspan="3">Email</td>
+       </tr>
+       <tr>
+<td valign="top" colspan="3"><input type="text" value="" name="EM" size="40" class="form4" /></td>
+        </tr>
+        </table>
+        
+        <div align="center">
+         <input type="image" src="/files/linuxjournal.com/images/clickhere.jpg" />
+        </div>
+
+      </form>
+       <div class="subslinks">
+          <a href="https://www.pubservice.com/subnew2page.aspx?PC=LJ&amp;PK=MPUB911&amp;FC=CANADA&amp;SA=P">Canadian Residents</a> | <a href="https://www.pubservice.com/Subnew1.aspx?PC=LJ&amp;PK=MPUB911&amp;FC=UNITED%20STATES&amp;ref=1&amp;SA=P">Foreign Residents</a> | <a href="https://www.pubservice.com/subgift.aspx?PC=LJ">Gift Subscriptions</a> | <a href="http://www.linuxjournal.com/subs/customer_service">Customer Service</a> | <a href="/content/privacystatement">Privacy Policy</a>
+
+          </div>
+ 		</div> 
+  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-block-63" class="block block-block region-even even region-count-2 count-12"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><iframe src="http://webchat.freenode.net/?channels=linuxjournal" width="99%" height="275"></iframe>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-subscriptions" class="block block-menu region-odd odd region-count-3 count-13"><div class="block-inner">
+
+      <h2 class="title">Digital Edition</h2>
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="https://www.pubservice.com/subnew1.aspx?PC=LJ" title="Subscribe to Linux Journal">Subscribe/Renew</a></li>
+<li class="leaf"><a href="https://www.pubservice.com/subinfo.aspx?PC=LJ&amp;DO=P" title="Pay Your Subscription Bill">Pay My Bill</a></li>
+<li class="leaf"><a href="/subs/customer_service" title="">Customer Service</a></li>
+<li class="leaf"><a href="http://www.linuxjournal.com/digital" title="">Digital Downloads</a></li>
+<li class="leaf last"><a href="https://www.pubservice.com/subgift.aspx?PC=LJ" title="Give a Subscription to Linux Journal">Gift Subscriptions</a></li>
+</ul>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-linux-resources" class="block block-menu region-even even region-count-4 count-14"><div class="block-inner">
+
+      <h2 class="title">Magazine Formats</h2>
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="/content/pdf" title="PC/Mac">PC/Mac</a></li>
+<li class="leaf"><a href="/content/android" title="Android App">Android</a></li>
+<li class="leaf"><a href="/content/ios" title="iPhone/iPad">iPhone/iPad</a></li>
+<li class="leaf"><a href="/content/epub" title="EPUB Format">EPUB</a></li>
+<li class="leaf last"><a href="/content/kindle" title="Kindle Format">Kindle</a></li>
+</ul>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-store" class="block block-menu region-odd odd region-count-5 count-15"><div class="block-inner">
+
+      <h2 class="title">The Store</h2>
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="http://lj.mybigcommerce.com/categories/Buttons-%26-Stickers/" title="Buttons &amp; Stickers">Stickers</a></li>
+<li class="leaf"><a href="http://lj.mybigcommerce.com/categories/T%252dShirts-%26-Apparel/" title="T-shirts and Apparel">T-shirts</a></li>
+<li class="leaf"><a href="http://lj.mybigcommerce.com/categories/Posters/" title="Posters">Posters</a></li>
+<li class="leaf"><a href="http://lj.mybigcommerce.com/categories/Back-Issues-%252d-Digital-Downloads/" title="Buy Back Issues of Linux Journal">Back Issues</a></li>
+<li class="leaf last"><a href="http://linuxjournal.com/archive_cd" title="Archive CD">Archive CD</a></li>
+</ul>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-about" class="block block-menu region-even even region-count-6 count-16"><div class="block-inner">
+
+      <h2 class="title">About Us</h2>
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="/advertising" title="Advertise in Linux Journal">Advertise</a></li>
+<li class="leaf"><a href="/author" title="Write for Us">Author Info</a></li>
+<li class="leaf"><a href="/contact" title="Write a Letter to the Editor">Write a Letter</a></li>
+<li class="leaf"><a href="/aboutus/FAQ" title="Frequently Asked Questions">FAQ</a></li>
+<li class="leaf last"><a href="/staff" title="Masthead">Masthead</a></li>
+</ul>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-the-site" class="block block-menu region-odd odd region-count-7 count-17"><div class="block-inner">
+
+      <h2 class="title">The Site</h2>
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="/content/copyright" title="Copyright">Copyright</a></li>
+<li class="leaf"><a href="/rss_feeds" title="RSS Feeds">RSS Feeds</a></li>
+<li class="leaf"><a href="/content/privacy-statement" title="Privacy Statement">Privacy Policy</a></li>
+<li class="leaf"><a href="/events" title="Events">Events</a></li>
+<li class="leaf last"><a href="/aboutus" title="Contact Us">Contact Us</a></li>
+</ul>  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-block-70" class="block block-block region-even even region-count-8 count-18"><div class="block-inner">
+
+  
+  <div class="content">
+    <!--paging_filter--><div id="copyright">Copyright © 1994 - 2013 <em>Linux Journal</em>. All rights reserved.</div>
+  </div>
+
+  
+</div></div> <!-- /block-inner, /block -->
+
+      </div></div> <!-- /#footer-inner, /#footer -->
+    
+  </div></div> <!-- /#page-inner, /#page -->
+
+  
+  <div id="user_relationships_popup_form" class="user_relationships_ui_popup_form"></div><script type="text/javascript" src="/files/linuxjournal.com/ufiles/js/js_0540c6d5d048bc2b6ea7186a31948283.js"></script>
+<script type="text/javascript" src="http://s3.amazonaws.com/new.cetrk.com/pages/scripts/0010/8219.js"> </script>
+
+
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0010/8219.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+<script type="text/javascript">if(!NREUMQ.f){NREUMQ.f=function(){NREUMQ.push(["load",new Date().getTime()]);var e=document.createElement("script");e.type="text/javascript";e.src=(("http:"===document.location.protocol)?"http:":"https:")+"//"+"js-agent.newrelic.com/nr-100.js";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push(["nrfj","beacon-5.newrelic.com","2a1dc4588f","1935594","b1NTNkdRWhFSVkBZWlYZcAFBWVsMHFtbVFBnRlAFUG9CC1ZC",0,504,new Date().getTime(),"","","","",""]);</script>
+</body>
+</html>

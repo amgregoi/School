@@ -1,0 +1,8 @@
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe.config
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher_Card.Teacher.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher_Card.Properties.Resources.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.csproj.GenerateResource.Cache
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.pdb

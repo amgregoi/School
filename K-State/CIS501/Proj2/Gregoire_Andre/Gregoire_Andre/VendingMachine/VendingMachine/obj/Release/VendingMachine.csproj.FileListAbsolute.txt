@@ -1,0 +1,12 @@
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\bin\Release\VendingMachine.exe.config
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\bin\Release\VendingMachine.exe
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\bin\Release\VendingMachine.pdb
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\bin\Release\CodeHints.dll
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\bin\Release\CodeHints.pdb
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.csprojResolveAssemblyReference.cache
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.ListDialog.resources
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.VendingMachine.resources
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.Properties.Resources.resources
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.csproj.GenerateResource.Cache
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.exe
+C:\Users\Jailhouse\Desktop\CS501\Proj2\Gregoire_Andre\Gregoire_Andre\Gregoire_Andre\VendingMachine\VendingMachine\obj\Release\VendingMachine.pdb

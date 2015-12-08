@@ -1,0 +1,413 @@
+
+<html>
+<body>
+<h2>CIS505 Assignment 4</h2>
+
+<em><font color="#8B0000">10 points; due Tuesday, October 16, 10pm</font></em>
+<p>
+
+
+
+<h3>Insertion sort</h3>
+Recall that list reverse can be solved two ways, one that uses a direct
+list-assembly pattern and one that uses an extra,
+``accumulator'' parameter.
+Here are the two solutions:
+<ol>
+<li>
+<font color="#00008B"><strong><pre>
+(* reverse(ns)  reverses the items in list  ns.
+   Precondition:  ns  is a list.
+   Postcondition: the returned answer is a list that holds the elements
+     of  ns  in reverse order.
+*)
+fun reverse (nil)  = []
+|   reverse (n::ns) = (reverse ns) @ [n]
+</pre></strong></font>
+<p>
+<li>
+<font color="#00008B"><strong><pre>
+(* reverseloop(ns, ans)  reverses the items in list  ns  and appends them
+    to the end of  ans.
+   Precondition:  both  ns  and  ans  are lists.
+   Postcondition: the returned answer is a list that holds the elements
+     of  ans  followed by the elements of  ns  in reverse order.
+   To use the function to reverse a list, x,  do this:  reverseloop(x, []).
+*)
+fun reverseloop(nil, ans) = ans
+|   reverseloop(n::ns, ans) = reverseloop(ns, n :: ans)
+</pre></strong></font>
+(You can insert <tt><font color="#00008B"><strong>print</strong></font></tt> commands for a little debugging help, e.g.,
+<font color="#00008B"><strong><pre>
+|   reverseloop2(n::ns, ans) = (print "n= "; print(Int.toString(n)); print("\n");
+                               reverseloop2(ns, n :: ans)
+                              )
+</pre></strong></font>
+)
+</ol>
+
+<p>
+<h4>Question 1.</h4>
+The execution semantics of ML is just equational rewriting, as shown in the
+examples in Section 7.3 and 7.6.
+
+<p>
+Use a text editor to type the rewriting steps that build the answer to
+these expressions:
+<dl>
+<dd>
+<b>1a.</b> <tt><font color="#00008B"><strong>reverse ["a", "b", "c"]</strong></font></tt>
+<br>(Reminder: <tt><font color="#00008B"><strong>["a", "b", "c"]</strong></font></tt> is a shorthand for <tt><font color="#00008B"><strong>"a"::("b"::("c"::nil))</strong></font></tt>.
+Big Hint: look at the calculations already done for you in Section 7.6 of the Lecture notes!)
+<dd>
+<b>1b.</b> <tt><font color="#00008B"><strong>reverseloop([["a"], [], ["c", "d"]], [])</strong></font></tt>
+</dl>
+Save your derivations in the file, <tt><font color="#00008B"><strong>q1.txt</strong></font></tt>.
+
+<h4>Question 2.</h4>
+<p>
+Consider how we might sort a list of ints.
+We will write two ML functions, one with an accumulator, one without,
+to perform insertion sorting.
+If you don't remember insertion sorting, here is how you play it
+with Scrabble tiles:
+<font color="#00008B"><strong><pre>
+Elements            Answer
+--------------      --------------
+4 2 3 5 1
+
+  2 3 5 1           4
+
+    3 5 1           2 4
+
+      5 1           2 3 4
+   
+        1           2 3 4 5
+                    
+                    1 2 3 4 5
+
+</pre></strong></font>
+Write these ML functions and place them in a file named <tt><font color="#00008B"><strong>q2.sml</strong></font></tt>:
+<font color="#00008B"><strong><pre>
+(* insert(m, ns)  inserts  m  in the correct position within list  ns.
+   Precondition:  m  is an int  and  ns  is a sorted list of ints.
+   Postcondition:  the returned answer is a sorted list containing exactly
+      m  and the elements in  ns.
+   Example:  insert(3, [2,4]) returns [2,3,4].
+*)
+fun insert(m, nil) = ???
+|   insert(m, n::ns) = ???
+
+(* isortloop(ns, ans)  calls  insert  to insert the elements of  ns  into  ans.
+   Precondition:  ns  is a list of ints and  ans  is a sorted list of ints
+   Postcondition: the answer returned is a sorted list of ints containing
+     exactly the elements of  ns   and  ans.
+   Call it like this:   isortloop(ns, []),
+        e.g.,   isortloop([4,2,3,5,1], [])  returns  [1,2,3,4,5]
+*)
+</pre></strong></font>
+Test your codings on at these test cases:
+<font color="#00008B"><strong><pre>
+insert(2, [])
+insert(3, [1,4,5])
+insert(4, [1,3])
+isortloop([], [])
+isortloop([3,2,1], [])
+isortloop([4,2,3,5,1], [])
+</pre></strong></font>
+(See below for the instructions about how to test your file, <tt><font color="#00008B"><strong>q1b.sml</strong></font></tt>.)
+Copy and paste the test results into a file named <tt><font color="#00008B"><strong>q2tests.txt</strong></font></tt>.
+
+<p>
+Here is another way to play insertion sort, working from right to left,
+where the <tt><font color="#00008B"><strong>@</strong></font></tt> marks the progress made so far:
+<font color="#00008B"><strong><pre>
+Elements
+---------------
+4 2 3 5 1 @
+
+4 2 3 5 @ 1
+
+4 2 3 @ 1 5
+
+4 2 @ 1 3 5
+
+4 @ 1 2 3 5
+
+@ 1 2 3 4 5
+</pre></strong></font>
+Using only function <tt><font color="#00008B"><strong>insert</strong></font></tt> coded above, write this function that performs right-to-left
+insertion sorting and place it in your file, <tt><font color="#00008B"><strong>q2.sml</strong></font></tt>:
+<font color="#00008B"><strong><pre>
+(* isort(ns)  calls  insert  to sort  ns.
+   Precondition:  ns  is a list of ints
+   Postcondition:  the answer returned is a sorted list of ints containing
+     exactly the elements of  ns.
+   Example:  isort([4,2,3,5,1])  returns  [1,2,3,4,5]
+*)
+fun isort(nil) = ???
+|   isort(n::ns) = ???
+</pre></strong></font>
+This one should be easy to code, if you worked Question 1!
+Test your solution with these tests and copy the output into <tt><font color="#00008B"><strong>q2.txt</strong></font></tt>:
+<font color="#00008B"><strong><pre>
+isort []
+isort [3,2,1] 
+isort [4,2,3,5,1]
+</pre></strong></font>
+
+
+<h4>How to do the testing</h4>
+You should try to install and use SML of New Jersey.  All my examples
+use it.
+Place your functions in the file <tt><font color="#00008B"><strong>q2.sml</strong></font></tt>.  To run the functions:
+<ol>
+<li>
+Start a command window; cd to the folder where <tt><font color="#00008B"><strong>q2.sml</strong></font></tt> lives; type
+<tt><font color="#00008B"><strong>sml</strong></font></tt>.
+<li>
+After you see the ML prompt, type <tt><font color="#00008B"><strong>use "q2.sml";</strong></font></tt>
+If there are errors, you can try again by retyping <tt><font color="#00008B"><strong>use "q2.sml";</strong></font></tt>.
+(Try using the up-arrow on your computer to save the retyping.)
+<li>
+When your functions are processed without errors, you call them, e.g.,
+<tt><font color="#00008B"><strong>insert(3, [1,4,5]);</strong></font></tt>
+<li>
+If you test a function and it goes lost ("loops"), press
+<tt><font color="#00008B"><strong>Ctrl</strong></font></tt>+<tt><font color="#00008B"><strong>c</strong></font></tt> and then return.
+<li>
+When you want to exit SML but retain the command window, type
+<tt><font color="#00008B"><strong>Ctrl</strong></font></tt>+<tt><font color="#00008B"><strong>z</strong></font></tt> and then return.
+<li>
+Copy and paste your output from the test cases into a file, <tt><font color="#00008B"><strong>q2tests.txt</strong></font></tt>
+</ol>
+
+<!--
+<p>
+<strong>2. Selection sorting:</strong>
+Selection sort repeatedly selects the least int to move.  Here is
+how to play it with an accumulator:
+<font color="#00008B"><strong><pre>
+Elements            Answer
+--------------      --------------
+4 2 3 5 1
+
+4 2 3 5             1
+
+4 3 5               1 2
+
+4 5                 1 2 3
+
+5                   1 2 3 4
+
+                    1 2 3 4 5
+</pre></strong></font>
+Implement this approach in SML:
+<font color="#00008B"><strong><pre>
+(* select(ns)  extracts the smallest int in  ns
+   Precondition:  ns  is a list of ints
+   Postcondition: the returned answer is a pair, whose first element is the
+    smallest int in  ns  and the second element is a list consisting of
+    all the other ints remaining in  ns.
+*)
+
+(* ssortloop(ns, ans)  uses  select  to perform selection sort
+   Precondition:  ns  is a list of ints and  ans  is a sorted list of ints
+   Postcondition: the answer returned is a sorted list of ints containing
+     exactly the elements of  ns   and  ans.
+   Call it like this:   ssortloop(ns, [])
+*)
+</pre></strong></font>
+
+<p>
+There is an
+"in place" variant of selection sort that does not use an accumulator (<tt><font color="#00008B"><strong>ans</strong></font></tt>).
+Code it like this:
+<font color="#00008B"><strong><pre>
+(* ssort(ns)  uses  select  to perform selection sort
+   Precondition:  ns  is a list of ints 
+   Postcondition: the answer returned is a sorted list of ints containing
+     exactly the elements of  ns.
+*)
+fun ssort [] = []
+|   ssort ns = ... WRITE ME ...
+</pre></strong></font>
+
+Place your answers in the file, <tt><font color="#00008B"><strong>Q2.sml</strong></font></tt>.
+-->
+
+<p>
+<h3>Data structures with rollback</h3>
+
+Section 7.6.1 stated that text editors and data bases
+save their updates separately so that updates can be rolled back (undone)
+until a commitment is made.  There is a small example in that section,
+and I have adapted the example into a small database system
+in ML that you will finish.
+
+<p>
+The database is an ordered tree holding (key,value) pairs,
+where a key is a single character and a value is an int.  
+
+When a user does an update to the database, the update is patched to
+the front of the database and <em><font color="#8B0000">not yet</font></em> inserted into the ordered tree.
+When the user requests a "commit", the entire contents of the database
+is rebuilt into a new ordered tree. 
+The database structure is defined in ML like this (see Section 7.6.2):
+<font color="#00008B"><strong><pre>
+datatype DB = Leaf |  Node of (char * int * DB * DB)  | Update of (char * int * DB)
+</pre></strong></font>
+(The first option is an empty database/tree, the second option is an ordered tree
+holding <tt><font color="#00008B"><strong>char, int</strong></font></tt> at its "root" and two subtrees, and the third option is
+a "noncommitted" update of <tt><font color="#00008B"><strong>char, int</strong></font></tt> pasted to the front/top of a database.)
+
+<p>
+Say we start with these entries to initialize the database (ordered tree):  <tt><font color="#00008B"><strong>[(#"c",6), (#"d",7), (#"a",2)]</strong></font></tt>.
+(Note:, in SML, <tt><font color="#00008B"><strong>#"c"</strong></font></tt> means the char, <tt><font color="#00008B"><strong>'c'</strong></font></tt>, and <tt><font color="#00008B"><strong>"c"</strong></font></tt> means the string, <tt><font color="#00008B"><strong>"c"</strong></font></tt>.  Sorry about this.)
+The ordered tree constructed is
+<font color="#00008B"><strong><pre>
+Node("c",6, Node("a",2,Leaf,Leaf), Node("d",7,Leaf,Leaf))
+</pre></strong></font>
+Next, say the user talks to the database and requests these two new
+pairs as updates:
+<tt><font color="#00008B"><strong>a 5</strong></font></tt> and then <tt><font color="#00008B"><strong>b 8</strong></font></tt>.
+The database changes into this:
+<font color="#00008B"><strong><pre>
+   Update(("b",8),
+        Update(("a",5),
+             Node("c",6, Node("a",2,Leaf,Leaf), Node("d",7,Leaf,Leaf))))
+</pre></strong></font>
+The two updates are "noncommitted" --- not yet permanent.
+
+<p>
+Now, a lookup of key <tt><font color="#00008B"><strong>a</strong></font></tt> gives <tt><font color="#00008B"><strong>5</strong></font></tt>, a lookup of <tt><font color="#00008B"><strong>c</strong></font></tt> gives <tt><font color="#00008B"><strong>6</strong></font></tt>, etc.
+If we "commit" now, the database gets traversed, its active
+pairs are collected into the list,  <tt><font color="#00008B"><strong>[("b",8), ("a",5), ("c",6), ("d",7)]</strong></font></tt>,
+and the list is <em><font color="#8B0000">rebuilt</font></em> as this ordered tree:
+<font color="#00008B"><strong><pre>
+   Node("b",8, Node("a",5,Leaf,Leaf), 
+               Node("c",6,Leaf, Node("d"7,Leaf,Leaf)))
+</pre></strong></font>
+The old entry for <tt><font color="#00008B"><strong>"a"</strong></font></tt> is discarded.
+
+<h4>Question 3</h4>
+
+<p>
+The code you start from is at
+<a href="http://www.cis.ksu.edu/~schmidt/505f12/Exercises/Ex4/q3.sml">
+<tt><font color="#00008B">www.cis.ksu.edu/~schmidt/505f12/Exercises/Ex4/Q3.sml</font></tt></a>.
+Save it as <tt><font color="#00008B"><strong>q3.sml</strong></font></tt>.
+To run it,
+open a command window, start SML, and type
+<font color="#00008B"><strong><pre>
+use "q3.sml";
+</pre></strong></font>
+This loads the database.  To run the version I gave you, type:
+<font color="#00008B"><strong><pre>
+run nil;
+</pre></strong></font>
+You will implement the functions <tt><font color="#00008B"><strong>lookup</strong></font></tt> and <tt><font color="#00008B"><strong>collect</strong></font></tt>, which do lookup and checkpointing.
+
+<h4>Testing</h4>
+Do these tests.  (<tt><font color="#00008B"><strong>u</strong></font></tt> means update; <tt><font color="#00008B"><strong>l</strong></font></tt> means lookup; <tt><font color="#00008B"><strong>r</strong></font></tt> means revert (undo);
+<tt><font color="#00008B"><strong>c</strong></font></tt> means commit).
+First, run this test with the system I gave you to be sure it works on
+your machine:
+<font color="#00008B"><strong><pre>
+run [(#"a",2),(#"d",7)];
+> u c 6
+> u d 9
+> !
+</pre></strong></font>
+Make certain you understand the final database that is printed.
+Next, code <tt><font color="#00008B"><strong>lookup</strong></font></tt> and run this test:
+<font color="#00008B"><strong><pre>
+run [(#"a",2),(#"d",7)];
+> u c 6
+> l d
+> l a
+> u a 5
+> l a
+> r
+> l a
+> l e
+> !
+</pre></strong></font>
+The lookups should print <tt><font color="#00008B"><strong>7</strong></font></tt>, <tt><font color="#00008B"><strong>2</strong></font></tt>, <tt><font color="#00008B"><strong>5</strong></font></tt>, <tt><font color="#00008B"><strong>2</strong></font></tt>, and <tt><font color="#00008B"><strong>lookup error</strong></font></tt>, in that order.  Notice that the <tt><font color="#00008B"><strong>r</strong></font></tt> (revert)
+command forgot the update of <tt><font color="#00008B"><strong>a 5</strong></font></tt>.
+<p>
+Finally, code <tt><font color="#00008B"><strong>collect</strong></font></tt> and run this test:
+<font color="#00008B"><strong><pre>
+run nil;
+> u a 6
+> u d 7
+> u c 2
+> c
+> u c 5
+> u b 8
+> r
+> c
+> l d
+> !
+</pre></strong></font>
+Here is the output from the third test, once everything is operating:
+<font color="#00008B"><pre>===================================================<strong>
+
+- run(nil);
+> u a 6
+update performed
+> u d 7
+update performed
+> u c 2
+update performed
+> c
+Commit database:
+Update(c,2, Update(d,7, Update(a,6, Leaf)))
+Active values: [(c,2), (d,7), (a,6), ]
+New database:
+Node(c,2, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf))
+> u c 5
+update performed
+> u b 8
+update performed
+> r
+revert performed
+> c
+Commit database:
+Update(c,5, Node(c,2, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf)))
+Active values: [(c,5), (a,6), (d,7), ]
+New database:
+Node(c,5, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf))
+> l d
+lookup
+7
+> !
+Final database:
+Node(c,5, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf))
+val it = [(#"c",5),(#"a",6),(#"d",7)] : (char * int) list
+
+</strong>===================================================</pre></font>
+
+Place the output from
+your three test cases in a file, <tt><font color="#00008B"><strong>q3tests.txt</strong></font></tt>.
+
+
+<h4>Submission and grading</h4>
+
+Place your answers,
+<tt><font color="#00008B"><strong>q1.txt</strong></font></tt>, <tt><font color="#00008B"><strong>q2.sml</strong></font></tt>, <tt><font color="#00008B"><strong>q2tests.txt</strong></font></tt>, <tt><font color="#00008B"><strong>q3.sml</strong></font></tt>, and <tt><font color="#00008B"><strong>q3tests.txt</strong></font></tt>,
+<tt><font color="#00008B"><strong>Ex4</strong></font></tt>.
+Zip the folder into a <tt><font color="#00008B"><strong>.zip</strong></font></tt> file and submit the <tt><font color="#00008B"><strong>.zip</strong></font></tt> file to the CIS505 site on K-State Online.
+
+<p><em><font color="#8B0000">Important:</font></em> This is a solo assignment --- it must be done by you, individually.
+If you had a partner for Exercises 2 and 3, I know it will be tempting to
+work in a pair, but you gotta do your own work to get these ideas loaded in
+your brain!
+It is certainly OK to discuss the assignment with the instructor, TA, or your
+colleagues, but all the coding must be typed by you alone, and all the concepts in the coding must be stored in your head so that you can reproduce them on demand.
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,61 @@
+
+REQUIRED TEST CASES
+---------------------
+
+1a.
+
+print (2 + 1)
+!
+
+(should print 3 and display an empty namespace)
+
+
+1b.
+
+if (2 + 1): print 99
+else print 88
+end
+!
+
+(should print 99 and display an empty namespace)
+
+
+2a.
+
+int x;
+x = 2; print x
+!
+
+(should print 2 and display a namespace with binding,  'x':2)
+
+
+2b.
+
+int y; int x;
+x = 2;  y = (x + 1)
+!
+
+(should display a namespace with bindings for  x  and  y)
+
+
+3a.
+
+int x;
+proc p:  x = (x - 1) end;
+x = 2; call p; print x
+!
+
+(should print 1 and display a namespace with bindings for  x  and  p)
+
+
+3b.
+
+int x;
+proc p: x = (x - 1) end;
+x = 2;
+while x : print x; call p end;
+if (x + 1) : call p else print (x-9) end
+!
+
+(operates as described on the assignment sheet)
+

@@ -1,0 +1,440 @@
+
+<html>
+<body>
+
+<h2>Beginner's guide to using the CIS301 proof checker</h2>
+
+First, read the
+<a href="checker.html">Installing and Using the CIS301 proof checker</a>
+page to learn how to download, install, and start the proof checker.
+
+<p>
+This little web page means to give some simple advice and examples
+for using the checker.  There are many examples that you can later
+study that are enclosed with the checker package.
+
+<p>
+The proof checker operates on a subset of the Python language,
+including integers, arrays, functions, assignments, conditionals,
+and while loops.  If you try more than this, the checker will
+not handle it (and it will tell you so before it crashes).
+The checker is designed to analyze a Python program and check
+the correctness of any proofs you have embedded into the program.
+You will see many many examples of such proofs in Chapters 2,3, and 4
+of the CIS301 lecture notes.  Indeed, you can copy the any example
+from the lecture notes into a file and ask the checker to check it.
+So, it is a good idea to copy and test the examples in the lecture
+notes as you see them.  (If you find any errors/problems, let me know!)
+
+<h4>Getting started</h4>
+
+Let's begin by checking a program that has no proofs in it at all:
+Within the <tt>cis301</tt> folder, make a new folder named <tt>Exs</tt>.
+Within <tt>Exs</tt>, make a file named <tt>assign0.py</tt>
+that holds this text:
+<pre>
+x = readInt()
+sum = 0
+i = 0
+sum = sum + x
+i = i + 1
+</pre>
+Now,
+check it:  double-click on the icon for <tt>Check.py</tt> and
+when the checker asks for the file name,  type  <tt>Exs/assign0.py</tt>.
+When the checker asks for ``options'', just hit Enter.
+The checker will display this log:
+<pre>
++--------------
+| x = readInt()
+  sum = 0
+  i = 0
+  sum = sum + x
+  i = i + 1
+
+  All assertions verified.  (-:
+
+| Press  Enter  to repeat with this file; Press  q  to quit: 
++--------------
+</pre>
+If you look inside folder  <tt>Exs</tt>, you will see two new files;
+the first is <tt>assign0A.py</tt> --- it contains the output program produced
+by the checker.  There is also an html-version of <tt>assign0A.py</tt>,
+named <tt>assign0A.py.htm</tt>.   
+
+<p>
+For the example we did, the <tt>assign0A.py</tt> and <tt>assign0A.py.html</tt> files
+look just like <tt>assign0.py</tt>.  Let's try again.
+This time, start the checker, tell it to analyze <tt>Exs/assign0.py</tt>,
+but when the checker asks for options, type <tt>v</tt> (for verbose).
+This makes the checker tell you the logical information it extracts
+from the program while it is reading it.  If you do this
+and you then look at <tt>assign0A.py.htm</tt> in your web browser,
+you will see these annotations:
+
+<pre><strong>
+
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+sum = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (sum == 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (sum == 0)</font>
+i = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (i == 0)</font>
+<font color="#1E90FF"># (sum == 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (i == 0)</font>
+<font color="#1E90FF"># (sum == 0)</font>
+sum = sum + x
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (sum == (sum_old + x))</font>
+<font color="#1E90FF"># (i == 0)</font>
+<font color="#1E90FF"># (sum_old == 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (i == 0)</font>
+i = i + 1
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (i == (i_old + 1))</font>
+<font color="#1E90FF"># (i_old == 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+</strong></pre>
+
+As best as it could, the checker showed you the logical properties
+that hold true within the program.   If you want more properties
+than this, you must insert (``attach'') proof steps into the program.
+
+
+<h4>Writing a proof</h4>
+
+Here is the example with attached proof steps:
+<pre>
+x = readInt()
+sum = 0
+i = 0
+"""{ 1. sum == 0   premise
+     2. i == 0     premise
+     3.  sum == x * i   algebra 1 2  }"""
+sum = sum + x
+"""{ 1.  sum == sum_old  + x   premise
+     2.  sum_old  == x * i     premise
+     3.  sum == (x*i) + x      subst 2 1
+}"""
+i = i + 1
+"""{ 1. i == i_old + 1      premise
+     2. sum == (x * i_old) + x   premise
+    3. sum == x * i             algebra 1 2
+}"""
+</pre>
+Proofs are enclosed within <tt>"""{   }"""</tt>.   (Triple-quoted strings
+work like multi-line comments in python.)
+There is one proof step per line.  Each proof step begins with a number
+followed by the proposition, followed by the justification.
+
+<p>
+A <em>premise</em> is an already-known-true fact, which follows
+from the logic laws for Python (e.g., the assignment law in the above
+example).   <em>If you check the program with the <tt>v</tt> option, the
+checker will show you the premises you may use in any proof you
+attach to the program.</em>
+
+<p>
+Any fact proved on the <em>last line</em> of a previous embedded
+proof is also a premise for the next command that follows.
+(For example, the first embedded proof above proved
+<tt>sum == x * i</tt> on its last line.  This proposition becomes
+a premise that can be used with the command that follows,
+namely, <tt>sum = sum + x</tt>.  By the Python assignment law,
+this generates two premises for the next, attached proof,
+<tt>sum == sum_old  + x</tt> and <tt>sum_old  == x * i</tt>.)
+
+<p>
+We use algebra to generate new knowledge from premises;
+there are two ways:
+<ol>
+<li>
+<tt>algebra</tt>, followed by line numbers (zero or as many as you wish),
+asks the checker to combine the
+facts indicated by the line numbers to do linear algebra to
+prove the result.
+<li>
+<tt>subst m n</tt> tells the prove to subsitute the equality stated on line
+<tt>m</tt> into the proposition on line <tt>n</tt>.
+</ol>
+If you check the above example (using the <tt>v</tt> option), here is what you get:
+
+<pre><strong>
+
+
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+sum = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (sum == 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (sum == 0)</font>
+i = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (i == 0)</font>
+<font color="#1E90FF"># (sum == 0)</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> sum == 0   premise
+     2.<font color="#00FF00">OK</font> i == 0     premise
+     3.<font color="#00FF00">OK</font>  sum == x * i   algebra 1 2  }"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (sum == (x * i))</font>
+sum = sum + x
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (sum == (sum_old + x))</font>
+<font color="#1E90FF"># (sum_old == (x * i))</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  sum == sum_old  + x   premise
+     2.<font color="#00FF00">OK</font>  sum_old  == x * i     premise
+     3.<font color="#00FF00">OK</font>  sum == (x*i) + x      subst 2 1
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (sum == ((x * i) + x))</font>
+i = i + 1
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (i == (i_old + 1))</font>
+<font color="#1E90FF"># (sum == ((x * i_old) + x))</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> i == i_old + 1      premise
+     2.<font color="#00FF00">OK</font> sum == (x * i_old) + x   premise
+    3.<font color="#00FF00">OK</font> sum == x * i             algebra 1 2
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (sum == (x * i))</font>
+
+</strong></pre>
+The checker annotates your proofs to show that it validated your
+claims.
+
+<p>
+Say that something goes wrong in the proof, for example,
+when we check this faulty program:
+<pre>
+x = readInt()
+sum = 0
+"""{ 1. sum == 1   premise
+     2. i == 0     premise
+     3.  sum == x * i   algebra 1 2  }"""
+sum = sum + x
+"""{ 1.  sum == sum_old  + x   premise
+     2.  sum == sum_old  * x   algebra 1
+}"""
+</pre>
+We will see these warnings in the displayed log:
+<pre>
++---------------
+| x = readInt()
+  sum = 0
+  """{ 1. sum == 1   premise
+       2. i == 0     premise
+       3.  sum == x * i   algebra 1 2  }"""
+  WARNING: evall couldn't find var i in the store
+  WARNING: evall couldn't find var i in the store
+  sum = sum + x
+  UNABLE TO VERIFY (sum == 1)
+  UNABLE TO VERIFY (i == 0)
+  """{ 1.  sum == sum_old  + x   premise
+       2.  sum == sum_old  * x   algebra 1
+  }"""
+
+  UNABLE TO VERIFY (sum == (sum_old * x))
+
+| Only partial success; please see output file.
++----------------
+</pre>
+and when we read the annotated file, we see that the checker
+marked our mistakes and tried to repair them
+by adding <tt>assert</tt> commands that
+would check our claims when the program is executed later:
+<pre><strong>
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+sum = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (sum == 0)</font>
+<font color="#CD6600">assert</font> (sum == 1)  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+<font color="#CD6600">assert</font> (i == 0)  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+<font color="#008B00">"""{ 1.<font color="#EE2C2C">??</font> sum == 1   premise
+     2.<font color="#EE2C2C">??</font> i == 0     premise
+     3.<font color="#00FF00">OK</font>  sum == x * i   algebra 1 2  }"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (sum == (x * i))</font>
+sum_old = sum
+sum = sum + x
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (sum == (sum_old + x))</font>
+<font color="#1E90FF"># (sum_old == (x * i))</font>
+<font color="#CD6600">assert</font> (sum == (sum_old * x))  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  sum == sum_old  + x   premise
+     2.<font color="#EE2C2C">??</font>  sum == sum_old  * x   algebra 1
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+</strong></pre>
+
+Finally,
+here are some warnings about the programs and proofs you may write:
+<ul>
+<li>
+<em>watch out</em> --- if you make a serious spelling/syntax
+error in your program or proof, the checker will quit on the spot,
+as gracefully as
+it can, because it is not a spelling checker!
+For example:
+<pre>
+sum = 0
+"""{ 1. sum = 0   premise }"""
+sum = sum + x
+</pre>
+contains a syntax error in Line 1 (it uses <tt>=</tt> rather than
+<tt>==</tt>);
+when we check this, we see in the displayed log:
+<pre>
++-----------
+| sum = 0
+  """{ 1. sum = 0   premise }"""
+  PARSE ERROR invalid justification or malformed assertion at token: = ('0', 'premise', '}"""')
+
+  Due to internal error,  Analyze.py  must terminate.  Sorry.
+
+  Please verify that the filename (and its path) are correct,
+| and if so, please inspect your program for syntax errors.
++----------
+</pre>
+
+<p>
+<li>
+It is important that you <em>fully parenthesize</em>
+nested arithmetic and logical expressions.  That is, write
+<pre>
+x = 2 + (3 * 4)
+</pre>
+and not <tt>x = 2 + 3 * 4</tt>.  And similarly, write
+<pre>
+1.  (x == 2 or x == 3) or x == 4    premise
+</pre>
+and not <tt>x == 2 or x == 3 or x == 4</tt>.
+The checker does <em>not</em> apply default precedences!
+
+<p>
+<li>
+The checker does not know how to reason about division
+or modulo or fractional numbers (just yet), so don't use these.
+
+<p>
+<li>
+The checker cannot handle strings just yet (except within
+<tt>print</tt> commands).
+
+<p>
+<li>
+The checker's algebra solver does poorly with polynomials
+(this is why it is called a <em>linear</em> solver), so do not
+expect to use the <tt>algebra</tt> justification to
+prove all numerical facts.
+For example, the checker is unable to validate
+<pre>
+x = readInt()
+assert x > 1
+"""{ 1. x > 1   premise
+     2. x * x > x   algebra 1
+}"""
+</pre>
+because it has trouble comparing quadratic terms with linear ones.
+(It does better with equality expressions, however.)
+Often, you can carefully apply the <tt>subst</tt> justification
+to prove what you want when you work with quadratics.
+
+<p>
+<li>
+Python uses indentation rather than <tt>{ }</tt> brackets
+to remember the commands within a conditional or loop.
+For this reason, you must indent evenly when you write
+sequences of assignments.  The checker also requires that
+you indent the first line of an embedded proof to match
+the indentation of the command that precedes it.
+Please see the examples in the CIS301 lecture notes and the <tt>DOC.txt</tt>
+file for correct indentation style.
+</ul>
+
+<h4>Other options for checking proofs</h4>
+Here are the options you can use for checking a proof:
+<ul>
+<li>
+<tt>v</tt> : verbose mode.  As we saw, this makes the checker
+insert as comments in the output file the logical propositions
+that hold true because of the programming laws for Python.
+Use this option when you are developing your proofs.
+<p>
+<li>
+<tt>a</tt> : all possible asserts.  The proof checker
+retains all possible premises
+generated from all previous commands and proofs, for as long as it can.
+This can be useful when you wish to insert only few 
+embedded proofs and wish to have available as many
+premises as possible for each embedded proof. 
+On the other hand, the number of premises
+can grow too large to be truly useful.
+Try this option and see if you like it.
+
+<p>
+If you want a proof to compute more than one fact at the end of a proof,
+there are two ways to do this: use either the <tt>andi</tt> justification
+or use the <tt>return</tt> justification.  Both are documented
+in examples in the Lecture notes and in the <tt>DOC.txt</tt> file
+that comes with the checker.
+
+<p>
+<li>
+<tt>x</tt> : insert header code in output file for execution.  If you
+are serious about executing your checked program, then use this
+option, and it will insert the header code for two key Python
+functions.  (The checker is not a 
+true development tool at this point, but the <tt>x</tt> option makes the checker
+behave like Spec# and JML, two industrial-strength tools
+(for C# and Java, respectively) that operate in this way.)
+
+<p>
+<li>
+<tt>n</tt> : do not generate an html file for viewing
+
+<p>
+<li>
+<tt>d</tt> : display internal data structures for debugging.
+This option is primarily for fixing coding errors within the checker itself,
+but you are welcome to try this if you are bored.
+</ul>
+
+<h4>More examples and details</h4>
+
+Read the CIS301 lecture notes for more examples to try.
+There is a precise listing of the Python language subset
+and the proof rules supported by the checker in the <tt>DOC.txt</tt>
+file that comes with the checker.  That same file also contains
+a sequence of progressively more difficult examples that show 
+the checker's capabilities.
+Finally, there are two folders that come with the checker,
+<tt>Ex</tt> and <tt>Exw</tt>, that are
+full of examples to study and check.   
+
+
+<p>
+The checker is still under development (it was built in three intense
+weeks in Nov.-Dec. 2008), so please email
+programs/proofs that generate unexplained crashes to
+<tt>das@ksu.edu</tt>.
+
+</body>
+</html>
+
+

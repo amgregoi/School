@@ -1,0 +1,23 @@
+#Andy Gregoire
+1. new int a: int				decvar
+
+2. a: int					ref 1
+3. 2: int					num
+4. a = 2: int					assign 2, 3
+
+5. new int[9] b: int-array					decarray
+
+6. b: int-array							arrayref 5
+7. a+a: int							add 2,2
+8. b[a + a]: int						index 6,7
+9. b[a + a] = a: int						assign 8,2
+
++------------------------------------------------
+| 10. c: int-array			assumption
+| 11. 4: int				num
+| 12. c[4]: int				index 10,11
++------------------------------------------------
+13. def g(int-array c) return c[4] end: int-array -> int	def 10-12
+
+14. g(b): int							call 13,6
+15. a = g(b): int						assign 2,14 

@@ -1,0 +1,136 @@
+<html><body><pre><strong>
+
+<font color="#1E90FF">### A MODULE/CLASS THAT MODELS A BANK ACCOUNT ###############</font>
+
+<font color="#1E90FF"># The global variable, the money in the account:</font>
+account = 100       <font color="#1E90FF"># we'll start at 1d0....</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (account == 100)</font>
+<font color="#1E90FF"># the global invariant (sometimes called the _class invariant_):</font>
+<font color="#008B00">"""{ globalinv<font color="#00FF00">OK</font>  account >= 0  }"""</font>  <font color="#1E90FF"># this property must stay true forever</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (account >= 0)</font>
+
+<font color="#1E90FF"># A real account maintains a log of all the transactions:</font>
+log = [0+100]
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (log == [(0 + 100)])</font>
+<font color="#1E90FF"># (account >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (log == [(0 + 100)])</font>
+<font color="#1E90FF"># (account >= 0)</font>
+
+<font color="#1E90FF"># There is another global invariant: the  balance  is correct!</font>
+
+<font color="#1E90FF">### <font color="#008B00">"""{ globalinv   account == summation of  i: 0..log(len-1), log[i] }"""</font></font>
+
+<font color="#1E90FF"># We can use  def  clauses, explained in Chapter 3, and arrays,</font>
+<font color="#1E90FF"># explained in Chapter 6, to state and prove this property.</font>
+
+
+def deposit(howmuch) :
+    """deposit adds  howmuch  to  account"""
+    <font color="#008B00">"""{ pre  howmuch >= 0 
+         post  True }"""</font>
+    global account, log
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (howmuch >= 0)</font>
+    <font color="#1E90FF"># (account >= 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  account >= 0    premise <font color="#1E90FF"># the globalinv holds on entry</font>
+         2.<font color="#00FF00">OK</font>  howmuch >= 0    premise  <font color="#1E90FF"># the function's precondition</font>
+         3.<font color="#00FF00">OK</font>  account >= 0 and howmuch >= 0  andi 1 2
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># ((account >= 0) and (howmuch >= 0))</font>
+    account = account + howmuch
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (account == (account_old + howmuch))</font>
+    <font color="#1E90FF"># ((account_old >= 0) and (howmuch >= 0))</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> account == account_old + howmuch    premise
+         2.<font color="#00FF00">OK</font> account_old >= 0  and  howmuch >= 0    premise 
+         3.<font color="#00FF00">OK</font> account >= 0                         algebra 1 2
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (account >= 0)</font>
+
+    log.append(0+howmuch)   <font color="#1E90FF"># record the transaction in the log</font>
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (log[(len(log) - 1)] == (0 + howmuch))</font>
+    <font color="#1E90FF"># (len(log) == (len(log_old) + 1))</font>
+    <font color="#1E90FF"># (account >= 0)</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (log[(len(log) - 1)] == (0 + howmuch))</font>
+    <font color="#1E90FF"># (account >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (log == [(0 + 100)])</font>
+<font color="#1E90FF"># (account >= 0)</font>
+
+    <font color="#1E90FF"># We must prove the global invariants are preserved at the exit.</font>
+
+
+def withdraw(howmuch) :
+    """withdraw  removes  howmuch  from  account"""
+    <font color="#008B00">"""{ pre  howmuch >= 0 
+         post  True }"""</font> 
+    global account, log
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (howmuch >= 0)</font>
+    <font color="#1E90FF"># (account >= 0)</font>
+    <font color="#1E90FF"># the same premises hold here like in  deposit</font>
+    if  howmuch <= account :
+        <font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+        <font color="#1E90FF"># (howmuch <= account)</font>
+        <font color="#1E90FF"># (howmuch >= 0)</font>
+        <font color="#1E90FF"># (account >= 0)</font>
+        <font color="#1E90FF"># now we know that  howmuch <= account :</font>
+        account = account - howmuch
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (account == (account_old - howmuch))</font>
+        <font color="#1E90FF"># (howmuch <= account_old)</font>
+        <font color="#1E90FF"># (howmuch >= 0)</font>
+        <font color="#1E90FF"># (account_old >= 0)</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> account == account_old - howmuch    premise
+             2.<font color="#00FF00">OK</font>  howmuch <= account_old            premise
+             3.<font color="#00FF00">OK</font>  account >= 0                     algebra 1 2
+        }"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (account >= 0)</font>
+
+        log.append(0-howmuch)  <font color="#1E90FF"># record the transaction in the log</font>
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (log[(len(log) - 1)] == (0 - howmuch))</font>
+        <font color="#1E90FF"># (len(log) == (len(log_old) + 1))</font>
+        <font color="#1E90FF"># (account >= 0)</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (log[(len(log) - 1)] == (0 - howmuch))</font>
+        <font color="#1E90FF"># (account >= 0)</font>
+
+    else :
+        <font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+        <font color="#1E90FF"># not (howmuch <= account)</font>
+        <font color="#1E90FF"># (howmuch >= 0)</font>
+        <font color="#1E90FF"># (account >= 0)</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> not(howmuch <= account)     premise
+             2.<font color="#00FF00">OK</font>  account >= 0               premise  <font color="#1E90FF"># the invariant</font>
+        }"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (account >= 0)</font>
+        pass
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (account >= 0)</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> account >= 0                premise }"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (account >= 0)</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (account >= 0)</font>
+    <font color="#1E90FF"># (howmuch >= 0)</font>
+    <font color="#1E90FF"># END IF</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> account >= 0                     premise }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (account >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (log == [(0 + 100)])</font>
+<font color="#1E90FF"># (account >= 0)</font>
+    <font color="#1E90FF"># We reprove the global invariants here.</font>
+
+</strong></pre></body></html>

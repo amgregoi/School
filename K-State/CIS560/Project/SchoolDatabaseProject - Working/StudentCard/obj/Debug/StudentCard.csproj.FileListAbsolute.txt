@@ -1,0 +1,45 @@
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.exe.config
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.Properties.Resources.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.csproj.GenerateResource.Cache
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.Student.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.csprojResolveAssemblyReference.cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.exe.config
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.csprojResolveAssemblyReference.cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.Student.resources
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.Properties.Resources.resources
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.csproj.GenerateResource.Cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.Student.resources
+U:\cis560\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject\StudentCard\obj\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.exe.config
+U:\cis560\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject\StudentCard\bin\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\bin\Debug\StudentCard.exe.config
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\bin\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\bin\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\obj\Debug\StudentCard.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\obj\Debug\StudentCard.Student.resources
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\obj\Debug\StudentCard.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\obj\Debug\StudentCard.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\obj\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject - Copy\StudentCard\obj\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\bin\Debug\StudentCard.exe.config
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\bin\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\bin\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\obj\Debug\StudentCard.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\obj\Debug\StudentCard.Student.resources
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\obj\Debug\StudentCard.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\obj\Debug\StudentCard.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\obj\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject - Working\StudentCard\obj\Debug\StudentCard.pdb

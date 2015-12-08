@@ -1,0 +1,45 @@
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe.config
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.Teacher.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher_Card.Properties.Resources.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.csproj.GenerateResource.Cache
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe.config
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.csprojResolveAssemblyReference.cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.Teacher.resources
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher_Card.Properties.Resources.resources
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.csproj.GenerateResource.Cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.Teacher.resources
+U:\cis560\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher_Card.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject\Teacher Card\obj\Debug\TeacherCard.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject\Teacher Card\obj\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe.config
+U:\cis560\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject\Teacher Card\bin\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\bin\Debug\Teacher Card.exe.config
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\bin\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\bin\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\obj\Debug\TeacherCard.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\obj\Debug\TeacherCard.Teacher.resources
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\obj\Debug\Teacher_Card.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\obj\Debug\TeacherCard.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\obj\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject - Copy\Teacher Card\obj\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\bin\Debug\Teacher Card.exe.config
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\bin\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\bin\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\obj\Debug\TeacherCard.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\obj\Debug\TeacherCard.Teacher.resources
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\obj\Debug\Teacher_Card.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\obj\Debug\TeacherCard.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\obj\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject - Working\Teacher Card\obj\Debug\Teacher Card.pdb

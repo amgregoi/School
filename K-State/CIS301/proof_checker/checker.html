@@ -1,0 +1,274 @@
+
+<html>
+<body>
+<h2>Installing and Using the CIS301 proof checker</h2>
+
+The CIS301 proof checker helps you write and check
+correctness proofs like the ones presented in the CIS301
+lecture notes.
+
+The checker is meant to be ``lightweight'' in that it is small,
+works with text files, and is used
+with an edit window and a web browser.
+
+<p>
+To use the checker, you must have the Python language installed
+on your computer.  If you have a Mac, you already have Python;
+if you have installed Cygwin on Windows, you already have Python.
+Many Windows machines already have Python as well.
+(See the end of this note to learn about installing Python.)
+
+<h4>Installing the Checker</h4>
+From the CIS301 web page, download the zip-file,
+<tt>cis301.zip</tt>.
+Uncompress (unzip) the file, and extract from within it a copy of
+the folder, <tt>cis301</tt>.  Save the <tt>cis301</tt>
+folder on your computer in the place where you keep
+your coursework folders (e.g., your <tt>My Documents</tt> folder,
+if you are a Windows user).
+
+<p>
+Within the <tt>cis301</tt> folder, you will find a folder,
+<tt>Checker</tt>, that holds the proof checker,
+two folders of example programs to check (<tt>Ex</tt> and <tt>Exw</tt>),
+and README and DOC files.
+
+
+<h4>Using the Checker</h4>
+You can start the checker by double-clicking on its icon
+or by running it from within a command window:
+
+<p>
+The simplest way to start the checker is to enter (open)
+the <tt>Checker</tt> folder and double-click on <tt>Check.py</tt>.
+(You can do this if <tt>Check.py</tt> is displayed with an S-like or
+snake-like icon, which stands for Python programs.)
+Double-clicking
+starts the checker, which will ask you for the filename to
+check.
+(Note: if <tt>Check.py</tt> is not displayed with the snake icon,
+it likely means that you must install Python.  Please skip to the
+bottom of this note to learn how.)
+
+<p>
+When you start <tt>Check.py</tt>, you will see a window appear
+on your display, asking which file you wish to check.
+You can use any of the examples in the folder <tt>Exw</tt>
+(or <tt>Ex</tt>) to try.
+Here is a sample dialog, where some person named ``schmidt''
+installed the checker and asked it to analyze
+the program,  <tt>Exw/while.py</tt>:
+<pre>
++-------
+|  Command-line usage: python Check.py [-args] FILENAME.py
+   where  args  can be any or all of
+      v : verbose mode: insert deduced asserts as comments in output
+      a : include all possible asserts in proof output as premises
+      x : insert header and assert code in output file for execution
+      n : do not generate html file for viewing
+      d : display internal data structures for debugging
+
+   Entering interactive mode. (Press Enter to quit.)
+
+   Current path is   C:\Documents and Settings\schmidt\cis301
+
+   Type filename (relative to current path) to check:  Exw/while.py
+   Type options (any or none of  vaxnd): v
+
+     ... the analysis will be displayed here and also saved in two files  ...
+
+|  Press  Enter  to repeat with this file; Press  q  to quit: 
++------
+</pre>
+The analysis creates two files, both saved where the input file lived:
+<tt>whileA.py</tt>, the input file annotated with the results of
+the checks; <tt>whileA.py.html</tt>, an html-formatted, multi-color version of
+<tt>whileA.py</tt> that you can view in your web browser.  (The latter is useful
+when you are developing a proof in stages.)
+
+<p>
+For repeated use of the checker, you should make a shortcut icon
+and place it on your Desktop:
+<ol>
+<li>
+In Windows XP, to generate a shortcut, open the  Checker folder,
+right-click on  <tt>Check.py</tt>,  and select  ``Create Shortcut''.   Then,
+move the shortcut icon to where you will find it most convenient to use,
+e.g., your Desktop.
+<li>
+To use the checker, double click on its shortcut.
+This will generate an interactive session, where you are asked
+the name of the file that you wish analyzed and any execution options.
+</ol>
+
+<p>
+While you are developing and checking a program, you can use an
+edit window to type your program and a web browser to view the
+results.
+You can also repeat the analysis on the same file over and over;
+this is useful for developing a program and its correctness
+proof in stages.
+
+<p>
+You should study the 
+<a href="cis301/README.txt"><tt>README.txt</tt></a> file that is included
+within the <tt>cis301</tt> folder for advice about where to make a folder
+that holds the programs you write and check.
+There is also a
+<a href="howtocheck.html">beginner's guide</a> you should read before
+you write any programs/proofs of your own.
+
+<h4>Using the checker from the command window</h4>
+
+<p>
+Unix and Linux users often like using a command window to edit and
+run programs.  
+You can also do this with a Windows machine.
+
+<p>
+Try opening a command window and typing <tt>python</tt>.
+If you get the ``not found'' message, please read the
+web page,
+<a href="setpath.html">Using Python from a command window</a>
+to learn how to set the Path variable on a Windows machine.
+(If you are using Linux, update the <tt>PATH</tt> variable
+within your startup script, e.g., <tt>.bashrc</tt>, so that it
+includes the path to the folder where  <tt>python</tt> is installed).
+
+<p>
+Once you have the Path variable set, you can use the checker like this:
+<tt>cd</tt> to  <tt>cis301</tt>, and type this at the
+command line:
+<pre>
+python Checker/Check.py
+</pre>
+This starts the session.  If you prefer to use command-line arguments,
+you may do so, like this:
+<pre>
+python Checker/Check.py -v Ex/while.py
+</pre>
+Then, by pressing the up-arrow key on your keyboard,
+you can repeat the analysis over and over....
+
+<p>
+It is a bit of a nuisance to always start from the
+<tt>cis301</tt> folder and always type the <tt>python Checker/Check.py</tt>
+part.  If you are a Unix/Linux user, you can write an <em>alias command</em>
+like this one and place it in your startup script (<tt>.bashrc</tt>):
+<pre>
+alias run301='python /home/Myname/Mystuff/cis301/Checker/Check.py'
+</pre>
+where <tt>/home/Myname/Mystuff/cis301/Checker/Check.py</tt> is the
+complete path to the checker.
+Then, you can start the checker from the command window like this:
+<pre>
+run301 -v Ex/while.py
+</pre>
+<!--
+Also, Mr. Hoag has written an installation script that you can
+use to install the alias command as a one-line batch-program
+in your <tt>/usr/bin</tt> folder.
+His script calculates the checker's path automatically.
+To use it, please read <tt>HoagsREADME</tt> in the <tt>cis301</tt> folder.
+-->
+
+
+<h4>Installing Python if you do not have it</h4>
+
+Say that you double-click on <tt>Check.py</tt> and it does not
+start.  It is likely that your computer lacks Python.
+
+<p>
+To see if your computer has Python installed, you can try these
+tricks:
+<ol>
+<li>
+<em>On a windows machine:</em>
+<p>
+In your <tt>My Documents</tt> folder (or Desktop),
+use Notepad to make a file named
+<tt>Hello.py</tt> and place in the file the single line,
+<pre>
+raw_input("hello")
+</pre>
+Then, try double clicking on the file's icon to start the program.
+If it starts and prints <tt>hello</tt>, you have python installed
+correctly on your machine.
+<p>
+Or,
+from the <tt>Start</tt> menu, use <tt>Search</tt> to search
+<tt>all files and folders</tt> for the file,  <tt>python.exe</tt>.
+If the search command finds it, it will show you where.
+<p>
+<li>
+<em>
+On a Linux machine (or MacOS that lets you start a Unix command
+window):</em>
+Type the command, <tt>which python</tt>
+<p>
+If Python is installed correctly, you will see the directory path to it.
+</ol>
+
+<!--
+<p>
+To see if your computer has Python installed,
+open a command window, and type
+<pre>
+python
+</pre>
+<ul>
+<li>
+If Python is installed, you will see
+<pre>
+Python 2.6 (#1, May 18 2007, 07:40:45) 
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+</pre>
+and you should be ready to go.  
+(Hmmm, so if you cannot start <tt>Check.py</tt> by double-clicking on it,
+then something odd has happened - your computer's
+operating system has not connected Python as the start-up program
+for <tt>.py</tt> files.  In this case, please speak with the instructor.)
+
+<p>
+<li>
+If you see the message,
+<pre>
+'python' is not recognized as an internal or external command,
+operable program or batch file.
+</pre>
+Then you must install Python.
+</ul>
+-->
+
+<p>
+Important: your computer must have <em>Python 2.4 or newer up to
+but not including Python 3.0</em>.
+(This is normally not a problem --- most machines have 2.6 these days.)
+
+<p>
+If you must install Python, you will find it
+easy:
+Go to <a href="http://www.activestate.com/Products/ActivePython">
+<tt>http://www.activestate.com/Products/ActivePython</tt></a>,
+click on ``Active Python 2.6 Download Now'', then fill in your name and address
+in the dialog box that appears,
+then download and install Python Version 2.6.
+
+Try your implementation by 
+using Notepad to make a file named
+<tt>Hello.py</tt> and place in the file the single line,
+<pre>
+raw_input("hello")
+</pre>
+Then,
+try double clicking on the file's icon to start the program.
+If it starts and prints <tt>hello</tt>, you are good to go.
+(Or, try starting the program from a command window, like this:
+<tt>python Hello.py</tt>)
+
+
+</body>
+</html>
+
+

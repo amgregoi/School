@@ -1,0 +1,59 @@
+phase1
+-----------------
+break *(phase_1+18)
+
+phase2
+-----------------
+break *(phase_2+20)
+break *(phase_2+44)
+break *(read_six_numbers+56)
+
+
+phase 3
+------------------
+break *(phase_3+34)
+break *(phase_3+148)
+break *(phase_3+171)
+
+phase 4
+-------------------
+break *(phase_4+47)
+break *(phase_4+83)
+
+phase 5
+-------------------
+break *(phase_5+34)
+break *(phase_5+99)
+
+phase 6
+-------------------
+break *(phase_6+46)
+break *(phase_6+76)
+break *(phase_6+220)
+
+phase 7
+-------------------
+break *(secret_phase+36)
+break *(secret_phase+58)
+
+
+
+
+
+
+Border relations with Canada have never been better.
+
+1 2 4 8 16 32
+
+
+1  -239
+
+
+3 10 DrEvil
+
+
+5 115
+
+3 2 4 5 6 1
+
+107

@@ -1,0 +1,366 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
+<!-- 120 -->
+
+
+<html>
+<head>
+	<title>Anatomy of an ARP Poisoning Attack | WatchGuard</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="index,nofollow" />
+	<meta name="description" content="Anatomy of an ARP Poisoning Attack: Network Security Basics from WatchGuard LiveSecurity." />
+	<meta name="keywords" content="watchguard security basics, arp poisoning" />
+	<link rel="stylesheet" type="text/css" href="/includes/wgrd_styles.css" media="screen" />
+
+		<link rel="stylesheet" type="text/css" href="/includes/style/products.css" media="screen, print" />
+	
+<link rel="stylesheet" type="text/css" href="/includes/wgrd_styles_print.css" media="print" />
+</head>
+<body>
+
+<div id="wrap">
+	<div id="whisper">
+		
+        	<div id="region" onmouseover="document.getElementById('regionDD').style.display='block';" onmouseout="document.getElementById('regionDD').style.display='none';">
+            	
+						<strong style="padding:2px 0 0 5px;">United States</strong>
+				
+            </div>
+            <div id="regionDD" onmouseover="document.getElementById('regionDD').style.display='block';" onmouseout="document.getElementById('regionDD').style.display='none';">
+                <span style="padding-left:5px;"><a href="http://www.watchguard.com/international/br/index.asp" class="noline">Brasil</a></span><br />
+				<span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/zh/index.asp" class="noline">&#20013;&#22269;</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/de/index.asp" class="noline">Deutschland</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/es/index.asp" class="noline">Espa&ntilde;a</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/fr/index.asp" class="noline">France</a></span><br />
+<!--              <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard-apac.com/hk/" class="noline">&#39321;&#28207;</a></span><br /> -->
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/it/index.asp" class="noline">Italia</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/jp/index.asp" class="noline">&#26085;&#26412;</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/kr/index.asp" class="noline">&#54620;&#44397;</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/latam/index.asp" class="noline">Latinoam&eacute;rica</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/nl/index.asp" class="noline">Nederland</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/international/uk/index.asp" class="noline">United Kingdom</a></span><br />
+                <span style="padding:2px 0 0 5px;"><a href="http://www.watchguard.com/index.asp" class="noline">United States</a></span>
+            </div>
+		
+			<strong><a href="/infocenter/editorial/13658.asp?t=020703webapp" style="color:#888;">Web App Attacks: Sneaking in the Front Door</a></strong>
+		
+	</div>
+
+	<div id="printHeader">
+		<img src="/images/nav/logoPrint.gif" width="117" height="61" alt="WatchGuard Technologies, Inc." />
+		<hr />
+	</div>
+
+	<div id="screenHeader">
+		
+				<a href="http://www.watchguard.com/"><img src="/images/nav/logo.png" width="176" height="66" alt="WatchGuard Technologies, Inc." align="left" /></a>
+		
+		
+		<div id="topnav">
+		
+				<a href="http://www.watchguard.com/products/index.asp">
+				<img src="/images/nav/products_over.png" width="74" height="32" alt="Products" /></a><a href="https://www.watchguard.com/partners/index.asp"><img src="/images/nav/partners.png" onmouseover="document.partners.src='/images/nav/partners_over.png'" onmouseout="document.partners.src='/images/nav/partners.png'" name="partners" width="72" height="32" alt="Partners" /></a><a href="https://www.watchguard.com/support/index.asp" id="sel-link-support"><img src="/images/nav/support.png" onmouseover="document.support.src='/images/nav/support_over.png'" onmouseout="document.support.src='/images/nav/support.png'" name="support" width="70" height="32" alt="Support" /></a><a href="http://www.watchguard.com/corporate/index.asp"><img src="/images/nav/about.png" onmouseover="document.about.src='/images/nav/about_over.png'" onmouseout="document.about.src='/images/nav/about.png'" name="about" width="79" height="32" alt="About Us" /></a><a href="http://www.watchguard.com/sales/index.asp"><img src="/images/nav/howToBuy.png" onmouseover="document.howToBuy.src='/images/nav/howToBuy_over.png'" onmouseout="document.howToBuy.src='/images/nav/howToBuy.png'" name="howToBuy" width="92" height="32" alt="How to Buy" /></a><a href="http://www.watchguard.com/search/index.asp"><img src="/images/nav/search.png" onmouseover="document.search.src='/images/nav/search_over.png'" onmouseout="document.search.src='/images/nav/search.png'" name="search" width="63" height="32" alt="Search" /></a><a href="https://www.watchguard.com/auth/login.aspx?r=https%3A%2F%2Fwww%2Ewatchguard%2Ecom%2Fproducts%2F"><img src="/images/nav/logIn.png" onmouseover="document.logIn.src='/images/nav/logIn_over.png'" onmouseout="document.logIn.src='/images/nav/logIn.png'" name="logIn" width="56" height="32" alt="Log In" /></a></div>
+	</div>
+
+	<div id="subwrap">
+		<div id="subnav">
+			<script type="text/javascript" src="/includes/nav/hover_menu.js"></script>
+<ul id="menu">
+	<li>
+	
+		<a href="/products/explore/index.asp">Explore<br />Solutions</a>
+	
+		<ul>
+			<li><a href="/products/industrysolutions/index.asp">Your Industry</a></li>
+			<li><a href="/products/explore/network.asp">Your Network</a></li>
+			<li><a href="/products/explore/whywatchguard.asp">Why WatchGuard: Three Reasons</a></li>
+			<li><a href="/products/offer/index.asp">Special Offers</a></li>
+		</ul>
+	</li>
+	
+	<li>
+	
+		<a href="/products/lines/index.asp">Product<br />Lines</a>
+	
+		<ul>
+			<li><a href="/products/appliances.asp">XTM &amp; UTM Appliances</a></li>
+			<li><a href="/products/fireware-xtm.asp">Fireware&reg; XTM</a></li>
+			<li><a href="/products/ssl100.asp">Standalone Appliances</a></li>
+			<li><a href="/products/3g_extend.asp">Accessories</a></li>
+			<li><a href="/products/options.asp">Subscriptions &amp; Upgrades</a></li>
+			<li><a href="/products/management.asp">Managing WatchGuard Appliances</a></li>
+			<li><a href="/products/vpnsolutions.asp">VPN Solutions</a></li>
+			<li><a href="/products/certifications.asp">Certifications</a></li>
+			<li><a href="/infocenter/index.asp">Product Resources</a></li>
+		</ul>
+	</li>
+	
+	<li>
+	
+		<a href="/education/index.asp"><strong>Learning<br />Lab</strong></a>
+	
+		<ul>
+			<li><a href="/education/article.asp">Security Articles</a></li>
+			<li><a href="/education/videos.asp">Video Tutorials</a></li>
+			<li><a href="/education/feeds/index.asp">WatchGuard Feeds</a></li>
+			<li><a href="/infocenter/whitepapers.asp">White Papers</a></li>
+			<li><a href="/infocenter/casestudies.asp">Case Studies</a></li>
+			<li><a href="/glossary/index.asp">Network Security Glossary</a></li>
+		</ul>
+	</li>
+	
+	<li>
+	
+		<a href="/archive/service.asp">Expert<br />Support</a>
+	
+		<ul>
+			<li><a href="/archive/service.asp">LiveSecurity&reg; Service</a></li>
+			<li><a href="/archive/ls_xcompare.asp">Comparison Charts</a></li>
+			<li><a href="/about/support.asp">Get Help Now</a></li>
+			<li><a href="/training/partners_locate.asp">Find a Training Partner</a></li>
+		</ul>
+	</li>
+</ul>
+		</div>
+<table width="100%" cellspacing="0" cellpadding="0">
+<tr valign="top" id="topBanner">
+	<td style="border-right:1px solid #ccc;"><img src="/images/nav/products/logo_btm_sub.gif" width="174" height="69" alt="Products" /></td>
+	<td style="background:url(/images/nav/section_ident_bar.gif) repeat-x;padding:0 30px;width:100%;">
+	&nbsp;
+	</td>
+</tr>
+<tr valign="top">
+	<td id="sideMenu">
+		
+	<div style="padding:0;margin:0;height:1px;background:#ccc;"><img src="/images/clrpxl.gif" width="1" height="1" alt="" /></div>
+
+		<p style="margin:0;padding:5px 5px 5px 10px;border-bottom:1px solid #ccc;background:#fff;"><a href="/education/article.asp" class="navlevel3">Security Articles</a></p>
+	
+	<p style="margin:0;padding:5px 5px 5px 10px;border-bottom:1px solid #ccc;"><a href="/education/videos.asp" class="navlevel3">Video Tutorials</a></p>
+
+	<p style="margin:0;padding:5px 5px 5px 10px;border-bottom:1px solid #ccc;"><a href="/education/feeds/" class="navlevel3">WatchGuard Feeds</a></p>
+
+	<p style="margin:0;padding:5px 5px 5px 10px;border-bottom:1px solid #ccc;"><a href="/infocenter/whitepapers.asp" class="navlevel3">White Papers</a></p>
+
+	<p style="margin:0;padding:5px 5px 5px 10px;border-bottom:1px solid #ccc;"><a href="/infocenter/casestudies.asp" class="navlevel3">Case Studies</a></p>
+
+	<p style="margin:0;padding:5px 5px 5px 10px;border-bottom:1px solid #ccc;"><a href="/glossary/" class="navlevel3">Network Security Glossary</a></p>
+
+<div align="center" style="margin-top:12px;">
+	
+	<div style="margin:0 0 7px 0;width:144px;background:url(/images/nav/btn_bg.png) repeat-x;border:1px solid #ccc;padding:3px;text-align:left;"><strong><a href="/products/compare.asp" class="subtext noline" style="color:#000;">Compare Appliances</a></strong></div>
+
+<script type="text/javascript">
+<!-- // hover menu code
+var sfHoverFinder = function() {
+	var sfEls = document.getElementById("finder").getElementsByTagName("LI");
+	for (var sf1=0; sf1<sfEls.length; sf1++) {
+		sfEls[sf1].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[sf1].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+
+if (window.attachEvent) window.attachEvent("onload", sfHoverFinder);
+// -->
+</script>
+<div id="finder" style="padding-left:11px;text-align:left;">
+
+<!--
+<ul>
+	<li style="background:url(/images/nav/btn_bg.png) repeat-x;"><a style="padding:5px;background:url(/images/nav/downarrow.png) no-repeat;background-position:95% 50%;"><strong>Find a product</strong></a>
+	<ul>
+		<li><a href="/products/utm_bundles.asp">UTM Bundles</a></li>
+		<li><a href="/products/xtm1050.asp">XTM 10 Series</a></li>
+		<li><a href="/products/peak-e.asp">Firebox X Peak e-Series</a></li>
+		<li><a href="/products/core-e.asp">Firebox X Core e-Series</a></li>
+		<li><a href="/products/edge-e.asp">Firebox X Edge e-Series</a></li>
+		<li><a href="/products/3g_extend.asp">WatchGuard 3G Extend</a></li>
+		<li><a href="/products/ssl100.asp">WatchGuard SSL</a></li>
+		<li><a href="/products/utm_suite.asp">UTM Software Suite</a></li>
+		<li><a href="/products/spamblocker.asp">spamBlocker</a></li>
+		<li><a href="/products/gatewayav/ips.asp">Gateway AV/IPS</a></li>
+		<li><a href="/products/webblock.asp">WebBlocker</a></li>
+		<li><a href="/products/upgrade.asp">Model Upgrades</a></li>
+		<li><a href="/products/fireware.asp">Fireware Pro</a></li>
+		<li><a href="/products/fireware-xtm-pro.asp">Fireware XTM Pro</a></li>
+	</ul></li>
+</ul>
+-->
+</div>
+
+</div>
+
+    <div align="center" style="clear:both;padding-top:10px;"><a onmouseover="document.getElementById('expert').style.display='block';" onmouseout="document.getElementById('expert').style.display='none';"><img src="/images/nav/products/talk_to_an_expert.gif" width="152" height="30" alt="" /></a></div>
+        <div id="expert" style="display:none;position:absolute;left:60px;background:url(/images/nav/products/shadow.png) no-repeat bottom right;padding:0 3px 3px 0;margin-top:-15px;width:200px;z-index:1;" onmouseover="document.getElementById('expert').style.display='block';" onmouseout="document.getElementById('expert').style.display='none';">
+
+    <div style="border:1px solid #ccc;padding:10px;background:url(/images/nav/products/bg_gradient.png) repeat-x bottom #fff;">
+    <p style="margin-bottom:10px;"><strong>Not sure where to start?</strong><br />
+    Talk to a sales specialist:</p>
+    
+    <p style="margin-bottom:5px;"><strong>U.S./Canada</strong><br />
+    1.800.734.9905</p>
+    
+    <p style="margin-bottom:10px;"><strong>Worldwide:</strong><br />
+    +1.206.613.0895</p>
+    
+    <p style="margin-bottom:0;">Or <a href="/sales/emailus.asp">have us contact you</a>.</p>
+    </div>
+</div><div align="center" style="clear:both;margin-top:12px;">
+<!--	<a href="/products/utm_bundles.asp?t=000001utm"><img src="/images/nav/products/UTM_ad_gfx.png" width="150" height="128" alt="" /></a> -->
+</div>
+	</td>
+	<td id="main">
+	<!-- MAIN CONTENT START -->
+
+	<h1 style="margin-bottom:0;">Anatomy of an ARP Poisoning Attack</h1>
+	<p>by Corey Nachreiner, WatchGuard Network Security Analyst</p>
+	
+	<p>Hackers lie. Skillful hackers lie well. And well-rounded hackers can lie both to people and to machines.</p>
+	
+	<p>Lying to people, known as "social engineering," involves tactics (detailed at length by convicted hacker <a href="http://www.amazon.com/exec/obidos/ASIN/0471237124/qid=1052258577/sr=2-1/ref=sr_2_1/104-0257092-3848757" target="_blank">Kevin Mitnick</a>) such as posing as a company's employee so the company's real employees will blab secrets freely. Lying to machines involves lots of different techniques, and a commonly used one -- ARP Cache Poisoning -- is the focus of this article. ARP poisoning enables local hackers to cause general networking mayhem. Because it's mostly "incurable," every administrator should be aware of how this attack works.</p>
+	
+	<h2 style="margin-bottom:0;">ARP Refresher</h2>
+	<p>In <a href="135250.asp">Foundations: What Are NIC, MAC, and ARP?</a>, we explained that <a href="/glossary/a.asp#ARP">Address Resolution Protocol (ARP)</a> is how network devices associate <a href="/glossary/m.asp#MAC_address">MAC addresses</a> with <a href="/glossary/i.asp#IP_address">IP Addresses</a> so that devices on the local network can find each other. ARP is basically a form of networking roll call.</p>
+	
+	<p>ARP, a very simple protocol, consists of merely four basic message types:</p>
+	
+	<ol>
+		<li><p><strong>An ARP Request</strong>. Computer A asks the network, "Who has this IP address?"</p></li>
+	
+		<li><p><strong>An ARP Reply</strong>. Computer B tells Computer A, "I have that IP. My MAC address is [whatever it is]."</p></li>
+		
+		<li><p><strong>A Reverse ARP Request (RARP)</strong>. Same concept as ARP Request, but Computer A asks, "Who has this MAC address?"</p></li>
+	
+		<li><p><strong>A RARP Reply</strong>. Computer B tells Computer A, "I have that MAC. My IP address is [whatever it is]"</p></li>
+	</ol>
+	
+	<p>All network devices have an <em>ARP table</em>, a short-term memory of all the IP addresses and MAC addresses the device has already matched together. The ARP table ensures that the device doesn't have to repeat ARP Requests for devices it has already communicated with.</p>
+	
+	<p>Here's an example of a normal ARP communication. Jessica, the receptionist, tells Word to print the latest company contact list. This is her first print job today. Her computer (IP address 192.168.0.16) wants to send the print job to the office's HP LaserJet printer (IP address 192.168.0.45). So Jessica's computer broadcasts an ARP Request to the entire local network asking, "Who has the IP address, 192.168.0.45?" as seen in <a href="/archive/files/images/ARPpoison1.jpg">Diagram 1</a>.</p>
+	
+	<p>All the devices on the network ignore this ARP Request, except for the HP LaserJet printer. The printer recognizes its own IP in the request and sends an ARP Reply: "Hey, my IP address is 192.168.0.45. Here is my MAC address: 00:90:7F:12:DE:7F," as in <a href="/archive/files/images/ARPpoison2.jpg">Diagram 2</a>.</p>
+	
+	<p>Now Jessica's computer knows the printer's MAC address. It
+	sends the print job to the correct device, and it also associates the printer's
+	MAC address of 00:90:7F:12:DE:7F with the printer's IP address of 192.168.0.45
+	in its ARP table.</p>
+	
+	<h2 style="margin-bottom:0;">Hey ARP, Did You Know Gullible Is Not in the Dictionary?</h2>
+	<p>The founders of networking probably simplified the communication process for ARP so that it would function efficiently. Unfortunately, this simplicity also leads to major insecurity. Know why my short description of ARP doesn't mention any sort of <a href="/glossary/a.asp#authentication">authentication</a> method? Because in ARP, there is none.</p>
+	
+	<p>ARP is very trusting, as in, gullible. When a networked device sends an ARP request, it simply trusts that when the ARP reply comes in, it really does come from the correct device. ARP provides no way to verify that the responding device is really who it says it is. In fact, many operating systems implement ARP so trustingly that devices that have not made an ARP request still accept ARP replies from other devices.</p>
+	
+	<p>OK, so think like a malicious hacker. You just learned that the ARP protocol has no way of verifying ARP replies. You've learned many devices accept ARP replies before even requesting them. Hmmm. Well, why don't I craft a perfectly valid, yet malicious, ARP reply containing any arbitrary IP and MAC address I choose? Since my victim's computer will blindly accept the ARP entry into its ARP table, I can force my victim's gullible computer into thinking any IP is related to any MAC address I want. Better yet, I can <em><a href="/glossary/b.asp#broadcast">broadcast</a></em> my faked ARP reply to my victim's entire network and fool <em>all</em> his computers. Muahahaha<em>haa!</em></p>
+	
+	<p>Back to reality. Now you probably understand why this common technique is called ARP Cache Poisoning (or just ARP Poisoning): the attacker lies to a device on your network, corrupting or "poisoning" its understanding of where other devices are. This frighteningly simple procedure enables the hacker to cause a variety of networking woes, described next.</p>
+	
+	<h2 style="margin-bottom:0;">All Your ARP Are Belong To Us!</h2>
+	<p>The ability to associate any IP address with any MAC address provides hackers with many attack vectors, including Denial of Service, Man in the Middle, and MAC Flooding.</p>
+	
+	<h2 style="margin-bottom:0;">Denial of Service</h2>
+	<p>A hacker can easily associate an operationally significant IP address to a false MAC address. For instance, a hacker can send an ARP reply associating your network router's IP address with a MAC address that doesn't exist. Your computers believe they know where your default gateway is, but in reality they're sending any packet whose destination is not on the local segment, into the Great Bit Bucket in the Sky. In one move, the hacker has cut off your network from the Internet.</p>
+	
+	<h2 style="margin-bottom:0;">Man in the Middle</h2>
+	<p>A hacker can exploit ARP Cache Poisoning to intercept network traffic between two devices in your network. For instance, let's say the hacker wants to see all the traffic between your computer, 192.168.0.12, and your Internet router, 192.168.0.1. The hacker begins by sending a malicious ARP "reply" (for which there was no previous request) to your router, associating his computer's MAC address with 192.168.0.12 (see <a href="/archive/files/images/ARPpoison3.jpg" target="_blank">Diagram 3</a>).</p>
+	
+	<p>Now your router thinks the <em>hacker's</em> computer is <em>your</em> computer.</p>
+	
+	<p>Next, the hacker sends a malicious ARP reply to <em>your</em> computer, associating his MAC Address with 192.168.0.1 (see <a href="/archive/files/images/ARPpoison4.jpg" target="_blank">Diagram 4</a>).</p>
+	
+	<p>Now your machine thinks the hacker's <em>computer</em> is your <em>router</em>.</p>
+	
+	<p>Finally, the hacker turns on an operating system feature called <em>IP forwarding</em>. This feature enables the hacker's machine to forward any network traffic it receives from your computer to the router (shown in <a href="/archive/files/images/ARPpoison5.jpg" target="_blank">Diagram 5</a>).</p>
+	
+	<p>Now, whenever you try to go to the Internet, your computer sends the network traffic to the hacker's machine, which it then forwards to the real router. Since the hacker is still forwarding your traffic to the Internet router, you remain unaware that he is intercepting all your network traffic and perhaps also sniffing your clear text passwords or <a href="/glossary/s.asp#session_hijacking">hijacking</a> your secured Internet sessions.</p>
+	
+	<h2 style="margin-bottom:0;">MAC Flooding</h2>
+	<p><em>MAC Flooding</em> is an ARP Cache Poisoning technique aimed at network switches. (If you need a reminder about the difference between a hub and a switch, see this <a href="/archive/files/images/Hub-Switch.sidebar.htm">sidebar</a>.) When certain switches are overloaded they often drop into a "hub" mode. In "hub" mode, the switch is too busy to enforce its port security features and just broadcasts all network traffic to every computer in your network. By flooding a switch's ARP table with a ton of spoofed ARP replies, a hacker can overload many vendor's switches and then <a href="http://www.robertgraham.com/pubs/sniffing-faq.html" target="_blank">packet sniff</a> your network while the switch is in "hub" mode.</p>
+	
+	<h2 style="margin-bottom:0;">Scared? Good, Now Calm Down!</h2>
+	<p>This is scary stuff. ARP Cache Poisoning is trivial to exploit yet it can result in very significant network compromise. However, before you jump to Defcon-7, notice the major mitigating factor: only local attackers can exploit ARP's insecurities. A hacker would need either physical access to your network, or control of a machine on your local network, in order to deliver an ARP Cache Poisoning attack. ARP's insecurities can't be exploited remotely.</p>
+	
+	<p>That said, hackers have been known to gain local access to networks. Good network administrators should be aware of ARP Cache Poisoning techniques.</p>
+	
+	<p>Since ARP Cache Poisoning results from a lack of security in a protocol that is required for TCP/IP networking to function, you can't fix it. But you can help prevent ARP attacks using the following techniques.</p>
+	
+	<h2 style="margin-bottom:0;">For Small Networks</h2>
+	<p>If you manage a small network, you might try using static IP addresses and static ARP tables. Using CLI commands, such as "ipconfig /all" in Windows or "ifconfig" in 'NIX, you can learn the IP address and MAC address of every device in your network. Then using the "arp -s" command, you can add static ARP entries for all your known devices. "Static" means unchanging; this prevents hackers from adding spoofed ARP entries for devices in your network. You can even create a login script that would add these static entries to your PCs as they boot.</p>
+	
+	<p>However, static ARP entries are hard to maintain; impossible in large networks. That's because every device you add to your network has to be manually added to your ARP script or entered into each machine's ARP table. But if you manage fewer than two dozen devices, this technique might work for you.</p>
+	
+	<h2 style="margin-bottom:0;">For Large Networks</h2>
+	<p>If you manage a large network, research your network switch's "Port Security" features. One "Port Security" feature lets you force your switch to allow only one MAC address for each physical port on the switch. This feature prevents hackers from changing the MAC address of their machine or from trying to map more than one MAC address to their machine. It can often help prevent ARP-based Man-in-the-Middle attacks.</p>
+	
+	<h2 style="margin-bottom:0;">For All Networks</h2>
+	<p>Your best defense is understanding ARP Poisoning and monitoring for it. I'd highly recommend deploying an ARP monitoring tool, such as <a href="http://www.securityfocus.com/tools/142" target="_blank">ARPwatch</a>, to alert you when unusual ARP communication occurs. This kind of vigilance is still the greatest weapon against all kinds of attack -- for, as Robert Louis Stevenson wrote, <em>"The cruelest lies are often told in silence."</em></p>
+	
+	<h2 style="margin-bottom:0;">Resources:</h2>
+	<p><a href="http://www.sans.org/rr/threats/address.php" target="_blank">Address Resolution Protocol Spoofing and Man-in-the-Middle Attacks</a></p>
+	<!-- MAIN CONTENT END -->
+	</td>
+</tr>
+</table>
+</div>
+<div id="footer">
+	<p align="center" class="footer">Copyright&copy; 1996-2011 WatchGuard Technologies, Inc. All rights reserved.<br />
+	<a href="/corporate-info/terms-of-use.asp" class="footer noline">Terms of Use</a> | <a href="/corporate-info/privacy-policy.asp" class="footer noline">Privacy Policy</a> | <a href="/corporate-info/contact-us.asp" class="footer noline">Contact Us</a> | <a href="/careers/index.asp?t=020705jobs" class="footer noline">Careers</a></p>
+	
+	<p align="center" class="footer"><a href="http://feeds.feedburner.com/WatchguardWire"><img src="/images/nav/rss2.gif" width="80" height="15" alt="RSS 2.0" /></a></p>
+</div>
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-701459-1']);
+  _gaq.push(['_setDomainName', 'watchguard.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<script type="text/javascript">
+(function() {
+  var didInit = false;
+  function initMunchkin() {
+    if(didInit === false) {
+      didInit = true;
+      Munchkin.init('483-KCW-712');
+    }
+  }
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//munchkin.marketo.net/munchkin.js';
+  s.onreadystatechange = function() {
+    if (this.readyState == 'complete' || this.readyState == 'loaded') {
+      initMunchkin();
+    }
+  };
+  s.onload = initMunchkin;
+  document.getElementsByTagName('head')[0].appendChild(s);
+})();
+</script>
+<script type="text/javascript">
+	if(location.href.indexOf("https://") != -1) {
+		
+	} else {
+		document.write(unescape("%3Cscript type='text/javascript' language='javascript'%3Ellactid=10485%3C/script%3E"));
+		document.write(unescape("%3Cscript type='text/javascript' language='javascript' src='http://t2.trackalyzer.com/trackalyze.js'%3E%3C/script%3E"));
+	}
+</script>
+</div>
+</body>
+</html>

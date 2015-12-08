@@ -1,0 +1,79 @@
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe.config
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.pdb
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csprojResolveAssemblyReference.cache
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Form1.resources
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Properties.Resources.resources
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csproj.GenerateResource.Cache
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.exe
+c:\users\amgregoi\documents\visual studio 2012\Projects\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe.config
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csprojResolveAssemblyReference.cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Properties.Resources.resources
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csproj.GenerateResource.Cache
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\MySql.Data.dll
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe.config
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Properties.Resources.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csproj.GenerateResource.Cache
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.SchoolDB.resources
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\StudentCard.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\StudentCard.pdb
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\Teacher Card.exe
+C:\Users\Andy\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\Teacher Card.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\StudentCard.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\Teacher Card.exe
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\StudentCard.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\Teacher Card.pdb
+C:\Users\amgregoi\Desktop\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.SchoolDB.resources
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe.config
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.exe
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.pdb
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.pdb
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\bin\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.SchoolDB.resources
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe.config
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.exe
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.pdb
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.pdb
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\bin\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.SchoolDB.resources
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Copy\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe.config
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.exe
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.pdb
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.exe
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\SchoolDatabaseProject.pdb
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\AddStudent.exe
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\StudentCard.exe
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\Teacher Card.exe
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\AddStudent.pdb
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\StudentCard.pdb
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\Teacher Card.pdb
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.SchoolDB.resources
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\obj\Debug\SchoolDatabaseProject.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\AddTeacher.exe
+U:\cis560\SchoolDatabaseProject - Working\SchoolDatabaseProject\bin\Debug\AddTeacher.pdb

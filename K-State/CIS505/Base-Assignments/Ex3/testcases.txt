@@ -1,0 +1,187 @@
+Test cases for Exercise 3
+
+
+PART C
+--------------
+
+Test case 1:
+
+print nil;
+print new {int x = 9;}
+
+Output should be:
+
+Parse tree:
+[[], [['print', 'nil'], ['print', ['new', ['struct', [['int', 'x', '9']]]]]]]
+Execution:
+nil
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil'}
+}
+h1
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil'}
+  h1 : {'parentns': 'h0', 'x': 9}
+}
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil'}
+  h1 : {'parentns': 'h0', 'x': 9}
+}
+
+
+
+Test case 2:
+
+int y = 9;
+ob z = new {int val = y; proc inc(x): val = (val + x) end;};
+
+Output should show the global namespace and an object that holds values for  y  and  z.   There should also be a namespace holding  y  and  inc  and a closure object.
+
+
+
+
+Test case 3:
+
+int a = 2;
+ob counter  = new {int val = a;
+                   proc inc(x) : val = (val + x); end;
+                  };
+print counter.val;
+counter.inc(6);
+
+Output should print 2  and then finish with the  val  field inside  counter's object with value 8.
+
+
+
+
+Test case 4:
+
+int g = 4;
+ob a =  new { int x = (g + 1);
+              ob y = new { int z = (x + g); };
+              int z = 99;
+              proc p(z): int w = z;
+                         print w;
+                         x = (z + y.z) end;
+            };
+a.p(a.y.z);
+print a.x;
+
+Output should be:
+
+Parse tree:
+[[['int', 'g', '4'], ['ob', 'a', ['new', ['struct', [['int', 'x', ['+', ['deref', 'g'], '1']], ['ob', 'y', ['new', ['struct', [['int', 'z', ['+', ['deref', 'x'], ['deref', 'g']]]]]]], ['int', 'z', '99'], ['proc', 'p', ['z'], [['print', ['deref', 'w']], ['=', 'x', ['+', ['deref', 'z'], ['deref', ['dot', 'y', 'z']]]]], [['int', 'w', ['deref', 'z']]]]]]]]], [['call', ['dot', 'a', 'p'], [['deref', ['dot', ['dot', 'a', 'y'], 'z']]]], ['print', ['deref', ['dot', 'a', 'x']]]]]
+Execution:
+9
+activation stack = ['h0', 'h4']
+heap = {
+  h0 : {'a': 'h1', 'parentns': 'nil', 'g': 4}
+  h1 : {'y': 'h2', 'parentns': 'h0', 'z': 99, 'p': 'h3', 'x': 5}
+  h2 : {'parentns': 'h1', 'z': 9}
+  h3 : ['proc', ['z'], [['print', ['deref', 'w']], ['=', 'x', ['+', ['deref', 'z'], ['deref', ['dot', 'y', 'z']]]]], [['int', 'w', ['deref', 'z']]], 'h1']
+  h4 : {'parentns': 'h1', 'z': 9, 'w': 9}
+}
+18
+activation stack = ['h0']
+heap = {
+  h0 : {'a': 'h1', 'parentns': 'nil', 'g': 4}
+  h1 : {'y': 'h2', 'parentns': 'h0', 'z': 99, 'p': 'h3', 'x': 18}
+  h2 : {'parentns': 'h1', 'z': 9}
+  h3 : ['proc', ['z'], [['print', ['deref', 'w']], ['=', 'x', ['+', ['deref', 'z'], ['deref', ['dot', 'y', 'z']]]]], [['int', 'w', ['deref', 'z']]], 'h1']
+  h4 : {'parentns': 'h1', 'z': 9, 'w': 9}
+}
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'a': 'h1', 'parentns': 'nil', 'g': 4}
+  h1 : {'y': 'h2', 'parentns': 'h0', 'z': 99, 'p': 'h3', 'x': 18}
+  h2 : {'parentns': 'h1', 'z': 9}
+  h3 : ['proc', ['z'], [['print', ['deref', 'w']], ['=', 'x', ['+', ['deref', 'z'], ['deref', ['dot', 'y', 'z']]]]], [['int', 'w', ['deref', 'z']]], 'h1']
+  h4 : {'parentns': 'h1', 'z': 9, 'w': 9}
+}
+
+
+
+
+PART D
+------------
+
+Test case 5:
+
+class counter : {int val = 0;
+                 proc inc() : print val;
+                              val = (val + 1); end;};
+ob c = new counter;
+ob d = new counter;
+c.inc();
+print c.val;
+
+Output should be:
+
+Parse tree:
+[[['class', 'counter', ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], []]]]], ['ob', 'c', ['new', ['call', 'counter']]], ['ob', 'd', ['new', ['call', 'counter']]]], [['call', ['dot', 'c', 'inc'], []], ['print', ['deref', ['dot', 'c', 'val']]]]]
+Execution:
+0
+activation stack = ['h0', 'h6']
+heap = {
+  h0 : {'parentns': 'nil', 'c': 'h2', 'counter': 'h1', 'd': 'h4'}
+  h1 : ['class', [], ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], []]]], [], 'h0']
+  h2 : {'parentns': 'h0', 'val': 0, 'inc': 'h3'}
+  h3 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], [], 'h2']
+  h4 : {'parentns': 'h0', 'val': 0, 'inc': 'h5'}
+  h5 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], [], 'h4']
+  h6 : {'parentns': 'h2'}
+}
+1
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'c': 'h2', 'counter': 'h1', 'd': 'h4'}
+  h1 : ['class', [], ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], []]]], [], 'h0']
+  h2 : {'parentns': 'h0', 'val': 1, 'inc': 'h3'}
+  h3 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], [], 'h2']
+  h4 : {'parentns': 'h0', 'val': 0, 'inc': 'h5'}
+  h5 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], [], 'h4']
+  h6 : {'parentns': 'h2'}
+}
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'c': 'h2', 'counter': 'h1', 'd': 'h4'}
+  h1 : ['class', [], ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], []]]], [], 'h0']
+  h2 : {'parentns': 'h0', 'val': 1, 'inc': 'h3'}
+  h3 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], [], 'h2']
+  h4 : {'parentns': 'h0', 'val': 0, 'inc': 'h5'}
+  h5 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], [], 'h4']
+  h6 : {'parentns': 'h2'}
+}
+
+
+
+Test case 6:
+
+int howmuch = 1;
+class counter : { int val  = 0;
+                  proc inc() : val = (val + howmuch); end;
+                };
+class clock : { ob hours = new counter;
+                ob minutes = new counter;
+                proc tick(): if (minutes.val - 59) :
+                                  minutes.inc()
+                             else
+                                  minutes.val = 0;
+                                  hours.inc()
+                             end
+                end;
+              };
+ob c = new clock;
+c.tick(); c.tick();
+print c.hours.val;
+print c.minutes.val
+
+
+Output should print 0 and 2 and the appropriate namespaces.
+

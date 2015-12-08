@@ -1,0 +1,69 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q3.py</font>
+n = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+m = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+a = n
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (a == n)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (a == n)</font>
+b = m
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (b == m)</font>
+<font color="#1E90FF"># (a == n)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (b == m)</font>
+<font color="#1E90FF"># (a == n)</font>
+
+while  b != 0 :
+	<font color="#008B00">"""{ invariant  (a - b) == (n - m)
+		modifies  a, b  }"""</font>
+	<font color="#1E90FF">#PREMISES FOR LOOP BODY: </font>
+	<font color="#1E90FF"># (b != 0)</font>
+	<font color="#1E90FF"># ((a - b) == (n - m))</font>
+	a = a - 1	<font color="#1E90FF"># insert an assignment command here</font>
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (a == (a_old - 1))</font>
+	<font color="#1E90FF"># (b != 0)</font>
+	<font color="#1E90FF"># ((a_old - b) == (n - m))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> a == a_old -1	premise
+		2.<font color="#00FF00">OK</font> a_old-b == n-m	premise
+		3.<font color="#00FF00">OK</font> a_old == a+1	algebra 1
+		4.<font color="#00FF00">OK</font> a+1 == (n-m)+b	algebra 2 3
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((a + 1) == ((n - m) + b))</font>
+	b = b - 1
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (b == (b_old - 1))</font>
+	<font color="#1E90FF"># ((a + 1) == ((n - m) + b_old))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font>b == b_old -1	premise
+		2.<font color="#00FF00">OK</font> b_old == b+1 algebra 1
+		3.<font color="#00FF00">OK</font> a+1 == (n-m)+ b_old	premise
+		4.<font color="#00FF00">OK</font> a+1 == (n-m)+(b+1)algebra 3 2
+		5.<font color="#00FF00">OK</font> a == (n-m) + b	algebra 4
+		6.<font color="#00FF00">OK</font> a-b == n-m	algebra 5
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((a - b) == (n - m))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># ((a - b) == (n - m))</font>
+<font color="#1E90FF"># not (b != 0)</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> a-b == n-m	premise
+	2.<font color="#00FF00">OK</font> not(b != 0)	premise
+	3.<font color="#00FF00">OK</font> b == 0	algebra 2
+	4.<font color="#00FF00">OK</font> a == n-m	algebra 1 3
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (a == (n - m))</font>
+print "n - m ==", a
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (a == (n - m))</font>
+
+</strong></pre></body></html>

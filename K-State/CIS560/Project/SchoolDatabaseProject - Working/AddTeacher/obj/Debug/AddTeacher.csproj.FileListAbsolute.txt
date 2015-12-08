@@ -1,0 +1,9 @@
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\bin\Debug\AddTeacher.exe.config
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\bin\Debug\AddTeacher.exe
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\bin\Debug\AddTeacher.pdb
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\obj\Debug\AddTeacher.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\obj\Debug\AddTeacher.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\obj\Debug\AddTeacher.TeacherForm.resources
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\obj\Debug\AddTeacher.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\obj\Debug\AddTeacher.exe
+U:\cis560\SchoolDatabaseProject - Working\AddTeacher\obj\Debug\AddTeacher.pdb

@@ -1,0 +1,162 @@
+Test cases for Exercise 2:
+
+I. Adding activation stack and int declarations:
+
+
+Test case 1:
+
+int x = 2;
+int y = (x + x);
+if y :
+    x = y
+else
+    x = 0
+end;
+
+Output should be:
+
+Parse tree:
+[[['int', 'x', '2'], ['int', 'y', ['+', ['deref', 'x'], ['deref', 'x']]]], [['if', ['deref', 'y'], [['=', 'x', ['deref', 'y']]], [['=', 'x', '0']]]]]
+Execution:
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'y': 4, 'parentns': 'nil', 'x': 4}
+}
+
+
+
+
+II. Adding procedure declarations and calls:
+
+Test case 2:
+
+int x = 2;
+proc p() : print x; x = (x+1) end;
+p();
+
+Output should be:
+
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', [], [['print', ['deref', 'x']], ['=', 'x', ['+', ['deref', 'x'], '1']]], []]], [['call', 'p', []]]]
+Execution:
+2
+activation stack = ['h0', 'h2']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 2}
+  h1 : ['proc', [], [['print', ['deref', 'x']], ['=', 'x', ['+', ['deref', 'x'], '1']]], [], 'h0']
+  h2 : {'parentns': 'h0'}
+}
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 3}
+  h1 : ['proc', [], [['print', ['deref', 'x']], ['=', 'x', ['+', ['deref', 'x'], '1']]], [], 'h0']
+  h2 : {'parentns': 'h0'}
+}
+
+
+
+III. Adding parameters:
+
+
+Test case 3:
+int x = 2;
+proc p(y, z):
+   x = (y - z); q(y); z = 0
+end;
+proc q(y): print y; x = y; end;
+q(99)
+
+Output should be:
+
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', ['y', 'z'], [['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'y']]], ['=', 'z', '0']], []], ['proc', 'q', ['y'], [['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]], []]], [['call', 'q', ['99']]]]
+Execution:
+99
+activation stack = ['h0', 'h3']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 2}
+  h1 : ['proc', ['y', 'z'], [['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'y']]], ['=', 'z', '0']], [], 'h0']
+  h2 : ['proc', ['y'], [['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]], [], 'h0']
+  h3 : {'y': 99, 'parentns': 'h0'}
+}
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 99}
+  h1 : ['proc', ['y', 'z'], [['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'y']]], ['=', 'z', '0']], [], 'h0']
+  h2 : ['proc', ['y'], [['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]], [], 'h0']
+  h3 : {'y': 99, 'parentns': 'h0'}
+}
+
+(You can "garbage collect"  h3's namespace at the exit of  q's call, if you wish.
+It isn't required.)
+
+
+
+Test case 4:
+
+int x = 2;
+proc p(y, z):
+   print y;
+   x = (y - z); q(z); 
+   z = 0
+end;
+proc q(y): print y; x = y; end;
+p(x, 9)
+
+Output should print 2 and then 9.
+
+
+
+IV. Adding local declarations:
+
+Test case 5:
+
+int x = 2;
+proc p(y) : 
+    int z = x; 
+    print z; x = (y+1) end;
+p(9);
+
+Output should be:
+
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', ['y'], [['print', ['deref', 'z']], ['=', 'x', ['+', ['deref', 'y'], '1']]], [['int', 'z', ['deref', 'x']]]]], [['call', 'p', ['9']]]]
+Execution:
+2
+activation stack = ['h0', 'h2']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 2}
+  h1 : ['proc', ['y'], [['print', ['deref', 'z']], ['=', 'x', ['+', ['deref', 'y'], '1']]], [['int', 'z', ['deref', 'x']]], 'h0']
+  h2 : {'y': 9, 'parentns': 'h0', 'z': 2}
+}
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 10}
+  h1 : ['proc', ['y'], [['print', ['deref', 'z']], ['=', 'x', ['+', ['deref', 'y'], '1']]], [['int', 'z', ['deref', 'x']]], 'h0']
+  h2 : {'y': 9, 'parentns': 'h0', 'z': 2}
+}
+
+
+Test case 6:
+
+int x = 2;
+proc p():
+   int y = 3;
+   proc q() :
+      int z = 4;
+      print z;
+      print y;
+      print x
+   end;
+   q()
+end;
+p()
+
+Output should print 4 then 3 then 2.
+
+
+      

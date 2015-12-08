@@ -1,0 +1,62 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q1:  double returns an int that is twice as large as its int argument, n"""</font>
+def double(n) :
+	<font color="#008B00">"""{ pre  n >= 0
+		post ans == 2 * n
+		return ans
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (n >= 0)</font>
+	if n == 0 :
+		<font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+		<font color="#1E90FF"># (n == 0)</font>
+		<font color="#1E90FF"># (n >= 0)</font>
+		ans = 0
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (ans == 0)</font>
+		<font color="#1E90FF"># (n == 0)</font>
+		<font color="#1E90FF"># (n >= 0)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> n == 0	premise
+			2.<font color="#00FF00">OK</font> ans == 0	premise
+			3.<font color="#00FF00">OK</font> ans == 2*n	algebra 1 2
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (ans == (2 * n))</font>
+	else :
+		<font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+		<font color="#1E90FF"># not (n == 0)</font>
+		<font color="#1E90FF"># (n >= 0)</font>
+		subans = double(n - 1)
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (subans == (2 * (n - 1)))</font>
+		<font color="#1E90FF"># not (n == 0)</font>
+		<font color="#1E90FF"># (n >= 0)</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (subans == (2 * (n - 1)))</font>
+		<font color="#1E90FF"># not (n == 0)</font>
+		<font color="#1E90FF"># (n >= 0)</font>
+		ans = subans + 2
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (ans == (subans + 2))</font>
+		<font color="#1E90FF"># (subans == (2 * (n - 1)))</font>
+		<font color="#1E90FF"># not (n == 0)</font>
+		<font color="#1E90FF"># (n >= 0)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(n == 0)	premise
+			2.<font color="#00FF00">OK</font> n >=0	premise
+			3.<font color="#00FF00">OK</font> n > 0	algebra 1 2
+			4.<font color="#00FF00">OK</font> subans == 2 *(n-1)	premise
+			5.<font color="#00FF00">OK</font> ans == subans + 2	premise
+			6.<font color="#00FF00">OK</font> subans == ans-2	algebra 5
+			7.<font color="#00FF00">OK</font> ans-2 == 2*(n-1)	subst 6 4
+			8.<font color="#00FF00">OK</font> ans == 2*n	algebra 7
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (ans == (2 * n))</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (ans == (2 * n))</font>
+	<font color="#1E90FF"># (n >= 0)</font>
+	return ans	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (ans == (2 * n))</font>
+	<font color="#1E90FF"># (n >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+</strong></pre></body></html>

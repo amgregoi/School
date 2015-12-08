@@ -1,0 +1,135 @@
+<html><body><pre><strong>
+<font color="#1E90FF">#Q5.py:   a "bank account class":</font>
+bal = 0   <font color="#1E90FF"># no money to start, but surely we will do some deposits  (-:</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (bal == 0)</font>
+<font color="#008B00">"""{ globalinv<font color="#00FF00">OK</font> bal >= 0  }"""</font>  <font color="#1E90FF"># all methods must maintain this property</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+
+def withdraw(amt) :
+    <font color="#008B00">"""{ pre  amt >= 0
+         post bal + cash == bal_in
+         return cash
+    }"""</font>
+    global bal 
+    bal_in = bal
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (amt >= 0)</font>
+	<font color="#1E90FF"># (bal >= 0)</font>
+	<font color="#1E90FF"># (bal == bal_in)</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> amt >= 0	premise
+		2.<font color="#00FF00">OK</font> bal >= 0	premise
+		3.<font color="#00FF00">OK</font> bal == bal_in	premise
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (bal == bal_in)</font>
+	if amt <= bal:
+		<font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+		<font color="#1E90FF"># (amt <= bal)</font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> amt <= bal	premise
+			4.<font color="#00FF00">OK</font> bal == bal_in	premise
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		bal = bal - amt
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (bal == (bal_old - amt))</font>
+		<font color="#1E90FF"># (bal_old == bal_in)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> bal == bal_old - amt	premise
+			2.<font color="#00FF00">OK</font> amt <= bal_old	algebra 1
+			3.<font color="#00FF00">OK</font> amt >= 0	algebra 1
+			4.<font color="#00FF00">OK</font> bal_old >= 0	algebra 1
+			5.<font color="#00FF00">OK</font> bal_old == bal_in	premise
+			6.<font color="#00FF00">OK</font> amt == bal_in - bal	algebra 1 5
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (amt == (bal_in - bal))</font>
+		cash = amt
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (cash == amt)</font>
+		<font color="#1E90FF"># (amt == (bal_in - bal))</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> amt == bal_in - bal	premise
+			2.<font color="#00FF00">OK</font> cash == amt	premise
+			3.<font color="#00FF00">OK</font> cash == bal_in - bal		subst 2 1
+			4.<font color="#00FF00">OK</font> bal >= 0	algebra 1
+			5.<font color="#00FF00">OK</font> bal_in == bal + cash	algebra 3
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (bal_in == (bal + cash))</font>
+	else :
+		<font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+		<font color="#1E90FF"># not (amt <= bal)</font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(amt <= bal)	premise
+			4.<font color="#00FF00">OK</font> bal == bal_in	premise
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		cash = 0
+		<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+		<font color="#1E90FF"># (cash == 0)</font>
+		<font color="#1E90FF"># (bal == bal_in)</font>
+		<font color="#CD6600">assert</font> not (amt <= bal)  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+		<font color="#008B00">"""{1.<font color="#00FF00">OK</font> cash == 0	premise
+			2.<font color="#00FF00">OK</font> bal == bal_in	premise
+			3.<font color="#EE2C2C">??</font> not(amt <= bal)	premise
+			4.<font color="#00FF00">OK</font> bal >= 0	algebra 3
+		}"""</font>
+		<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+		<font color="#1E90FF"># (bal >= 0)</font>
+<font color="#1E90FF"># <font color="#EE2C2C">ERROR</font>: uneven indentation of commands</font>
+    <font color="#1E90FF"># prove here that  bal >= 0 and bal + cash == bal_in</font>
+    return cash
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (bal >= 0)</font>
+    <font color="#1E90FF"># ((bal + cash) == bal_in)</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((bal_in == (bal + cash)) or ((bal >= 0) and ((bal + cash) == bal_in)))</font>
+	<font color="#CD6600">assert</font> (bal >= 0)  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+
+def deposit(amt) :
+    <font color="#008B00">"""{ pre amt >= 0
+         post bal_in + amt == bal
+    }"""</font>
+	global bal
+	bal_in = bal
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (amt >= 0)</font>
+	<font color="#1E90FF"># (bal >= 0)</font>
+	<font color="#1E90FF"># (bal == bal_in)</font>
+	bal = bal + amt
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (bal == (bal_old + amt))</font>
+	<font color="#1E90FF"># (amt >= 0)</font>
+	<font color="#1E90FF"># (bal_old >= 0)</font>
+	<font color="#1E90FF"># (bal_old == bal_in)</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (amt >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+    <font color="#1E90FF"># The checker will prove this one for you *and* confirm the invariant!</font>
+
+<font color="#1E90FF"># The checker will do this one, too:</font>
+def currentBalance() :
+    <font color="#008B00">"""{ pre True
+         post ans == bal
+         return ans
+    }"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># True</font>
+	ans = bal
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (ans == bal)</font>
+	<font color="#1E90FF"># True</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (ans == bal)</font>
+<font color="#1E90FF"># <font color="#EE2C2C">ERROR</font>: uneven indentation of commands</font>
+    return ans    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (ans == bal)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (bal >= 0)</font>
+</strong></pre></body></html>

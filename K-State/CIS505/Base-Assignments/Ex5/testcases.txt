@@ -1,0 +1,235 @@
+
+TEST CASES FOR ASSIGNMENT 5
+-----------------------------------
+
+
+STEP 0: write Env and Store maintenance functions 
+(no need to submit these test cases; these are here to help you get started):
+
+
+declare("a", Loc(9), emptyenv);
+
+val it = [("a",Loc 9)] : (string * Denotable) list
+
+
+
+let val env = declare("b", Loc(3), declare("a", Loc(9), emptyenv))
+in (print (Env2string env); print "\n";
+    lookup("a", env)
+   )
+end;
+
+(b, Loc(3))
+:: (a, Loc(9))
+:: nil
+val it = Loc 9 : Denotable
+
+
+
+allocCell emptymem;
+
+val it = (0,[0]) : int * int list
+
+
+
+
+allocCell [1,9];
+
+val it = (2,[1,9,0]) : int * int list
+
+
+
+fetch(2, [9,8,7,6]);
+
+val it = 7 : int
+
+
+
+store(3, 99, [9,8,7,6]);
+
+val it = [9,8,7,99] : int list
+
+
+
+
+let val (loc, mem) = allocCell emptymem
+in store(loc, 99, mem)
+end;
+
+val it = [99] : int list
+
+
+
+
+revert(2, [9,8,7,6]);
+
+val it = [9,8] : int list
+
+
+
+let val mem = [9,8,7,6]  
+    val a = length mem
+    val (newloc, newmem) = allocCell mem
+    val nn = store(newloc, 99, newmem)
+in  (print (Store2string nn); print "\n";
+    revert(a, nn)
+    )
+end;
+
+[ 9, 8, 7, 6, 99, ]
+val it = [9,8,7,6] : int list
+
+
+
+-----------------------------------------------------
+
+STEP 1: write assignment semantics: (submit these test cases and all that follow)
+
+
+- run();
+Type program below, terminated by ! as first symbol on the final line:
+int x;
+!
+Parse tree:
+( [ Var(x),],  [] )
+Execution:
+Finished commandlist: []
+using env =
+(x, Loc(0))
+:: nil
+Current store =
+[ 0, ]
+val it = [0] : Store
+
+
+
+int x; int y;
+x = 2; y = (x + 1)
+!
+Parse tree:
+( [ Var(x), Var(y),],  [ Assign(x, Num(2)), Assign(y, Add(L(x), Num(1))),] )
+Execution:
+Finished commandlist: [ Assign(x, Num(2)), Assign(y, Add(L(x), Num(1))),]
+using env =
+(y, Loc(1))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 2, 3, ]
+val it = [2,3] : Store
+
+
+
+--------------------------------------------------------
+
+STEP 2: write proc-declaration semantics:
+
+int x;
+proc p() : print x end;
+!
+Parse tree:
+( [ Var(x), Proc(p, [], [ Print(L(x)),]),],  [] )
+Execution:
+Finished commandlist: []
+using env =
+(p, Closure(params:[], body:[ Print(L(x)),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 0, ]
+val it = [0] : Store
+
+
+
+int x;
+proc p(a,b): x = (a + b) end;
+proc q(): call p(x, 1) end;
+x = 6
+!
+Parse tree:
+( [ Var(x), Proc(p, [ a, b,], [ Assign(x, Add(L(a), L(b))),]), Proc(q, [], [ Call(p, [ L(x), Num(1),]),]),],  [ Assign(x, Num(6)),] )
+Execution:
+Finished commandlist: [ Assign(x, Num(6)),]
+using env =
+(q, Closure(params:[], body:[ Call(p, [ L(x), Num(1),]),], linkto:(p, Closure(params:[ a, b,], body:[Assign(x, Add(L(a), L(b))),], linkto:(x, Loc(0)) :: nil)) :: (x, Loc(0)) :: nil))
+:: (p, Closure(params:[ a, b,], body:[ Assign(x, Add(L(a), L(b))),], linkto:(x,Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 6, ]
+val it = [6] : Store
+
+
+
+--------------------------------------------------
+
+STEP 3: write proc-call semantics:
+
+int x;
+proc p(): x = 7 end;
+call p()
+!
+Parse tree:
+( [ Var(x), Proc(p, [], [ Assign(x, Num(7)),]),],  [ Call(p, []),] )
+Execution:
+Finished commandlist: [ Assign(x, Num(7)),]
+using env =
+(x, Loc(0))
+:: nil
+Current store =
+[ 7, ]
+Finished commandlist: [ Call(p, []),]
+using env =
+(p, Closure(params:[], body:[ Assign(x, Num(7)),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 7, ]
+val it = [7] : Store
+
+
+
+int x;
+proc p(a,b): x = (a + b) end;
+proc q(): call p(x, 1) end;
+x = 3;
+call q()
+!
+Parse tree:
+( [ Var(x), Proc(p, [ a, b,], [ Assign(x, Add(L(a), L(b))),]), Proc(q, [], [ Call(p, [ L(x), Num(1),]),]),],  [ Assign(x, Num(3)), Call(q, []),] )
+Execution:
+Finished commandlist: [ Assign(x, Add(L(a), L(b))),]
+using env =
+(b, Loc(2))
+:: (a, Loc(1))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 4, 3, 1, ]
+Finished commandlist: [ Call(p, [ L(x), Num(1),]),]
+using env =
+(p, Closure(params:[ a, b,], body:[ Assign(x, Add(L(a), L(b))),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 4, ]
+Finished commandlist: [ Assign(x, Num(3)), Call(q, []),]
+using env =
+(q, Closure(params:[], body:[ Call(p, [ L(x), Num(1),]),], linkto:(p, Closure(params:[ a, b,], body:[ Assign(x, Add(L(a), L(b))),], linkto:(x, Loc(0)) :: nil)) :: (x, Loc(0)) :: nil))
+:: (p, Closure(params:[ a, b,], body:[ Assign(x, Add(L(a), L(b))),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 4, ]
+val it = [4] : Store
+
+
+
+int x; int y;
+proc p(a) :  x = a  end;
+proc q(a, b) : call p((a + b))  end;
+y = 2;
+call p(y);
+call q(x, 7)
+!
+

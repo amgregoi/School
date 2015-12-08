@@ -1,0 +1,17 @@
+<html><body><pre><strong>
+
+a = 0
+<font color="#008B00">"""{ globalinv<font color="#00FF00">OK</font>  a >= 0 }"""</font>
+
+def f(x) :
+    <font color="#008B00">"""{ pre x > 0
+         post ans > 0 
+         return ans  }"""</font>
+    global a
+    ans = (a + x) + 1
+    return ans
+
+b = f(1)
+print "b =", b
+
+</strong></pre></body></html>

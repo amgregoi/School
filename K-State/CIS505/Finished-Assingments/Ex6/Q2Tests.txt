@@ -1,0 +1,90 @@
+Test 1
+---------
+1 ?- addDB([(b,2), (a,1), (c,4)]).
+true.
+
+2 ?- lookup(a).
+1
+true.
+
+ 3 ?- update(a, 99).
+a updated
+true.
+
+4 ?- lookup(a).
+99
+true.
+
+ 5 ?- update(b, 1000).
+b updated
+true.
+
+6 ?- lookup(b).
+1000
+true.
+
+ 7 ?- revert.
+true .
+
+8 ?- lookup(b).
+2
+true.
+
+ 9 ?- commit.
+[ (a,99), (c,4), (a,1), (b,2)]
+true.
+
+//listing after commit shows (a, 1) gone
+
+Test 2
+--------------------------------
+1 ?- addDB([(b,2), (a,1), (c,4)]).
+true.
+
+2 ?- lookup(a).
+1
+true.
+
+ 3 ?- lookup(b).
+2
+true.
+
+ 4 ?- update(a, 99).
+a updated
+true.
+
+5 ?- update(b, 1000).
+b updated
+true.
+
+6 ?- lookup(a).
+99
+true.
+
+ 7 ?- lookup(b).
+1000
+true.
+
+ 8 ?- revert.
+true .
+
+9 ?- lookup(b).
+2
+true.
+
+ 10 ?- revert.
+true.
+
+11 ?- lookup(a).
+1
+true.
+
+ 12 ?- update(c, 500).
+c updated
+true.
+
+13 ?- commit.
+[ (c,500), (c,4), (a,1), (b,2)]
+true.
+
+//listing after commit shows (c, 4) gone

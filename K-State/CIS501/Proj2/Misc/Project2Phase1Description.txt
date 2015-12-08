@@ -1,0 +1,33 @@
+		Project 2 Phase 1 (Design)
+		
+Due: 8:00am on 10/10 (Wednesday)
+		
+1. Develop an object image diagram to implement the Vending Machine
+   Represent each object by a circle or rectangle, and each link by an arrow.
+   If you have multiple objects, draw at least 2 (preferably 3) circles (rectangles) to represent the objects.
+   
+   Use a drawing program to draw your object diagram
+   If your drawing program is not powerPoint, then copy your drawing and paste it on PowerPoint
+   blank slide to submit (so you need to submit PowerPoint file (ppt or pptx)).
+   
+2. Draw a class diagram based on your object image diagram.
+   For each class, you need to write the "Name", "Fields", and "Methods".
+   For each association, you need to give the "Name" (field name) and "Multiplicities".
+
+   You do not need to develop a sequence diagram.
+   However, at the meeting, I will ask you to describe use-case realizations in English
+   on your object/class diagrams.
+   
+Note: In this project, you are not allowed to use Dictionary (Hash).
+        If you use Dictionary, often object structures become unimprotant (in small programs)
+        and I will be unable to evaluate your design or design skills effectively.
+   
+How to submit your work:
+ 1. Create a directory named after your "lastname_firstname" (e.g., Mizuno_Masaaki in my case)
+ 2. Put your StarUml and PowerPoint files in the directory.
+ 3. Zip your directory and submit it to the file dropbox named "Project2 Phase1"
+ 
+ Note: 1. If you do not follow the above submission procedure, you will lose at least 5% of the total score.
+ 
+         2. This is strictly an individual project.  You may discuss problems only with me and/or Ana.
+ 

@@ -1,0 +1,33 @@
+		Project 2 Phase 2 (Implementation)
+		
+Due 8:00AM on 10/24 (Wednesday)
+
+1. Complete your object diagram based on the discussion in our meeting. 
+   I will check whether you can draw an object diagram correctly.
+   
+2. Complete your class diagram (with all the fields, associations, methods, and multiplicities correctly). 
+   Your class diagram must match your object diagram.
+   
+   It may be difficult to identify all the methods (including private methods) in the design phase, so it is ok to 
+   complete the methods in the class diagram after you finish your implementation (based on your code).
+ 
+3. Develop a sequence diagram for the "Insert Coin" use-case.
+   You do not have to show alternation or repetition.  
+   Just represent all necessary method calls in sequence.
+  
+4. Complete the program.
+   If you need to change your design, update your object/class/sequence diagrams as well.
+   It is a common practice to change a design slightly when you implement it since you may not know every 
+   detail of the program until you actually implement it.
+   However, you must stick to the basic design which we came up with during your meeting with me.
+ 
+5. Make a directory after your name "lastname_firstname" 
+   Put your program's solution directory, class diagram (.uml file), and object diagram (.ppt or .pptx file) in the directory.
+   
+6. Make a zip file of the directory and submit it in the file dropboxes named "Project 2 Phase 2".
+ 
+ In the meeting, I will check (1) if your object, class, sequence diagrams are correct (multiplicities, etc),
+ (2) your code exactly matches your class diagram, and (3) the quality of your code (you may want to 
+ review Chapter 4 (Refactoring) of Part 1 of the course notes).
+ 
+ Note: This is strictly an individual project.  You may discuss problems only with me and/or Ana.

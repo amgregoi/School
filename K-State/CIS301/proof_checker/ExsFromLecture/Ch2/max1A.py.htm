@@ -1,0 +1,53 @@
+<html><body><pre><strong>
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+y = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+if x > y :
+    <font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+    <font color="#1E90FF"># (x > y)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x > y     premise  }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x > y)</font>
+    max = x
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (max == x)</font>
+    <font color="#1E90FF"># (x > y)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x > y     premise
+         2.<font color="#00FF00">OK</font> max == x  premise
+         3.<font color="#00FF00">OK</font> (x > y  and  max == x)  andi 1 2
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># ((x > y) and (max == x))</font>
+else :
+    <font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+    <font color="#1E90FF"># not (x > y)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> not(x > y)       premise
+         2.<font color="#00FF00">OK</font> y >= x            algebra 1
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (y >= x)</font>
+    max = y
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (max == y)</font>
+    <font color="#1E90FF"># (y >= x)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> max == y                premise
+         2.<font color="#00FF00">OK</font> y >= x                  premise
+         3.<font color="#00FF00">OK</font> y >= x  and  max == y   andi 2 1
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># ((y >= x) and (max == y))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (((x > y) and (max == x)) or ((y >= x) and (max == y)))</font>
+
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> (x > y and max == x)  or  (y >= x and max == y)   premise
+     2.<font color="#00FF00">OK</font> max >= x  and  max >= y                           ore 1  
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># ((max >= x) and (max >= y))</font>
+</strong></pre></body></html>

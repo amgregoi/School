@@ -1,0 +1,25 @@
+<html><body><pre><strong>
+
+if x > y :
+    <font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+    <font color="#1E90FF"># (x > y)</font>
+    max = x
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (max == x)</font>
+    <font color="#1E90FF"># (x > y)</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (max == x)</font>
+    <font color="#1E90FF"># (x > y)</font>
+else :
+    <font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+    <font color="#1E90FF"># not (x > y)</font>
+    max = y
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (max == y)</font>
+    <font color="#1E90FF"># not (x > y)</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (max == y)</font>
+    <font color="#1E90FF"># not (x > y)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (((max == x) and (x > y)) or ((max == y) and not (x > y)))</font>
+</strong></pre></body></html>

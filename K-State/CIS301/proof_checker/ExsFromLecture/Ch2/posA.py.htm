@@ -1,0 +1,48 @@
+<html><body><pre><strong>
+
+x = readInt() 
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+if x < 0:
+    <font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+    <font color="#1E90FF"># (x < 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x < 0    premise  }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x < 0)</font>
+    x = 0 - x
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (x == (0 - x_old))</font>
+    <font color="#1E90FF"># (x_old < 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x == 0 - x_old     premise
+       2.<font color="#00FF00">OK</font> x_old < 0            premise
+       3.<font color="#00FF00">OK</font> x > 0                algebra 1 2
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x > 0)</font>
+else:
+    <font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+    <font color="#1E90FF"># not (x < 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> not(x < 0)   premise
+       2.<font color="#00FF00">OK</font> x >= 0         algebra 1
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x >= 0)</font>
+    pass
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x >= 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x >= 0       premise }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># ((x > 0) or (x >= 0))</font>
+
+<font color="#1E90FF"># prove here that  x >= 0 :</font>
+
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> (x > 0)  or  (x >= 0)    premise
+     2.<font color="#00FF00">OK</font> x >= 0                   ore 1
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (x >= 0)</font>
+</strong></pre></body></html>

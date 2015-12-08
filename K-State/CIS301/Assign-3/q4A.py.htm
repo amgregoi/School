@@ -1,0 +1,150 @@
+<html><body><pre><strong>
+<font color="#1E90FF">#Q4.py   Plays a "Price Is Right" game: "jump s  up to  goal":</font>
+<font color="#1E90FF">#  the program guesses some ints, in jumps (multiples),</font>
+<font color="#1E90FF">#  without going over the  goal.   The output,  score,  is the number of jumps  made.</font>
+<font color="#1E90FF"># The program generates the highest possible score, which is formalized by this output</font>
+<font color="#1E90FF"># condition:   (score * jump) + gap == goal  and  (gap >= 0 and  gap < jump)</font>
+<font color="#1E90FF">#                 where   score * jump  is the int value of the final guess</font>
+<font color="#1E90FF">#                 and  gap  is the distance between the final int guess and the goal.</font>
+jump = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+goal = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#CD6600">assert</font> jump > 0
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (jump > 0)</font>
+<font color="#CD6600">assert</font> goal >= 0
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (goal >= 0)</font>
+<font color="#1E90FF"># (jump > 0)</font>
+
+gap = goal   <font color="#1E90FF"># gap remembers how far away our current guess is from the goal.</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (gap == goal)</font>
+<font color="#1E90FF"># (goal >= 0)</font>
+<font color="#1E90FF"># (jump > 0)</font>
+
+<font color="#1E90FF"># we must never go negative on the gap between the number guessed and the goal:</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> gap == goal  premise
+     globalinv<font color="#00FF00">OK</font>  gap >= 0       <font color="#1E90FF"># establishes the global invariant that  gap >= 0</font>
+     2.<font color="#00FF00">OK</font> return 1               <font color="#1E90FF"># remember the initial value of gap for now</font>
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (gap == goal)</font>
+
+guess = 0   <font color="#1E90FF"># the number we have guessed so far</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (guess == 0)</font>
+<font color="#1E90FF"># (gap == goal)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (guess == 0)</font>
+<font color="#1E90FF"># (gap == goal)</font>
+score = 0   <font color="#1E90FF"># how many rounds we have guessed without going over</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (score == 0)</font>
+<font color="#1E90FF"># (guess == 0)</font>
+<font color="#1E90FF"># (gap == goal)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (score == 0)</font>
+<font color="#1E90FF"># (guess == 0)</font>
+<font color="#1E90FF"># (gap == goal)</font>
+
+<font color="#1E90FF"># How to play one round of the game:</font>
+def playRound():  
+	<font color="#1E90FF">#IMPORTANT: the invariant,  gap >= 0,  is implicit in both pre and post</font>
+	<font color="#1E90FF"># that is, it's a premise on function entry and it must be proved on function exit</font>
+	<font color="#008B00">"""{ pre  gap >= jump
+		post  guess_in + gap_in == guess + gap  and  guess == guess_in + jump 
+	}"""</font> 
+	global guess, gap
+	gap_in = gap
+	guess_in = guess
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (gap >= jump)</font>
+	<font color="#1E90FF"># (gap >= 0)</font>
+	<font color="#1E90FF"># (guess == guess_in)</font>
+	<font color="#1E90FF"># (gap == gap_in)</font>
+	<font color="#1E90FF">#guess_in = guess (the checker automatically adds this 'ghost assignment')</font>
+	<font color="#1E90FF"># gap_in = gap     (same here)</font>
+	guess = guess + jump
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (guess == (guess_old + jump))</font>
+	<font color="#1E90FF"># (gap >= jump)</font>
+	<font color="#1E90FF"># (gap >= 0)</font>
+	<font color="#1E90FF"># (guess_old == guess_in)</font>
+	<font color="#1E90FF"># (gap == gap_in)</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> guess == guess_old + jump premise
+		2.<font color="#00FF00">OK</font> guess_old == guess_in	premise
+		3.<font color="#00FF00">OK</font> guess == guess_in + jump	algebra 2 1
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (guess == (guess_in + jump))</font>
+	print "My next guess is",  guess, "!"
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (guess == (guess_in + jump))</font>
+	gap = gap - jump
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (gap == (gap_old - jump))</font>
+	<font color="#1E90FF"># (guess == (guess_in + jump))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> guess == guess_in + jump	premise
+		2.<font color="#00FF00">OK</font> gap == gap_old - jump	premise
+		3.<font color="#00FF00">OK</font> guess_in == guess - jump	algebra 1
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (guess_in == (guess - jump))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (score == 0)</font>
+<font color="#1E90FF"># (guess == 0)</font>
+<font color="#1E90FF"># (gap == goal)</font>
+    
+<font color="#1E90FF"># to win the game, we repeatedly play rounds without going over:</font>
+while gap >= jump :
+	<font color="#008B00">"""{ invariant  score * jump == guess  and  guess + gap == goal
+		modifies  guess, gap, score, void     <font color="#1E90FF"># see comment below about 'void'</font>
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR LOOP BODY: </font>
+	<font color="#1E90FF"># (gap >= jump)</font>
+	<font color="#1E90FF"># (((score * jump) == guess) and ((guess + gap) == goal))</font>
+	void = playRound()   <font color="#1E90FF"># the function returns no answer</font>
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (((guess_old + gap_old) == (guess + gap)) and (guess == (guess_old + jump)))</font>
+	<font color="#1E90FF"># (gap_old >= jump)</font>
+	<font color="#1E90FF"># (((score * jump) == guess_old) and ((guess_old + gap_old) == goal))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> gap_old >= jump	premise
+		2.<font color="#00FF00">OK</font> guess_old + gap_old == guess + gap and guess == guess_old + jump	premise
+		3.<font color="#00FF00">OK</font> score * jump == guess_old and guess_old + gap_old == goal	premise
+		4.<font color="#00FF00">OK</font> guess_old + gap_old == guess + gap ande 2
+		5.<font color="#00FF00">OK</font> guess == guess_old + jump ande 2
+		6.<font color="#00FF00">OK</font> guess_old == guess - jump algebra 5
+		7.<font color="#00FF00">OK</font> gap_old == (guess+gap)-guess_old	algebra 4
+		
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	score = score + 1
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (score == (score_old + 1))</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> score == score_old + 1	premise
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#CD6600">assert</font> (((score * jump) == guess) and ((guess + gap) == goal))  <font color="#1E90FF"># <font color="#EE2C2C">UNABLE</font> TO VERIFY</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (((score * jump) == guess) and ((guess + gap) == goal))</font>
+<font color="#1E90FF"># not (gap >= jump)</font>
+	<font color="#1E90FF"># REPROVE THE LOOP INVARIANT HERE</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(gap >= jump)	premise
+	2.<font color="#00FF00">OK</font> score * jump == guess  and  guess + gap == goal	premise
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (((score * jump) == guess) and ((guess + gap) == goal))</font>
+
+<font color="#1E90FF"># PROVE HERE that the game was won with a maximum score:</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> gap >= 0       globalinv      <font color="#1E90FF"># a globalinv is a fact that is true "everywhere"</font>
+		<font color="#1E90FF"># ... ADD MORE PROOF STEPS HERE AND PROVE ON THE LAST LINE THAT</font>
+		<font color="#1E90FF">#  (score * jump) + gap == goal  and  (gap >= 0 and  gap < jump)</font>
+}"""</font><font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (gap >= 0)</font>
+</strong></pre></body></html>

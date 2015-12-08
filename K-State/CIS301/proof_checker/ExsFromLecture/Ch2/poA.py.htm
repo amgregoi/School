@@ -1,0 +1,24 @@
+<html><body><pre><strong>
+
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#CD6600">assert</font> x > 0
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (x > 0)</font>
+x = x + 1
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (x == (x_old + 1))</font>
+<font color="#1E90FF"># (x_old > 0)</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> x == x_old + 1  premise
+     2.<font color="#00FF00">OK</font> x_old > 0  premise
+     3.<font color="#00FF00">OK</font> x > 1      algebra 1 2
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (x > 1)</font>
+print x
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (x > 1)</font>
+
+</strong></pre></body></html>

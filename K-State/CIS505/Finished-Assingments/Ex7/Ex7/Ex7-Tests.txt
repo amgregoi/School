@@ -1,0 +1,36 @@
+1 ?- run.
+Type program as a string followed by a period:
+|: "x = 2".
+Scanned program: x = 2 
+
+Parse tree: [assign(iden([120]),_G47)]
+Execution:
+Final contents of memory
+x = _G71
+true.
+
+
+
+---------------------------------
+ 2 ?- run.
+Type program as a string followed by a period:
+|: "x = 2 ;  y = ( x + 1 ) ;  print x".
+Scanned program: x = 2 ; y = ( x + 1 ) ; print x 
+
+
+
+Parse tree: [assign(iden([120]),_G762),assign(iden([121]),_G817),print(iden([120]))]
+Execution:
+
+I cannot get lookup to work			<----------#####
+
+ERROR: is/2: Arguments are not sufficiently instantiated
+   Exception: (12) lookup([120], [[[120]|_G895], [[121]|_G903]], _G948) ? 
+-----------------------------------------------------------
+1 ?- run.
+Type program as a string followed by a period:
+|: "x = 2 ; y = 0 ; while x : x = ( x - 1 ) ; y = ( y + 2 ) ; print x end".
+Scanned program: x = 2 ; y = 0 ; while x : x = ( x - 1 ) ; y = ( y + 2 ) ; print x end 
+
+
+false.

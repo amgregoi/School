@@ -1,0 +1,96 @@
+-----------------1---------------------
+int x;
+!
+Parse tree:
+( [ Var(x),],  [] )
+Execution:
+Finished commandlist: []
+using env =
+(x, Loc(0))
+:: nil
+Current store =
+[ 0, ]
+val it = [0] : Store
+
+
+-----------------2---------------------
+
+int x; int y;
+x = 2; y = (x + 1)
+!
+Parse tree:
+( [ Var(x), Var(y),],  [ Assign(x, Num(2)), Assign(y, Add(L(x), Num(1))),] )
+Execution:
+Finished commandlist: [ Assign(x, Num(2)), Assign(y, Add(L(x), Num(1))),]
+using env =
+(y, Loc(1))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 2, 3, ]
+val it = [2,3] : Store
+-
+
+
+-----------------3---------------------
+int x;
+proc p() : print x end;
+!
+Parse tree:
+( [ Var(x), Proc(p, [], [ Print(L(x)),]),],  [] )
+Execution:
+Finished commandlist: []
+using env =
+(p, Closure(params:[], body:[ Print(L(x)),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ 0, 0, ]
+val it = [0,0] : Store
+-
+
+
+-----------------4---------------------
+int x;
+proc p(): x = 7 end;
+call p()
+!
+Parse tree:
+( [ Var(x), Proc(p, [], [ Assign(x, Num(7)),]),],  [ Call(p, []),] )
+Execution:
+WRITE THE CODE FOR A CALL
+Finished commandlist: [ Call(p, []),]
+using env =
+(p, Closure(params:[], body:[ Assign(x, Num(7)),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ ]
+val it = [] : Store
+-
+-----------------5---------------------
+
+int x;
+proc p(a,b): x = (a + b) end;
+proc q(): call p(x, 1) end;
+x = 3;
+call q()
+!
+Parse tree:
+( [ Var(x), Proc(p, [ a, b,], [ Assign(x, Add(L(a), L(b))),]), Proc(q, [], [ Cal
+l(p, [ L(x), Num(1),]),]),],  [ Assign(x, Num(3)), Call(q, []),] )
+Execution:
+WRITE THE CODE FOR A CALL
+Finished commandlist: [ Assign(x, Num(3)), Call(q, []),]
+using env =
+(q, Closure(params:[], body:[ Call(p, [ L(x), Num(1),]),], linkto:(p, Closure(pa
+rams:[ a, b,], body:[ Assign(x, Add(L(a), L(b))),], linkto:(x, Loc(0)) :: nil))
+:: (x, Loc(0)) :: nil))
+:: (p, Closure(params:[ a, b,], body:[ Assign(x, Add(L(a), L(b))),], linkto:(x,
+Loc(0)) :: nil))
+:: (x, Loc(0))
+:: nil
+Current store =
+[ ]
+val it = [] : Store
+-

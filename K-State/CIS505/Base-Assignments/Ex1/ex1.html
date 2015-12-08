@@ -1,0 +1,197 @@
+
+<html>
+<body>
+<h2>CIS505 Assignment 1</h2>
+
+<em>10 points; due Friday August 31, 10pm</em>
+
+<p>
+We will
+use Python to write an interpreter for the mini-command language in the Lecture
+Notes, Chapter 1, extended with expression printing, if-commands, global declarations, and procedure calls.
+A sample program looks like this:
+<pre>
+int x;
+proc p: x = (x - 1) end
+x = 2;
+while x : print x; call p end;
+if (x + 1) : call p else print (x-9) end
+</pre>
+Here is the execution of this program:
+<spre>
+python run.py
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int x;
+proc p: x = (x - 1) end
+x = 2;
+while x : print x; call p end;
+if (x + 1) : call p else print (x-9) end
+!
+Parse tree:
+[[['int', 'x'], ['proc', 'p', [['=', 'x', ['-', 'x', '1']]]]], [['=', 'x', '2'], ['while', 'x', [['print', 'x'], ['call', 'p']]], ['if', ['+', 'x', '1'], [['call', 'p']], [['print', ['-', 'x', '9']]]]]]
+Execution:
+2
+1
+final namespace = {'x': -1, 'p': [['=', 'x', ['-', 'x', '1']]]}
+</spre>
+The program is parsed into its tree and
+interpreted, which causes the namespace (storage) to hold
+values for $x$ and $p$.  While the loop repeats, $2$ and $1$ are printed as $x$ counts down to 0.  The final value of the namespace is displayed.
+
+<p>
+Here the grammar of the language we will implement:
+<pre>
+PROGRAM ::=  DECLIST COMMANDLIST 
+DECLIST ::=  DECLARATION ; DECLIST  |  (nothing)
+DECLARATION ::=  int VAR  |  proc VAR : COMMANDLIST end
+COMMANDLIST ::=  COMMAND  |  COMMAND ; COMMANDLIST
+COMMAND ::=  VAR = EXPRESSSION
+             |  print EXPRESSION
+             |  while EXPRESSION : COMMANDLIST end
+             |  if EXPRESSION : COMMANDLIST else COMMANDLIST end
+             |  call VAR
+EXPRESSION ::= NUMERAL  |  VAR  |  ( EXPRESSION OPERATOR EXPRESSION )
+OPERATOR is  +  or  -
+NUMERAL  is a sequence of digits from the set, {0,1,2,...,9}
+VAR  is a string of lower-case letters, not a keyword
+</pre>
+I have already modified the parser from Chapter 1 to build parse trees for this grammar.
+
+<h4>Interpreter input format</h4>
+
+<p>
+The input to the interpreter you write is the list-represented tree constructed by the parser.
+The syntax of trees is this:
+<pre>
+PTREE ::=  [ DLIST, CLIST ]
+DLIST ::=  [ DTREE* ]
+           where  DTREE*  means zero or more DTREEs
+DTREE ::=  ["int", VAR]  |  ["proc", VAR, CLIST]
+CLIST ::=  [ CTREE+ ]
+           where  CTREE+  means one or more CTREEs
+CTREE ::=  ["=", VAR, ETREE]  |  ["print", ETREE]  |  ["while", ETREE, CLIST]
+        |  ["if", ETREE, CLIST, CLIST]  |  ["call", VAR]
+ETREE ::=  NUMERAL  |  VAR  |  [OP, ETREE, ETREE]
+           where  OP  is either "+" or "-"
+</pre>
+Notice how the trees match the grammar constructions.   Since the trees are nested lists, it is easy to disassemble them and compute on their parts.
+
+<h4>Interpreter operation</h4>
+
+<p>
+You will extend the mini-command interpreter so that it processes the trees for
+expression printing, if-commands, declarations, and procedure calls.
+Here are the semantic concepts you must implement:
+<ul>
+<li>
+<em>expression printing</em>: $print E$ evaluates expression $E$ and prints its value.
+<li>
+<em>if-commands</em>: like the while-loop: first, the test is computed to its value.  If the value is $0$ (false), the else-arm is executed.  Otherwise, the 
+then-arm is executed.
+<li>
+<em>declarations</em>: An $int x$ declaration creates an entry for $x$ in the namespace, <em>provided that $x$ is not already declared</em> (otherwise, it's an error that stops execution).  The initial value of $x$ is set to $0$.
+A $proc p: C end$ declaration creates an entry for $p$ in the namespace,
+<em>provided that $p$ is not already declared</em> (otherwise, it's an error that stops execution). 
+$p$ is initialized to $C$.
+<li>
+<em>call</em>: the code of the called procedure is extracted from the namespace and is executed on the spot.
+</ul>
+You must also revise the semantics of commands and expressions so that
+<em>(i)</em> a variable must be declared before it is referenced in an expression
+or command; <em>(ii)</em> only $int$ variables may be used in arithmetic or assignments; <em>(iii)</em> only $proc$ variables may be called.
+Othewise, it's an error that stops execution.  When an error arises, the interpreter must print an appropriate message before stopping execution.
+
+<h4>Implementation and testing</h4>
+
+I have provided a folder that contains the drivers, scanner, modified parser, and interpreter for the mini-command language.
+You will find it on the CIS505 assignments page.
+The first thing you should do is download this folder, open it, and test it.
+To test it, you should either
+<ol>
+<li>
+Double-click on the icon for $run$, or
+<li>
+Open a command window and execute $python run.py$
+</ol>
+You should see a prompt that asks you to type a program.  Try this:
+<spre>
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+x = 2; y = (x + 1); print y
+!
+Parse tree:
+[[], [['=', 'x', '2'], ['=', 'y', ['+', 'x', '1']]]]
+Execution:
+3
+final namespace = {'y': 3, 'x': 2}
+</spre>
+That is, the interpreter understands the mini-command language from Chapter 2.
+
+<p>
+Now, your job is to revise $interpret.py$ (and that file only --- no others!)
+to have expression printing, if-commands, declarations, and procedures.
+
+Extend the interpreter in the standard "interpreter design pattern,"
+that is, each form of parse tree has its own $interpret$ function.   So,
+you must modify $interpretCTREE$ and add two new functions,
+$interpretDLIST$ and $interpretDTREE$.
+
+<p>
+<em>Remember to document the two new functions and modify the documentation
+of the other functions to match the extended language.</em>
+
+<p>
+<em>Important:</em>
+Read the short explanation,
+<a href="http://people.cis.ksu.edu/~schmidt/505f12/pythonstrucs.html">
+Notes on lists and dictionaries</a>, to learn how to implement procedures.
+(There are other links to Python documentation on the CIS505 home page.)
+
+<p>
+<em>Also:</em> Python uses indentation
+to show the nesting of commands. <em>You can indent using either spaces or tabs, but you cannot mix them. In my code, I used all spaces to do indentation.</em>  (If you mix leading tabs with leading spaces you will get strange syntax errors.)   You are warned.
+
+<p>
+Write and test the interpreter in three stages:
+<ol>
+<li>
+implement and test the semantics of expression printing and if-commands
+<li>
+add $int$-declarations and modify accordingly the semantics of expressions and
+commands to operate correctly on $int$-variables
+<li>
+add $proc$-declarations and procedure calls
+</ol>
+There is a suite of test programs included in the folder with the prototype
+interpreter.   Use <em>at least</em> these tests to check your implemetation.
+You should also devise addtional tests to see if the interpreter detects program
+errors and prints appropriate messages.
+
+Copy and paste all the test-cases-and-output
+into a file named $tests.txt$, which you will submit with your interpreter.
+
+
+<h4>Submission and grading</h4>
+
+Make a new folder,
+named $Ex1$, and place in it your final version of $interpret.py$ and also
+$tests.txt$.
+Zip the folder into a $.zip$ file and submit the $.zip$ file to the CIS505 site on K-State Online.  (Please, use $zip$ and not $rar$.)
+
+<p>
+The teaching assistant will study your work and your tests and apply some
+additional tests before scoring the submission.
+
+<p><em>Important:</em> This assignment must be done by you, individually,
+so that you acquire some basic skills with scripting and dynamic data structures.
+It is certainly OK to discuss the assignment with the instructor, TA, or your
+colleagues, but all the coding must be typed by you alone, and all the concepts in the coding must be stored in your head so that you can reproduce them on demand.   Later in the course, we will allow two-person assignments, but this assignment is a solo one.
+
+</body>
+</html>
+
+
+

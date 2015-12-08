@@ -1,0 +1,15 @@
+Line 09318 starts off at _idle_task:
+
+The first thing we do is push halt to the stack, and call the function _level0.  we moved the pushed variable (halt) into eax, and then into the variable (_level0_func). After this the int LEVEL0_VECTOR instruction is called and control goes to _level0_call (line 6814). From here we call save, save stores our registers and segments in the processes PCB, and changes the esp to point towards k_stack as well as push "restart" into k_stack so we can later return and restore the state of the process.  (Figure 1)
+
+After we jmp back from save, we jmp to (_level0_func) which is pointing to halt (moved from line 09340). sti sets the interrupt flag, and we call hlt which places the processor in a HALT state, that stops instruction execution.
+
+To resume execution after the hlt instruction, an enabled interrupt, NMI, or a reset is needed. We use clock_handler() which is an interrupt handler to a clock as an example.
+
+After going through the clock_handler() our k_stack looks like: (figure 2)
+
+since we still haven't restored the process, esp is still pointing to k_stack.
+
+Inside of clock_handler() line 10612 is when the notification is sent to the device driver, when the Driver Task receives the signal (line 11057) it will receive the message, and based on the message type do the request work and send a reply.
+(k_stack figure 3): (with driver_task & init_buffer())?
+

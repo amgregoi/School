@@ -1,0 +1,33 @@
+=========== 1A ===========
+
+reverse ["a", "b", "c"] 
+
+	reverse ["b", "c"] @ "a"
+
+		reverse ["c"] @ "b"
+		
+			reverse [] @ "c"
+			
+				reverse []
+				
+				output = [[]]
+			
+			output = [[], ["c"]]
+			
+		output = [[], ["c"], ["b"]]
+		
+	output = [[], ["c"], ["b"], ["a"]]
+	
+output = [["c"], ["b"], ["a"]]
+
+=========== 1B ===========
+
+reverseloop([["a"], [], ["c", "d"]], [])
+
+	reverseloop([[], ["c", "d"]], [["a"], []])
+		
+		reverseloop([["c", "d"]], [ [[]],["a"], []])
+			
+			reverseloop([], [["c", "d"], [[]], ["a"], []])
+				
+				ans = [["c", "d"], [[]], ["a"]]

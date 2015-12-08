@@ -1,0 +1,221 @@
+Test1 =============================================
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+print nil;
+print new {int x = 9;}
+!
+Parse tree:
+[[], [['print', 'nil'], ['print', ['new', ['struct', [['int', 'x', '9']]]]]]]
+Execution:
+nil
+h1
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil'}
+  h1 : {'parentns': 'h0', 'x': 9}
+}
+
+Press Enter key to terminate
+
+Test2 ==============================================
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int y = 9;
+ob z = new {int val = y; proc inc(x): val = (val + x) end;};
+!
+Parse tree:
+[[['int', 'y', '9'], ['ob', 'z', ['new', ['struct', [['int', 'val', ['deref', 'y
+']], ['proc', 'inc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'x']
+]]], []]]]]]], []]
+Execution:
+activation stack = ['h0']
+heap = {
+  h0 : {'y': 9, 'parentns': 'nil', 'z': 'h1'}
+  h1 : {'parentns': 'h0', 'val': 9, 'inc': 'h2'}
+  h2 : ['proc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'x']]]],
+'h1']
+}
+
+Press Enter key to terminate
+
+
+Test3 ================================================
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int a = 2;
+ob counter  = new {int val = a;
+                   proc inc(x) : val = (val + x); end;
+                  };
+print counter.val;
+counter.inc(6);
+!
+Parse tree:
+[[['int', 'a', '2'], ['ob', 'counter', ['new', ['struct', [['int', 'val', ['dere
+f', 'a']], ['proc', 'inc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref'
+, 'x']]]], []]]]]]], [['print', ['deref', ['dot', 'counter', 'val']]], ['call',
+['dot', 'counter', 'inc'], ['6']]]]
+Execution:
+2
+activation stack = ['h0']
+heap = {
+  h0 : {'a': 2, 'parentns': 'nil', 'counter': 'h1'}
+  h1 : {'parentns': 'h0', 'val': 8, 'inc': 'h2'}
+  h2 : ['proc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'x']]]],
+'h1']
+  h3 : {'parentns': 'h1', 'x': 6}
+}
+
+Press Enter key to terminate
+
+Test4 =================================================
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int g = 4;
+ob a =  new { int x = (g + 1);
+              ob y = new { int z = (x + g); };
+              int z = 99;
+              proc p(z): int w = z;
+                         print w;
+                         x = (z + y.z) end;
+            };
+a.p(a.y.z);
+print a.x;
+!
+Parse tree:
+[[['int', 'g', '4'], ['ob', 'a', ['new', ['struct', [['int', 'x', ['+', ['deref'
+, 'g'], '1']], ['ob', 'y', ['new', ['struct', [['int', 'z', ['+', ['deref', 'x']
+, ['deref', 'g']]]]]]], ['int', 'z', '99'], ['proc', 'p', ['z'], [['print', ['de
+ref', 'w']], ['=', 'x', ['+', ['deref', 'z'], ['deref', ['dot', 'y', 'z']]]]], [
+['int', 'w', ['deref', 'z']]]]]]]]], [['call', ['dot', 'a', 'p'], [['deref', ['d
+ot', ['dot', 'a', 'y'], 'z']]]], ['print', ['deref', ['dot', 'a', 'x']]]]]
+Execution:
+Heap error:  invalid lookup address: h4 w  Crash!
+activation stack = ['h4']
+heap = {
+  h0 : {'a': 'h1', 'parentns': 'nil', 'g': 4}
+  h1 : {'y': 'h2', 'parentns': 'h0', 'z': 99, 'p': 'h3', 'x': 5}
+  h2 : {'parentns': 'h1', 'z': 9}
+  h3 : ['proc', ['z'], [['print', ['deref', 'w']], ['=', 'x', ['+', ['deref', 'z
+'], ['deref', ['dot', 'y', 'z']]]]], 'h1']
+  h4 : {'parentns': 'h1', 'z': 9}
+}
+Traceback (most recent call last):
+
+We didnt get Test 4 to work completely, i believe this still used multi-level declaration from the last assignment which we never got to work?
+
+Press Enter key to terminate
+
+
+Test5 =================================================
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+class counter : {int val = 0;
+                 proc inc() : print val;
+                              val = (val + 1); end;};
+ob c = new counter;
+ob d = new counter;
+c.inc();
+print c.val;
+!
+Parse tree:
+[[['class', 'counter', ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['p
+rint', ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], []]]]], [
+'ob', 'c', ['new', ['call', 'counter']]], ['ob', 'd', ['new', ['call', 'counter'
+]]]], [['call', ['dot', 'c', 'inc'], []], ['print', ['deref', ['dot', 'c', 'val'
+]]]]]
+Execution:
+0
+1
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'c': 'h2', 'counter': 'h1', 'd': 'h4'}
+  h1 : ['class', ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['print',
+ ['deref', 'val']], ['=', 'val', ['+', ['deref', 'val'], '1']]], []]]], 'h0']
+  h2 : {'parentns': 'h0', 'val': 1, 'inc': 'h3'}
+  h3 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', '
+val'], '1']]], 'h2']
+  h4 : {'parentns': 'h0', 'val': 0, 'inc': 'h5'}
+  h5 : ['proc', [], [['print', ['deref', 'val']], ['=', 'val', ['+', ['deref', '
+val'], '1']]], 'h4']
+  h6 : {'parentns': 'h2'}
+}
+
+Press Enter key to terminate
+
+Test6 ====================================================
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int howmuch = 1;
+class counter : { int val  = 0;
+                  proc inc() : val = (val + howmuch); end;
+                };
+class clock : { ob hours = new counter;
+                ob minutes = new counter;
+                proc tick(): if (minutes.val - 59) :
+                                  minutes.inc()
+                             else
+                                  minutes.val = 0;
+                                  hours.inc()
+                             end
+                end;
+              };
+ob c = new clock;
+c.tick(); c.tick();
+print c.hours.val;
+print c.minutes.val
+!
+Parse tree:
+[[['int', 'howmuch', '1'], ['class', 'counter', ['struct', [['int', 'val', '0'],
+ ['proc', 'inc', [], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'howmuch']]
+]], []]]]], ['class', 'clock', ['struct', [['ob', 'hours', ['new', ['call', 'cou
+nter']]], ['ob', 'minutes', ['new', ['call', 'counter']]], ['proc', 'tick', [],
+[['if', ['-', ['deref', ['dot', 'minutes', 'val']], '59'], [['call', ['dot', 'mi
+nutes', 'inc'], []]], [['=', ['dot', 'minutes', 'val'], '0'], ['call', ['dot', '
+hours', 'inc'], []]]]], []]]]], ['ob', 'c', ['new', ['call', 'clock']]]], [['cal
+l', ['dot', 'c', 'tick'], []], ['call', ['dot', 'c', 'tick'], []], ['print', ['d
+eref', ['dot', ['dot', 'c', 'hours'], 'val']]], ['print', ['deref', ['dot', ['do
+t', 'c', 'minutes'], 'val']]]]]
+Execution:
+0
+2
+activation stack = ['h0']
+heap = {
+  h0 : {'parentns': 'nil', 'howmuch': 1, 'counter': 'h1', 'c': 'h3', 'clock': 'h
+2'}
+  h1 : ['class', ['struct', [['int', 'val', '0'], ['proc', 'inc', [], [['=', 'va
+l', ['+', ['deref', 'val'], ['deref', 'howmuch']]]], []]]], 'h0']
+  h10 : {'parentns': 'h6'}
+  h11 : {'parentns': 'h3'}
+  h12 : {'parentns': 'h6'}
+  h2 : ['class', ['struct', [['ob', 'hours', ['new', ['call', 'counter']]], ['ob
+', 'minutes', ['new', ['call', 'counter']]], ['proc', 'tick', [], [['if', ['-',
+['deref', ['dot', 'minutes', 'val']], '59'], [['call', ['dot', 'minutes', 'inc']
+, []]], [['=', ['dot', 'minutes', 'val'], '0'], ['call', ['dot', 'hours', 'inc']
+, []]]]], []]]], 'h0']
+  h3 : {'hours': 'h4', 'parentns': 'h0', 'tick': 'h8', 'minutes': 'h6'}
+  h4 : {'parentns': 'h3', 'val': 0, 'inc': 'h5'}
+  h5 : ['proc', [], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'howmuch']]]
+], 'h4']
+  h6 : {'parentns': 'h3', 'val': 2, 'inc': 'h7'}
+  h7 : ['proc', [], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'howmuch']]]
+], 'h6']
+  h8 : ['proc', [], [['if', ['-', ['deref', ['dot', 'minutes', 'val']], '59'], [
+['call', ['dot', 'minutes', 'inc'], []]], [['=', ['dot', 'minutes', 'val'], '0']
+, ['call', ['dot', 'hours', 'inc'], []]]]], 'h3']
+  h9 : {'parentns': 'h3'}
+}
+
+Press Enter key to terminate
+

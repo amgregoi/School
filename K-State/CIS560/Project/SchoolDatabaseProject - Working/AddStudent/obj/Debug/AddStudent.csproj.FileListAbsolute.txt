@@ -1,0 +1,9 @@
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\bin\Debug\AddStudent.exe.config
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\bin\Debug\AddStudent.exe
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\bin\Debug\AddStudent.pdb
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\obj\Debug\AddStudent.csprojResolveAssemblyReference.cache
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\obj\Debug\AddStudent.StudentForm.resources
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\obj\Debug\AddStudent.Properties.Resources.resources
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\obj\Debug\AddStudent.csproj.GenerateResource.Cache
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\obj\Debug\AddStudent.exe
+U:\cis560\SchoolDatabaseProject - Working\AddStudent\obj\Debug\AddStudent.pdb

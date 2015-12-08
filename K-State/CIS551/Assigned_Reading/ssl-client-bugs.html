@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns='http://www.w3.org/1999/xhtml'> 
+
+<head> 
+<base href="http://crypto.stanford.edu/~dabo/pubs/pubs.html">
+
+<meta content='text/html; charset=utf-8' http-equiv='Content-Type' /> 
+<link rel='stylesheet' type='text/css' href='dabo.css' /> 
+<title>  
+Boneh Publications: 
+The most dangerous code in the world: validating SSL certificates in non-browser software</title>
+
+<script>  
+  function showBibtex(abbrv) {
+    var elt = document.getElementById('bibtex-' + abbrv);
+    if (elt.style.display == 'none') {
+      var elts = document.getElementsByTagName("div");
+      for (var i = 0; i < elts.length; i++) {
+        if (elts[i].className == "bibtex")
+          elts[i].style.display = "none";
+        }
+        elt.style.display = "block";
+    } else {
+        elt.style.display = "none";
+    }
+  }
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33008185-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head> 
+
+
+<body> 
+<div id="inner-wrapper"> 
+<div id="outer-wrapper"> 
+<h1 id='header'>Publications</h1>
+<div id='content' class='full course'> 
+
+<h1 class="course-title">
+The most dangerous code in the world: validating SSL certificates in non-browser software</h1>
+
+<b> Authors:</b> <i> 
+
+M. Georgiev, 
+S. Iyengar, 
+S. Jana, 
+R. Anubhai, 
+D. Boneh, and 
+<a href="http://www.cs.utexas.edu/~shmat/">V. Shmatikov</a></i><p>
+
+<b> Abstract: </b> <br>
+
+SSL (Secure Sockets Layer) is the de facto standard for secure
+Internet communications. Security of SSL connections against an active
+network attacker depends on correctly validating public-key
+certificates presented when the connection is established.
+We demonstrate that SSL certificate validation is completely broken in
+many security-critical applications and libraries. Vulnerable software
+includes Amazon's EC2 Java library and all cloud clients based on it;
+Amazon's and PayPal's merchant SDKs responsible for transmitting
+payment details from e-commerce sites to payment gateways; integrated
+shopping carts such as osCommerce, ZenCart, Ubercart, and PrestaShop;
+AdMob code used by mobile websites; Chase mobile banking and several
+other Android apps and libraries; Java Web-services middleware -
+including Apache Axis, Axis 2, Codehaus XFire, and Pusher library for
+Android - and all applications employing this middleware. Any SSL
+connection from any of these programs is insecure against a
+man-in-the-middle attack.
+The root causes of these vulnerabilities are badly designed APIs of
+SSL implementations (such as JSSE, OpenSSL, and GnuTLS) and
+data-transport libraries (such as cURL) which present developers with
+a confusing array of settings and options. We analyze perils and
+pitfalls of SSL certificate validation in software based on these APIs
+and present our recommendations.  
+
+<p>
+<b> Reference:</b> <br>
+In proceedings of <a href="http://www.sigsac.org/ccs/CCS2012/techprogram.shtml">ACM CCS '12</a>, pp. 38-49, 2012
+&nbsp;
+<a onclick="showBibtex('ssl-client-bugs'); return false;" href="#" class="bibtexlink">
+[BIBTEX]</a> 
+
+<div style='display: none' class='bibtex' id='bibtex-ssl-client-bugs'>
+@inproceedings{GIJABS12,
+  author    = {Martin Georgiev and
+               Subodh Iyengar and
+               Suman Jana and
+               Rishita Anubhai and
+               Dan Boneh and
+               Vitaly Shmatikov},
+  title     = {The most dangerous code in the world: validating SSL certificates
+               in non-browser software},
+  booktitle = {ACM Conference on Computer and Communications Security},
+  year      = {2012},
+  pages     = {38-49}
+}
+
+</div>  
+</p>
+
+<p>
+
+<B>Full paper:</B>
+ <a href="http://www.cs.utexas.edu/~shmat/shmat_ccs12.pdf">pdf</a>
+ 
+<P>
+
+<B>Related papers:</B>
+ <ul>
+<li>See our <a href="https://docs.google.com/document/pub?id=1roBIeSJsYq3Ntpf6N0PIeeAAvu4ddn7mGo6Qb7aL7ew">FAQ</a> for a brief explanation of the issue uncovered
+in the paper.  </li>
+<li> iSec partners released <a href="https://www.isecpartners.com/blog/2012/october/the-lurking-menace-of-broken-tls-validation.aspx">three tools</a> to help developers avoid the type of errors discussed in the paper.</li>
+</ul>
+ 
+<P>
+
+
+<br><br>
+
+<hr class="bottomrule">
+
+<p class="nav">
+<a href="pubs.html">Dan's publications</a>,  &nbsp;&nbsp;
+<a href="http://crypto.stanford.edu/~dabo/">Dan's home page</a>
+</p>
+
+
+</body>
+</html>

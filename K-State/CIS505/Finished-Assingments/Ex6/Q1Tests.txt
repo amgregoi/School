@@ -1,0 +1,14 @@
+1a
+----------
+1 ?- printOverdue(100).
+Tale of Two Cities
+Moby Dick
+Tale of Two Cities
+David Copperfied
+true
+
+
+1b 
+----------
+2 ?- hasFine('Homer', 55, MoneyOwed).
+MoneyOwed = 20

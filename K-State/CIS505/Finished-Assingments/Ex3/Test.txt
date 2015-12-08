@@ -1,0 +1,133 @@
+Test 1
+int x = 2;
+int y = (x+x);
+if y:
+    x = y
+else
+    x = 0
+end;
+!
+Parse tree:
+[[['int', 'x', '2'], ['int', 'y', ['+', ['deref', 'x'], ['deref', 'x']]]], [['if
+', ['deref', 'y'], [['=', 'x', ['deref', 'y']]], [['=', 'x', '0']]]]]
+Execution:
+Successful termination.
+namespace = ['h0', 'h0']
+heap = {
+  h0 : {'y': 4, 'parentns': 'nil', 'x': 4}
+}
+
+Press Enter key to terminate
+------------------------------------------------------------------
+Test2
+int x = 2;
+proc p() : print x; x = (x+1) end;
+p();
+!
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', [], [['print', ['deref', 'x']], ['=', 'x', ['
++', ['deref', 'x'], '1']]], []]], [['call', 'p', []]]]
+Execution:
+[['print', ['deref', 'x']], ['=', 'x', ['+', ['deref', 'x'], '1']]]
+
+
+
+
+2
+Successful termination.
+namespace = ['h0', 'h0']
+heap = {
+  h0 : {'parentns': 'nil', 'p': 'h1', 'x': 3}
+  h1 : ['proc', [], [['print', ['deref', 'x']], ['=', 'x', ['+', ['deref', 'x'],
+ '1']]], 'h0']
+  h2 : {'parentns': 'h0'}
+}
+
+Press Enter key to terminate
+------------------------------------------------------------------
+Test 3
+
+int x = 2;
+proc p(y,z):
+    x = (y-z); q(y); z = 0
+end;
+proc q(y): print y; x = y; end;
+q(99)
+!
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', ['y', 'z'], [['=', 'x', ['-', ['deref', 'y'],
+ ['deref', 'z']]], ['call', 'q', [['deref', 'y']]], ['=', 'z', '0']], []], ['pro
+c', 'q', ['y'], [['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]], []]], [
+['call', 'q', ['99']]]]
+Execution:
+[['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'y'
+]]], ['=', 'z', '0']]
+
+
+
+
+[['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]]
+
+
+
+
+99
+Successful termination.
+namespace = ['h0', 'h0']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 99}
+  h1 : ['proc', ['y', 'z'], [['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]],
+['call', 'q', [['deref', 'y']]], ['=', 'z', '0']], 'h0']
+  h2 : ['proc', ['y'], [['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]],
+'h0']
+  h3 : {'y': 99, 'parentns': 'h0'}
+}
+
+Press Enter key to terminate
+------------------------------------------------------------------
+Test 4
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int x = 2;
+proc p(y, z):
+    print y;
+    x = (y - z); q(z);
+    z = 0
+end;
+proc q(y): print y; x = y; end;
+p(x, 9)
+!
+Parse tree:
+[[['int', 'x', '2'], ['proc', 'p', ['y', 'z'], [['print', ['deref', 'y']], ['=',
+ 'x', ['-', ['deref', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], [
+'=', 'z', '0']], []], ['proc', 'q', ['y'], [['print', ['deref', 'y']], ['=', 'x'
+, ['deref', 'y']]], []]], [['call', 'p', [['deref', 'x'], '9']]]]
+Execution:
+[['print', ['deref', 'y']], ['=', 'x', ['-', ['deref', 'y'], ['deref', 'z']]], [
+'call', 'q', [['deref', 'z']]], ['=', 'z', '0']]
+
+
+[['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]]
+
+
+2
+9
+Successful termination.
+namespace = ['h0', 'h0']
+heap = {
+  h0 : {'q': 'h2', 'parentns': 'nil', 'p': 'h1', 'x': 9}
+  h1 : ['proc', ['y', 'z'], [['print', ['deref', 'y']], ['=', 'x', ['-', ['deref
+', 'y'], ['deref', 'z']]], ['call', 'q', [['deref', 'z']]], ['=', 'z', '0']], 'h
+0']
+  h2 : ['proc', ['y'], [['print', ['deref', 'y']], ['=', 'x', ['deref', 'y']]],
+'h0']
+  h3 : {'y': 2, 'parentns': 'h0', 'z': 0}
+  h4 : {'y': 9, 'parentns': 'h0'}
+}
+
+Press Enter key to terminate
+------------------------------------------------------------------
+Test 5
+Test 6
+ - Didnt get part B to work.

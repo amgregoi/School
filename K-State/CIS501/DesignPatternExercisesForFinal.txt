@@ -1,0 +1,33 @@
+The following 5 questions are for you to prepare for the final exam and not to be turned in.
+
+1. The program in TemplateMethodExercise uses an anti-pattern program structure.
+   Rewrite it by applying the Template Method Pattern
+   
+2. In the program in AdaptorExercise, the old interface has a method ConvFahToCel() 
+   which takes Fahrenheit (double) as an argument and converts it to Celsius.
+   The new interface has only basic arithmetic operations.
+   The client (Main) is written for the old interface.
+   Use the adaptor pattern to convert the old interface to the new interface so that
+   the main can call ConvFahToCel().
+
+3. The program in ObserverExercise uses an anti-pattern program structure.
+   Rewrite it by applying the Observer Pattern.
+   
+4. The program in MediatorExercise has input for the mail address.
+   Rewrite the program to adapt the following rules:
+   1. When Guest is selected, Username, Password, and e-mail are all disabled and
+      no text can be typed 
+   2. When User is selected, Username becomes enabled and accepts input
+   3. When no character is input in Username, both Password and e-mail are disabled
+   4. If at least one character is input in Username, Password is enabled
+   5. If both Username and Password have at least one character, e-mail is enabled
+   6. When User is selected, if all of Username, Password, and e-mail have at least one character,
+      the OK button is enabled
+   7. When Guest is selected, OK is enabled
+   8. Cancel is always enabled
+  Note that this excercise program had been written before I converted the adaptor-pattern implementations
+  from the inheritance-based to delegate(association)-based.  
+
+5. Rewrite the program in StrategyExercise by applying the Strategy Pattern.
+   The new program should be easily expanded to accommodate more algorithms to add
+   two numbers.

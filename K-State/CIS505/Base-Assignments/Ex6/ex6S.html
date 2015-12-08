@@ -1,0 +1,263 @@
+<html>
+<body>
+<h2>CIS505 Assignment 6</h2>
+
+<em><font color="#8B0000">10 points; due Friday, November 9</font></em>
+
+<p>
+
+<em><font color="#8B0000">This is an individual exercise --- this is the only way you will get
+these concepts to stick in your head.
+</font></em>
+<hr>
+Here are two easy things to do to ``warm up'':
+<hr>
+<p>
+<h3>Question 1a.</h3>
+Download <a href="../../PrologExs/lib.pl"><tt><font color="#00008B"><strong>lib.pl</strong></font></tt></a> from the 
+CIS505 Lectures page.  Write a one-line query,
+<tt><font color="#00008B"><strong>?- BLAHBLAH</strong></font></tt>, such that <tt><font color="#00008B"><strong>BLAHBLAH</strong></font></tt> asks the following:
+<dl>
+<dd>
+<em><font color="#8B0000">''print the titles of all the books that everyone has borrowed and are overdue as of Day 100''
+</font></em>
+</dl>
+(Hint: use <tt><font color="#00008B"><strong>findall</strong></font></tt> and some of the clauses already defined in <tt><font color="#00008B"><strong>lib.pl</strong></font></tt>.)
+<p>
+Start <tt><font color="#00008B"><strong>lib.pl</strong></font></tt>, type the one-line query, and copy-and-paste the query and its answer into the file, <tt><font color="#00008B"><strong>q1a.txt</strong></font></tt>.
+
+<p>
+<h3>Question 1b.</h3>
+Here is a "function" that sums the ints in a list of ints:
+<font color="#00008B"><strong><pre>
+/* sum(L, T)  holds true when  T  is the sum of all the ints in list  L.  */
+sum([], 0).
+sum([N|Rest], Total) :- sum(Rest, M),  Total is N + M.
+</pre></strong></font>
+Insert these two lines in the file, <tt><font color="#00008B"><strong>lib.pl</strong></font></tt>.
+Now, code this definition and add it to <tt><font color="#00008B"><strong>lib.pl</strong></font></tt>:
+<font color="#00008B"><pre>===================================================<strong>
+
+/* hasFine(Who, Today, Howmuch)  holds true when  Who  has borrowed items
+     that are overdue as of Today, and the total fine of all the overdue 
+     items is  Howmuch.
+*/
+hasFine(Who, Today, Howmuch) :-   ...WRITE ME...
+
+</strong>===================================================</pre></font>
+Add your definition to <tt><font color="#00008B"><strong>lib.pl</strong></font></tt> and test it with
+<tt><font color="#00008B"><strong>?- hasFine('Homer', 55, MoneyOwed)</strong></font></tt>.
+Copy and paste the query and its result into the file, <tt><font color="#00008B"><strong>q1b.txt</strong></font></tt>.
+
+<br>
+<p>
+<br>
+<hr>
+The next two questions ask you to rework Question 3 of Exercise 4 --- the baby database with rollback and commital --- in two different ways in Prolog.
+<hr>
+
+<p>
+<h3>Question 2.</h3>
+Say that a database is built from these key-value bindings:
+<tt><font color="#00008B"><strong>[(b,2), (a,1), (c,4)]</strong></font></tt>.  These are saved in the Prolog database
+as clauses:
+<font color="#00008B"><strong><pre>
+mapsTo(b, 2).
+mapsTo(a, 1).
+mapsTo(c, 4).
+</pre></strong></font>
+There is a Prolog operator, <tt><font color="#00008B"><strong>asserta</strong></font></tt>, that lets you add a new
+clause to a database.  Say that we want to update <tt><font color="#00008B"><strong>a</strong></font></tt> to  <tt><font color="#00008B"><strong>99</strong></font></tt>; we can do this:
+<font color="#00008B"><strong><pre>
+?- asserta(upd(a, 99)).
+</pre></strong></font>
+Now, we see that
+<font color="#00008B"><strong><pre>
+?- listing.
+ ...
+upd(a, 99).
+mapsTo(b, 2).
+mapsTo(a, 1).
+mapsTo(c, 4).
+</pre></strong></font>
+If we want to undo an update, we "retract" the last-inserted <tt><font color="#00008B"><strong>udp</strong></font></tt> clause, like this:
+<font color="#00008B"><strong><pre>
+?- retract(upd(K,_)).
+</pre></strong></font>
+(There is also an operator, <tt><font color="#00008B"><strong>retractall</strong></font></tt>, which removes all clauses,
+e.g., <tt><font color="#00008B"><strong>retractall(upd(_,_))</strong></font></tt> removes all the <tt><font color="#00008B"><strong>upd</strong></font></tt> clauses.)
+<p>
+When it is time to "commit" the updates to the database, we must
+<ol>
+<li>
+collect into a list all the <tt><font color="#00008B"><strong>(Key,Value)</strong></font></tt> pairs that appear in all the <tt><font color="#00008B"><strong>upd(Key, Value)</strong></font></tt>
+clauses and then remove any older, duplicate-key pairs
+from the list;
+<li>
+retract all <tt><font color="#00008B"><strong>upd</strong></font></tt> clauses;
+<li>
+use the list from Step 1 to retract all outdated  <tt><font color="#00008B"><strong>mapsTo</strong></font></tt> clauses;
+<li>
+use the list from Step 1 to add new <tt><font color="#00008B"><strong>mapsTo</strong></font></tt> clauses to the database.
+</ol>
+
+<p>
+Your job is to implement the baby database by finishing what
+I have already written.
+The code you start from is at
+<a href="Ex6/q2.pl"><tt><font color="#00008B"><strong>Ex6/q2.pl</strong></font></tt></a>.
+(You should execute what I wrote before you try adding any code to it.)
+<p>
+Here is a demo of how the finished database will behave: 
+<font color="#00008B"><pre>===================================================<strong>
+
+1 ?- addDB([(b,2), (a,1), (c,4)]).
+true.
+
+2 ?- listing.
+ ...
+mapsTo(c, 4).
+mapsTo(a, 1).
+mapsTo(b, 2).
+ ...
+
+3 ?- lookup(a).
+1
+true.
+
+4 ?- update(a, 99).
+a updated
+true.
+
+5 ?- listing.
+  ...
+upd(a, 99).
+mapsTo(c, 4).
+mapsTo(a, 1).
+mapsTo(b, 2).
+  ...
+
+6 ?- lookup(a).
+99
+true 
+
+7 ?- update(b, 1000).
+b updated
+true.
+
+8 ?- revert.
+b reverted
+true.
+
+9 ?- commit.
+Updates to commit:[ (a,99)]
+New contents:[ (a,99), (c,4), (b,2)]
+true.
+
+10 ?- listing.
+  ...
+mapsTo(a, 99).
+mapsTo(c, 4).
+mapsTo(b, 2).
+ ...
+
+</strong>===================================================</pre></font>
+Once you have your solution working, do at least two different
+test sessions with it and copy-and-paste the results into a file,
+<tt><font color="#00008B"><strong>q2tests.txt</strong></font></tt>.
+
+
+<p>
+<h3>Question 3.</h3>
+The implementation in Question 2 is simple and it works!  But perhaps
+we love ordered binary-search trees, like the ones we coded in Question 3,
+Exercise 4, and we want to build them in Prolog.
+This is what you do for this question.
+
+<p>
+(Note: In Prolog, an atom is <tt><font color="#00008B"><strong>abc</strong></font></tt> or <tt><font color="#00008B"><strong>'abc'</strong></font></tt>.  A string is <tt><font color="#00008B"><strong>"abc"</strong></font></tt>.
+The latter is actually a list of ASCII ints (e.g., <tt><font color="#00008B"><strong>"abc"</strong></font></tt> is really <tt><font color="#00008B"><strong>[97, 98, 99]</strong></font></tt>).
+Characters in strings can be compared with <tt><font color="#00008B"><strong><</strong></font></tt>, but atoms cannot.  Since we will implement
+an ordered tree, we need to use <tt><font color="#00008B"><strong><</strong></font></tt>, so we use single-letter strings as keys.)
+The Prolog program builds and maintains a database of this form:
+<font color="#00008B"><strong><pre>
+DB::=  leaf  |  node(Key, Value, DB1, DB2)  |  upd(Key, Value, DB)
+Key ::=  a one-letter double-quoted string, e.g.,  "a"
+Value  ::= an int
+</pre></strong></font>
+
+Here is a demo of how the program will operate:
+<font color="#00008B"><pre>===================================================<strong>
+
+?- run([("b",2), ("a",1), ("c",4)]).
+node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf)
+
+Command? l.
+Key (double quoted)? "a".
+
+1
+Command? u.
+Key (double quoted)? "a".
+Value? 99.
+
+upd([97],99,node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf))
+Command? l.
+Key (double quoted)? "a".
+
+99
+Command? u.
+Key (double quoted)? "b".
+Value? 1000.
+
+upd([98],1000,upd([97],99,node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf)))
+Command? r.
+
+upd([97],99,node([99],4,node([97],1,leaf,node([98],2,leaf,leaf)),leaf))
+Command? c.
+
+(a, 99), (c, 4), (b, 2), 
+node([98],2,node([97],99,leaf,leaf),node([99],4,leaf,leaf))
+Command? q.
+
+(b, 2), (a, 99), (c, 4), 
+true ;
+false.
+
+</strong>===================================================</pre></font>
+IMPORTANT: each user input must be terminated by a period.
+<p>
+You will finish the program I have started writing for you; it's at
+<a href="Ex6/q3.pl"><tt><font color="#00008B"><strong>Ex6/q3.pl</strong></font></tt></a>.
+(You should execute what I wrote before you try adding any code to it.)
+
+
+<p>
+HINT: Prolog has a built-in predicate, <tt><font color="#00008B"><strong>append</strong></font></tt>, that can append
+together (concat) two lists:
+<tt><font color="#00008B"><strong>append(L1, L2, Ans)</strong></font></tt>  holds true when list  <tt><font color="#00008B"><strong>Ans</strong></font></tt>  is exactly list  <tt><font color="#00008B"><strong>L1</strong></font></tt>  appended to list  <tt><font color="#00008B"><strong>L2</strong></font></tt>.
+Example: 
+<font color="#00008B"><strong><pre>
+?- append([1,2], [3], A).
+   A = [1,2,3]
+</pre></strong></font>
+You will use this in your solution.  See also the hints I inserted into the
+code I've already written.
+
+<p>
+Once you have your solution working, do at least two different
+test sessions with it and copy-and-paste the results into a file,
+<tt><font color="#00008B"><strong>q3tests.txt</strong></font></tt>.
+
+<h4>Submission</h4>
+
+<p>Make a folder, <tt><font color="#00008B"><strong>Ex6</strong></font></tt>, and save in it
+<tt><font color="#00008B"><strong>q1a.txt</strong></font></tt>, your revised <tt><font color="#00008B"><strong>lib.pl</strong></font></tt>, <tt><font color="#00008B"><strong>q1b.txt</strong></font></tt>,
+<tt><font color="#00008B"><strong>q2.pl</strong></font></tt>, and <tt><font color="#00008B"><strong>q3.pl</strong></font></tt>.  Also save the files, <tt><font color="#00008B"><strong>q2tests.txt</strong></font></tt> and <tt><font color="#00008B"><strong>q3tests.txt</strong></font></tt>,
+that hold at least two test sessions with your implementations of
+<tt><font color="#00008B"><strong>q2.pl</strong></font></tt> and <tt><font color="#00008B"><strong>q3.pl</strong></font></tt>, respectively.
+Submit <tt><font color="#00008B"><strong>Ex6.zip</strong></font></tt> to the CIS505 site on K-State Online.
+</body>
+</html>
+
+
+

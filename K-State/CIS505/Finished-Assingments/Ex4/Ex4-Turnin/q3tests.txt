@@ -1,0 +1,77 @@
+=================1=================
+- run [(#"a",2), (#"d", 7)];
+> u c 6
+update performed
+> u d 9
+update performed
+> !
+Final database:
+Update(d,9, Update(c,6, Node(a,2, Leaf, Node(d,7, Leaf, Leaf))))
+val it = "[(d,9), (c,6), (a,2), ]" : string
+
+
+=================2=================
+- run [(#"a",2),(#"d",7)];
+> u c 6
+update performed
+> l d
+lookup
+7
+> l a
+lookup
+2
+> u a 5
+update performed
+> l a
+lookup
+5
+> r
+revert performed
+> l a
+lookup
+2
+> l e
+lookup
+
+lookup error
+> !
+Final database:
+Update(c,6, Node(a,2, Leaf, Node(d,7, Leaf, Leaf)))
+val it = "[(c,6), (a,2), (d,7), ]" : string
+-
+
+
+=================3=================
+- run nil;
+> u a 6
+update performed
+> u d 7
+update performed
+> u c 2
+update performed
+> c
+Commit database:
+Update(c,2, Update(d,7, Update(a,6, Leaf)))
+Active values: [(c,2), (d,7), (a,6), ]
+New database:
+Node(c,2, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf))
+> u c 5
+update performed
+> u b 8
+update performed
+> r
+revert performed
+> c
+Commit database:
+Update(c,5, Node(c,2, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf)))
+Active values: [(c,5), (a,6), (d,7), ]
+New database:
+Node(c,5, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf))
+> l d
+lookup
+7
+> !
+Final database:
+Node(c,5, Node(a,6, Leaf, Leaf), Node(d,7, Leaf, Leaf))
+val it = "[(c,5), (a,6), (d,7), ]" : string
+-

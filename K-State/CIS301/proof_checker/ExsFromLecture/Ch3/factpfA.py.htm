@@ -1,0 +1,67 @@
+<html><body><pre><strong>
+
+<font color="#008B00">"""{ def<font color="#00FF00">OK</font> mult(0) == 1
+     def<font color="#00FF00">OK</font> mult(n) == mult(n-1) * n  }"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+def fac(n) :
+    <font color="#008B00">"""{ pre  n >= 0
+         post  ans == mult(n)
+         return ans  }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (n >= 0)</font>
+    if n == 0 :
+        <font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+        <font color="#1E90FF"># (n == 0)</font>
+        <font color="#1E90FF"># (n >= 0)</font>
+        ans = 1
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (ans == 1)</font>
+        <font color="#1E90FF"># (n == 0)</font>
+        <font color="#1E90FF"># (n >= 0)</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> mult(0) == 1    def
+             2.<font color="#00FF00">OK</font> ans == mult(0)  algebra 1
+             3.<font color="#00FF00">OK</font> n == 0          premise
+             4.<font color="#00FF00">OK</font> ans == mult(n)  subst 3 2}"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (ans == mult(n))</font>
+    else :
+        <font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+        <font color="#1E90FF"># not (n == 0)</font>
+        <font color="#1E90FF"># (n >= 0)</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> not(n == 0)   premise
+             2.<font color="#00FF00">OK</font> n - 1 >= 0    algebra 1
+        }"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># ((n - 1) >= 0)</font>
+        sub = fac(n-1)
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (sub == mult((n - 1)))</font>
+        <font color="#1E90FF"># ((n - 1) >= 0)</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  sub == mult(n-1)    premise }"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (sub == mult((n - 1)))</font>
+        ans = sub * n
+        <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+        <font color="#1E90FF"># (ans == (sub * n))</font>
+        <font color="#1E90FF"># (sub == mult((n - 1)))</font>
+        <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  ans == sub * n             premise
+             2.<font color="#00FF00">OK</font>  sub == mult(n-1)           premise
+             3.<font color="#00FF00">OK</font>  ans == mult(n-1) * n       subst 2 1
+             4.<font color="#00FF00">OK</font>  mult(n) == mult(n-1) * n   def
+             5.<font color="#00FF00">OK</font>  ans == mult(n)             subst 4 3
+        }"""</font>
+        <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+        <font color="#1E90FF"># (ans == mult(n))</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (ans == mult(n))</font>
+    <font color="#1E90FF"># (n >= 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  ans == mult(n)                 premise }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (ans == mult(n))</font>
+    return ans
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (ans == mult(n))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+</strong></pre></body></html>

@@ -1,0 +1,45 @@
+<html><body><pre><strong>
+x = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+if x > 0 :
+	<font color="#1E90FF">#PREMISES FOR THEN-ARM: </font>
+	<font color="#1E90FF"># (x > 0)</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> x>0	premise}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># (x > 0)</font>
+	y = x + 1
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (y == (x + 1))</font>
+	<font color="#1E90FF"># (x > 0)</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> x > 0	premise
+	2.<font color="#00FF00">OK</font> y == x+1	premise
+	3.<font color="#00FF00">OK</font> y > 0	algebra 2 1
+	4.<font color="#00FF00">OK</font> y > x	algebra 2 1
+	5.<font color="#00FF00">OK</font> y> 0 and y>x andi 3 4
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((y > 0) and (y > x))</font>
+else :
+	<font color="#1E90FF">#PREMISES FOR ELSE-ARM: </font>
+	<font color="#1E90FF"># not (x > 0)</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(x>0)	premise}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># not (x > 0)</font>
+	y = 0 - x
+	<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+	<font color="#1E90FF"># (y == (0 - x))</font>
+	<font color="#1E90FF"># not (x > 0)</font>
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(x>0)	premise
+	2.<font color="#00FF00">OK</font> y == 0-x	premise
+	3.<font color="#00FF00">OK</font> y + x == 0	algebra 2
+	4.<font color="#00FF00">OK</font> y >= 0	algebra 3 1
+	5.<font color="#00FF00">OK</font> y >= x 	algebra 3 1
+	6.<font color="#00FF00">OK</font> y>= 0 and y>=x andi 4 5
+	}"""</font>
+	<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+	<font color="#1E90FF"># ((y >= 0) and (y >= x))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (((y > 0) and (y > x)) or ((y >= 0) and (y >= x)))</font>
+<font color="#1E90FF"># prove here that  y > 0  and  y > x</font></strong></pre></body></html>

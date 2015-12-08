@@ -1,0 +1,70 @@
+<html><body><pre><strong>
+
+<font color="#1E90FF">### MODULE ########################################</font>
+
+pi = 3  <font color="#1E90FF"># sorry --- the checker handles  ints  only  )-:</font>
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (pi == 3)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (pi == 3)</font>
+c = 0
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (c == 0)</font>
+<font color="#1E90FF"># (pi == 3)</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  c == 0    premise
+     2.<font color="#00FF00">OK</font>  c >= 0    algebra 1
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (c >= 0)</font>
+<font color="#008B00">"""{ globalinv<font color="#00FF00">OK</font> c >= 0  
+     globalinv<font color="#00FF00">OK</font> pi == 3  }"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (pi == 3)</font>
+
+def circ(diameter) :
+    <font color="#008B00">"""{ pre  diameter >= 0 
+         post  c == pi * diameter  
+    }"""</font>
+    global c
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (diameter >= 0)</font>
+    <font color="#1E90FF"># (c >= 0)</font>
+    <font color="#1E90FF"># as needed, we can introduce the two  globalinvs  into the proof:</font>
+    c = pi * diameter
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (c == (pi * diameter))</font>
+    <font color="#1E90FF"># (diameter >= 0)</font>
+    <font color="#1E90FF"># (c_old >= 0)</font>
+    <font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  c == pi * diameter           premise
+         2.<font color="#00FF00">OK</font>  diameter >= 0                premise
+         3.<font color="#00FF00">OK</font>  pi == 3                      globalinv
+         4.<font color="#00FF00">OK</font>  c >= 0                       algebra 1 2 3
+         5.<font color="#00FF00">OK</font>  return 1 4                   <font color="#1E90FF">#  returns _two_ premises to show</font>
+                                          <font color="#1E90FF">#  that post  proved and globalinv proved</font>
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (c == (pi * diameter))</font>
+    <font color="#1E90FF"># (c >= 0)</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (pi == 3)</font>
+<font color="#1E90FF">### END #########################################</font>
+
+
+<font color="#1E90FF"># this part would be in another component that imports (uses) the module:</font>
+
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font> pi == 3   globalinv
+     2.<font color="#00FF00">OK</font> c >= 0    globalinv
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (c >= 0)</font>
+novar = circ(2)
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># (c == (pi * 2))</font>
+<font color="#1E90FF"># (c_old >= 0)</font>
+<font color="#008B00">"""{ 1.<font color="#00FF00">OK</font>  c == pi * 2   premise
+     2.<font color="#00FF00">OK</font>  c >= 0        globalinv
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (c >= 0)</font>
+
+</strong></pre></body></html>

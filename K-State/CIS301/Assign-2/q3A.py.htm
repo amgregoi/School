@@ -1,0 +1,48 @@
+<html><body><pre><strong>
+<font color="#1E90FF"># Q3.py</font>
+<font color="#1E90FF"># The checker verifies automatically that  sub  satisfies its pre-post-conditions:</font>
+def sub(x, y) :
+    <font color="#008B00">"""{ pre  x > y
+         post z < 0 and z + x == y
+         return z
+    }"""</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (x > y)</font>
+    z = y - x
+    <font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+    <font color="#1E90FF"># (z == (y - x))</font>
+    <font color="#1E90FF"># (x > y)</font>
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (z == (y - x))</font>
+    <font color="#1E90FF"># (x > y)</font>
+<font color="#1E90FF"># <font color="#EE2C2C">ERROR</font>: sorry -- you must use the specified return variable in the header</font>
+    <font color="#1E90FF"># The checker automatically proves   z < 0 and z + x == y.</font>
+    return y
+    <font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+    <font color="#1E90FF"># (z == (y - x))</font>
+    <font color="#1E90FF"># (x > y)</font>
+    <font color="#1E90FF"># ((z < 0) and ((z + x) == y))</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+
+<font color="#1E90FF"># Your work starts here:</font>
+a = readInt()
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># True</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#CD6600">assert</font> a > 0
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (a > 0)</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> a > 0 	premise}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (a > 0)</font>
+b = sub(2 * a, a)
+<font color="#1E90FF">#PREMISES FOR ATTACHED PROOF, IF ANY: </font>
+<font color="#1E90FF"># ((b < 0) and ((b + (2 * a)) == a))</font>
+<font color="#1E90FF"># (a > 0)</font>
+<font color="#008B00">"""{1.<font color="#00FF00">OK</font> a > 0 	premise
+	2.<font color="#00FF00">OK</font> b < 0 and b + (2 * a) == a	premise
+	3.<font color="#00FF00">OK</font> a == 0-b	algebra 2
+}"""</font>
+<font color="#1E90FF">#PREMISES FOR NEXT LINE: </font>
+<font color="#1E90FF"># (a == (0 - b))</font>
+<font color="#1E90FF"># Prove here that   a == 0 - b</font></strong></pre></body></html>

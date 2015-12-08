@@ -1,0 +1,24 @@
+A --------------------------
+
+1 ?- getOverdue('Lisa', 25, List).
+List = [].
+
+2 ?- getOverdue('Homer', 25, List).
+List = [k2, k4].
+
+3 ?- getOverdue(_, 50, List).
+List = [k2, k4, k3, k0]
+
+B --------------------------
+
+1 ?- totalfine('Homer', 25, L).
+L = 20.
+
+2 ?- totalfine('Lisa', 25, L).
+L = 0.
+
+3 ?- totalfine(_, 100, Amt).
+Amt = 295.
+90+80+60+55+10+
+false.
+

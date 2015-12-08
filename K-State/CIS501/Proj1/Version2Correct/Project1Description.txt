@@ -1,0 +1,34 @@
+				Project 1 					Fall, 2012
+
+Due: 8:00 on 9/26 (Wednesday)
+
+The goals of the project:
+1. To be able to draw a class diagram correctly from an object diagram
+2. To be able to translate a design (a class diagram and use-case realizations) into code
+3. (Hopefully) to start understanding the importance of "design" in OO program developments 
+   and pleasure in not spending much time on debugging
+
+1. Draw a class diagram for the Old Maid program based on the design we discussed in class
+   (refer to Project1Design.pptx).
+   You need to write all fields and methods identified in the design. 
+   You also need to write all associations with names and multiplicities.
+   You can add private methods and fields/associations if you need.
+   While implementing, it is ok to add/delete private methods/fields/associations you have identified.
+   (we never know the details until we actually implement it).
+ 
+2. Implement the design in C#
+
+Note:  In the meeting, I will check whether (1) your class diagram is correct (multiplicities, etc) with respect
+   to the informal design in Project1Design.pptx, (2) your code exactly matches your class diagram, and 
+   (3) each method in  your code is clearly written.
+   
+How to submit:
+ 1. Create a submission directory named after your "LastName_FirstName" (e.g., Mizuno_Masaaki in my case)
+ 2. Put (1) your star uml file and (2) your program (the whole solution directory, after removing the bin 
+    and obj directories) in the submission directory
+ 3. Zip the submission directory and submit it to the file dropbox named "Project1"
+ 
+Since I have to download and unzip all your submissions and read the submissions by the first several 
+students by 9:00AM on 9/26, if you do not submit your work by 8:00, I will not accept it.
+Even though you do not finish your work, you must submit it in time.
+ 

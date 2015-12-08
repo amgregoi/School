@@ -1,0 +1,91 @@
+
+REQUIRED TEST CASES
+---------------------
+
+1a.
+
+print (2 + 1)
+!
+Parse tree:
+[[], [['print', ['+', '2', '1']]]]
+Execution:
+3
+final namespace = {}
+
+press Enter key to finish
+
+
+1b.
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+print (2 + 1)
+!
+Parse tree:
+[[], [['print', ['+', '2', '1']]]]
+Execution:
+3
+final namespace = {}
+
+press Enter key to finish
+
+
+
+2a.
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+print (2 + 1)
+!
+Parse tree:
+[[], [['print', ['+', '2', '1']]]]
+Execution:
+3
+final namespace = {}
+
+press Enter key to finish
+
+
+
+2b.
+
+int y; int x;
+x = 2;  y = (x + 1)
+!
+
+(should display a namespace with bindings for  x  and  y)
+
+
+3a.
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+print (2 + 1)
+!
+Parse tree:
+[[], [['print', ['+', '2', '1']]]]
+Execution:
+3
+final namespace = {}
+
+press Enter key to finish
+
+
+3b.
+
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+print (2 + 1)
+!
+Parse tree:
+[[], [['print', ['+', '2', '1']]]]
+Execution:
+3
+final namespace = {}
+
+press Enter key to finish
+

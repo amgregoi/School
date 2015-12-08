@@ -1,0 +1,52 @@
+		  CIS 722  
+		Assignment 1
+
+Due (2 and 3 only)    5:00PM on Sep. 4 (Thursday)
+
+1. Transfer var.c, test.c, and fact.c found in Asm1Programs.zip to Minix (using dos.img).
+   Compile each file as "cc -S -O0 file.c"   
+      -S means "stop after compilation and leave the assembly file"
+      -O0 means "do not optimize"
+      
+   Transfer var.s, test.s, and fact.s to the Windows file system.
+   
+2. Write a C program which prints out
+	argc (integer),
+	argv (list of strings), and
+	envp (list of strings).
+	
+    Use %s to print argv strings and %c to print envp strings.
+
+3. Write a program consisting of the following three processes (each process
+   must EXEC a different executable file):
+
+     process 1:  create a child process (e.g., process 2)
+		 repeat the following until EOF is read
+			read a character from the terminal and send it to
+			process 2
+
+     process 2: create a child process (e.g., process 3)
+		repeat the following until EOF is received
+			receive a character from process 1
+			if it is a lower case character, convert it to
+			  upper case
+			send the character to process 3
+
+     process 3: repeat the following until EOF is received
+     			receive a character from process 2
+			print out the character on the screen
+
+	refer to: fork, execve (execl), pipe, dup (or dup2), fflush.
+	
+Submit your solution programs for 2 and 3 in "b.img" (the minix format)
+(no hard copy is needed)
+Make directories Prog2 and Prog3 and place your programs in these directories
+
+4.  Read Chapters 3 (Basic Programming Model), 11 (Protected-Mode Memory
+    Management), 12 (Protection), 13 (Protected-Mode Multitasking), and
+    14 (Protected-Mode Exception and Interruipts) in the Pentium Manual
+    AT LEAST TWICE.  I do not expect many of you will understand the 
+    contents well.  However, it will make a significant difference when 
+    I explain the Minix initialization procedure.
+
+   

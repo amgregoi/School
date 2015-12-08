@@ -1,0 +1,416 @@
+
+<html>
+<body>
+<h2>CIS505 Assignment 3</h2>
+
+<em><font color="#8B0000">10 points; due Thursday September 27</font></em> 
+<p>
+
+<!--
+<em><font color="#8B0000">Read this assignment sheet completely before starting work.</font></em>
+This will save you time.
+-->
+
+<p>
+You will extend the interpreter you built in
+Assigment 2.
+This assignment goes in two parts. 
+
+<h3>Part C: add objects</h3>
+
+<p>
+First, you
+extend the interpreter you built in 
+Assigment 2 to have object declarations and objects.
+A sample program will work like this:
+<font color="#00008B"><pre>===================================================<strong>
+
+python run.py
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int a = 1;
+ob counter = new {int val = a;
+                  proc inc(x) : val = ((val + x) + a);  print val; end;
+                 };
+proc p(): a = (a + counter.val)  end;
+ob nothingyet = nil;
+
+counter.inc(1);
+p();
+nothingyet = counter
+!
+
+</strong>===================================================</pre></font>
+Here is the execution of the above program:
+<font color="#00008B"><pre>===================================================<strong>
+
+Parse tree:
+[[['int', 'a', '1'], ['ob', 'counter', ['new', ['struct', [['int', 'val', ['deref', 'a']], ['proc', 'inc', ['x'], [['=', 'val', ['+', ['+', ['deref', 'val'], ['deref', 'x']], ['deref', 'a']]], ['print', ['deref', 'val']]], []]]]]], ['proc', 'p', [], [['=', 'a', ['+', ['deref', 'a'], ['deref', ['dot', 'counter', 'val']]]]], []], ['ob', 'nothingyet', 'nil']], [['call', ['dot', 'counter', 'inc'], ['1']], ['call', 'p', []], ['=', 'nothingyet', ['deref', 'counter']]]]
+
+Execution:
+3
+activation stack = ['h0', 'h4']
+heap = {
+  h0 : {'a': 1, 'parentns': 'nil', 'counter': 'h1', 'nothingyet': 'nil', 'p': 'h3'}
+  h1 : {'parentns': 'h0', 'val': 3, 'inc': 'h2'}
+  h2 : ['proc', ['x'], [['=', 'val', ['+', ['+', ['deref', 'val'], ['deref', 'x']], ['deref', 'a']]], ['print', ['deref', 'val']]], [], 'h1']
+  h3 : ['proc', [], [['=', 'a', ['+', ['deref', 'a'], ['deref', ['dot', 'counter', 'val']]]]], [], 'h0']
+  h4 : {'parentns': 'h1', 'x': 1}
+}
+
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'a': 4, 'parentns': 'nil', 'counter': 'h1', 'nothingyet': 'h1', 'p': 'h3'}
+  h1 : {'parentns': 'h0', 'val': 3, 'inc': 'h2'}
+  h2 : ['proc', ['x'], [['=', 'val', ['+', ['+', ['deref', 'val'], ['deref', 'x']], ['deref', 'a']]], ['print', ['deref', 'val']]], [], 'h1']
+  h3 : ['proc', [], [['=', 'a', ['+', ['deref', 'a'], ['deref', ['dot', 'counter', 'val']]]]], [], 'h0']
+  h4 : {'parentns': 'h1', 'x': 1}
+  h5 : {'parentns': 'h0'}
+}
+
+
+</strong>===================================================</pre></font>
+In the example, <tt><font color="#00008B"><strong>h0</strong></font></tt> is the handle to the global variables' namespace.  Variable
+<tt><font color="#00008B"><strong>counter</strong></font></tt> is bound to the handle of a new namespace, <tt><font color="#00008B"><strong>h1</strong></font></tt>, that holds <tt><font color="#00008B"><strong>val</strong></font></tt>, <tt><font color="#00008B"><strong>inc</strong></font></tt>, and
+a <tt><font color="#00008B"><strong>parentns</strong></font></tt> link.  (The <tt><font color="#00008B"><strong>h1</strong></font></tt>'s <tt><font color="#00008B"><strong>parentns</strong></font></tt> link lets its code see
+global variables.) 
+
+<p>
+When 
+<tt><font color="#00008B"><strong>counter.inc(1)</strong></font></tt> is called, it works just as you implemented it in Assignment 2: a new activation, <tt><font color="#00008B"><strong>h4</strong></font></tt>,
+is constructed and <tt><font color="#00008B"><strong>h4</strong></font></tt> is pushed onto the activation
+stack.  (Note that activation <tt><font color="#00008B"><strong>h4</strong></font></tt> has a <tt><font color="#00008B"><strong>parentns</strong></font></tt> link that is set to
+<tt><font color="#00008B"><strong>h1</strong></font></tt>, which is where <tt><font color="#00008B"><strong>inc</strong></font></tt>'s parent object lives.  <em><font color="#8B0000">In Java and C#, the
+<tt><font color="#00008B"><strong>parentns</strong></font></tt> field inside <tt><font color="#00008B"><strong>h4</strong></font></tt> is called <tt><font color="#00008B"><strong>this</strong></font></tt>!</font></em>)
+
+<p>
+Once <tt><font color="#00008B"><strong>inc</strong></font></tt>'s code finishes, the stack is popped.  Then <tt><font color="#00008B"><strong>p()</strong></font></tt> gets called, and its
+activation, <tt><font color="#00008B"><strong>h5</strong></font></tt>, is pushed then popped. 
+(In Java/C#, <tt><font color="#00008B"><strong>p</strong></font></tt> is called a ``static method,'' and <tt><font color="#00008B"><strong>inc</strong></font></tt> is called an
+``instance method.'')
+
+<p>
+So, your work is to implement
+these new parts of the language:
+<font color="#00008B"><strong><pre>
+D ::=  ...  |  ob I = E  
+E ::= ... |  new T  |  nil
+T ::=  { DL }
+L ::=  I  |  L . I
+</pre></strong></font>
+
+Here is the complete syntax, with the new parts included:
+<font color="#00008B"><pre>===================================================<strong>
+
+<table>
+<tr>
+<td>
+<font color="#00008B"><strong><pre>
+P : Program
+CL : CommandList
+C : Command
+DL : DeclarationList
+D : Declaration
+EL : ExpressionList
+</pre></strong></font>
+</td>
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+<td>
+<font color="#00008B"><strong><pre>
+E : Expression
+T : TypeTemplate
+L : LefthandSide
+IL : VariableList
+I : Variable
+N : Numeral
+</pre></strong></font>
+</td>
+</tr>
+</table>
+
+P ::=  DL CL
+
+DL ::=  D;*
+
+D ::=  int I = E  |  ob I = E  |  proc I ( IL ) : CL end 
+
+CL ::=  C;*
+
+C ::=  L = E  |  if E : CL1 else CL2 end  |  print E  |  L ( EL )
+
+EL ::=  E,*
+
+E ::=  N  |  ( E1 OP E2 )  |  L  |  new T  |  nil
+  where  OP ::=  +  |  -
+
+T ::=  { DL }
+
+L ::=  I  |  L . I
+
+N ::=  string of digits
+
+IL ::=  I,*
+
+I ::=  strings of letters, not including keywords
+
+</strong>===================================================</pre></font>
+The parser you used for Exercise 2 already implements the above constructions,
+so you reuse the parser you already have.
+
+<h4>Interpreter input format</h4>
+
+<p>
+The input to the interpreter is the list-based parse tree constructed by the parser.
+The new constructions are:
+<font color="#00008B"><strong><pre>
+DTREE ::=   ... |  ["ob", ID, ETREE]
+ETREE ::=  ...  |  "nil"  |  ["new",  TTREE]
+TTREE ::=  ["struct", DLIST]
+LTREE ::=  ID  |  ["dot", LTREE, ID]
+</pre></strong></font>
+The syntax of all forms of parse trees goes like this:
+<font color="#00008B"><pre>===================================================<strong>
+
+PTREE ::=  [DLIST, CLIST]
+
+DLIST ::=  [ DTREE* ]
+           where  DTREE*  means zero or more DTREEs
+
+DTREE ::=  ["int", ID, ETREE]  |  ["proc", ID, IDLIST, CLIST, DLIST]  |  ["ob", ID, ETREE]
+
+CLIST ::=  [ CTREE* ]
+
+CTREE ::=  ["=", LTREE, ETREE]  |  ["if", ETREE, CLIST, CLIST]
+        |  ["print", ETREE]  |  ["call", LTREE, ELIST]
+
+ELIST ::=   [ ETREE* ]
+
+ETREE ::=  NUM  |  [OP, ETREE, ETREE] |  ["deref", LTREE]  |  "nil"  |  ["new",  TTREE]
+      where  OP ::=  "+"  | "-"
+
+TTREE ::=  ["struct", DLIST]
+
+LTREE ::=  ID  | ["dot", LTREE, ID]
+
+NUM   ::=  a nonempty string of digits
+
+IDLIST ::= [ ID+ ]
+
+ID    ::=  a nonempty string of letters
+
+</strong>===================================================</pre></font>
+
+
+<h4>Interpreter operation</h4>
+
+You start from the interpreter you built for Assignment 2.
+(<em><font color="#8B0000">If you didn't complete at least Assignment 2, Part A, you must finish it
+before you start this one</font></em> --- please see the instructor as soon as
+possible to make an appointment to fix your Assignment 2 submission.  
+Sorry, but it's useless to do this assignment without learning how to do Assignment 2, Part A.)
+
+<p>
+You have these structures to implement:
+
+<tt><font color="#00008B"><strong>"nil"</strong></font></tt>,  <tt><font color="#00008B"><strong>["new",  TTREE]</strong></font></tt>,
+<tt><font color="#00008B"><strong>["ob", ID, ETREE]</strong></font></tt>,
+<tt><font color="#00008B"><strong>["struct", DLIST]</strong></font></tt>, and
+<tt><font color="#00008B"><strong>["dot", LTREE, ID]</strong></font></tt>.
+
+<ol>
+<li>
+Within <tt><font color="#00008B"><strong>interpretETREE</strong></font></tt>, implement <tt><font color="#00008B"><strong>"nil"</strong></font></tt> to have itself as its value.
+Implement <tt><font color="#00008B"><strong>["new", T]</strong></font></tt> to call <tt><font color="#00008B"><strong>interpretTTREE(T)</strong></font></tt>, whose job is to allocate an object, fill it with <tt><font color="#00008B"><strong>T</strong></font></tt>,
+and return the object's handle.
+(<tt><font color="#00008B"><strong>def interpretTTREE</strong></font></tt> receives arguments of the form,
+<tt><font color="#00008B"><strong>["struct", DLIST]</strong></font></tt>.  The function does this: <em><font color="#8B0000">(i)</font></em> allocates a new namespace
+and <em><font color="#8B0000">pushes the namespace's handle on the activation stack</font></em>;
+<em><font color="#8B0000">(ii)</font></em> evaluates <tt><font color="#00008B"><strong>DLIST</strong></font></tt>;
+<em><font color="#8B0000">(iii)</font></em>pops the activation stack and returns the popped
+handle as its answer.
+
+<p>
+<li>
+Within <tt><font color="#00008B"><strong>interpretDTREE</strong></font></tt>, implement <tt><font color="#00008B"><strong>["ob", I, E]</strong></font></tt>,
+which <em><font color="#8B0000">(i)</font></em> computes the meaning of <tt><font color="#00008B"><strong>E</strong></font></tt>, <em><font color="#8B0000">(ii)</font></em> validates that <tt><font color="#00008B"><strong>E</strong></font></tt> is either
+a handle to an object or is <tt><font color="#00008B"><strong>nil</strong></font></tt>, and <em><font color="#8B0000">(iii)</font></em> binds <tt><font color="#00008B"><strong>I</strong></font></tt> to the meaning
+in the active namespace (provided that <tt><font color="#00008B"><strong>I</strong></font></tt> is not already declared there).
+
+<p>
+<li>
+Within <tt><font color="#00008B"><strong>interpretLTREE</strong></font></tt>, implement <tt><font color="#00008B"><strong>["dot", L, I]</strong></font></tt>.
+This means you compute the handle named by <tt><font color="#00008B"><strong>L</strong></font></tt>, call it <tt><font color="#00008B"><strong>h</strong></font></tt>,
+and then check if the pair, <tt><font color="#00008B"><strong>(h,I)</strong></font></tt> is a valid L-value (that is, variable
+<tt><font color="#00008B"><strong>I</strong></font></tt> is a field inside the object named by <tt><font color="#00008B"><strong>h</strong></font></tt>).
+Big Hint: read the code for the object machine in Chapter 2.
+
+
+</ol>
+As usual, enforce declaration checking --- the same name cannot
+be declared twice in the same namespace and
+no name can be referenced or assigned to if it is undeclared
+(this includes fields within objects).
+Also enforce type checking in commands and expressions:
+<em><font color="#8B0000">Only a handle (or <tt><font color="#00008B"><strong>nil</strong></font></tt>) can be assigned to an object variable,
+and only an int can be assigned to an int variable.</font></em>
+(Hint: use Python's <tt><font color="#00008B"><strong>instanceof</strong></font></tt> or <tt><font color="#00008B"><strong>type</strong></font></tt> operator to check types. See the notes,
+<a href="http://people.cis.ksu.edu/~schmidt/505f11/pythonstrucs.html">Terse notes on lists and dictionaries</a> on the CIS505 web page.)
+Only ints can be used in arithmetic;
+only procs can be called; and only objects can be indexed with dot notation.
+
+
+<p>
+<em><font color="#8B0000">Remember to document appropriately your modified interpreter.
+</font></em>
+
+<h4>Testing</h4>
+
+The <tt><font color="#00008B"><strong>Ex3</strong></font></tt> folder contains a file of test cases that you should use for testing
+Part C.
+Use at least these tests to check your implemetation.
+You should also devise additional tests to see if the interpreter detects program
+errors and prints appropriate messages.
+
+<p>
+Place all the test cases and their output in a file named <tt><font color="#00008B"><strong>tests.txt</strong></font></tt>
+
+<h3>Part D: add classes</h3>
+
+Don't start this part unless you have built and tested successfully
+Part C.
+
+<p>
+Now you extend the interpreter
+with classes.
+A sample program looks like this:
+<font color="#00008B"><pre>===================================================<strong>
+
+python run.py
+Type program; OK to do it on multiple lines; terminate with  !
+  as the first symbol on a line by itself:
+
+int a = 2;
+class counter : {int val = a; 
+                 proc inc(x) : val = (val + x); end;
+                };
+ob c = new counter;
+proc p(): a = (a + c.val)  end;
+c.inc(1);
+p();
+!
+
+</strong>===================================================</pre></font>
+Here is the execution of the above program:
+<font color="#00008B"><pre>===================================================<strong>
+
+Parse tree:
+[[['int', 'a', '2'], ['class', 'counter', ['struct', [['int', 'val', ['deref', 'a']], ['proc', 'inc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'x']]]], []]]]], ['ob', 'c', ['new', ['call', 'counter']]], ['proc', 'p', [], [['=', 'a', ['+', ['deref', 'a'], ['deref', ['dot', 'c', 'val']]]]], []]], [['call', ['dot', 'c', 'inc'], ['1']], ['call', 'p', []]]]
+
+Execution:
+Successful termination.
+activation stack = ['h0']
+heap = {
+  h0 : {'a': 5, 'parentns': 'nil', 'c': 'h2', 'counter': 'h1', 'p': 'h4'}
+  h1 : ['class', [], ['struct', [['int', 'val', ['deref', 'a']], ['proc', 'inc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'x']]]], []]]], [], 'h0']
+  h2 : {'parentns': 'h0', 'val': 3, 'inc': 'h3'}
+  h3 : ['proc', ['x'], [['=', 'val', ['+', ['deref', 'val'], ['deref', 'x']]]], [], 'h2']
+  h4 : ['proc', [], [['=', 'a', ['+', ['deref', 'a'], ['deref', ['dot', 'c', 'val']]]]], [], 'h0']
+  h5 : {'parentns': 'h2', 'x': 1}
+  h6 : {'parentns': 'h0'}
+}
+
+
+</strong>===================================================</pre></font>
+<p>
+The syntax has 
+these two additions:
+<font color="#00008B"><strong><pre>
+D ::=  ...  |  class I : T
+T ::=  ...  |  L
+</pre></strong></font>
+That is, we can declare a class and call it.
+The parser already implements the new constructions.
+
+<h4>Interpreter input format</h4>
+
+<p>
+You must implement in your interpreter,
+<font color="#00008B"><strong><pre>
+DTREE ::=  ...  |  ["class", ID, TTREE]
+TTREE ::=  ...  |  ["call", LTREE]
+</pre></strong></font>
+
+
+<h4>Interpreter operation</h4>
+
+The interpreter implements static scoping, like in C#.  This means we do not alter the semantics of variable lookup or procedure call.
+
+<p>
+There are two steps:
+<ol>
+<p>
+<li>
+Within <tt><font color="#00008B"><strong>interpretDTREE</strong></font></tt>, implement <tt><font color="#00008B"><strong>["class", I, T]</strong></font></tt>,
+which behaves like procedure declaration, that is, <tt><font color="#00008B"><strong>I</strong></font></tt> is bound to
+a closure containing <tt><font color="#00008B"><strong>T</strong></font></tt> and its link to global variables.
+Please study the above example, which shows that class closures
+are labelled differently than procedure closures.
+
+<p>
+<li>
+Within <tt><font color="#00008B"><strong>interpretTTREE</strong></font></tt>, implement <tt><font color="#00008B"><strong>["call", L]</strong></font></tt>.
+This works like procedure call, where <tt><font color="#00008B"><strong>L</strong></font></tt> is computed to a handle,
+the closure labelled by the handle is extracted from the heap, and
+provided that the closure holds a class, the
+<tt><font color="#00008B"><strong>TTREE</strong></font></tt> within the closure is extracted and executed. 
+
+</ol>
+As usual, enforce declaration checking. 
+Remember to document appropriately your modified interpreter.
+
+<h4>Testing</h4>
+
+The <tt><font color="#00008B"><strong>Ex3</strong></font></tt> folder contains a file of test cases that you should use for Part D.
+Use at least these tests to check your implemetation.
+Place your tests in your <tt><font color="#00008B"><strong>tests.txt</strong></font></tt> file.
+You should also devise additional tests to see if the interpreter detects program
+errors and prints appropriate messages.
+
+
+<h4>Teamwork</h4>
+If you worked with a partner on Exercise 2, you may work with that same
+partner for this exercise, and there is no need to notify the instructor.
+If you wish to add or remove a partner from Exercise 2 for this exercise,
+please notify the instructor by Friday evening, September 21.
+
+<h4>Submission and grading</h4>
+
+Place your versions of <tt><font color="#00008B"><strong>heapmodule.py</strong></font></tt>, <tt><font color="#00008B"><strong>interpret.py</strong></font></tt>, and <tt><font color="#00008B"><strong>tests.txt</strong></font></tt> 
+in the <tt><font color="#00008B"><strong>Ex3</strong></font></tt> folder.  (Don't alter and don't submit the other files.)
+Zip the folder into a <tt><font color="#00008B"><strong>.zip</strong></font></tt> file and submit the <tt><font color="#00008B"><strong>.zip</strong></font></tt> file to the CIS505 site on K-State Online.
+If you are working with a partner, both you and your partner upload the
+same zipped folder.
+
+<p>
+The teaching assistant will study your work and your tests and apply some
+additional tests before scoring the submission.
+   
+<h4>Final Comment</h4>
+You have implemented C#-style ``instance methods,'' where a called
+method has as its <tt><font color="#00008B"><strong>this</strong></font></tt> value exactly the <tt><font color="#00008B"><strong>parentns</strong></font></tt> link.
+It takes a lot more work to implement ``virtual methods.'' (You use the
+<tt><font color="#00008B"><strong>virtual</strong></font></tt>/<tt><font color="#00008B"><strong>override</strong></font></tt> keywords in C# to get these.)   This is because
+a virtual method computes the value of <tt><font color="#00008B"><strong>this</strong></font></tt> only when the
+method is called and not when the method is declared
+--- see the explanation in the Lecture Notes,
+Section 6.6.
+
+</body>
+</html>
+
+
+

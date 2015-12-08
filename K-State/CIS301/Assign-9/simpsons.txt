@@ -1,0 +1,55 @@
+2 ?- aunt('Bart Simpson', Z).
+Z = 'Patricia Bouvier' ;
+B ---------------------
+
+Z = 'Selma Bouvier' ;
+false.
+
+3 ?- aunt(X, 'Patricia Bouvier').
+X = 'Bart Simpson' ;
+X = 'Lisa Simpson' ;
+X = 'Maggie Simpson' ;
+X = 'Ling Bouvier' ;
+false.
+
+
+C ---------------------
+
+1 ?- brother('Homer Simpson', Z).
+false.
+
+2 ?- halfBrother(X, Y).
+X = 'Homer Simpson',
+Y = 'Herbert Powell' ;
+X = 'Herbert Powell',
+Y = 'Homer Simpson' ;
+false.
+
+D ---------------------
+
+1 ?- niece('Patricia Bouvier', N).
+N = 'Lisa Simpson' ;
+N = 'Maggie Simpson' ;
+N = 'Ling Bouvier' ;
+false.
+
+2 ?- niece(X, Y).
+X = 'Patricia Bouvier',
+Y = 'Lisa Simpson' ;
+X = 'Selma Bouvier',
+Y = 'Lisa Simpson' ;
+X = 'Patricia Bouvier',
+Y = 'Maggie Simpson' ;
+X = 'Selma Bouvier',
+Y = 'Maggie Simpson' ;
+X = 'Marge Bouvier',
+Y = 'Ling Bouvier' ;
+X = 'Patricia Bouvier',
+Y = 'Ling Bouvier' ;
+false.
+
+1 ?- newphew(X, 'Bart Simpson').
+X = 'Patricia Bouvier' ;
+X = 'Selma Bouvier' ;
+false.
+
