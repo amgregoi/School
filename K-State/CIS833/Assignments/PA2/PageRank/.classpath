@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/avro-1.7.4.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/guava-11.0.2.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-auth-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-common-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-app-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-common-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-core-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-hs-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-hs-plugins-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-jobclient-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-jobclient-2.7.1-tests.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-mapreduce-client-shuffle-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-yarn-api-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/hadoop-yarn-common-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/httpclient-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/httpcore-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/slf4j-api-1.7.10.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/Typical Hadoop Libraries/slf4j-log4j12-1.7.10.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/Desktop/CIS833/Nick/lintool-Cloud9-9c4dacb/lintool-Cloud9-9c4dacb/cloud9.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

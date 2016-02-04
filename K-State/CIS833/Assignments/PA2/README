@@ -1,0 +1,7 @@
+PageRank is organized into eight difference mapper and reducer jobs
+
+each job 1-7 (and 1.5) have their own method to initialize and start the job, found at the end bottom of the file.
+
+From the top down is where the definitions are each of the Mapper and Reducers are in order of their respective job.
+
+There are also a few extra methods for  multiple iterations of page rank as well as for convergence.

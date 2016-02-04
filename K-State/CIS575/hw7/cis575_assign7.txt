@@ -1,0 +1,50 @@
+1)***
+
+shortest(p[1..n])
+{	
+	if p.size = 1	return null
+	else if p.size = 2   return distance(p[1], p[2])
+	else
+		LP = shortest(p[1..n/2])			//LEFT PARTITION
+		RP = shortest(p[(n/2)+1 .. n])		//RIGHT PARTITION
+	
+	min = minimum(LP, RP)
+	foreach point a in p
+	{
+		foreach point b in p
+		{
+			if(a.x+min > b.x || a.x-min < b.x) break;
+			if(a != b)
+				temp = dist(a,b)
+				if(temp < min) min = temp
+		}
+	}
+}
+
+Goal) It finds the shortest distance for the left and right partitions, and then compares the inside edge of both partitions of points to see if there is a pair of points with a shorter distance than just the two partitions.
+
+because it will only scan points within a 'radius' of the distance of the minimum LP or RP(based on the x plane), we do not need to scan each point from both partitions, making the complexity less than n^2 and making it O(n lg n).***
+This is assuming our input is sorted based on the x coordinate.
+
+
+
+
+
+
+2.1)
+Base: n = 1, 0 edges - trivial
+IH: n >= 2, choose a random point p in G.
+	G2 = G/p, and G2 has connected components n1 + .. + nk = n-1
+	The subgraph G2 has atleast ni-1 edges and p is connected in G with the 
+		components in the subgraph G2 by at least one edge.
+	so G contains at least n-1 edges.
+	
+
+2.2)	
+Base: n = 1, G contains zero edges.
+IH: choose any edge e in G
+	G2 = G/e
+	G2 cannot have a path from the point between the chosen edge e.
+	G2 can now be broken down into smaller graphs H1..Hk, where each graph has at most ni-1 edges.
+	so G has at most (n1 + .. + nk) - (k-1) <= n-1
+	

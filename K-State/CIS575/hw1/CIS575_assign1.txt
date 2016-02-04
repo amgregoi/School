@@ -1,0 +1,38 @@
+Andy Gregoire
+CIS575
+
+pre:
+	x occurs in A[1..n] (thus n >= 1)
+post:
+	returns p with 1<= p <= n such that A[p] = x and x doe snot occur in A[p+1..n]
+	
+1.
+Findlast(A, n, x)
+	if A[n] = x
+		return n
+	Findlast(A, n-1, x)
+	
+*2.
+Base: A[n] = x, if n = 1 then A[n] must equal x, I left out the case that x does not occur in A due to the 	
+	precondition already taking care of this case
+I.H.: A[n] = x satisfies post condition because it will return position n, and by starting at the end of the 
+	array we catch the last occurrence of the number x, so no 'later' occurrences will appear.
+	Example: A = {0,1,2,1,3} n = 5, x = 1 -> Findlast(A, n, x)
+	Findlast({0,1,2,1,3}, 5, 1) -> {0,1,2,1,3}		
+											^
+	Findlast({0,1,2,1,3}, 4, 1) -> {0,1,2,1,3} -> returns 4
+										  ^
+3. 
+Findlast(A, n, x)
+	while A[n] != x
+		n <- n-1
+	return n
+	
+*4.
+invariant: n >= 1, A[1..n]
+
+Initialization: A[1..n], n > 0
+Termination: ok, will always terminate from loop after finding x
+Maintenance: iteration occurs: n >= i >= 1, invariant is shown to hold in correctness.
+Correctness: Since the pre condition states x will occur in A, we can assume that A will not be the empty 
+	set, so n will be atleast 1. The loop exit condition occurs when A[n] = x, starting from the end of the array and decrements towards the beginning, so as soon as A[n] = x the loop will terminate.  Since x occurs somewhere in A, n will never decrement below 1.  The invariant holds true all iterations of this loop.

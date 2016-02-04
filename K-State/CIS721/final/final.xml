@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+
+chan move;</declaration><template><name x="5" y="5">Board</name><parameter>int board</parameter><declaration>// Place local declarations here.
+
+int layoutSize = 20;
+int layout[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int coinPos1 = -1, coinPos2 = -1;
+int max, min, moveCount = 0;
+
+void initializeBoard()
+{
+	//0 represents white space
+	int i,j=board, initial = (layoutSize - (board*2))/2;
+	//1 represents X
+	for(i = initial; i&lt;initial+board; i++)
+	{
+		layout[i] = 1;
+	}
+	//2 represents O
+	for(i=initial; i&lt;initial+board; i++)
+	{
+		layout[j+i] = 2;
+	}
+
+	//set min and max move placements
+	j = -1;
+	for(i=0; i &lt; layoutSize; i++)
+		if(layout[i] &gt; 0 &amp;&amp; j &lt; 0) j = i;
+
+	if(j-2 &gt;= 0) min = j-2;
+	else min = j;
+
+	j = -1;
+
+	for(i = layoutSize-1; i &gt;= 0; i--)
+		if(layout[i] &gt; 0 &amp;&amp; j &lt; 0) j = i;
+
+	if(j+2 &lt; layoutSize) max = j+2;
+	else max = j+2;
+}
+
+bool checkWin(){
+	int i, j=0, start = -1;
+
+	for(i = 0; i&lt; layoutSize; i++)
+		if(layout[i] &gt; 0 &amp;&amp; start &lt; 0) start = i;
+
+	if(layout[start] == 2) return false;
+	for(i=start; i&lt;start+(board*2); i++)
+	{
+		if(layout[i] == 1 &amp;&amp; j == 1) return false;
+		else if(layout[i] == 1 &amp;&amp; j == 2) j = 1;
+		else if(layout[i] == 2 &amp;&amp; j == 2) return false;
+		else if(layout[i] == 2 &amp;&amp; j == 1) j = 2;
+		else if(layout[i] == 0) return false;
+		else j = layout[i];
+	}
+	return true;
+}
+
+bool canPickUp(int pos)
+{
+	if(coinPos1 &lt; 0){
+		if(layout[pos] &gt; 0) return true;
+		return false;
+	}else if((coinPos1+1 == pos || coinPos1-1 == pos) &amp;&amp; layout[pos] &gt; 0)return true;
+	return false;
+}
+
+bool canMove(int dest)
+{
+	if(coinPos1 &lt; dest &amp;&amp; dest &lt;= max &amp;&amp; dest &gt;= min){
+		if(dest == layoutSize-1) return false;
+		if(layout[dest] == 0 &amp;&amp; layout[(dest)+1] == 0) return true;
+	}
+	if(coinPos1 &gt; dest &amp;&amp; dest &lt;= max &amp;&amp; dest &gt;= min){
+		if(dest == 0) return false;
+		if(layout[dest] == 0 &amp;&amp; layout[(dest)-1] == 0) return true;
+	}
+	return false;
+}
+
+bool moveFinished(){
+	if(coinPos1 &lt; 0  || coinPos2 &lt; 0) return true;
+	
+	return false;
+}
+
+void pickUp(int pos){
+	if(coinPos1 &lt; 0) coinPos1 = pos;
+	else coinPos2 = pos;
+}
+
+void doMove(int dest){
+	int i,j=-1, cp1, cp2, d2;
+
+	if(coinPos1 &lt; dest &amp;&amp; coinPos1 &lt; coinPos2){
+		cp1 = coinPos1;
+		cp2 = coinPos2;
+		d2 = dest +1;
+	}else if(coinPos1 &lt; dest &amp;&amp; coinPos1 &gt; coinPos2){
+		cp1 = coinPos2;
+		cp2 = coinPos1;
+		d2 = dest +1;
+	}else if(coinPos1 &gt; dest &amp;&amp; coinPos1 &lt; coinPos2){
+		cp1 = coinPos2;
+		cp2 = coinPos1;
+		d2 = dest -1;
+	}else{
+		cp1 = coinPos1;
+		cp2 = coinPos2;
+		d2 = dest -1;
+	}
+
+	layout[dest] = layout[cp1];
+	layout[cp1] = 0;
+	layout[d2] = layout[cp2];
+	layout[(cp2)] = 0;
+	coinPos1 = -1;
+	coinPos2 = -1;
+
+
+	for(i=0; i&lt;layoutSize; i++)
+		if(layout[i] &gt; 0 &amp;&amp; j &lt; 0) j = i;
+
+	if(j-2 &gt;= 0) min = j-2;
+	else min = j;
+
+	j = -1;
+
+	for(i=layoutSize-1; i&gt;= 0; i--)
+		if(layout[i] &gt; 0 &amp;&amp; j &lt; 0) j = i;
+
+	if(j+2 &lt; layoutSize) max = j+2;
+	else max = j+2;
+
+	moveCount++;
+	
+}
+
+
+
+
+
+
+</declaration><location id="id0" x="-832" y="-32"><name x="-842" y="-62">P19</name></location><location id="id1" x="-896" y="-32"><name x="-906" y="-62">P18</name></location><location id="id2" x="-960" y="-32"><name x="-970" y="-62">P17</name></location><location id="id3" x="-1024" y="-32"><name x="-1034" y="-62">P16</name></location><location id="id4" x="-1088" y="-32"><name x="-1098" y="-62">P15</name></location><location id="id5" x="-1152" y="-32"><name x="-1162" y="-62">P14</name></location><location id="id6" x="-1216" y="-32"><name x="-1226" y="-62">P13</name></location><location id="id7" x="-1280" y="-32"><name x="-1290" y="-62">P12</name></location><location id="id8" x="-1344" y="-32"><name x="-1354" y="-62">P11</name></location><location id="id9" x="-1408" y="-32"><name x="-1418" y="-62">P10</name></location><location id="id10" x="-1760" y="96"></location><location id="id11" x="-1472" y="-32"><name x="-1480" y="-16">P9</name></location><location id="id12" x="-1536" y="-32"><name x="-1544" y="-16">P8</name></location><location id="id13" x="-1600" y="-32"><name x="-1608" y="-16">P7</name></location><location id="id14" x="-1664" y="-32"><name x="-1672" y="-16">P6</name></location><location id="id15" x="-1728" y="-32"><name x="-1728" y="-16">P5</name></location><location id="id16" x="-1792" y="-32"><name x="-1808" y="-16">P4</name></location><location id="id17" x="-1856" y="-32"><name x="-1864" y="-16">P3</name></location><location id="id18" x="-1920" y="-32"><name x="-1928" y="-16">P2</name></location><location id="id19" x="-1984" y="-32"><name x="-1984" y="-16">P1</name></location><location id="id20" x="-2048" y="-32"><name x="-2056" y="-16">P0</name></location><location id="id21" x="-1896" y="-256"></location><location id="id22" x="-1760" y="-256"><name x="-1784" y="-288">Solved</name></location><location id="id23" x="-1760" y="-160"></location><init ref="id21"/><transition><source ref="id0"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id1"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id2"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id2"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id3"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id4"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id5"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id6"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id7"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id8"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id9"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id0"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id1"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id2"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id3"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id4"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id5"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id6"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id7"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id8"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id9"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id10"/><target ref="id0"/><label kind="guard" x="-2144" y="48">canMove(19)</label><label kind="assignment" x="-2144" y="32">doMove(19)</label></transition><transition><source ref="id10"/><target ref="id1"/><label kind="guard" x="-2144" y="48">canMove(18)</label><label kind="assignment" x="-2144" y="32">doMove(18)</label></transition><transition><source ref="id10"/><target ref="id2"/><label kind="guard" x="-2144" y="48">canMove(17)</label><label kind="assignment" x="-2144" y="32">doMove(17)</label></transition><transition><source ref="id10"/><target ref="id3"/><label kind="guard" x="-2144" y="48">canMove(16)</label><label kind="assignment" x="-2144" y="32">doMove(16)</label></transition><transition><source ref="id10"/><target ref="id4"/><label kind="guard" x="-2144" y="48">canMove(15)</label><label kind="assignment" x="-2144" y="32">doMove(15)</label></transition><transition><source ref="id10"/><target ref="id5"/><label kind="guard" x="-2144" y="48">canMove(14)</label><label kind="assignment" x="-2144" y="32">doMove(14)</label></transition><transition><source ref="id10"/><target ref="id6"/><label kind="guard" x="-2144" y="48">canMove(13)</label><label kind="assignment" x="-2144" y="32">doMove(13)</label></transition><transition><source ref="id10"/><target ref="id7"/><label kind="guard" x="-2144" y="48">canMove(12)</label><label kind="assignment" x="-2144" y="32">doMove(12)</label></transition><transition><source ref="id10"/><target ref="id8"/><label kind="guard" x="-2144" y="48">canMove(11)</label><label kind="assignment" x="-2144" y="32">doMove(11)</label></transition><transition><source ref="id10"/><target ref="id9"/><label kind="guard" x="-2144" y="48">canMove(10)</label><label kind="assignment" x="-2144" y="32">doMove(10)</label></transition><transition><source ref="id23"/><target ref="id0"/><label kind="guard" x="-1992" y="-160">canPickUp(19)</label><label kind="assignment" x="-1992" y="-128">pickUp(19)</label></transition><transition><source ref="id23"/><target ref="id1"/><label kind="guard" x="-1992" y="-160">canPickUp(18)</label><label kind="assignment" x="-1992" y="-128">pickUp(18)</label></transition><transition><source ref="id23"/><target ref="id2"/><label kind="guard" x="-1992" y="-160">canPickUp(17)</label><label kind="assignment" x="-1992" y="-128">pickUp(17)</label></transition><transition><source ref="id23"/><target ref="id3"/><label kind="guard" x="-1992" y="-160">canPickUp(16)</label><label kind="assignment" x="-1992" y="-128">pickUp(16)</label></transition><transition><source ref="id23"/><target ref="id4"/><label kind="guard" x="-1992" y="-160">canPickUp(15)</label><label kind="assignment" x="-1992" y="-128">pickUp(15)</label></transition><transition><source ref="id23"/><target ref="id5"/><label kind="guard" x="-1992" y="-160">canPickUp(14)</label><label kind="assignment" x="-1992" y="-128">pickUp(14)</label></transition><transition><source ref="id23"/><target ref="id6"/><label kind="guard" x="-1992" y="-160">canPickUp(13)</label><label kind="assignment" x="-1992" y="-128">pickUp(13)</label></transition><transition><source ref="id23"/><target ref="id7"/><label kind="guard" x="-1992" y="-160">canPickUp(12)</label><label kind="assignment" x="-1992" y="-128">pickUp(12)</label></transition><transition><source ref="id23"/><target ref="id8"/><label kind="guard" x="-1992" y="-160">canPickUp(11)</label><label kind="assignment" x="-1992" y="-128">pickUp(11)</label></transition><transition><source ref="id23"/><target ref="id9"/><label kind="guard" x="-1992" y="-160">canPickUp(10)</label><label kind="assignment" x="-1992" y="-128">pickUp(10)</label></transition><transition><source ref="id11"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id12"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id13"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id14"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id15"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id16"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id17"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id18"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id19"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id11"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id12"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id13"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id14"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id15"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id16"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id17"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id18"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id19"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id20"/><target ref="id10"/><label kind="guard" x="-2152" y="64">!moveFinished()</label></transition><transition><source ref="id20"/><target ref="id23"/><label kind="guard" x="-1992" y="-144">moveFinished()</label></transition><transition><source ref="id10"/><target ref="id11"/><label kind="guard" x="-2144" y="48">canMove(9)</label><label kind="assignment" x="-2144" y="32">doMove(9)</label></transition><transition><source ref="id10"/><target ref="id12"/><label kind="guard" x="-2144" y="48">canMove(8)</label><label kind="assignment" x="-2144" y="32">doMove(8)</label></transition><transition><source ref="id10"/><target ref="id13"/><label kind="guard" x="-2144" y="48">canMove(7)</label><label kind="assignment" x="-2144" y="32">doMove(7)</label></transition><transition><source ref="id10"/><target ref="id14"/><label kind="guard" x="-2144" y="48">canMove(6)</label><label kind="assignment" x="-2144" y="32">doMove(6)</label></transition><transition><source ref="id10"/><target ref="id15"/><label kind="guard" x="-2144" y="48">canMove(5)</label><label kind="assignment" x="-2144" y="32">doMove(5)</label></transition><transition><source ref="id10"/><target ref="id16"/><label kind="guard" x="-2144" y="48">canMove(4)</label><label kind="assignment" x="-2144" y="32">doMove(4)</label></transition><transition><source ref="id10"/><target ref="id17"/><label kind="guard" x="-2144" y="48">canMove(3)</label><label kind="assignment" x="-2144" y="32">doMove(3)</label></transition><transition><source ref="id10"/><target ref="id18"/><label kind="guard" x="-2144" y="48">canMove(2)</label><label kind="assignment" x="-2144" y="32">doMove(2)</label></transition><transition><source ref="id10"/><target ref="id19"/><label kind="guard" x="-2144" y="48">canMove(1)</label><label kind="assignment" x="-2144" y="32">doMove(1)</label></transition><transition><source ref="id10"/><target ref="id20"/><label kind="guard" x="-2144" y="48">canMove(0)</label><label kind="assignment" x="-2144" y="32">doMove(0)</label></transition><transition><source ref="id23"/><target ref="id11"/><label kind="guard" x="-1992" y="-160">canPickUp(9)</label><label kind="assignment" x="-1992" y="-128">pickUp(9)</label></transition><transition><source ref="id23"/><target ref="id12"/><label kind="guard" x="-1992" y="-160">canPickUp(8)</label><label kind="assignment" x="-1992" y="-128">pickUp(8)</label></transition><transition><source ref="id23"/><target ref="id13"/><label kind="guard" x="-1992" y="-160">canPickUp(7)</label><label kind="assignment" x="-1992" y="-128">pickUp(7)</label></transition><transition><source ref="id23"/><target ref="id14"/><label kind="guard" x="-1992" y="-160">canPickUp(6)</label><label kind="assignment" x="-1992" y="-128">pickUp(6)</label></transition><transition><source ref="id23"/><target ref="id15"/><label kind="guard" x="-1992" y="-160">canPickUp(5)</label><label kind="assignment" x="-1992" y="-128">pickUp(5)</label></transition><transition><source ref="id23"/><target ref="id16"/><label kind="guard" x="-1992" y="-160">canPickUp(4)</label><label kind="assignment" x="-1992" y="-128">pickUp(4)</label></transition><transition><source ref="id23"/><target ref="id17"/><label kind="guard" x="-1992" y="-160">canPickUp(3)</label><label kind="assignment" x="-1992" y="-128">pickUp(3)</label></transition><transition><source ref="id23"/><target ref="id18"/><label kind="guard" x="-1992" y="-160">canPickUp(2)</label><label kind="assignment" x="-1992" y="-128">pickUp(2)</label></transition><transition><source ref="id23"/><target ref="id19"/><label kind="guard" x="-1992" y="-160">canPickUp(1)</label><label kind="assignment" x="-1992" y="-128">pickUp(1)</label></transition><transition><source ref="id23"/><target ref="id20"/><label kind="guard" x="-1992" y="-160">canPickUp(0)</label><label kind="assignment" x="-1992" y="-128">pickUp(0)</label></transition><transition><source ref="id21"/><target ref="id23"/><label kind="assignment" x="-1952" y="-296">initializeBoard()</label></transition><transition><source ref="id23"/><target ref="id22"/><label kind="guard" x="-1752" y="-240">checkWin()</label></transition></template><system>
+// Place template instantiations here.
+Process = Board(4);
+
+// List one or more processes to be composed into a system.
+system Process;</system></nta>

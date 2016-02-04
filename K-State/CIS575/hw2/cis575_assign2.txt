@@ -1,0 +1,40 @@
+Andy Gregoire
+1.1)
+
+lg(n!) belongs to O(n lg n)
+exists n >= 0 
+lg(n!) = lg(1) + lg(2) + .. + lg(n)
+	  <= lg(n) + lg(n) + .. + lg(n)  --> replaced all coeficients in lg to n.
+	  <= n lg n
+	   
+
+
+1.2)
+n! not belong to O(n^k)
+proof by contradiction: n! belongs to O(n^k) for all k>=0
+exists n >= 0
+k = k+1: 1,2,..,k,k+1
+
+n^k+1 is monotonically increasing, so lim k->infinity (n^k) = infinity.
+	   
+2)
+
+f belongs to theta(n); g belongs to theta(n^2); prove f+g belongs to theta(n^2)
+Exists c > 0, n0 > 0
+Forall n >= n0
+f+g  --> n + n^2 <= cn
+		 n/n = 1 <= c
+		 n/n^2 = n <= c
+		 
+3)
+
+H = N/A
+C = e^1000000
+B = 1000000 * 1000000 = 1,000,000,000,000
+J = 1000000
+G = 200,000
+I = 1000
+A = 20
+D = 13
+E = 12
+F = 10 ( i think this will over shoot it quite a bit )

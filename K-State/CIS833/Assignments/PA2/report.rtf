@@ -1,0 +1,162 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red224\green239\blue255;}
+\margl1440\margr1440\vieww16600\viewh18260\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 Andy Gregoire\
+CIS833\
+Project 2\
+\
+This project takes a corpus of wiki pages builds a linked graph (links to other wiki pages)  and runs a page rank algorithm to find a pages rank score.\
+There are eight map reduce jobs in the program.\
+\
+PageRank class: holds all the actual work, it parses the input and does all the calculations and  outputs the result.\
+Driver class: is just a small class to give the user a way to interact with the program.\
+\
+\
+	Job1 mapper -> takes in the original corpus as input  and outputs pairs of pages and their appropriate  links\
+	job1 reducer -> takes in the pairs above from the mapper \
+\
+	Job 1.5 mapper -> takes in the corpus again and counts the number of nodes in our linked graph\
+	job 1.5 reducer -> outputs that number so we can use it later\
+\
+	job 2 mapper -> takes as input the output from the job 1 reducer, a wiki page and its link or itself and outputs the same things\
+	job 2 reducer -> takes these pairs and builds the linked graph and outputs the linked graph in my own format\
+\
+	job 3 mapper -> takes in as input the output of job2 as well as job 5, it is the format of my linked graph and has multiple outputs\
+			output1 -> (lnk, part_of_page_rank_value)\
+			output2 -> (pageTitle, no value)\
+			output3 -> (pageTitle,  pageRankValue) //this is used to help with convergence\
+	job 3 reducer-> the reducer takes these values and re builds  and outputs similar data as the above linked graph\
+\
+	job 4 mapper -> takes as input the above output, parses the page rank values and sums them together and outputs it to the reducer\
+	job 4 reducer -> takes the above sum and outputs it to a file to be used when  normalizing our page rank values\
+\
+	job 5 mapper -> takes the output of job3 as input and gives it to the reducer\
+	job 5 reducer -> takes above output and multiples the page rank value by the normalization value and outputs the same format\
+		note: the above is iterative (jobs 3-5 and later job 7 for convergence)\
+\
+	job 6 mapper -> takes the output of job5 (or job7) after it is done iterating strips unneccesary information, and outputs a negative page rank value and pageTitle in order to get a list in descending order\
+	job6 reducer -> take the above output makes the score positive again and outputs the page title with its page rank score\
+\
+	job7 mapper -> takes as input the output from job 5 and tests for convergence, it outputs a blank key and a float value that is the difference squared of the new and old page rank values for that node\
+	job8 reducer -> sums the values  of these numbers and tests for convergence, it then outputs a \'931\'94 or \'91\'930\'94 to a file if it converged or not respectively.\
+\
+\
+\
+to run the program in stand alone or on beacon we  must first place the corpus on the HDFS\
+	1) hadoop fs -put <file>\
+now we can run the jar \
+	2) hadoop jar pageRank.jar <input file> <output file> <epsilon>\
+You\'92ll get a small driver menu such as this:\
+\pard\pardeftab720
+
+\fs20 \cf0 ####### Page Rank Driver #######\
+1 to create Link Graph\
+2 to process Page Rank\
+3 to clean up output\
+4 to run everything at once\
+5 to run convergence\
+6 to exit driver\
+Enter Option: \
+\
+\pard\pardeftab720
+\cf0 Output for scowiki (10 iterations 0.01 epsilon) -> option 4\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\pardeftab720
+\cf0 Europe	0.077971324\
+Asie	0.061325587\
+Cheenae	0.04772931\
+Australie	0.047065884\
+Indie	0.02548845\
+Africae	0.024494903\
+Eurozone	0.023254573\
+Mongolie	0.020709882\
+Roushie	0.01976487\
+Germany	0.016307507\
+\
+\
+\
+\pard\pardeftab720
+\cf0 Output for scowiki (10 iterations 0.01 epsilon) -> option 4\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\pardeftab720
+\cf0 Suid-Afrika	0.022820786\
+Frankryk	0.013256635\
+Duitsland	0.01056056\
+Europa	0.008350109\
+Itali\'eb	0.0071950094\
+Engels	0.0068692495\
+Nederland	0.006508175\
+Asi\'eb	0.0062762136\
+Latyn	0.0059885834\
+Bybel	0.0059746574\
+\
+\
+\
+\
+\
+\
+As of writing this, I am still having problems with convergence.\
+File management was a bit more of a challenge then I had  originally anticipated. there is a lot of output  between the many map reduce cycles.\
+I\'92m not sure how much time i\'92ve spent the assignment probably about 10-15 hrs, (with playing with convergence)\
+\
+After getting values that seemed correct on the smaller two samples, I moved to the bigger file and there weren\'92t really any big issues. forgot to set \
+more than one reducer in one of my jobs etc..  and it just took a while to process.\
+\
+output for large file (After 10 iterations and an epsilon of 0.1)\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs26 \cf2 \cb0 \CocoaLigature0 United_States	0.0050443485\
+United_Kingdom	0.001992046\
+Germany	0.0018686176\
+France	0.0018133783\
+World_War_II	0.0017265433\
+England	0.0016469737\
+Canada	0.0016053949\
+India	0.0015145019\
+Italy	0.0014044656\
+Animal	0.0013969293\
+\pard\pardeftab720
+
+\f0\fs20 \cf0 \cb1 \CocoaLigature1 \
+\
+\
+\
+\
+\
+Convergence outputs\
+1) scowiki (12 iterations 0.001 epsilon)\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+Suid-Afrika	0.023129325\
+Frankryk	0.01334986\
+Duitsland	0.010598862\
+Europa	0.008473642\
+Itali\'eb	0.007308848\
+Engels	0.00694065\
+Asi\'eb	0.00668898\
+Nederland	0.006528529\
+Bybel	0.0064796614\
+Latyn	0.006140664\
+\
+\
+\
+2) afwiki ( 4 iterations 0.01 epsilon)\
+Europe	0.07448619\
+Asie	0.050261553\
+Australie	0.039090455\
+Cheenae	0.033045594\
+Africae	0.02328979\
+Germany	0.02286513\
+Eurozone	0.021624684\
+Roushie	0.019877488\
+Indie	0.019450607\
+Ingland	0.016505647\
+\
+\
+\
+I borrowed a few of cloud9s data types, PairOfStringInt etc.. There were not extra data structures for this project,  there was just a lot of parsing.\
+\
+}

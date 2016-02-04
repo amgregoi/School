@@ -1,0 +1,40 @@
+Andy Gregoire
+Assignment 4
+CIS 575
+
+1.1) 
+	a = 0; b = 3; r = 2; q = 2;
+	r = q
+	theta(n^2 lg n)
+	
+1.2)
+	sum(from 1 to n) ((n-1) + n) = n^2
+	O(n^2)
+	
+1.3)
+	a = 3; b = 2; r = log(base 2) of 3; q = 1
+	r > q
+	theta(n^(log(base2) of 3)) ~ theta(n^1.5)
+	
+2)
+
+	a. guess T(n) <= cn^3
+	b. IH
+		<= 7c(n/2)^3 + n^3
+		<= 7cn^3/8 + n3 <= (7c/8 + 1)n^3
+		<= cn^3
+
+3)
+	a. guess T(n) <= cn^2 - d
+	b. IH
+		<= 4c((n/2)^2 - d) + 1
+		<= 2(n^2)c - 4d + 1
+		<= cn^2 - d
+		
+4.1)
+	T(n) = T(ceiling(n/2)) + 1
+
+4.2)
+	a = 1; b = 2; r = 0; q = 0
+	r = q
+	theta(n^0 lg n) == theta(lg n)
