@@ -1,0 +1,72 @@
+\documentclass[12pt]{report}
+\usepackage{tikz}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{flexisym}
+\usepackage{verbatim}
+\usepackage{scrextend}
+
+\newcounter{casenum}
+\newenvironment{caseof}{\setcounter{casenum}{1}}{\vskip.5\baselineskip}
+\newcommand{\case}[2]{\vskip.5\baselineskip\par\noindent {\bfseries Case \arabic{casenum}:} #1\\#2\addtocounter{casenum}{1}}
+
+
+\begin{document}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%title page
+\author{Andre Gregoire}
+\title{CIS770 Homework 8}
+\maketitle
+
+%problem 1
+\textbf{Problem1}\newline
+\textit{1.} N 
+\begin{addmargin}[1cm]{0em}
+for w $\in$ \{0,1\}\textsuperscript{*} \\simulate M on w\\if M accepts w then: \\
+\tab write the word w on output tape\\
+
+note: the words tested by the enumerator should be in lexicographical order i.e. 0,1,00,01,11..
+\end{addmargin}
+
+\textit{2.} M
+\begin{addmargin}[1cm]{0em}
+The turing machine M that decides E(N), on input w will run N until N outputs our input w, where we should accept and stop N, or another word that is greater than our input w, where we should reject and  stop N.  If neither of these are the case we should keep running N until one of the above cases is true.
+
+Run N on w (input) \\
+Every time N writes a word $w_1$ compare $w_1$ with w.\\\tab If $w_1$ = w then accept and stop N\\\tab else if $w_1$ $>$ w then reject and stop N\\\tab else continue running N\\
+\end{addmargin}
+
+\textbf{Problem2}\\
+\begin{addmargin}[1cm]{0em}
+Given some grammar G we will convert G into Chomsky Normal Form and the resulting grammar will be called $G_1$.  All words of length that are less than or equal to the number of variables in $G_1$($\vert G_1 \vert$), which will be called $L_2$  is a finite language, thus regular.  Since regular languages are closed under complementation the language $L_2$ is also regular. Also because L($G_1$) is context free and $L_2$ is regular L($G_1$) $\cap$ $L_2$ $\neq$ $\emptyset$ because context free languages are closed under intersection with regular languages.
+
+{\footnotesize Note: need to finish }
+\end{addmargin}
+
+
+\textbf{Problem3}\\
+\begin{addmargin}[1cm]{0em}
+Let $M_A$ be a Turing machine recognizing $\bar{A}$ and let $M_B$ be a Turing machine recognizing $\bar{B}$. Since A $\cap$ B = $\emptyset$, A $\cup$ $\bar{B}$ = $\Sigma$\textsuperscript{*}.  Consider some program M that simulates the previous two turing machines on some input w.  We can step through each of these machines 1 step at a time and when one completes  we check which one completed and accept or reject accordingly. If $M_A$ accepts the input w it should reject and if $M_B$ accepts the input w it should accept.
+
+Because $\bar{A}$ $\cup$ $\bar{B}$ = $\Sigma$\textsuperscript{*} the program described above will always terminate making the language decidable.
+
+Finally, if we let w $\in$ A. $M_A$ will reject w however,  $M_B$ will accept w thus M will accept w showing A $\subseteq$ L.  Now if we let w $\in$ B. $M_A$ will accept w and $M_B$ would reject w thus M will reject w showing B $\subseteq$ $\bar{L}$
+
+Program described above\\
+M:
+\begin{addmargin}[1cm]{0em}
+	Input w\\
+	\tab for i = 1,2...\\
+	\tab\tab run $M_A$  on w for i steps\\
+	\tab\tab run $M_B$  on w for i steps\\
+	\tab\tab if $M_A$ or $M_B$ accepts exit loop\\
+	\tab if $M_A$ accepts reject\\
+	\tab if $M_B$ accepts accept\\
+
+\end{addmargin}
+\end{addmargin}
+
+
+
+\end{document}

@@ -1,0 +1,128 @@
+\documentclass[12pt]{report}
+\usepackage{tikz}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{flexisym}
+\usepackage{verbatim}
+\usepackage{scrextend}
+
+\newcounter{casenum}
+\newenvironment{caseof}{\setcounter{casenum}{1}}{\vskip.5\baselineskip}
+\newcommand{\case}[2]{\vskip.5\baselineskip\par\noindent {\bfseries Case \arabic{casenum}:} #1\\#2\addtocounter{casenum}{1}}
+
+
+\begin{document}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%title page
+\author{Andre Gregoire}
+\title{CIS770 Homework 7}
+\maketitle
+
+%problem 1
+\textbf{Problem1}\newline
+\textit{1.}
+M = ($Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej}$)
+\begin{addmargin}[1cm]{0em}
+Q = \{$q_0,q_1,q_2,q_3,q_4,q_{acc}$\}\\
+$\Sigma$ = \{a,b\}\\
+$\Gamma$ = \{a,b,X,Y, $\sqcup$\}\\
+\begin{equation*}
+	\begin{aligned}[l]
+\delta(q_0, a) = (q_2, X, R) \\
+\delta(q_0, b) = (q_3, X, R)\\
+\delta(q_0, \sqcup) = (q_{acc}, \sqcup, R)\\
+\delta(q_1, Y) = (q_1, Y, R)\\
+\delta(q_1, a) = (q_2, X, R)\\
+\delta(q_1, b) = (q_3, X, R)\\
+\delta(q_1, \sqcup) = (q_{acc}, \sqcup, R)\\
+\delta(q_2, a) = (q_2, a, R)\\
+\delta(q_2, Y) = (q_2, Y, R)\\
+\end{aligned}
+	\quad\quad
+	\begin{aligned}[c]
+\delta(q_2, b) = (q_4, Y, L)\\	
+\delta(q_3, b) = (q_3, b, R)\\
+\delta(q_3, Y) = (q_3, Y, R)\\
+\delta(q_3, a) = (q_4, Y, L)\\
+\delta(q_4, a) = (q_4, a, L)\\
+\delta(q_4, b) = (q_4, b, L)\\
+\delta(q_4, Y) = (q_4, Y, L)\\
+\delta(q_4, X) = (q_4, X, R)\\
+\delta(q, z) = (q_{rej}, \sqcup, R) \\
+	\end{aligned}
+\end{equation*}
+\end{addmargin}
+
+\textit{2.} Steps: 
+\begin{addmargin}[1cm]{0em}
+0.   $q_0$b a a b a b\\
+1.   X $q_3$a a b a b\\
+2.   X Y $q_4$a b a b\\
+3.   X $q_4$Y a b a b\\
+4.   $q_4$X Y a b a b\\
+5.   X $q_1$Y a b a b\\
+6.   X Y $q_1$a b a b\\
+7.   X Y X $q_2$b a b\\
+8.   X Y $q_4$X Y a b\\
+9.   X Y X $q_1$Y a b\\
+10. X Y X Y $q_1$a b\\
+11. X Y X Y X $q_2$b\\
+12. X Y X Y $q_4$X Y\\
+13. X Y X Y X $q_1$Y\\
+14. X Y X Y X Y $q_1\sqcup$\\
+15. X Y X Y X Y $\sqcup$ $q_{acc}\sqcup$
+\end{addmargin}
+
+\pagebreak
+\textit{3.} Even number of a's and b's\\
+\begin{addmargin}[1cm]{0em}
+L = \{w $\in$ \{a,b\}\textsuperscript{*} $\vert$ w has equal number of a's b's\}
+
+M marks the first symbol read and rewrites it with an X and it branches to the correct states.  it continues to read from the tape until a non matching symbol is read and rewrites it to Y.  It will then backtrack until it finds the last X it has written and follow the same pattern until it has ensured there are an even number of a's and b's and move to an accepting state.
+\end{addmargin}
+
+
+\textbf{Problem2}\\
+\textit{1.} P = (Q, $\Sigma$, $\Gamma$, $\delta$, $q_0$, F)\\
+\begin{addmargin}[1cm]{0em}
+Q = set of all states\\
+$\Sigma$ = alphabet of the input\\
+$\Gamma$ = alphabet of the stack(s)\\
+$q_0$ = initial state\\
+F = set of accept states in Q (F $\subset$ Q)\\
+$\delta$ = Q x ($\Sigma \cup \{\epsilon\}$) x ($\Gamma \cup \{\epsilon\}$) x ($\Gamma \cup \{\epsilon\}$)\\
+\tab {\footnotesize Since there are two stacks $\delta$ should look like:\\ \tab $\delta$(q, $\Sigma$, $\Gamma_1$, $\Gamma_2$) = (q, $\Gamma_1$, $\Gamma_2$)} \\
+\end{addmargin}
+
+\textit{2.}\\
+Because we need to keep track of two stacks the instantaneous description is a triple containing the current state, and two symbols representing each of the stacks. i.e. $\langle q, \gamma_1, \gamma_2 \rangle$\\
+
+Given some word w $\in$ $\Sigma$\textsuperscript{*} and the starting and ending instantaneous descriptions:  $\langle q, \gamma_1, \gamma_1 \rangle$, and $\langle q, \sigma_2, \sigma_2 \rangle$ we know $\langle q, \gamma_1, \gamma_1 \rangle$ $\xrightarrow{w}$ $\langle q, \sigma_2, \sigma_2 \rangle$ if there are a sequence of instantaneous descriptions where the first description is $\langle q, \gamma_1, \gamma_1 \rangle$ and the last one is $\langle q, \sigma_2, \sigma_2 \rangle$\\
+
+The language accepted by P are all words w $\in$ $\Sigma$\textsuperscript{*} that are a accepted by P by the above definition.  L(P) = \{w $\in$ $\Sigma$\textsuperscript{*} $\vert$ P accepts w \}.\\
+
+\textit{3.}\\
+The 2-PDA P equivalent to a turing machine that is deterministic and single-taped can be achieved by reading the contents of the tape and pushing them into one of the stacks, after it has non-deterministically decided it is done reading input from the tape we need to reverse the contents of the first stack because it is  currently in reverse order.  We do this by popping from the  top of the first stack and pushing to the second stack, at this point because we've finished reading the contents of the tape there is no more input therefore the rest of the transitions done are $\epsilon$-transitions.  After the stack contents is in the correct order we can start simulating as the original turing machine  M would run.
+M = ($Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej}$)
+\tab {\footnotesize fully defined in problem 1.1}\\
+P = ($Q', \Sigma, \Gamma', \delta', q'_0, F$)\\
+\begin{addmargin}[1cm]{0em}
+Q' = (Q x $\Gamma$) $\cup$ \{A, B, C\}  where A is the state that pushes the bottom of the stack symbol, B is the state where we copy the contents of the tape into the first stack, and C is the state where we reverse the stack to put the contents in the correct order.\\
+$\Gamma$' = $\Gamma$ $\cup$ \{\$\} where \$ is our start of stack symbol and \$ $\notin$ $\Gamma$\\
+$q'_0$ = A\\
+F = \{$q_{acc}, \alpha \vert \alpha \in \Gamma$\}\\
+
+$\delta'$(A,$\epsilon, \epsilon, \epsilon$) = (B, \$, \$)\\
+$\delta'$(B,$\alpha, \epsilon, \epsilon$) = (B, $\alpha$, \$)				if $\alpha$ $\in$ $\Sigma$\\
+$\delta'$(B,$\epsilon, \epsilon, \epsilon$) = (C, \$, \$)\\
+$\delta'$(C,$\epsilon, \alpha, \epsilon$) = (C, \$, $\alpha$)				if $\alpha$ $\in$ $\Sigma$\\
+$\delta'$(C,$\epsilon, \$, \alpha$) = (($q_0, \alpha$), \$, $\epsilon$)		if $\alpha$ $\in$ $\Sigma$\\
+$\delta'$(C,$\epsilon, \$, \$$) = (($q_0, \sqcup$), \$, \$)\\
+$\delta'$((q,$\alpha$),$\epsilon$, b, $\epsilon$) = ((q', b), $\epsilon$, c)	if b $\in$ $\Gamma$\\
+$\delta'$((q,$\alpha$),$\epsilon$, \$, $\epsilon$) = ((q', c), \$, $\epsilon$)\\
+$\delta'$((q,$\alpha$),$\epsilon$, $\epsilon$, b) = ((q', b), c, $\epsilon$)	if b $\in$ $\Gamma$\\
+$\delta'$((q,$\alpha$),$\epsilon$, $\epsilon$, \$) = ((q', $\sqcup$), c, \$)\\
+
+\end{addmargin}
+\end{document}
